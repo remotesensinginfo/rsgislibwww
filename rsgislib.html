@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Image Change Detection" href="rsgislib_changedetection.html" />
+    <link rel="prev" title="Command Line Utilities" href="commandlineutilities.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.RSGISGDALErrorHandler"><code class="docutils literal notranslate"><span class="pre">RSGISGDALErrorHandler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.RSGISGDALErrorHandler.handler"><code class="docutils literal notranslate"><span class="pre">RSGISGDALErrorHandler.handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.RSGISPyException"><code class="docutils literal notranslate"><span class="pre">RSGISPyException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.RSGISTime"><code class="docutils literal notranslate"><span class="pre">RSGISTime</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.RSGISTime.calc_diff"><code class="docutils literal notranslate"><span class="pre">RSGISTime.calc_diff()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.RSGISTime.end"><code class="docutils literal notranslate"><span class="pre">RSGISTime.end()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.RSGISTime.start"><code class="docutils literal notranslate"><span class="pre">RSGISTime.start()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.TQDMProgressBar"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.displayError"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.displayError()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.displayException"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.displayException()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.displayInfo"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.displayInfo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.displayWarning"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.displayWarning()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.reset"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.setLabelText"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.setLabelText()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.setProgress"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.setProgress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.setTotalSteps"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.setTotalSteps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.TQDMProgressBar.wasCancelled"><code class="docutils literal notranslate"><span class="pre">TQDMProgressBar.wasCancelled()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_gdal_datatype"><code class="docutils literal notranslate"><span class="pre">get_gdal_datatype()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_gdal_interp_type"><code class="docutils literal notranslate"><span class="pre">get_gdal_interp_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_install_base_path"><code class="docutils literal notranslate"><span class="pre">get_install_base_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_numpy_char_codes_datatype"><code class="docutils literal notranslate"><span class="pre">get_numpy_char_codes_datatype()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_numpy_datatype"><code class="docutils literal notranslate"><span class="pre">get_numpy_datatype()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_rsgislib_datatype"><code class="docutils literal notranslate"><span class="pre">get_rsgislib_datatype()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_rsgislib_datatype_str"><code class="docutils literal notranslate"><span class="pre">get_rsgislib_datatype_str()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.get_rsgislib_version"><code class="docutils literal notranslate"><span class="pre">get_rsgislib_version()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rsgislib.is_notebook"><code class="docutils literal notranslate"><span class="pre">is_notebook()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rsgislib">
+<span id="rsgislib"></span><h1>RSGISLib<a class="headerlink" href="#module-rsgislib" title="Link to this heading"></a></h1>
+<p>This namespace contains rsgislib Python bindings</p>
+<p>Please be aware that the following variables have been
+defined to match enums within RSGISLib.</p>
+<p>Data Types for images:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>TYPE_UNDEFINED = 0</p></li>
+<li><p>TYPE_8INT = 1</p></li>
+<li><p>TYPE_16INT = 2</p></li>
+<li><p>TYPE_32INT = 3</p></li>
+<li><p>TYPE_64INT = 4</p></li>
+<li><p>TYPE_8UINT = 5</p></li>
+<li><p>TYPE_16UINT = 6</p></li>
+<li><p>TYPE_32UINT = 7</p></li>
+<li><p>TYPE_64UINT = 8</p></li>
+<li><p>TYPE_32FLOAT = 9</p></li>
+<li><p>TYPE_64FLOAT = 10</p></li>
+</ul>
+</div></blockquote>
+<p>Methods for the Maximum Likelihood Classifier:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>METHOD_SAMPLES = 0        # as calculated by ML</p></li>
+<li><p>METHOD_AREA = 1           # priors set by the relative area</p></li>
+<li><p>METHOD_EQUAL = 2          # priors all equal</p></li>
+<li><p>METHOD_USERDEFINED = 3    # priors passed in to function</p></li>
+<li><p>METHOD_WEIGHTED = 4       # priors by area but with a weight applied</p></li>
+</ul>
+</div></blockquote>
+<p>Shape indexes used with RasterGIS:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SHAPE_SHAPENA = 0</p></li>
+<li><p>SHAPE_SHAPEAREA = 1</p></li>
+<li><p>SHAPE_ASYMMETRY = 2</p></li>
+<li><p>SHAPE_BORDERINDEX = 3</p></li>
+<li><p>SHAPE_BORDERLENGTH = 4</p></li>
+<li><p>SHAPE_COMPACTNESS = 5</p></li>
+<li><p>SHAPE_DENSITY = 6</p></li>
+<li><p>SHAPE_ELLIPTICFIT = 7</p></li>
+<li><p>SHAPE_LENGTH = 8</p></li>
+<li><p>SHAPE_LENGTHWIDTH = 9</p></li>
+<li><p>SHAPE_WIDTH = 10</p></li>
+<li><p>SHAPE_MAINDIRECTION = 11</p></li>
+<li><p>SHAPE_RADIUSLARGESTENCLOSEDELLIPSE = 12</p></li>
+<li><p>SHAPE_RADIUSSMALLESTENCLOSEDELLIPSE = 13</p></li>
+<li><p>SHAPE_RECTANGULARFIT = 14</p></li>
+<li><p>SHAPE_ROUNDNESS = 15</p></li>
+<li><p>SHAPE_SHAPEINDEX = 16</p></li>
+</ul>
+</div></blockquote>
+<p>Methods of initialising KMEANS:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>INITCLUSTER_RANDOM = 0</p></li>
+<li><p>INITCLUSTER_DIAGONAL_FULL = 1</p></li>
+<li><p>INITCLUSTER_DIAGONAL_STDDEV = 2</p></li>
+<li><p>INITCLUSTER_DIAGONAL_FULL_ATTACH = 3</p></li>
+<li><p>INITCLUSTER_DIAGONAL_STDDEV_ATTACH = 4</p></li>
+<li><p>INITCLUSTER_KPP = 5</p></li>
+</ul>
+</div></blockquote>
+<p>Methods of calculating distance:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>DIST_UNDEFINED = 0</p></li>
+<li><p>DIST_EUCLIDEAN = 1</p></li>
+<li><p>DIST_MAHALANOBIS = 2</p></li>
+<li><p>DIST_MANHATTEN = 3</p></li>
+<li><p>DIST_MINKOWSKI = 4</p></li>
+<li><p>DIST_CHEBYSHEV = 5</p></li>
+<li><p>DIST_MUTUALINFO = 6</p></li>
+</ul>
+</div></blockquote>
+<p>Methods of summarising data:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SUMTYPE_UNDEFINED = 0</p></li>
+<li><p>SUMTYPE_MODE = 1</p></li>
+<li><p>SUMTYPE_MEAN = 2</p></li>
+<li><p>SUMTYPE_MEDIAN = 3</p></li>
+<li><p>SUMTYPE_MIN = 4</p></li>
+<li><p>SUMTYPE_MAX = 5</p></li>
+<li><p>SUMTYPE_STDDEV = 6</p></li>
+<li><p>SUMTYPE_COUNT = 7</p></li>
+<li><p>SUMTYPE_RANGE = 8</p></li>
+<li><p>SUMTYPE_SUM = 9</p></li>
+</ul>
+</div></blockquote>
+<p>Constants specifying how bands should be treated when sharpening
+(see rsgislib.imageutils)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SHARP_RES_IGNORE = 0</p></li>
+<li><p>SHARP_RES_LOW = 1</p></li>
+<li><p>SHARP_RES_HIGH = 2</p></li>
+</ul>
+</div></blockquote>
+<p>Options for interpolating raster data:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>INTERP_NEAREST_NEIGHBOUR = 0</p></li>
+<li><p>INTERP_BILINEAR = 1</p></li>
+<li><p>INTERP_CUBIC = 2</p></li>
+<li><p>INTERP_CUBICSPLINE = 3</p></li>
+<li><p>INTERP_LANCZOS = 4</p></li>
+<li><p>INTERP_AVERAGE = 5</p></li>
+<li><p>INTERP_MODE = 6</p></li>
+<li><p>INTERP_MIN = 7</p></li>
+<li><p>INTERP_MAX = 8</p></li>
+<li><p>INTERP_MEDIAN = 9</p></li>
+<li><p>INTERP_Q1 = 10</p></li>
+<li><p>INTERP_Q3 = 11</p></li>
+<li><p>INTERP_SUM = 12</p></li>
+</ul>
+</div></blockquote>
+<p>Options for image stretching / normalisation:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>IMG_STRETCH_NONE = 0</p></li>
+<li><p>IMG_STRETCH_USER = 1</p></li>
+<li><p>IMG_STRETCH_LINEAR = 2</p></li>
+<li><p>IMG_STRETCH_STDEV = 3</p></li>
+<li><p>IMG_STRETCH_CUMULATIVE = 4</p></li>
+</ul>
+</div></blockquote>
+<p>Options for vector geometry types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>GEOM_PT = 1</p></li>
+<li><p>GEOM_LINE = 2</p></li>
+<li><p>GEOM_POLY = 3</p></li>
+<li><p>GEOM_MPT = 4</p></li>
+<li><p>GEOM_MLINE = 5</p></li>
+<li><p>GEOM_MPOLY = 6</p></li>
+</ul>
+</div></blockquote>
+<p>Available thresholding methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>THRES_METH_NONE = 0</p></li>
+<li><p>THRES_METH_OTSU = 1</p></li>
+<li><p>THRES_METH_YEN = 2</p></li>
+<li><p>THRES_METH_ISODATA = 3</p></li>
+<li><p>THRES_METH_CROSS_ENT = 4</p></li>
+<li><p>THRES_METH_LI = 5</p></li>
+<li><p>THRES_METH_KURT_SKEW = 6</p></li>
+</ul>
+</div></blockquote>
+<p>Options for classification datasets:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CLS_ALL_DATA = 0</p></li>
+<li><p>CLS_TRAIN_DATA = 1</p></li>
+<li><p>CLS_VALID_DATA = 2</p></li>
+<li><p>CLS_TEST_DATA = 3</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Options for classification hyperparameter optimisation:</dt><dd><ul class="simple">
+<li><p>OPT_MTHD_UNDEFINED = 0</p></li>
+<li><p>OPT_MTHD_BAYESOPT = 1</p></li>
+<li><p>OPT_MTHD_OPTUNA = 2</p></li>
+<li><p>OPT_MTHD_SKOPT = 3</p></li>
+<li><p>OPT_MTHD_RANDOM = 4</p></li>
+<li><p>OPT_MTHD_GRID = 5</p></li>
+</ul>
+</dd>
+<dt>Options for calculating correlation:</dt><dd><ul class="simple">
+<li><p>STATS_CORR_UNDEFINED = 0</p></li>
+<li><p>STATS_CORR_PEARSONS = 1</p></li>
+<li><p>STATS_CORR_SPEARMAN = 2</p></li>
+<li><p>STATS_CORR_KENDALL_TAU = 3</p></li>
+<li><p>STATS_CORR_POINT_BISERIAL = 4</p></li>
+</ul>
+</dd>
+<dt>Options for logical combination of data:</dt><dd><ul class="simple">
+<li><p>LOGIC_AND = 1</p></li>
+<li><p>LOGIC_OR = 2</p></li>
+</ul>
+</dd>
+<dt>Options for variable type</dt><dd><ul class="simple">
+<li><p>VAR_TYPE_UNDEFINED = 0</p></li>
+<li><p>VAR_TYPE_CONTINUOUS = 1</p></li>
+<li><p>VAR_TYPE_CATEGORICAL = 2</p></li>
+</ul>
+</dd>
+<dt>Options for rounding numbers:</dt><dd><ul class="simple">
+<li><p>ROUND_NEAREST = 1</p></li>
+<li><p>ROUND_UP = 2</p></li>
+<li><p>ROUND_DOWN = 3</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="rsgislib.RSGISGDALErrorHandler">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">RSGISGDALErrorHandler</span></span><a class="headerlink" href="#rsgislib.RSGISGDALErrorHandler" title="Link to this definition"></a></dt>
+<dd><p>A class representing a generic GDAL Error Handler which
+can be used to pick up GDAL warnings rather than just
+failure errors.</p>
+<p>Init for RSGISGDALErrorHandler. Class attributes are
+err_level, err_no and err_msg</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.RSGISGDALErrorHandler.handler">
+<span class="sig-name descname"><span class="pre">handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err_msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.RSGISGDALErrorHandler.handler" title="Link to this definition"></a></dt>
+<dd><p>The handler function which is called with the error information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>err_level</strong> – The level of the error</p></li>
+<li><p><strong>err_no</strong> – The error number</p></li>
+<li><p><strong>err_msg</strong> – The message (string) associated with the error.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rsgislib.RSGISPyException">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">RSGISPyException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.RSGISPyException" title="Link to this definition"></a></dt>
+<dd><p>A class representing the RSGISLib exception.</p>
+<p>Init for the RSGISPyException class</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rsgislib.RSGISTime">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">RSGISTime</span></span><a class="headerlink" href="#rsgislib.RSGISTime" title="Link to this definition"></a></dt>
+<dd><p>Class to calculate run time for a function, format and print out.</p>
+<p>Need to call start before running function and end immediately after.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">RSGISTime</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">segmentation</span><span class="o">.</span><span class="n">clump</span><span class="p">(</span><span class="n">kMeansFileZonesNoSgls</span><span class="p">,</span> <span class="n">initClumpsFile</span><span class="p">,</span>
+                            <span class="n">gdalformat</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note, this is only designed to provide some general feedback, for
+benchmarking the timeit module is better suited.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.RSGISTime.calc_diff">
+<span class="sig-name descname"><span class="pre">calc_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">precede_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.RSGISTime.calc_diff" title="Link to this definition"></a></dt>
+<dd><p>Calculate time difference, format and print.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>precede_str</strong> – A string which is printed ahead of time difference</p></li>
+<li><p><strong>post_str</strong> – A string which is printed after the time difference</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.RSGISTime.end">
+<span class="sig-name descname"><span class="pre">end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">report_diff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precede_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.RSGISTime.end" title="Link to this definition"></a></dt>
+<dd><p>End timer and optionally print difference.
+If precedeStr or postStr have a value then they will be used instead
+of the generic wording around the time.</p>
+<p>“{precede_str} {time} {post_str}”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>report_diff</strong> – A boolean specifying whether time difference should
+be printed to console.</p></li>
+<li><p><strong>precede_str</strong> – A string which is printed ahead of time difference</p></li>
+<li><p><strong>post_str</strong> – A string which is printed after the time difference</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.RSGISTime.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.RSGISTime.start" title="Link to this definition"></a></dt>
+<dd><p>Start timer, optionally printing start time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>print_start_time</strong> – A boolean specifying whether the start time
+should be printed to console.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">TQDMProgressBar</span></span><a class="headerlink" href="#rsgislib.TQDMProgressBar" title="Link to this definition"></a></dt>
+<dd><p>Uses TQDM TermProgress to print a progress bar to the terminal</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.displayError">
+<span class="sig-name descname"><span class="pre">displayError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.displayError" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.displayException">
+<span class="sig-name descname"><span class="pre">displayException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.displayException" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.displayInfo">
+<span class="sig-name descname"><span class="pre">displayInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.displayInfo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.displayWarning">
+<span class="sig-name descname"><span class="pre">displayWarning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.displayWarning" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.setLabelText">
+<span class="sig-name descname"><span class="pre">setLabelText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.setLabelText" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.setProgress">
+<span class="sig-name descname"><span class="pre">setProgress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.setProgress" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.setTotalSteps">
+<span class="sig-name descname"><span class="pre">setTotalSteps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.setTotalSteps" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rsgislib.TQDMProgressBar.wasCancelled">
+<span class="sig-name descname"><span class="pre">wasCancelled</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.TQDMProgressBar.wasCancelled" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_gdal_datatype">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_gdal_datatype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rsgislib_datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.get_gdal_datatype" title="Link to this definition"></a></dt>
+<dd><p>Convert from RSGIS data type to GDAL data type int.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_gdal_interp_type">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_gdal_interp_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rsgis_interp_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.get_gdal_interp_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_install_base_path">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_install_base_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PurePath</span></span></span><a class="headerlink" href="#rsgislib.get_install_base_path" title="Link to this definition"></a></dt>
+<dd><p>A function which returns the base path for the RSGISLib installation.
+This can be used to find files stored in share etc. installed alongside
+the RSGISLib source code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a pathlib.PurePath object with the base path of the RSGISLib
+installation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_numpy_char_codes_datatype">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_numpy_char_codes_datatype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rsgislib_datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.get_numpy_char_codes_datatype" title="Link to this definition"></a></dt>
+<dd><p>Convert from RSGISLib data type to numpy datatype</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rsgis_datatype</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy character code datatype</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_numpy_datatype">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_numpy_datatype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rsgislib_datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.get_numpy_datatype" title="Link to this definition"></a></dt>
+<dd><p>Convert from RSGISLib data type to numpy datatype</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rsgis_datatype</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy datatype</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_rsgislib_datatype">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_rsgislib_datatype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdal_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.get_rsgislib_datatype" title="Link to this definition"></a></dt>
+<dd><p>Convert from GDAL data type string to RSGISLib data type int.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_rsgislib_datatype_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_rsgislib_datatype_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rsgislib_datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.get_rsgislib_datatype_str" title="Link to this definition"></a></dt>
+<dd><p>Get a string representation of the datatype.
+Easier for a user to interpret.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.get_rsgislib_version">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">get_rsgislib_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.get_rsgislib_version" title="Link to this definition"></a></dt>
+<dd><p>Calls rsgis-config to get the version number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string with the rsgislib version number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.is_notebook">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.</span></span><span class="sig-name descname"><span class="pre">is_notebook</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.is_notebook" title="Link to this definition"></a></dt>
+<dd><p>A function to find if running within a python notebook. If
+running within a jupyter notebook then can use a different
+progress bar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean: True: within notebook</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="commandlineutilities.html" class="btn btn-neutral float-left" title="Command Line Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_changedetection.html" class="btn btn-neutral float-right" title="RSGISLib Image Change Detection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

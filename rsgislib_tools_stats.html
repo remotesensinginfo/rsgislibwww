@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Stats Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Maths Tools" href="rsgislib_tools_maths.html" />
+    <link rel="prev" title="RSGISLib Plotting Tools" href="rsgislib_tools_plotting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Stats Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#normalisation">Normalisation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.standarise_img_data"><code class="docutils literal notranslate"><span class="pre">standarise_img_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.normalise_img_data"><code class="docutils literal notranslate"><span class="pre">normalise_img_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#histogram-thresholds">Histogram Thresholds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_otsu_threshold"><code class="docutils literal notranslate"><span class="pre">calc_otsu_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_yen_threshold"><code class="docutils literal notranslate"><span class="pre">calc_yen_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_isodata_threshold"><code class="docutils literal notranslate"><span class="pre">calc_isodata_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_hist_cross_entropy"><code class="docutils literal notranslate"><span class="pre">calc_hist_cross_entropy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_li_threshold"><code class="docutils literal notranslate"><span class="pre">calc_li_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_kurt_skew_threshold"><code class="docutils literal notranslate"><span class="pre">calc_kurt_skew_threshold()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#histograms">Histograms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.get_nbins_histogram"><code class="docutils literal notranslate"><span class="pre">get_nbins_histogram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.get_bin_centres"><code class="docutils literal notranslate"><span class="pre">get_bin_centres()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-selection">Feature Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.corr_feature_selection"><code class="docutils literal notranslate"><span class="pre">corr_feature_selection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.lassolars_feature_selection"><code class="docutils literal notranslate"><span class="pre">lassolars_feature_selection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#statistical-tests">Statistical Tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.breusch_pagan_test"><code class="docutils literal notranslate"><span class="pre">breusch_pagan_test()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.calc_pandas_vif"><code class="docutils literal notranslate"><span class="pre">calc_pandas_vif()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.cqv_threshold"><code class="docutils literal notranslate"><span class="pre">cqv_threshold()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-statistics">Summary Statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.bin_accuracy_scores_prob"><code class="docutils literal notranslate"><span class="pre">bin_accuracy_scores_prob()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.accuracy_scores_binary"><code class="docutils literal notranslate"><span class="pre">accuracy_scores_binary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.bias_score"><code class="docutils literal notranslate"><span class="pre">bias_score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.decompose_bias_variance"><code class="docutils literal notranslate"><span class="pre">decompose_bias_variance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numpy-array-manipulation">Numpy Array Manipulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.stats.mask_data_to_valid"><code class="docutils literal notranslate"><span class="pre">mask_data_to_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#variograms">Variograms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib Stats Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-stats-tools">
+<h1>RSGISLib Stats Tools<a class="headerlink" href="#rsgislib-stats-tools" title="Link to this heading"></a></h1>
+<section id="normalisation">
+<h2>Normalisation<a class="headerlink" href="#normalisation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.standarise_img_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">standarise_img_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.standarise_img_data" title="Link to this definition"></a></dt>
+<dd><p>Standardise the input image (minus the mean and
+divide by the standard deviation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img_data</strong> – a numpy array with the shape [bands, height, width] or
+[bands, n_pxls].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a numpy array with the standarised pixel values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.normalise_img_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">normalise_img_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.normalise_img_data" title="Link to this definition"></a></dt>
+<dd><p>Normalise the input image (data - min)/range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img_data</strong> – a numpy array with the shape [bands, height, width]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a numpy array with the normalised pixel values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="histogram-thresholds">
+<h2>Histogram Thresholds<a class="headerlink" href="#histogram-thresholds" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_otsu_threshold">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_otsu_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.calc_otsu_threshold" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate otsu’s threshold for a dataset. Input is expected
+to be a 1d numpy array.</p>
+<p>Wikipedia, <a class="reference external" href="https://en.wikipedia.org/wiki/Otsu's_Method">https://en.wikipedia.org/wiki/Otsu’s_Method</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – 1d numeric numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float (threshold)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_yen_threshold">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_yen_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.calc_yen_threshold" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate yen threshold for a dataset. Input is expected
+to be a 1d numpy array.</p>
+<p>Yen J.C., Chang F.J., and Chang S. (1995) “A New Criterion
+for Automatic Multilevel Thresholding” IEEE Trans. on Image
+Processing, 4(3): 370-378. DOI:<cite>10.1109/83.366472</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – 1d numeric numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float (threshold)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_isodata_threshold">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_isodata_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.calc_isodata_threshold" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate inter-means threshold for a dataset. Input is expected
+to be a 1d numpy array. Histogram-based threshold, known as Ridler-Calvard method
+or inter-means. Threshold values returned satisfy the following equality:</p>
+<p>threshold = (data[data &lt;= threshold].mean() + data[data &gt; threshold].mean()) / 2.0</p>
+<p>Ridler, TW &amp; Calvard, S (1978), “Picture thresholding using an iterative selection
+method” IEEE Transactions on Systems, Man and Cybernetics 8: 630-632,
+DOI:<cite>10.1109/TSMC.1978.4310039</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – 1d numeric numpy array</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float (threshold)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_hist_cross_entropy">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_hist_cross_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.calc_hist_cross_entropy" title="Link to this definition"></a></dt>
+<dd><p>A function which computes the cross-entropy between distributions
+above and below a threshold. Cross-entropy is a measure of the difference
+between two probability distributions for a given random variable or set of events.</p>
+<p>See Li and Lee (1993); this is the objective function <code class="docutils literal notranslate"><span class="pre">threshold_li</span></code>
+minimizes. This function can be improved but this implementation most
+closely matches equation 8 in Li and Lee (1993) and equations 1-3 in
+Li and Tam (1998).</p>
+<p>Li C.H. and Lee C.K. (1993) “Minimum Cross Entropy Thresholding”
+Pattern Recognition, 26(4): 617-625 DOI:<cite>10.1016/0031-3203(93)90115-D</cite></p>
+<p>Li C.H. and Tam P.K.S. (1998) “An Iterative Algorithm for Minimum
+Cross Entropy Thresholding” Pattern Recognition Letters, 18(8): 771-776
+DOI: <cite>10.1016/S0167-8655(98)00057-9</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – 1d numeric numpy array</p></li>
+<li><p><strong>threshold</strong> – float spliting to the two parts of the histogram.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float (cross-entropy target value)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_li_threshold">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_li_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_guess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.calc_li_threshold" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates a threshold value by Li’s iterative
+Minimum Cross Entropy method.</p>
+<p>Li C.H. and Lee C.K. (1993) “Minimum Cross Entropy Thresholding”
+Pattern Recognition, 26(4): 617-625 DOI:<cite>10.1016/0031-3203(93)90115-D</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – 1d numeric numpy array</p></li>
+<li><p><strong>tolerance</strong> – float (optional) - Finish the computation when the
+change in the threshold in an iteration is less than
+this value. By default, this is half the smallest
+difference between data values.</p></li>
+<li><p><strong>initial_guess</strong> – float (optional) - Li’s iterative method uses
+gradient descent to find the optimal threshold.
+If the histogram contains more than two modes
+(peaks), the gradient descent could get stuck
+in a local optimum. An initial guess for the
+iteration can help the algorithm find the
+globally-optimal threshold.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float (threshold)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_kurt_skew_threshold">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_kurt_skew_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contamination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_kurtosis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.stats.calc_kurt_skew_threshold" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate a threshold either side of the histogram based on</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – 1d numeric numpy array</p></li>
+<li><p><strong>max_val</strong></p></li>
+<li><p><strong>min_val</strong></p></li>
+<li><p><strong>init_thres</strong></p></li>
+<li><p><strong>low_thres</strong></p></li>
+<li><p><strong>contamination</strong></p></li>
+<li><p><strong>only_kurtosis</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="histograms">
+<h2>Histograms<a class="headerlink" href="#histograms" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.get_nbins_histogram">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">get_nbins_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.get_nbins_histogram" title="Link to this definition"></a></dt>
+<dd><p>Calculating the number of bins and the width of those bins for a histogram.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – 1-d numpy array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(n_bins, bin_width) n_bins: int for the number of bins. bin_width: float with the width of the bins.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.get_bin_centres">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">get_bin_centres</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bin_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.get_bin_centres" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate the centre points of bins from the bin edges from a histogram
+e.g., numpy.histogram. My default the arithmetic mean is provided (max+min)/2 but the
+geometric mean can also be calculated sqrt(min*max), this is useful for logarithmically
+spaced bins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bin_edges</strong> – numpy array of the bin edges</p></li>
+<li><p><strong>geometric</strong> – boolean, if False (default) then the arithmetic mean return if True
+then the geometric mean is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bin_centres - numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="feature-selection">
+<h2>Feature Selection<a class="headerlink" href="#feature-selection" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.corr_feature_selection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">corr_feature_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dep_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_min_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_max_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.corr_feature_selection" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a correlation based feature selection.
+This analysis will cluster the independent (predictor) variables based
+on the Pearson correlation distance metric. The Silhouette coefficient
+(Rousseeuw, 1987) is used to find the optimal number of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas dataframe where the columns are the predictor variables</p></li>
+<li><p><strong>dep_vars</strong> – list of dependent variables within the dataframe</p></li>
+<li><p><strong>ind_vars</strong> – list of independent (predictor) variables within the dataframe</p></li>
+<li><p><strong>n_min_clusters</strong> – The minimum number of clusters within the search (Default: 3)</p></li>
+<li><p><strong>n_max_clusters</strong> – The maximum number of clusters within the search (Default: 25)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of column names for good predictor variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.lassolars_feature_selection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">lassolars_feature_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dep_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind_vars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.lassolars_feature_selection" title="Link to this definition"></a></dt>
+<dd><p>A function which undertake regularisation-based feature selection using
+the LassoLars regressor in Scikit-Learn. the Lasso (least absolute shrinkage
+and selection operator) regression algorithm is linear model that uses L1
+regularisation to assign coefficients of zero to uninformative predictor
+variables (effectively eliminating them from the regression model). The
+LARS algorithm (Efron et al., 2004) provides a means of estimating which
+variables to include in the model, as well as their coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas dataframe where the columns are the predictor variables</p></li>
+<li><p><strong>dep_vars</strong> – list of dependent variables within the dataframe</p></li>
+<li><p><strong>ind_vars</strong> – list of independent (predictor) variables within the dataframe</p></li>
+<li><p><strong>alpha_val</strong> – Value of the regularization parameter (alpha) for the Lasso estimator.
+If None then the value will be estimated using Bayes Information criterion
+(BIC) and cross-validation. (Default: None).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of column names for good predictor variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="statistical-tests">
+<h2>Statistical Tests<a class="headerlink" href="#statistical-tests" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.breusch_pagan_test">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">breusch_pagan_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.breusch_pagan_test" title="Link to this definition"></a></dt>
+<dd><p>A function to perform a Breusch-Pagan test for heteroskedasticity in a linear model:
+H_0 = No heteroskedasticity.
+H_1 = Heteroskedasticity is present.</p>
+<p>Returns a list containing three elements:
+1. the Breusch-Pagan test statistic.
+2. the p-value for the test.
+3. the test result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – a numpy.ndarray containing the predictor variables. Shape = (nSamples, nPredictors).</p></li>
+<li><p><strong>y</strong> – a 1D numpy.ndarray containing the response variable. Shape = (nSamples, ).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list containing 3 elements (Breusch-Pagan test statistic, p-value for the test, test result)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.calc_pandas_vif">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">calc_pandas_vif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.calc_pandas_vif" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate variance inflation factors to
+investigate multicollinearity between predictor variables.</p>
+<p>Interpretation of VIF scores (somewhat subjective):
+1 = No multicollinearity.
+1-5 = Moderate multicollinearity.
+&gt; 5 = High multicollinearity.
+&gt; 10 = This predictor should be removed from the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas dataframe where the columns are the predictor variables</p></li>
+<li><p><strong>cols</strong> – list of columns in the dataframe</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pandas series containing the VIF for each predictor variable.</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;metrics.csv&#39;</span><span class="p">)</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="c1"># Subset to the column names of interest</span>
+<span class="n">ind_vars</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+<span class="n">vifs_series</span> <span class="o">=</span> <span class="n">calc_pandas_vif</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ind_vars</span><span class="p">)</span>
+<span class="n">vifs_series</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;VIF_scores.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.cqv_threshold">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">cqv_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowthreshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highthreshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.cqv_threshold" title="Link to this definition"></a></dt>
+<dd><p>A function to remove features with low &amp; high variance based on the coefficient
+of quartile variation (CQV).</p>
+<p>Low CQV == uninformative predictor.
+High CQV == unstable predictor variable.</p>
+<p>Inspired by sklearn.feature_selection.VarianceThreshold(), but more robust
+since the coefficient of quartile variation is independent of feature scaling.
+It is also less susceptible to outliers than the coefficient of variation.</p>
+<p>References:
+<a class="reference external" href="https://en.wikipedia.org/wiki/Quartile_coefficient_of_dispersion">https://en.wikipedia.org/wiki/Quartile_coefficient_of_dispersion</a>
+<a class="reference external" href="https://cran.r-project.org/web/packages/cvcqv/vignettes/cqv_versatile.html">https://cran.r-project.org/web/packages/cvcqv/vignettes/cqv_versatile.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas dataframe where the columns are the predictor variables</p></li>
+<li><p><strong>cols</strong> – list of columns in the dataframe</p></li>
+<li><p><strong>lowthreshold</strong> – Float defining the CQV below which the predictors are uninfomative</p></li>
+<li><p><strong>highthreshold</strong> – Float defining the CQV above which the predictors are unreliable</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of column names for good predictor variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="summary-statistics">
+<h2>Summary Statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.bin_accuracy_scores_prob">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">bin_accuracy_scores_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_prob</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.bin_accuracy_scores_prob" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate accuracy measures for probabilistic responses with sklearn and scipy.
+Function written by Osian Roberts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – binary class labels, where 0 is absence and 1 is presence.</p></li>
+<li><p><strong>y_prob</strong> – probability of presence scores e.g., generated by a species distribution model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list containing two arrays - metrics = names of test metrics. scores = test scores for each metric.</p>
+</dd>
+</dl>
+<p>Useful reference:
+<a class="reference external" href="https://machinelearningmastery.com/how-to-score-probability-predictions-in-python">https://machinelearningmastery.com/how-to-score-probability-predictions-in-python</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.accuracy_scores_binary">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">accuracy_scores_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.accuracy_scores_binary" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate accuracy measures for a binary classification.
+Function written by Osian Roberts.</p>
+<p>Parameters:
+:param y_true: observed binary labels, where 0 is absence and 1 is presence.
+:param y_pred: predicted binary labels, where 0 is absence and 1 is presence.
+:returns: a list containing two numpy.arrays - (metrics: name of test metrics, scores: test scores for each metric)</p>
+<p>Reference: See pages 253 - 255 in:
+Guisan et al. (2017). Habitat suitability and distribution models: with applications in R.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.bias_score">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">bias_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.bias_score" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate the regression model bias for each response variable
+in a multivariate regression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – numpy.ndarray of true y values, shape=(n_samples, n_responses).</p></li>
+<li><p><strong>y_true</strong> – numpy.ndarray of predicted y values, shape=(n_samples, n_responses).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bias (absolute bias), norm_bias (normalised bias (aka percentage bias))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.decompose_bias_variance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">decompose_bias_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.decompose_bias_variance" title="Link to this definition"></a></dt>
+<dd><p>A function to perform bias-variance decomposition.
+Decompose the mean squared error into: Bias^2 + Variance + Irreducible Error.
+Useful example: <a class="reference external" href="https://towardsdatascience.com/mse-and-bias-variance-decomposition-77449dd2ff55">https://towardsdatascience.com/mse-and-bias-variance-decomposition-77449dd2ff55</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> – numpy.ndarray of true y values, shape=(n_samples, n_responses).</p></li>
+<li><p><strong>y_true</strong> – numpy.ndarray of predicted y values, shape=(n_samples, n_responses).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>set (mse, bias_squared, variance, noise)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="numpy-array-manipulation">
+<h2>Numpy Array Manipulation<a class="headerlink" href="#numpy-array-manipulation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.stats.mask_data_to_valid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.stats.</span></span><span class="sig-name descname"><span class="pre">mask_data_to_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.stats.mask_data_to_valid" title="Link to this definition"></a></dt>
+<dd><p>A function which removes rows from an nxm numpy array which are
+not finite or outside of the upper and lower thresholds provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – nxm numpy array (n rows, m features)</p></li>
+<li><p><strong>lower_limit</strong> – lower threshold valid data is greater than this value.</p></li>
+<li><p><strong>upper_limit</strong> – upper threshold valid data is lower than this value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="variograms">
+<h2>Variograms<a class="headerlink" href="#variograms" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_plotting.html" class="btn btn-neutral float-left" title="RSGISLib Plotting Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_maths.html" class="btn btn-neutral float-right" title="RSGISLib Maths Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

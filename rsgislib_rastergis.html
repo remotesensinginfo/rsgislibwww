@@ -1,0 +1,1485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Raster GIS Module &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Regression Module" href="rsgislib_regression.html" />
+    <link rel="prev" title="RSGISLib Modelling" href="rsgislib_modelling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Raster GIS Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.pop_rat_img_stats"><code class="docutils literal notranslate"><span class="pre">pop_rat_img_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.collapse_rat"><code class="docutils literal notranslate"><span class="pre">collapse_rat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.get_rat_length"><code class="docutils literal notranslate"><span class="pre">get_rat_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.get_rat_columns"><code class="docutils literal notranslate"><span class="pre">get_rat_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.get_rat_columns_info"><code class="docutils literal notranslate"><span class="pre">get_rat_columns_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.check_string_col_valid"><code class="docutils literal notranslate"><span class="pre">check_string_col_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#attribute-clumps">Attribute Clumps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_stats"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_cat_proportions"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_cat_proportions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_percentiles"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_percentiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_mode"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_mode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_prop_valid_pxls"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_prop_valid_pxls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_meanlit_stats"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_meanlit_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.populate_rat_with_cat_vec_lyr"><code class="docutils literal notranslate"><span class="pre">populate_rat_with_cat_vec_lyr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.str_class_majority"><code class="docutils literal notranslate"><span class="pre">str_class_majority()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.define_class_names"><code class="docutils literal notranslate"><span class="pre">define_class_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.set_column_data"><code class="docutils literal notranslate"><span class="pre">set_column_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.create_uid_col"><code class="docutils literal notranslate"><span class="pre">create_uid_col()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calculate-spatial-relationships">Calculate Spatial Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_dist_to_classes"><code class="docutils literal notranslate"><span class="pre">calc_dist_to_classes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_dist_between_clumps"><code class="docutils literal notranslate"><span class="pre">calc_dist_between_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_dist_to_large_clumps"><code class="docutils literal notranslate"><span class="pre">calc_dist_to_large_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_border_length"><code class="docutils literal notranslate"><span class="pre">calc_border_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_rel_border"><code class="docutils literal notranslate"><span class="pre">calc_rel_border()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_rel_diff_neigh_stats"><code class="docutils literal notranslate"><span class="pre">calc_rel_diff_neigh_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.define_border_clumps"><code class="docutils literal notranslate"><span class="pre">define_border_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.define_clump_tile_positions"><code class="docutils literal notranslate"><span class="pre">define_clump_tile_positions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.find_boundary_pixels"><code class="docutils literal notranslate"><span class="pre">find_boundary_pixels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.find_neighbours"><code class="docutils literal notranslate"><span class="pre">find_neighbours()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.clumps_spatial_location"><code class="docutils literal notranslate"><span class="pre">clumps_spatial_location()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.clumps_spatial_extent"><code class="docutils literal notranslate"><span class="pre">clumps_spatial_extent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#read-rat">Read RAT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.get_column_data"><code class="docutils literal notranslate"><span class="pre">get_column_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.read_rat_neighbours"><code class="docutils literal notranslate"><span class="pre">read_rat_neighbours()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sampling">Sampling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.histo_sampling"><code class="docutils literal notranslate"><span class="pre">histo_sampling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.take_random_sample"><code class="docutils literal notranslate"><span class="pre">take_random_sample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.select_clumps_on_grid"><code class="docutils literal notranslate"><span class="pre">select_clumps_on_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.identify_small_units"><code class="docutils literal notranslate"><span class="pre">identify_small_units()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extrapolation">Extrapolation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.apply_rat_knn"><code class="docutils literal notranslate"><span class="pre">apply_rat_knn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#change-detection">Change Detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.get_global_class_stats"><code class="docutils literal notranslate"><span class="pre">get_global_class_stats()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_1d_jm_distance"><code class="docutils literal notranslate"><span class="pre">calc_1d_jm_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_2d_jm_distance"><code class="docutils literal notranslate"><span class="pre">calc_2d_jm_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.calc_bhattacharyya_distance"><code class="docutils literal notranslate"><span class="pre">calc_bhattacharyya_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#copy-export">Copy &amp; Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.export_rat_cols_to_ascii"><code class="docutils literal notranslate"><span class="pre">export_rat_cols_to_ascii()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.export_col_to_gdal_img"><code class="docutils literal notranslate"><span class="pre">export_col_to_gdal_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.export_cols_to_gdal_img"><code class="docutils literal notranslate"><span class="pre">export_cols_to_gdal_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.export_clumps_to_images"><code class="docutils literal notranslate"><span class="pre">export_clumps_to_images()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.copy_gdal_rat_columns"><code class="docutils literal notranslate"><span class="pre">copy_gdal_rat_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.copy_rat"><code class="docutils literal notranslate"><span class="pre">copy_rat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.import_vec_atts"><code class="docutils literal notranslate"><span class="pre">import_vec_atts()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#colour-tables">Colour Tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.colour_rat_classes"><code class="docutils literal notranslate"><span class="pre">colour_rat_classes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.set_class_names_colours"><code class="docutils literal notranslate"><span class="pre">set_class_names_colours()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.get_rat_colours"><code class="docutils literal notranslate"><span class="pre">get_rat_colours()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-structures-enums">Data Structures / Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.BandAttStats"><code class="docutils literal notranslate"><span class="pre">BandAttStats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.FieldAttStats"><code class="docutils literal notranslate"><span class="pre">FieldAttStats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.BandAttPercentiles"><code class="docutils literal notranslate"><span class="pre">BandAttPercentiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.rastergis.ShapeIndex"><code class="docutils literal notranslate"><span class="pre">ShapeIndex()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Raster GIS Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-raster-gis-module">
+<h1>RSGISLib Raster GIS Module<a class="headerlink" href="#rsgislib-raster-gis-module" title="Link to this heading"></a></h1>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.pop_rat_img_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">pop_rat_img_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_clr_tab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">boolean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_pyramids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">boolean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_zero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">boolean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.pop_rat_img_stats" title="Link to this definition"></a></dt>
+<dd><p>Populates header statics (e.g., builds histogram) and pyramids for thematic images.
+Note, this function expects that the image file format supports a raster attribute table (RAT) so will therefore not work with formats such as GTIFF</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>add_clr_tab</strong> – is a boolean to specify whether a colour table should created and added (colours will be random) (Optional, default = True)</p></li>
+<li><p><strong>calc_pyramids</strong> – is a boolean to specify where overview images could be created (Optional, default = True)</p></li>
+<li><p><strong>ignore_zero</strong> – is a boolean specifying whether zero should be ignored (i.e., set as a no data value). (Optional, default = True)</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;injune_p142_casi_sub_utm_segs_nostats_addstats.kea&#39;</span>
+<span class="n">pyramids</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">colourtable</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">pop_rat_img_stats</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">colourtable</span><span class="p">,</span> <span class="n">pyramids</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.collapse_rat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">collapse_rat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.collapse_rat" title="Link to this definition"></a></dt>
+<dd><p>Collapses the image and rat to a set of selected rows (defined with a value of 1 in the selected column).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>select_col</strong> – is a string containing the name of the binary column used to selected the rows to which the RAT is to be collapsed to.</p></li>
+<li><p><strong>output_img</strong> – is a string with the output file name</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image file format - note only KEA and HFA support RATs.</p></li>
+<li><p><strong>rat_band</strong> – is the image band with which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.get_rat_length">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">get_rat_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.rastergis.get_rat_length" title="Link to this definition"></a></dt>
+<dd><p>A function which returns the length (i.e., number of rows) within the RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – path to the image file with the RAT</p></li>
+<li><p><strong>rat_band</strong> – the band within the image file for which the RAT is to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an int with the number of rows.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.get_rat_columns">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">get_rat_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.rastergis.get_rat_columns" title="Link to this definition"></a></dt>
+<dd><p>A function which returns a list of column names within the RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – path to the image file with the RAT</p></li>
+<li><p><strong>rat_band</strong> – the band within the image file for which the RAT is to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of column names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.get_rat_columns_info">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">get_rat_columns_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.get_rat_columns_info" title="Link to this definition"></a></dt>
+<dd><p>A function which returns a dictionary of column names with type (GFT_Integer,
+GFT_Real, GFT_String) and usage (e.g., GFU_Generic, GFU_PixelCount,
+GFU_Name, etc.) within the RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – path to the image file with the RAT</p></li>
+<li><p><strong>rat_band</strong> – the band within the image file for which the RAT is to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict of column information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.check_string_col_valid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">check_string_col_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_punc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_spaces</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_non_ascii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_dashs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.check_string_col_valid" title="Link to this definition"></a></dt>
+<dd><p>A function which checks a string column to ensure nothing is invalid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – input clumps image.</p></li>
+<li><p><strong>str_col</strong> – the column to check</p></li>
+<li><p><strong>rm_punc</strong> – If True removes punctuation from column name other
+than dashs and underscores.</p></li>
+<li><p><strong>rm_spaces</strong> – If True removes spaces from the column name, replacing
+them with underscores.</p></li>
+<li><p><strong>rm_non_ascii</strong> – If True removes characters which are not in the
+ascii range of characters.</p></li>
+<li><p><strong>rm_dashs</strong> – If True then dashs are removed from the column name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="attribute-clumps">
+<h2>Attribute Clumps<a class="headerlink" href="#attribute-clumps" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rsgislib.rastergis.BandAttStats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_stats" title="Link to this definition"></a></dt>
+<dd><p>Populates an attribute table with statistics from an input values image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file from which the clumps are to populated.</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clumps image file</p></li>
+<li><p><strong>band_stats</strong> – is a sequence of rsgislib.rastergis.BandAttStats objects that have attributes in line with rsgis.cmds.RSGISBandAttStatsCmds
+* band: int defining the image band to process
+* min_field: string defining the name of the field for min value
+* max_field: string defining the name of the field for max value
+* sum_field: string defining the name of the field for sum value
+* mean_field: string defining the name of the field for mean value
+* std_dev_field: string defining the name of the field for standard deviation value</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>rat_band is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_sub_utm_segs_popstats.kea&#39;</span>
+<span class="nb">input</span><span class="o">=</span><span class="s1">&#39;./Rasters/injune_p142_casi_sub_utm.kea&#39;</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_field</span><span class="o">=</span><span class="s1">&#39;b1Min&#39;</span><span class="p">,</span> <span class="n">max_field</span><span class="o">=</span><span class="s1">&#39;b1Max&#39;</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;b1Mean&#39;</span><span class="p">,</span> <span class="n">sum_field</span><span class="o">=</span><span class="s1">&#39;b1Sum&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;b1StdDev&#39;</span><span class="p">))</span>
+<span class="n">bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_field</span><span class="o">=</span><span class="s1">&#39;b2Min&#39;</span><span class="p">,</span> <span class="n">max_field</span><span class="o">=</span><span class="s1">&#39;b2Max&#39;</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;b2Mean&#39;</span><span class="p">,</span> <span class="n">sum_field</span><span class="o">=</span><span class="s1">&#39;b2Sum&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;b2StdDev&#39;</span><span class="p">))</span>
+<span class="n">bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">min_field</span><span class="o">=</span><span class="s1">&#39;b3Min&#39;</span><span class="p">,</span> <span class="n">max_field</span><span class="o">=</span><span class="s1">&#39;b3Max&#39;</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;b3Mean&#39;</span><span class="p">,</span> <span class="n">sum_field</span><span class="o">=</span><span class="s1">&#39;b3Sum&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;b3StdDev&#39;</span><span class="p">))</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">populate_rat_with_stats</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">clumps</span><span class="p">,</span> <span class="n">bs</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_cat_proportions">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_cat_proportions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_cats_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_cols_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maj_col_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cp_cls_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">boolean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maj_cls_name_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span> <span class="pre">cls_name_field=string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band_clumps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band_cats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_cat_proportions" title="Link to this definition"></a></dt>
+<dd><p>Populates the attribute table with the proportions of intersecting categories</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_cats_img</strong> – is a string containing the name of the categories (classification) image file from which the propotions are calculated</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file to which the proportions are to be populated.</p></li>
+<li><p><strong>out_cols_name</strong> – is a string representing the base name for the output columns containing the proportions.</p></li>
+<li><p><strong>maj_col_name</strong> – is a string for name of the field which will hold the majority class.</p></li>
+<li><p><strong>cp_cls_names</strong> – is a boolean defining whether class names should be copied (Optional, Default = false).</p></li>
+<li><p><strong>maj_cls_name_field</strong> – is a string for the output column within the clumps image with the majority class names field (Optional, only used if copyClassNames == True)</p></li>
+<li><p><strong>cls_name_field</strong> – is a string with the name of the column within the categories image for the class names (Optional, only used if copyClassNames == True)</p></li>
+<li><p><strong>rat_band_clumps</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the clumps image.</p></li>
+<li><p><strong>rat_band_cats</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the catagories image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_percentiles">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_percentiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rsgislib.rastergis.BandAttStats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_hist_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_percentiles" title="Link to this definition"></a></dt>
+<dd><p>Populates an attribute table with a percentile of the pixel values from an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>img_band</strong> – is an int which specifies the image band (from valsimage) for which the stats are to be calculated</p></li>
+<li><p><strong>band_stats</strong> – is a sequence of objects that have attributes matching rsgislib.rastergis.BandAttPercentiles
+* percentile: float defining the percentile to calculate (Valid range is 0 - 100)
+* field_name: string defining the name of the field to use for this percentile</p></li>
+<li><p><strong>n_hist_bins</strong> – is an optional (default = 200) integer specifying the number of bins within the histogram (note this governs the accuracy to which percentile can be calculated).</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputImage</span> <span class="o">=</span> <span class="s1">&#39;./Rasters/injune_p142_casi_sub_utm.kea&#39;</span>
+<span class="n">clumpsImage</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_sub_utm_segs_popstats.kea&#39;</span>
+<span class="n">band</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">bandPercentiles</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bandPercentiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttPercentiles</span><span class="p">(</span><span class="n">percentile</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span> <span class="n">field_name</span><span class="o">=</span><span class="s1">&#39;B1Per25&#39;</span><span class="p">))</span>
+<span class="n">bandPercentiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttPercentiles</span><span class="p">(</span><span class="n">percentile</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">field_name</span><span class="o">=</span><span class="s1">&#39;B1Per50&#39;</span><span class="p">))</span>
+<span class="n">bandPercentiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttPercentiles</span><span class="p">(</span><span class="n">percentile</span><span class="o">=</span><span class="mf">75.0</span><span class="p">,</span> <span class="n">field_name</span><span class="o">=</span><span class="s1">&#39;B1Per75&#39;</span><span class="p">))</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">populate_rat_with_percentiles</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">clumpsImage</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">bandPercentiles</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_mode">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_cols_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_no_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">boolean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">long</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">boolean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_mode" title="Link to this definition"></a></dt>
+<dd><p>Populates the attribute table with the mode of from a single band in the input image.
+Note this only makes sense if the input pixel values are integers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file from which the mode is calculated</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file to which the mode will be populated.</p></li>
+<li><p><strong>out_cols_name</strong> – is a string representing the name for the output column containing the mode.</p></li>
+<li><p><strong>use_no_data</strong> – is a boolean defining whether the no data value should be ignored (Optional, Default = False).</p></li>
+<li><p><strong>no_data_val</strong> – is a long defining the no data value to be used (Optional, Default = 0)</p></li>
+<li><p><strong>out_no_data</strong> – is a boolean to specify that although the no data value should be used for the calculation it should not be outputted to the RAT as a output value unless there is no valid data within the clump. (Default = True)</p></li>
+<li><p><strong>mode_band</strong> – is an optional (default = 1) integer parameter specifying the image band for which the mode is to be calculated.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the clumps image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_prop_valid_pxls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_prop_valid_pxls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_prop_valid_pxls" title="Link to this definition"></a></dt>
+<dd><p>Populates the attribute table with the proportion of valid pixels within the clump.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file from which the valid pixels are to be identified</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file to which the proportion will be populated.</p></li>
+<li><p><strong>out_col</strong> – is a string representing the name for the output column containing the proportion.</p></li>
+<li><p><strong>no_data_val</strong> – is a float defining the no data value to be used.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the clumps image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_meanlit_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_meanlit_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_vals_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_lit_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_lit_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_lit_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pxl_count_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rsgislib.rastergis.BandAttStats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_meanlit_stats" title="Link to this definition"></a></dt>
+<dd><p>Populates an attribute table with statistics from an input values image where only the pixels with a band value above a defined threshold are used.
+This is something referred to as the mean-lit statistics, i.e., the sunlit pixels within the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_vals_img</strong> – is a string containing the name of the input image file from which the clumps are to populated.</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clumps image file</p></li>
+<li><p><strong>mean_lit_img</strong> – is a string containing the name of the input image containing the band to be used for the mean-lit stats.</p></li>
+<li><p><strong>mean_lit_band</strong> – is an unsigned integer specifying the image band to be used within the meanLitImage.</p></li>
+<li><p><strong>mean_lit_col</strong> – is a string specifying the column to be used for the ‘mean’ for each object in the mean-lit calculation</p></li>
+<li><p><strong>pxl_count_col</strong> – is a string specifying the output column in the RAT where the count for the number of pixels within each clump used for the stats is outputted.</p></li>
+<li><p><strong>band_stats</strong> – is a sequence of rsgislib.rastergis.BandAttStats objects that have attributes in line with rsgis.cmds.RSGISBandAttStatsCmds
+* band: int defining the image band to process
+* min_field: string defining the name of the field for min value
+* max_field: string defining the name of the field for max value
+* sum_field: string defining the name of the field for sum value
+* mean_field: string defining the name of the field for mean value
+* std_dev_field: string defining the name of the field for standard deviation value</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">inputImage</span> <span class="o">=</span> <span class="s2">&quot;RapidEye_20130625_lat53lon389_tid3063312_oid167771_rad_toa.kea&quot;</span>
+<span class="n">segmentClumps</span> <span class="o">=</span> <span class="s2">&quot;RapidEye_20130625_lat53lon389_tid3063312_oid167771_rad_toa_segs.kea&quot;</span>
+<span class="n">ndviImage</span> <span class="o">=</span> <span class="s2">&quot;RapidEye_20130625_lat53lon389_tid3063312_oid167771_rad_toa_ndvi.kea&quot;</span>
+<span class="n">bandStats</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bandStats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;BlueMeanML&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;BlueStdDevML&#39;</span><span class="p">))</span>
+<span class="n">bandStats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;GreenMeanML&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;GreenStdDevML&#39;</span><span class="p">))</span>
+<span class="n">bandStats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;RedMeanML&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;RedStdDevML&#39;</span><span class="p">))</span>
+<span class="n">bandStats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;RedEdgeMeanML&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;RedEdgeStdDevML&#39;</span><span class="p">))</span>
+<span class="n">bandStats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">mean_field</span><span class="o">=</span><span class="s1">&#39;NIRMeanML&#39;</span><span class="p">,</span> <span class="n">std_dev_field</span><span class="o">=</span><span class="s1">&#39;NIRStdDevML&#39;</span><span class="p">))</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">populate_rat_with_meanlit_stats</span><span class="p">(</span><span class="n">valsimage</span><span class="o">=</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">clumps</span><span class="o">=</span><span class="n">segmentClumps</span><span class="p">,</span> <span class="n">meanLitImage</span><span class="o">=</span><span class="n">ndviImage</span><span class="p">,</span> <span class="n">meanlitBand</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meanLitCol</span><span class="o">=</span><span class="s1">&#39;NDVIMean&#39;</span><span class="p">,</span> <span class="n">pxlCountCol</span><span class="o">=</span><span class="s1">&#39;MLPxlCount&#39;</span><span class="p">,</span> <span class="n">bandstats</span><span class="o">=</span><span class="n">bandStats</span><span class="p">,</span> <span class="n">rat_band</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.populate_rat_with_cat_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">populate_rat_with_cat_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_att_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_use_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_dir'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.populate_rat_with_cat_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function which populates a vector layer to a raster attribute table.
+This function rasterises the vector layer to the same pixel grid as the
+clumps file and then using the mode to populate the clumps. If a vector
+attribute column is provided then that column will be rasterised otherwise
+a binary mask will be used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – Input clumps file path.</p></li>
+<li><p><strong>out_col_name</strong> – the output column name.</p></li>
+<li><p><strong>vec_file</strong> – input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer</p></li>
+<li><p><strong>vec_att_col</strong> – optional attribute within the vector layer to be used
+to populate the clumps image. This must be an integer
+variable.</p></li>
+<li><p><strong>no_data_val</strong> – the no data value to use.</p></li>
+<li><p><strong>mode_use_no_data</strong> – use the no data value when calculating the mode.</p></li>
+<li><p><strong>tmp_dir</strong> – a temporary directory to outputs. If tmp_dir path does not
+exist it will be created and then deleted at the end of
+the function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.str_class_majority">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">str_class_majority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info_clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_class_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info_class_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_zero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band_base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.str_class_majority" title="Link to this definition"></a></dt>
+<dd><p>Finds the majority for class (string - field) from a set of small objects to large objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_clumps_img</strong> – is a the base clumps file, to be attribured.</p></li>
+<li><p><strong>info_clumps_img</strong> – is the file to take attributes from.</p></li>
+<li><p><strong>base_class_col</strong> – the output column name in the baseSegment file.</p></li>
+<li><p><strong>info_class_col</strong> – is the colum name in the infoSegment file.</p></li>
+<li><p><strong>ignore_zero</strong> – is a boolean specifying if zeros should be ignored in input layer. If set to false values of 0 will be included when calculating the class majority, otherwise the majority calculation will only consider objects with a value greater than 0.</p></li>
+<li><p><strong>rat_band_base</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the base clumps.</p></li>
+<li><p><strong>rat_band_info</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the info clumps.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_sub_utm_segs_popstats.kea&#39;</span>
+<span class="n">classRAT</span><span class="o">=</span><span class="s1">&#39;./TestOutputs/RasterGIS/reInt_rat.kea&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">str_class_majority</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">classRAT</span><span class="p">,</span> <span class="s1">&#39;class_dst&#39;</span><span class="p">,</span> <span class="s1">&#39;class_src&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.define_class_names">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">define_class_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_num_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_name_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_names_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.define_class_names" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>A function to create a class names column in a RAT based on segmented clumps</dt><dd><p>where a number of clumps have the same number class.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – input clumps image.</p></li>
+<li><p><strong>class_num_col</strong> – column specifying the class number (e.g., where clumps
+are segments in a segmentation)</p></li>
+<li><p><strong>class_name_col</strong> – the output column name where a string will be created if
+it doesn’t already exists.</p></li>
+<li><p><strong>class_names_dict</strong> – Dictionary to look up the class names. The key needs to
+the integer number for the class</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.set_column_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">set_column_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.set_column_data" title="Link to this definition"></a></dt>
+<dd><p>A function to read a column of data from a RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – Input clumps image</p></li>
+<li><p><strong>col_name</strong> – Name of the column to be written.</p></li>
+<li><p><strong>col_data</strong> – Data to be written to the column.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.create_uid_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">create_uid_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UID'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.create_uid_col" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a unique ID value (starting at 0) to each clump within a RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – Input clumps image</p></li>
+<li><p><strong>col_name</strong> – The output column name (default is UID).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-spatial-relationships">
+<h2>Calculate Spatial Relationships<a class="headerlink" href="#calculate-spatial-relationships" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_dist_to_classes">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_dist_to_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_img_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_dist_to_classes" title="Link to this definition"></a></dt>
+<dd><p>A function which will calculate proximity rasters for a set of classes
+defined within the RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string specifying the input image with the associated RAT</p></li>
+<li><p><strong>class_col</strong> – is the column in the RAT which has the classification</p></li>
+<li><p><strong>out_img_base</strong> – is the base name of the output image - output files will
+be KEA files.</p></li>
+<li><p><strong>tmp_dir</strong> – is a directory to be used for storing the image tiles and
+other temporary files - if not directory does not exist it
+will be created and deleted on completion (Default: tmp).</p></li>
+<li><p><strong>tile_size</strong> – is an int specifying in pixels the size of the image tiles
+used for processing (Default: 2000)</p></li>
+<li><p><strong>max_dist</strong> – is the maximum distance in units of the geographic units of
+the projection of the input image (Default: 1000).</p></li>
+<li><p><strong>no_data_val</strong> – is the value applied to the pixels outside of the maxDist
+threshold (Default: 1000; i.e., the same as maxDist).</p></li>
+<li><p><strong>n_cores</strong> – is the number of processing cores which are available to be
+used for this processing. If -1 all available cores will be
+used. (Default: -1)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_dist_between_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_dist_between_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_dist_between_clumps" title="Link to this definition"></a></dt>
+<dd><p>Calculate the distance between all clumps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – image clumps for which the distance will be calculated.</p></li>
+<li><p><strong>out_col_name</strong> – output column within the clumps image.</p></li>
+<li><p><strong>tmp_dir</strong> – directory out temporary files will be outputted to.</p></li>
+<li><p><strong>use_idx</strong> – use a spatial index when calculating the distance between
+clumps (needed for large number of clumps).</p></li>
+<li><p><strong>max_dist_thres</strong> – if using an index than an upper limit on the distance
+between clumps can be defined.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_dist_to_large_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_dist_to_large_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_dist_to_large_clumps" title="Link to this definition"></a></dt>
+<dd><p>Calculate the distance from each small clump to a large clump. Split defined by
+the threshold provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – image clumps for which the distance will be calculated.</p></li>
+<li><p><strong>out_col_name</strong> – output column within the clumps image.</p></li>
+<li><p><strong>size_thres</strong> – is a threshold to seperate the sets of large and small clumps.</p></li>
+<li><p><strong>tmp_dir</strong> – directory out temporary files will be outputted to.</p></li>
+<li><p><strong>use_idx</strong> – use a spatial index when calculating the distance between clumps
+(needed for large number of clumps).</p></li>
+<li><p><strong>max_dist_thres</strong> – if using an index than an upper limit on the distance
+between clumps can be defined.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_border_length">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_border_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_zero_edges</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_border_length" title="Link to this definition"></a></dt>
+<dd><p>Calculate the border length of clumps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>out_col</strong> – is a string with the output column name</p></li>
+<li><p><strong>ignore_zero_edges</strong> – is a boolean specifying whether zero edges (i.e., no data) should be ignored</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_rel_border">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_rel_border</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_names_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_zero_edges</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_rel_border" title="Link to this definition"></a></dt>
+<dd><p>Calculates the relative border length of the clumps to a class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputImage</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>out_col</strong> – is a string specifying the output column name</p></li>
+<li><p><strong>class_names_col</strong> – is a string specifying the column which holds the class names</p></li>
+<li><p><strong>class_name</strong> – is a string specifying the class for which the relative boarder is to be calculated.</p></li>
+<li><p><strong>ignore_zero_edges</strong> – is a boolean specifying whether zero edges (i.e., no data) should be ignored</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_rel_diff_neigh_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_rel_diff_neigh_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_stats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_abs_diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_rel_diff_neigh_stats" title="Link to this definition"></a></dt>
+<dd><p>Calculates the difference (relative or absolute) between each clump and it’s
+neighbours. The differences can be summarised as min, max, mean, std dev or sum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>field_stats</strong> – has the following fields
+* field: string defining the field in the RAT to compare to.
+* min_field: string defining the name of the field for min value
+* max_field: string defining the name of the field for max value
+* sum_field: string defining the name of the field for sum value
+* mean_field: string defining the name of the field for mean value
+* std_dev_field: string defining the name of the field for standard deviation value</p></li>
+<li><p><strong>use_abs_diff</strong> – calculate the absolute difference.:param rat_band: is the image band with which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.rastergis</span>
+<span class="n">inputImage</span> <span class="o">=</span> <span class="s1">&#39;./RapidEye_20130625_lat53lon389_tid3063312_oid167771_rad_toa_segs_neigh.kea&#39;</span>
+<span class="n">ratBand</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">find_neighbours</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">ratBand</span><span class="p">)</span>
+<span class="n">fieldInfo</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">FieldAttStats</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;NIRMean&#39;</span><span class="p">,</span> <span class="n">min_field</span><span class="o">=</span><span class="s1">&#39;MinNIRMeanDiff&#39;</span><span class="p">,</span> <span class="n">max_field</span><span class="o">=</span><span class="s1">&#39;MaxNIRMeanDiff&#39;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">calc_rel_diff_neigh_stats</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">fieldInfo</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ratBand</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.define_border_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">define_border_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.define_border_clumps" title="Link to this definition"></a></dt>
+<dd><p>Defines the clumps which are on the border within the file of the clumps using a mask</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>out_col</strong> – is a string containing the name of the output column where a value of 1 indicates a border clumps</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.define_clump_tile_positions">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">define_clump_tile_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_overlap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_boundary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_body</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.define_clump_tile_positions" title="Link to this definition"></a></dt>
+<dd><p>Defines the position within the file of the clumps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>tile_img</strong> – is a string containing the name of the input tile image</p></li>
+<li><p><strong>out_col</strong> – is a string containing the name of the output column</p></li>
+<li><p><strong>tile_overlap</strong> – is an unsigned int defining the overlap between tiles</p></li>
+<li><p><strong>tile_boundary</strong> – is an unsigned int</p></li>
+<li><p><strong>tile_body</strong> – is an unsigned int</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.find_boundary_pixels">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">find_boundary_pixels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.find_boundary_pixels" title="Link to this definition"></a></dt>
+<dd><p>Identifies the pixels on the boundary of the clumps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - (Optional, Default = ‘KEA’)</p></li>
+<li><p><strong>rat_band</strong> – is an int containing band for which the neighbours are to be calculated for (Optional, Default = 1)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.find_neighbours">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">find_neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.find_neighbours" title="Link to this definition"></a></dt>
+<dd><p>Finds the clump neighbours from an image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>rat_band</strong> – is an int containing band for which the neighbours are to be calculated for (Optional, Default = 1)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.clumps_spatial_location">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">clumps_spatial_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eastings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.clumps_spatial_location" title="Link to this definition"></a></dt>
+<dd><p>Adds spatial location columns to the attribute table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputImage</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>eastings</strong> – is a string containing the name of the eastings field</p></li>
+<li><p><strong>northings</strong> – is a string containing the name of the northings field</p></li>
+<li><p><strong>rat_band</strong> – is an integer containing the band number for the RAT (Optional, default = 1)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">image</span> <span class="o">=</span> <span class="s1">&#39;injune_p142_casi_sub_utm_segs_spatloc_eucdist.kea&#39;</span>
+<span class="n">eastings</span> <span class="o">=</span> <span class="s1">&#39;Easting&#39;</span>
+<span class="n">northings</span> <span class="o">=</span> <span class="s1">&#39;Northing&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">clumps_spatial_location</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">eastings</span><span class="p">,</span> <span class="n">northings</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.clumps_spatial_extent">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">clumps_spatial_extent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_xx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_xx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_yx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_yy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_yx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_yy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.clumps_spatial_extent" title="Link to this definition"></a></dt>
+<dd><p>Adds spatial extent for each clump to the attribute table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>min_xx</strong> – is a string containing the name of the min X X field</p></li>
+<li><p><strong>min_xy</strong> – is a string containing the name of the min X Y field</p></li>
+<li><p><strong>max_xx</strong> – is a string containing the name of the max X X field</p></li>
+<li><p><strong>max_xy</strong> – is a string containing the name of the max X Y field</p></li>
+<li><p><strong>min_yx</strong> – is a string containing the name of the min Y X field</p></li>
+<li><p><strong>min_yy</strong> – is a string containing the name of the min Y Y field</p></li>
+<li><p><strong>max_yx</strong> – is a string containing the name of the max Y X field</p></li>
+<li><p><strong>max_yy</strong> – is a string containing the name of the max Y Y field</p></li>
+<li><p><strong>rat_band</strong> – is an integer containing the band number for the RAT (Optional, default = 1)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">image</span> <span class="o">=</span> <span class="s1">&#39;injune_p142_casi_sub_utm_segs_spatloc_eucdist.kea&#39;</span>
+<span class="n">minX_X</span> <span class="o">=</span> <span class="s1">&#39;minXX&#39;</span>
+<span class="n">minX_Y</span> <span class="o">=</span> <span class="s1">&#39;minXY&#39;</span>
+<span class="n">maxX_X</span> <span class="o">=</span> <span class="s1">&#39;maxXX&#39;</span>
+<span class="n">maxX_Y</span> <span class="o">=</span> <span class="s1">&#39;maxXY&#39;</span>
+<span class="n">minY_X</span> <span class="o">=</span> <span class="s1">&#39;minYX&#39;</span>
+<span class="n">minY_Y</span> <span class="o">=</span> <span class="s1">&#39;minYY&#39;</span>
+<span class="n">maxY_X</span> <span class="o">=</span> <span class="s1">&#39;maxYX&#39;</span>
+<span class="n">maxY_Y</span> <span class="o">=</span> <span class="s1">&#39;maxYY&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">clumps_spatial_extent</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">minX_X</span><span class="p">,</span> <span class="n">minX_Y</span><span class="p">,</span> <span class="n">maxX_X</span><span class="p">,</span> <span class="n">maxX_Y</span><span class="p">,</span> <span class="n">minY_X</span><span class="p">,</span> <span class="n">minY_Y</span><span class="p">,</span> <span class="n">maxY_X</span><span class="p">,</span> <span class="n">maxY_Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="read-rat">
+<h2>Read RAT<a class="headerlink" href="#read-rat" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.get_column_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">get_column_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.rastergis.get_column_data" title="Link to this definition"></a></dt>
+<dd><p>A function to read a column of data from a RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – Input clumps image</p></li>
+<li><p><strong>col_name</strong> – Name of the column to be read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy array with values from the clumpsImg</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.read_rat_neighbours">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">read_rat_neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.rastergis.read_rat_neighbours" title="Link to this definition"></a></dt>
+<dd><p>A function which returns a list of clumps neighbours from a KEA RAT. Note, the
+neighbours are popualted using the function rsgislib.rastergis.findNeighbours.
+By default the whole datasets of neightbours is read to memory but the start_row
+and end_row variables can be used to read a subset of the RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – path to the image file with the RAT</p></li>
+<li><p><strong>start_row</strong> – the row within the RAT to start reading, if None will start
+at 0 (Default: None).</p></li>
+<li><p><strong>end_row</strong> – the row within the RAT to end reading, if None will end at n_rows
+within the RAT. (Default: None)</p></li>
+<li><p><strong>rat_band</strong> – the band within the image file for which the RAT is to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of lists with neighbour indexes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sampling">
+<h2>Sampling<a class="headerlink" href="#sampling" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.histo_sampling">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">histo_sampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_sel_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.histo_sampling" title="Link to this definition"></a></dt>
+<dd><p>This function performs a histogram based sampling of the RAT for a specific column.
+The output is a binary column within the RAT where rows with a value of 1 are the selected clumps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clumps image file</p></li>
+<li><p><strong>val_col</strong> – is a string containing the name of the field with the values used for the sampling.</p></li>
+<li><p><strong>out_sel_col</strong> – is a string containing the name of the field where the binary output will be written (1 for selected clumps).</p></li>
+<li><p><strong>prop_sample</strong> – is a float specifying the proportion of the datasets which should be within the outputted sample. Values range of 0-1. 0.5 would be a 50% sample.:param bin_width: is a float specifying the width of each histogram bin.</p></li>
+<li><p><strong>cls_col</strong> – is a string specifying a field within which classes have been defined. This can be used to only apply the sampling to a thematic subset of the RAT. If set as None then this is ignored. (Default = None)</p></li>
+<li><p><strong>class_val</strong> – is a string specifying the class it will be limited to.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+
+<span class="n">rastergis</span><span class="o">.</span><span class="n">histo_sampling</span><span class="p">(</span><span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;N00E103_10_grid_knn.kea&#39;</span><span class="p">,</span> <span class="n">varCol</span><span class="o">=</span><span class="s1">&#39;HH&#39;</span><span class="p">,</span> <span class="n">outSelectCol</span><span class="o">=</span><span class="s1">&#39;HHSampling&#39;</span><span class="p">,</span> <span class="n">propOfSample</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">binWidth</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">classColumn</span><span class="o">=</span><span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="n">classVal</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.take_random_sample">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">take_random_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_col_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.take_random_sample" title="Link to this definition"></a></dt>
+<dd><p>A function to take a random sample of an input column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – clumps image.</p></li>
+<li><p><strong>in_col_name</strong> – input column name.</p></li>
+<li><p><strong>in_col_val</strong> – numeric value for which the random sample is to be taken for.</p></li>
+<li><p><strong>out_col_name</strong> – output column where value of 1 is selected within the random
+sample and 0 is not selected.</p></li>
+<li><p><strong>sample_ratio</strong> – the size of the sample (0 - 1.0; i.e., 10% = 0.1) to be
+taken of the number of rows within input value.</p></li>
+<li><p><strong>rnd_seed</strong> – is the seed for the random number generation (optional;
+default is 0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.select_clumps_on_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">select_clumps_on_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_sel_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_sel_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eastings_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northings_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.select_clumps_on_grid" title="Link to this definition"></a></dt>
+<dd><p>Selects a segment within a regular grid pattern across the scene. The clump is selected based on the minimum, maximum or closest to the mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>in_sel_col</strong> – is a string which defines the column name where a value of 1 defines the clumps which will be included in the analysis.</p></li>
+<li><p><strong>out_sel_col</strong> – is a string which defines the column name where a value of 1 defines the clumps selected by the analysis.</p></li>
+<li><p><strong>eastings_col</strong> – is a string which defines a column with a eastings for each clump.</p></li>
+<li><p><strong>northings_col</strong> – is a string which defines a column with a northings for each clump.</p></li>
+<li><p><strong>metric_col</strong> – is a string which defines a column with a value for each clump which will be used for the distance, min, or max anaylsis.</p></li>
+<li><p><strong>method</strong> – is a string which defines whether the minimum, maximum or mean method of selecting a clump will be used (values can be either min, max or mean).</p></li>
+<li><p><strong>rows</strong> – is an unsigned integer which defines the number of rows within which a clump will be selected.</p></li>
+<li><p><strong>cols</strong> – is an unsigned integer which defines the number of columns within which a clump will be selected.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.identify_small_units">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">identify_small_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">small_clumps_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tiled_clump</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.identify_small_units" title="Link to this definition"></a></dt>
+<dd><p>Identify small connected units within a classification. The threshold to define
+small is provided by the user in pixels. Note, the outColName and smallClumpsThres
+variables can be provided as lists to identify a number of thresholds of
+small units.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – string for the clumps image file containing input classification</p></li>
+<li><p><strong>class_col</strong> – string for the column name representing the classification as
+integer values</p></li>
+<li><p><strong>tmp_dir</strong> – directory path where temporary layers are stored (if directory is
+created within the function it will be deleted once function
+is complete).</p></li>
+<li><p><strong>out_col_name</strong> – a list of output column names (i.e., one for each threshold)</p></li>
+<li><p><strong>small_clumps_thres</strong> – a list of thresholds for identifying small clumps.</p></li>
+<li><p><strong>use_tiled_clump</strong> – a boolean to specify whether the tiled clumping algorithm
+should be used (Default is False; select True for large
+datasets)</p></li>
+<li><p><strong>n_cores</strong> – if the tiled version of the clumping algorithm is being used then
+there is an option to use multiple processing cores; specify the
+number to be used (Default is 2).</p></li>
+<li><p><strong>tile_width</strong> – is the width of the image tile (in pixels) if tiled clumping
+is used.</p></li>
+<li><p><strong>tile_height</strong> – is the height of the image tile (in pixels) if tiled clumping
+is used.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.rastergis</span>
+
+<span class="n">clumpsImg</span> <span class="o">=</span> <span class="s2">&quot;LS2MSS_19750620_lat10lon6493_r67p250_rad_srefdem_30m_clumps.kea&quot;</span>
+<span class="n">tmpPath</span> <span class="o">=</span> <span class="s2">&quot;tmp/&quot;</span>
+<span class="n">classCol</span> <span class="o">=</span> <span class="s2">&quot;OutClass&quot;</span>
+<span class="n">outColName</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SmallUnits25&quot;</span><span class="p">,</span> <span class="s2">&quot;SmallUnits50&quot;</span><span class="p">,</span> <span class="s2">&quot;SmallUnits100&quot;</span><span class="p">]</span>
+<span class="n">smallClumpsThres</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">identify_small_units</span><span class="p">(</span><span class="n">clumpsImg</span><span class="p">,</span> <span class="n">classCol</span><span class="p">,</span> <span class="n">tmpPath</span><span class="p">,</span>
+                               <span class="n">outColName</span><span class="p">,</span> <span class="n">smallClumpsThres</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="extrapolation">
+<h2>Extrapolation<a class="headerlink" href="#extrapolation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.apply_rat_knn">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">apply_rat_knn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_extrap_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_extrap_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_regions_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_regions_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">list&lt;string&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_feat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_knn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summerise_knn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_thres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.apply_rat_knn" title="Link to this definition"></a></dt>
+<dd><p>This function uses the KNN algorithm to allow data values to be extrapolated to segments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clumps image file</p></li>
+<li><p><strong>in_extrap_col</strong> – is a string containing the name of the field with the values used for the extrapolation.</p></li>
+<li><p><strong>out_extrap_col</strong> – is a string containing the name of the field where the extrapolated values will be written to.</p></li>
+<li><p><strong>train_regions_col</strong> – is a string containing the name of the field specifying the clumps to be used as training - binary column (1 == training region).</p></li>
+<li><p><strong>apply_regions_col</strong> – is a string containing the name of the field specifying the regions for which KNN is to be applued - binary column (1 == regions to be calculated). If None then ignored and applied to all.:param val_cols: is a list of strings specifying the fields which will be used to calculate distance.</p></li>
+<li><p><strong>k_feat</strong> – is an unsigned integer specifying the number of nearest features (i.e., K) to be used (Default: 12)</p></li>
+<li><p><strong>dist_knn</strong> – specifies how the distance to identify NN is calculated (rsgislib.DIST_EUCLIDEAN, rsgislib.DIST_MANHATTEN, rsgislib.DIST_MAHALANOBIS, rsgislib.DIST_MINKOWSKI, rsgislib.DIST_CHEBYSHEV; Default: rsgislib.DIST_MAHALANOBIS).</p></li>
+<li><p><strong>summerise_knn</strong> – specifies how the extrapolation value is calculated (rsgislib.SUMTYPE_MODE, rsgislib.SUMTYPE_MEAN, rsgislib.SUMTYPE_MEDIAN, rsgislib.SUMTYPE_MIN, rsgislib.SUMTYPE_MAX, rsgislib.SUMTYPE_STDDEV; Default: rsgislib.SUMTYPE_MEDIAN). Mode is used for classification.</p></li>
+<li><p><strong>dist_thres</strong> – is a maximum distance threshold over which features will not be included within the ‘k’.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">imageutils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib</span>
+
+<span class="n">forestClumpsImg</span><span class="o">=</span><span class="s1">&#39;./LS5TM_20110428_forestclumps.kea&#39;</span>
+
+<span class="n">rastergis</span><span class="o">.</span><span class="n">apply_rat_knn</span><span class="p">(</span><span class="n">clumps</span><span class="o">=</span><span class="n">forestClumpsImg</span><span class="p">,</span> <span class="n">inExtrapField</span><span class="o">=</span><span class="s1">&#39;HP95&#39;</span><span class="p">,</span> <span class="n">outExtrapField</span><span class="o">=</span><span class="s1">&#39;HP95Pred&#39;</span><span class="p">,</span> <span class="n">trainRegionsField</span><span class="o">=</span><span class="s1">&#39;LiDARForest&#39;</span><span class="p">,</span> <span class="n">applyRegionsField</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;RedRefl&#39;</span><span class="p">,</span><span class="s1">&#39;GreenRefl&#39;</span><span class="p">,</span><span class="s1">&#39;BlueRefl&#39;</span><span class="p">],</span> <span class="n">kFeat</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">distKNN</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">DIST_EUCLIDEAN</span><span class="p">,</span> <span class="n">summeriseKNN</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">SUMTYPE_MEDIAN</span><span class="p">,</span> <span class="n">distThres</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># Export predicted column to GDAL image</span>
+<span class="n">forestHeightImg</span><span class="o">=</span><span class="s1">&#39;./LS5TM_20110428_forest95Height.kea&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">export_col_to_gdal_img</span><span class="p">(</span><span class="n">forestClumpsImg</span><span class="p">,</span> <span class="n">forestHeightImg</span><span class="p">,</span> <span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32FLOAT</span><span class="p">,</span> <span class="s1">&#39;HP95Pred&#39;</span><span class="p">)</span>
+<span class="n">imageutils</span><span class="o">.</span><span class="n">popImageStats</span><span class="p">(</span><span class="n">forestHeightImg</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="change-detection">
+<h2>Change Detection<a class="headerlink" href="#change-detection" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.get_global_class_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">get_global_class_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_chg_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.get_global_class_stats" title="Link to this definition"></a></dt>
+<dd><p>Similar to ‘findChangeClumpsFromStdDev’ but rather than applying a threshold to calculate change clumps adds global (over all objects) class mean and standard deviation to RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>class_field</strong> – is a string providing the name of the column containing classes.</p></li>
+<li><p><strong>attributes</strong> – is a sequence of strings containing the columns to use when detecting change.</p></li>
+<li><p><strong>cls_chg_cols</strong> – is a sequence of python objects having the following attributes:
+* cls_name - The class name in which change is going to be search for</p></li>
+<li><p><strong>rat_band</strong> – is an int containing band for which the neighbours are to be calculated for (Optional, Default = 1)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumpsImage</span><span class="o">=</span><span class="s1">&#39;injune_p142_casi_sub_utm_segs_popstats.kea&#39;</span>
+<span class="n">changeFeatVals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">changeFeatVals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">ChangeFeat</span><span class="p">(</span><span class="n">cls_name</span><span class="o">=</span><span class="s1">&#39;Forest&#39;</span><span class="p">))</span>
+<span class="n">changeFeatVals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rastergis</span><span class="o">.</span><span class="n">ChangeFeat</span><span class="p">(</span><span class="n">cls_name</span><span class="o">=</span><span class="s1">&#39;Scrub-Shrub))</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">get_global_class_stats</span><span class="p">(</span><span class="n">clumpsImage</span><span class="p">,</span> <span class="s1">&#39;ClassName&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;NDVI&#39;</span><span class="p">],</span> <span class="n">changeFeatVals</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="statistics">
+<h2>Statistics<a class="headerlink" href="#statistics" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_1d_jm_distance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_1d_jm_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_1d_jm_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jeffries and Matusita distance for a single variable between two classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>val_col</strong> – is a string specifying the name of the variable column.</p></li>
+<li><p><strong>bin_width</strong> – is a float specifying the bin width for the histogram.</p></li>
+<li><p><strong>cls_col</strong> – is a string specifying the column name with the class names.</p></li>
+<li><p><strong>class1</strong> – is a string specifying the first class.</p></li>
+<li><p><strong>class2</strong> – is a string specifying the second class.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the clumps image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>double for distance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_2d_jm_distance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_2d_jm_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val1_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val2_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val1_bin_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val2_bin_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_2d_jm_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jeffries and Matusita distance for two variables between two classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>val1_col</strong> – is a string specifying the name of the first variable column.</p></li>
+<li><p><strong>val2_col</strong> – is a string specifying the name of the second variable column.</p></li>
+<li><p><strong>val1_bin_width</strong> – is a float specifying the bin width for the histogram for variable 1.</p></li>
+<li><p><strong>val2_bin_width</strong> – is a float specifying the bin width for the histogram for variable 2.</p></li>
+<li><p><strong>cls_col</strong> – is a string specifying the column name with the class names.</p></li>
+<li><p><strong>class1</strong> – is a string specifying the first class.</p></li>
+<li><p><strong>class2</strong> – is a string specifying the second class.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the clumps image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>double for distance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.calc_bhattacharyya_distance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">calc_bhattacharyya_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">uint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.calc_bhattacharyya_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Bhattacharyya distance for a single variable between two classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clump file</p></li>
+<li><p><strong>val_col</strong> – is a string specifying the name of the variable column.</p></li>
+<li><p><strong>cls_col</strong> – is a string specifying the column name with the class names.</p></li>
+<li><p><strong>class1</strong> – is a string specifying the first class.</p></li>
+<li><p><strong>class2</strong> – is a string specifying the second class.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated in the clumps image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>double for distance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="copy-export">
+<h2>Copy &amp; Export<a class="headerlink" href="#copy-export" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.export_rat_cols_to_ascii">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">export_rat_cols_to_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.export_rat_cols_to_ascii" title="Link to this definition"></a></dt>
+<dd><p>Exports selected columns from a GDAL RAT to ASCII file (comma separated). The first column is the object ID (FID).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input RAT.</p></li>
+<li><p><strong>out_file</strong> – is a string containing the name of the output file.</p></li>
+<li><p><strong>fields</strong> – is a sequence of strings containing the field names.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;./RATS/injune_p142_casi_sub_utm_clumps_elim_final_clumps_elim_final.kea&#39;</span>
+<span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_rgb_exportascii.txt&#39;</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BlueAvg&#39;</span><span class="p">,</span> <span class="s1">&#39;GreenAvg&#39;</span><span class="p">,</span> <span class="s1">&#39;RedAvg&#39;</span><span class="p">]</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">export_rat_cols_to_ascii</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.export_col_to_gdal_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">export_col_to_gdal_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.export_col_to_gdal_img" title="Link to this definition"></a></dt>
+<dd><p>Exports column of the raster attribute table as bands in a GDAL image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file with RAT</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output gdal file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an int containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>field</strong> – is a string, providing the name of the column to be exported.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;./RATS/injune_p142_casi_sub_utm_clumps_elim_final_clumps_elim_final.kea&#39;</span>
+<span class="n">output_img</span><span class="o">=</span><span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_rgb_export.kea&#39;</span>
+<span class="n">gdalformat</span> <span class="o">=</span> <span class="s1">&#39;KEA&#39;</span>
+<span class="n">datatype</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32FLOAT</span>
+<span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;RedAvg&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">export_col_to_gdal_img</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">output_img</span><span class="p">,</span> <span class="n">gdalformat</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.export_cols_to_gdal_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">export_cols_to_gdal_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.export_cols_to_gdal_img" title="Link to this definition"></a></dt>
+<dd><p>Exports columns of the raster attribute table as bands in a GDAL image.
+Utility function, exports each column individually then stacks them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file with RAT</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output gdal file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output
+file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an int containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>field</strong> – is a list of strings, providing the names of the column to be exported</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the
+image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;RATS/injune_p142_casi_sub_utm_clumps_elim_final_clumps_elim_final.kea&#39;</span>
+<span class="n">outimage</span><span class="o">=</span><span class="s1">&#39;TestOutputs/RasterGIS/injune_p142_casi_rgb_export.kea&#39;</span>
+<span class="n">gdalformat</span> <span class="o">=</span> <span class="s1">&#39;KEA&#39;</span>
+<span class="n">datatype</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32FLOAT</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;RedAvg&#39;</span><span class="p">,</span><span class="s1">&#39;GreenAvg&#39;</span><span class="p">,</span><span class="s1">&#39;BlueAvg&#39;</span><span class="p">]</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">export_cols_to_gdal_image</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">outimage</span><span class="p">,</span> <span class="n">gdalformat</span><span class="p">,</span>
+                                    <span class="n">datatype</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.export_clumps_to_images">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">export_clumps_to_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_img_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_img_ext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.export_clumps_to_images" title="Link to this definition"></a></dt>
+<dd><p>Exports each clump to a seperate raster which is the minimum extent for the clump.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input image file with RAT</p></li>
+<li><p><strong>out_img_base</strong> – is a string containing the base name of the output image file (C + FID will be added to identify files).</p></li>
+<li><p><strong>bin_out</strong> – is a boolean specifying whether the output images should be binary or if the pixel value should be the FID of the clump.</p></li>
+<li><p><strong>out_img_ext</strong> – is a sting with the output file extension (e.g., kea) without the preceeding dot to be appended to the file name.</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;./DefineTiles.kea&#39;</span>
+<span class="n">outimgbase</span><span class="o">=</span><span class="s1">&#39;./Tiles/OutputImgTile_&#39;</span>
+<span class="n">outimgext</span><span class="o">=</span><span class="s1">&#39;kea&#39;</span>
+<span class="n">gdalformat</span> <span class="o">=</span> <span class="s1">&#39;KEA&#39;</span>
+<span class="n">binaryOut</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">export_clumps_to_images</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">outimgbase</span><span class="p">,</span> <span class="n">binaryOut</span><span class="p">,</span> <span class="n">outimgext</span><span class="p">,</span> <span class="n">gdalformat</span><span class="p">,</span> <span class="n">rat_band</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.copy_gdal_rat_columns">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">copy_gdal_rat_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_colours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_hist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.copy_gdal_rat_columns" title="Link to this definition"></a></dt>
+<dd><p>Copies GDAL RAT columns from one image to another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name and path for the image with RAT from which columns are to copied from.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the file to which the columns are to be copied.</p></li>
+<li><p><strong>fields</strong> – is a sequence of strings containing the names of the fields to copy</p></li>
+<li><p><strong>copy_colours</strong> – is a bool specifying if the colour columns should be copied (default = True)</p></li>
+<li><p><strong>copy_hist</strong> – is a bool specifying if the histogram  should be copied (default = True)</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">table</span> <span class="o">=</span> <span class="s1">&#39;./RATS/injune_p142_casi_sub_utm_clumps_elim_final_clumps_elim_final.kea&#39;</span>
+<span class="n">image</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_sub_utm_segs_cpcols.kea&#39;</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NIRAvg&#39;</span><span class="p">,</span> <span class="s1">&#39;BlueAvg&#39;</span><span class="p">,</span> <span class="s1">&#39;GreenAvg&#39;</span><span class="p">,</span> <span class="s1">&#39;RedAvg&#39;</span><span class="p">]</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">copy_gdal_rat_columns</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To copy a subset of columns from one RAT to a new file the following can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imageutils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">rat_band</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">table</span><span class="o">=</span><span class="s1">&#39;inRAT.kea&#39;</span>
+<span class="n">output</span><span class="o">=</span><span class="s1">&#39;outRAT_nir_only.kea&#39;</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="n">rat_band</span><span class="p">]</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">selectImageBands</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span><span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32INT</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NIRAvg&#39;</span><span class="p">]</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">copy_gdal_rat_columns</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">copycolours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copyhist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rat_band</span><span class="o">=</span><span class="n">rat_band</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.copy_rat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">copy_rat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.copy_rat" title="Link to this definition"></a></dt>
+<dd><p>Copies a GDAL RAT from one image to another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name and path for the image with RAT from which columns are to copied from.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the file to which the columns are to be copied.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span> <span class="o">=</span> <span class="s1">&#39;./RATS/injune_p142_casi_sub_utm_clumps_elim_final_clumps_elim_final.kea&#39;</span>
+<span class="n">output_img</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_sub_utm_segs_cptab.kea&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">copy_rat</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">output_img</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.import_vec_atts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">import_vec_atts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.import_vec_atts" title="Link to this definition"></a></dt>
+<dd><p>Copies the attributes from an input shapefile to the RAT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input file with RAT</p></li>
+<li><p><strong>vec_file</strong> – is a string containing the file path of the input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – is a string containing the layer name within the input vector file</p></li>
+<li><p><strong>fid_col</strong> – is a string with the name of a column which has the clumps pixel value associated with the vector feature.</p></li>
+<li><p><strong>col_names</strong> – is a list of strings specifying the columns to be copied to the RAT. If ‘None’ then all attributes will be copied.</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span> <span class="o">=</span> <span class="s1">&#39;clumpsFiles.kea&#39;</span>
+<span class="n">vectorFile</span> <span class="o">=</span> <span class="s1">&#39;vectorFile.shp&#39;</span>
+<span class="n">veclyr</span> <span class="o">=</span> <span class="s1">&#39;vectorFile&#39;</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">import_vec_atts</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">vectorFile</span><span class="p">,</span> <span class="n">veclyr</span><span class="p">,</span> <span class="s1">&#39;pxlval&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="colour-tables">
+<h2>Colour Tables<a class="headerlink" href="#colour-tables" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.colour_rat_classes">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">colour_rat_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_colours</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.colour_rat_classes" title="Link to this definition"></a></dt>
+<dd><p>Sets a colour table for a set of classes within the attribute table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>field</strong> – is a string containing the name of the input class field (class can be a string or integer).</p></li>
+<li><p><strong>class_colours</strong> – is dict mapping int class ids to an object having the following attributes:
+* red: int defining the red colour component (0 - 255)
+* green: int defining the green colour component (0 - 255)
+* blue: int defining the bluecolour component (0 - 255)
+* alpha: int defining the alpha colour component (0 - 255)</p></li>
+<li><p><strong>rat_band</strong> – is an optional (default = 1) integer parameter specifying the image band to which the RAT is associated.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rastergis</span>
+<span class="n">clumps</span><span class="o">=</span><span class="s1">&#39;./TestOutputs/RasterGIS/injune_p142_casi_sub_utm_segs_col.kea&#39;</span>
+<span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;outClass&#39;</span>
+<span class="n">classcolours</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">colourCat</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;ColourCat&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">])</span>
+<span class="n">classcolours</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">colourCat</span><span class="p">(</span><span class="n">red</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">green</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blue</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+<span class="n">classcolours</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">colourCat</span><span class="p">(</span><span class="n">red</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">green</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">blue</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+<span class="n">rastergis</span><span class="o">.</span><span class="n">colour_rat_classes</span><span class="p">(</span><span class="n">clumps</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">classcolours</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.set_class_names_colours">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">set_class_names_colours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_names_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.set_class_names_colours" title="Link to this definition"></a></dt>
+<dd><p>A function to define a class names column and define the class colours.</p>
+<p>classInfoDict = dict()
+classInfoDict[1] = {‘classname’:’Forest’, ‘red’:0, ‘green’:255, ‘blue’:0}
+classInfoDict[2] = {‘classname’:’Water’, ‘red’:0, ‘green’:0, ‘blue’:255}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – Input clumps image - expecting a classification
+(rather than segmentation) where the number is the pixel value.</p></li>
+<li><p><strong>class_names_col</strong> – The output column for the class names.</p></li>
+<li><p><strong>class_info_dict</strong> – a dict where the key is the pixel value for the class.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.get_rat_colours">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">get_rat_colours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.rastergis.get_rat_colours" title="Link to this definition"></a></dt>
+<dd><p>A function which gets the colour table and optionally the
+class names from the rat and returns it as a dict which
+can be inputted into the rsgislib.rastergis.set_class_names_colours
+function. This is useful for copying the class names and colours
+between files. Output dict will have the following structure:</p>
+<p>class_clr_info[1] = {‘classname’:’Forest’, ‘red’:0, ‘green’:255, ‘blue’:0}
+class_clr_info[2] = {‘classname’:’Water’, ‘red’:0, ‘green’:0, ‘blue’:255}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – Input clumps image</p></li>
+<li><p><strong>cls_column</strong> – Optionally a class names column can be provided.
+If None then ignored and output dict doesn’t have
+a ‘classname’ field.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict of dicts</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="data-structures-enums">
+<h2>Data Structures / Enums<a class="headerlink" href="#data-structures-enums" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.BandAttStats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">BandAttStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_dev_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.BandAttStats" title="Link to this definition"></a></dt>
+<dd><p>This is passed to the populate_rat_with_stats function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.FieldAttStats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">FieldAttStats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_dev_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.FieldAttStats" title="Link to this definition"></a></dt>
+<dd><p>This is passed to the calcRelDiffNeighStats function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.BandAttPercentiles">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">BandAttPercentiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.BandAttPercentiles" title="Link to this definition"></a></dt>
+<dd><p>This is passed to the populateRATWithPercentiles function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.rastergis.ShapeIndex">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.rastergis.</span></span><span class="sig-name descname"><span class="pre">ShapeIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.rastergis.ShapeIndex" title="Link to this definition"></a></dt>
+<dd><p>This is passed to the calcShapeIndices function</p>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_modelling.html" class="btn btn-neutral float-left" title="RSGISLib Modelling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_regression.html" class="btn btn-neutral float-right" title="RSGISLib Regression Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

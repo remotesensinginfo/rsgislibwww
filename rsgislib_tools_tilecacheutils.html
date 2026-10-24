@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Tile Cache Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib MS Office Tools" href="rsgislib_tools_msofficetools.html" />
+    <link rel="prev" title="RSGISLib Test Images Tools" href="rsgislib_tools_testimages.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Tile Cache Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#convert-indexing">Convert Indexing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.convert_between_tms_xyz"><code class="docutils literal notranslate"><span class="pre">convert_between_tms_xyz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.flip_xyz_tms_tiles"><code class="docutils literal notranslate"><span class="pre">flip_xyz_tms_tiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#find-path-tile">Find Path/Tile</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_quadkey_for_tile_path"><code class="docutils literal notranslate"><span class="pre">get_quadkey_for_tile_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_tile_path_from_quadkey"><code class="docutils literal notranslate"><span class="pre">get_tile_path_from_quadkey()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_tiles"><code class="docutils literal notranslate"><span class="pre">get_tiles()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_web_mercator_xy"><code class="docutils literal notranslate"><span class="pre">get_web_mercator_xy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_xy_mercator_lonlat"><code class="docutils literal notranslate"><span class="pre">get_xy_mercator_lonlat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.xy_mercator_bounds"><code class="docutils literal notranslate"><span class="pre">xy_mercator_bounds()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tile-info">Tile Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_tile_for_point"><code class="docutils literal notranslate"><span class="pre">get_tile_for_point()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_tile_tl_lonlat"><code class="docutils literal notranslate"><span class="pre">get_tile_tl_lonlat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.get_tile_bbox"><code class="docutils literal notranslate"><span class="pre">get_tile_bbox()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#internal-functions">Internal Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.resolution"><code class="docutils literal notranslate"><span class="pre">resolution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.tilecacheutils.truncate_lng_lat"><code class="docutils literal notranslate"><span class="pre">truncate_lng_lat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib Tile Cache Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-tile-cache-tools">
+<h1>RSGISLib Tile Cache Tools<a class="headerlink" href="#rsgislib-tile-cache-tools" title="Link to this heading"></a></h1>
+<section id="convert-indexing">
+<h2>Convert Indexing<a class="headerlink" href="#convert-indexing" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.convert_between_tms_xyz">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">convert_between_tms_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tiles_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.convert_between_tms_xyz" title="Link to this definition"></a></dt>
+<dd><p>A function which converts between TMS and XYZ tile indexing. The conversion is performed in-situ
+with the files simply renamed. If a tile cache is in TMS format then this function will convert
+it to XYZ, while if it is in XYZ format then it will convert it to TMS (they are easily interchangeable)</p>
+<p>The TMS format uses a grid with the origin at the bottom-left. While the XYZ
+format is uses a grid with the origin in the top-left.</p>
+<p>XYZ grids can be loads into QGIS and other GIS systems as layers.
+TMS grids are outputted by gdal2tiles.py.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tiles_dir</strong> – The input directory for the tile cache.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.flip_xyz_tms_tiles">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">flip_xyz_tms_tiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.flip_xyz_tms_tiles" title="Link to this definition"></a></dt>
+<dd><p>If you put in a XYZ tile index you will have returned
+an TMS index. If you put in a TMS index you will have
+returned XYZ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tile_x</strong> – The x index for the tile.</p></li>
+<li><p><strong>tile_y</strong> – The y index for the tile (will change if TMS or XYZ indexing).</p></li>
+<li><p><strong>zoom</strong> – the zoom level for the tile.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(tile_x, tile_y, zoom)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="find-path-tile">
+<h2>Find Path/Tile<a class="headerlink" href="#find-path-tile" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_quadkey_for_tile_path">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_quadkey_for_tile_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_quadkey_for_tile_path" title="Link to this definition"></a></dt>
+<dd><p>Get the quadkey of the tile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tile_x</strong> – The x index for the tile.</p></li>
+<li><p><strong>tile_y</strong> – The y index for the tile (will change if TMS or XYZ indexing).</p></li>
+<li><p><strong>zoom</strong> – the zoom level for the tile.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a quadkey for the tile.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_tile_path_from_quadkey">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_tile_path_from_quadkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quadkey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_tile_path_from_quadkey" title="Link to this definition"></a></dt>
+<dd><p>Return the tile path for an inputted quadkey.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quadkey</strong> – the inputted quadkey for the tile.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(tile_x, tile_y, zoom)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_tiles">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_tiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zooms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_tiles" title="Link to this definition"></a></dt>
+<dd><p>Gets a list of tile indexes for all the zoom levels specified. The tile indexes are returned as a
+dict with the zoom as the key which references a list of tiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – A bounding box in WGS84 longitude/latitude values
+(MinX, MaxX, MinY, MaxY).</p></li>
+<li><p><strong>zooms</strong> – list of zoom levels</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+<li><p><strong>truncate</strong> – Whether to truncate or clip inputs to web mercator limits.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[zoom] = [(tile_x, tile_y, zoom),  (tile_x, tile_y, zoom) …  (tile_x, tile_y, zoom)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_web_mercator_xy">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_web_mercator_xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_web_mercator_xy" title="Link to this definition"></a></dt>
+<dd><p>Convert a WGS84 longitude, latitude coordinate to a web mercator coordinate (meters).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon_deg</strong> – float with longitude value.</p></li>
+<li><p><strong>lat_deg</strong> – float with latitude value.</p></li>
+<li><p><strong>truncate</strong> – Whether to truncate or clip inputs to web mercator limits.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(meter_x, meter_y)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_xy_mercator_lonlat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_xy_mercator_lonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meter_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meter_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_xy_mercator_lonlat" title="Link to this definition"></a></dt>
+<dd><p>Convert a web mercator coordinate (meters) to a WGS84 longitude, latitude coordinate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meter_x</strong> – x coordinate in the web mercator coordinate system</p></li>
+<li><p><strong>meter_y</strong> – y coordinate in the web mercator coordinate system</p></li>
+<li><p><strong>truncate</strong> – Whether to truncate or clip inputs to web mercator limits.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(longitude, latitude)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.xy_mercator_bounds">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">xy_mercator_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.xy_mercator_bounds" title="Link to this definition"></a></dt>
+<dd><p>Returns the bounding box of a tile in the web mercator coordinate system (meters).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tile_x</strong> – The x index for the tile.</p></li>
+<li><p><strong>tile_y</strong> – The y index for the tile (will change if TMS or XYZ indexing).</p></li>
+<li><p><strong>zoom</strong> – the zoom level for the tile.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(MinX, MaxX, MinY, MaxY)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="tile-info">
+<h2>Tile Info<a class="headerlink" href="#tile-info" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_tile_for_point">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_tile_for_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_tile_for_point" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon_deg</strong> – float with longitude value.</p></li>
+<li><p><strong>lat_deg</strong> – float with latitude value.</p></li>
+<li><p><strong>zoom</strong> – the zoom level for the tile.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+<li><p><strong>tile_size</strong> – is the size, in pixels, of the tiles (default 256).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(tile_x, tile_y, zoom)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_tile_tl_lonlat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_tile_tl_lonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_tile_tl_lonlat" title="Link to this definition"></a></dt>
+<dd><p>Returns the Top-Left coordinate for the tile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tile_x</strong> – The x index for the tile.</p></li>
+<li><p><strong>tile_y</strong> – The y index for the tile (will change if TMS or XYZ indexing).</p></li>
+<li><p><strong>zoom</strong> – the zoom level for the tile.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(longitude, latitude)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.get_tile_bbox">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">get_tile_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.get_tile_bbox" title="Link to this definition"></a></dt>
+<dd><p>Returns the bounding box (BBOX) of a tile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tile_x</strong> – The x index for the tile.</p></li>
+<li><p><strong>tile_y</strong> – The y index for the tile (will change if TMS or XYZ indexing).</p></li>
+<li><p><strong>zoom</strong> – the zoom level for the tile.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(MinLon, MaxLon, MinLat, MaxLat)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="internal-functions">
+<h2>Internal Functions<a class="headerlink" href="#internal-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.resolution">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.resolution" title="Link to this definition"></a></dt>
+<dd><p>Calculate the image resolution for a zoom level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float image pixel resolution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.tilecacheutils.truncate_lng_lat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.tilecacheutils.</span></span><span class="sig-name descname"><span class="pre">truncate_lng_lat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon_deg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_deg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.tilecacheutils.truncate_lng_lat" title="Link to this definition"></a></dt>
+<dd><p>A function which truncates latitude and londitude values
+to be better -180 to 180 and -90 to 90.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon_deg</strong> – float with longitude value.</p></li>
+<li><p><strong>lat_deg</strong> – float with latitude value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(lon_deg, lat_deg)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_testimages.html" class="btn btn-neutral float-left" title="RSGISLib Test Images Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_msofficetools.html" class="btn btn-neutral float-right" title="RSGISLib MS Office Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planet Data API &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Planet Data API</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rsgislib.dataaccess.planet_data_api">
+<span id="planet-data-api"></span><h1>Planet Data API<a class="headerlink" href="#module-rsgislib.dataaccess.planet_data_api" title="Link to this heading"></a></h1>
+<p>Tools for accessing (searching and downloading) datasets from Planet.</p>
+<p>Note to use this module you need to have the planet API installed which
+can be used from pip:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pip</span> <span class="pre">install</span> <span class="pre">planet</span>
+<span class="pre">`</span></code></p>
+<section id="item-types">
+<h2>Item Types<a class="headerlink" href="#item-types" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_PLANET_ITEM_PSScene = 1</p></li>
+<li><p>RSGIS_PLANET_ITEM_REOrthoTile = 2</p></li>
+<li><p>RSGIS_PLANET_ITEM_REScene = 3</p></li>
+<li><p>RSGIS_PLANET_ITEM_SkySatScene = 4</p></li>
+<li><p>RSGIS_PLANET_ITEM_SkySatCollect = 5</p></li>
+<li><p>RSGIS_PLANET_ITEM_SkySatVideo = 6</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="asset-types">
+<h2>Asset Types<a class="headerlink" href="#asset-types" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_PLANET_ASSET_basic_analytic_4b = 1</p></li>
+<li><p>RSGIS_PLANET_ASSET_basic_analytic_4b_rpc = 2</p></li>
+<li><p>RSGIS_PLANET_ASSET_basic_analytic_4b_xml = 3</p></li>
+<li><p>RSGIS_PLANET_ASSET_basic_analytic_8b = 4</p></li>
+<li><p>RSGIS_PLANET_ASSET_basic_analytic_8b_xml = 5</p></li>
+<li><p>RSGIS_PLANET_ASSET_basic_udm2 = 6</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_analytic_4b = 7</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_analytic_4b_sr = 8</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_analytic_4b_xml = 9</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_analytic_8b = 10</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_analytic_8b_sr = 11</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_analytic_8b_xml = 12</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_udm2 = 13</p></li>
+<li><p>RSGIS_PLANET_ASSET_ortho_visual = 14</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="bundle-types">
+<h2>Bundle Types<a class="headerlink" href="#bundle-types" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_PLANET_BUNDLE_analytic_udm2 = 1</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_analytic_3b_udm2 = 2</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_analytic_8b_udm2 = 3</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_visual = 4</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_basic_analytic_udm2 = 5</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_basic_analytic_8b_udm2 = 6</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_analytic_sr_udm2 = 7</p></li>
+<li><p>RSGIS_PLANET_BUNDLE_analytic_8b_sr_udm2 = 8</p></li>
+</ul>
+</div></blockquote>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.get_asset_type_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">get_asset_type_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.get_asset_type_str" title="Link to this definition"></a></dt>
+<dd><p>A function to get the string representation of a given asset type.
+:param asset_type: RSGIS_PLANET_ASSET_*
+:return: string representation of a given asset type</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.get_bundle_type_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">get_bundle_type_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.get_bundle_type_str" title="Link to this definition"></a></dt>
+<dd><p>A function to get the string representation of a given bundle type.
+:param bundle_type: RSGIS_PLANET_ASSET_*
+:return: string representation of a given bundle type</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.get_item_type_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">get_item_type_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.get_item_type_str" title="Link to this definition"></a></dt>
+<dd><p>Get the string representation of a given item type (sensor).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item_type</strong> – RSGIS_PLANET_ITEM_* value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of a given item type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.planet_auth">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">planet_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.planet_auth" title="Link to this definition"></a></dt>
+<dd><p>A function to authenticate with planet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – Your username for the planet. If RSGIS_PLANET_USER
+environmental variable is specified then username
+will read from there is None is passed (Default: None)</p></li>
+<li><p><strong>password</strong> – Your password for the Planet. If RSGIS_PLANET_PASS
+environmental variable is specified then password
+will read from there is None is passed (Default: None)</p></li>
+<li><p><strong>api_key</strong> – Your api key for Planet API. If RSGIS_PLANET_API_KEY then
+the api key will be read from there. Alternatively, the
+PL_API_KEY environment variable can be specified.
+(Default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a planet.Auth object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_cancel_planet_orders">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_cancel_planet_orders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_cancel_planet_orders" title="Link to this definition"></a></dt>
+<dd><p>A function which the cancels planet orders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>order_ids</strong> – optional list of order IDs to be cancelled. If None
+(Default) then all are cancelled.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of orders</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_create_planet_order">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_create_planet_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundle_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_notification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_create_planet_order" title="Link to this definition"></a></dt>
+<dd><p>A function which creates an order for a list of items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>order_name</strong> – A name for the new order.</p></li>
+<li><p><strong>items</strong> – A list of dictionaries containing the items to be created.</p></li>
+<li><p><strong>item_type</strong> – The type of item to be included in the order (RSGIS_PLANET_ITEM_*)</p></li>
+<li><p><strong>bundle_type</strong> – The bundle type for the order (RSGIS_PLANET_BUNDLE_*)</p></li>
+<li><p><strong>email_notification</strong> – Boolean specifying whether you will receive an
+email notification when the order is ready to download.
+(Default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict of information for the created order (including the order id)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_download_and_validate_item">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_download_and_validate_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_download_and_validate_item" title="Link to this definition"></a></dt>
+<dd><p>A function which can be used to download a single item from a planet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>item_type</strong> – The type of item to be downloaded (RSGIS_PLANET_ITEM_*)</p></li>
+<li><p><strong>item_id</strong> – The unique id for the item to be downloaded.</p></li>
+<li><p><strong>asset_type</strong> – The type of asset type to be downloaded (RSGIS_PLANET_ASSET_*)</p></li>
+<li><p><strong>out_file_path</strong> – The output file path to download the file to.</p></li>
+<li><p><strong>overwrite</strong> – Boolean to overwrite existing files if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_download_planet_order">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_download_planet_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_download_planet_order" title="Link to this definition"></a></dt>
+<dd><p>A function which downloads an order which has been processed and ready
+to download. If the order is not ready do download then an expection
+will be thrown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>order_id</strong> – The order ID (not name) of the order to be downloaded.</p></li>
+<li><p><strong>out_file_path</strong> – the output directory where the order will be downloaded.</p></li>
+<li><p><strong>overwrite</strong> – Specify whether downloads should overwrite existing files.
+(Default = False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of downloaded file paths.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_get_planet_orders">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_get_planet_orders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_get_planet_orders" title="Link to this definition"></a></dt>
+<dd><p>A function which gets a list of all the current planet orders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of orders</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_search_planet_items">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_search_planet_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_cover</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sun_elevation_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sun_elevation_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_angle_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_angle_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_rslts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_search_planet_items" title="Link to this definition"></a></dt>
+<dd><p>A function which searches the planet API to find scenes/items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>item_type</strong> – The type of item to be downloaded (RSGIS_PLANET_ITEM_*)</p></li>
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in EPSG:4326 defining the region
+of interest.</p></li>
+<li><p><strong>start_date</strong> – a datetime object representing the start date
+(i.e., earlier date)</p></li>
+<li><p><strong>end_date</strong> – a datetime object representing the end date
+(i.e., later date)</p></li>
+<li><p><strong>cloud_cover</strong> – value between 0-100 where scenes with cloud cover less
+than the threshold will be returned. If None (default)
+then ignored.</p></li>
+<li><p><strong>sun_elevation_min</strong> – the minimum solar elevation (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>sun_elevation_max</strong> – the maximum solar elevation (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>view_angle_min</strong> – the minimum view angle (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>view_angle_max</strong> – the maximum view angle (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>max_n_rslts</strong> – The maximum number of results to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries containing all scene items.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

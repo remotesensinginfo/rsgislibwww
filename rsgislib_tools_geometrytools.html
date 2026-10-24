@@ -1,0 +1,641 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Geometry Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Projection Tools" href="rsgislib_tools_projection.html" />
+    <link rel="prev" title="RSGISLib Mapping Tools" href="rsgislib_tools_mapping.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Geometry Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#projections">Projections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.reproj_bbox"><code class="docutils literal notranslate"><span class="pre">reproj_bbox()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.reproj_bbox_epsg"><code class="docutils literal notranslate"><span class="pre">reproj_bbox_epsg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.reproj_point"><code class="docutils literal notranslate"><span class="pre">reproj_point()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.reproj_point_to_wgs84"><code class="docutils literal notranslate"><span class="pre">reproj_point_to_wgs84()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.do_bboxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_bboxes_intersect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.does_bbox_contain"><code class="docutils literal notranslate"><span class="pre">does_bbox_contain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.bbox_equal"><code class="docutils literal notranslate"><span class="pre">bbox_equal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.pt_in_bbox"><code class="docutils literal notranslate"><span class="pre">pt_in_bbox()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculations">Calculations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.calc_bbox_area"><code class="docutils literal notranslate"><span class="pre">calc_bbox_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.calc_pt_distance"><code class="docutils literal notranslate"><span class="pre">calc_pt_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compute-new-bbox">Compute New BBOX</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.bbox_intersection"><code class="docutils literal notranslate"><span class="pre">bbox_intersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.bboxes_intersection"><code class="docutils literal notranslate"><span class="pre">bboxes_intersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.buffer_bbox"><code class="docutils literal notranslate"><span class="pre">buffer_bbox()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.find_bbox_union"><code class="docutils literal notranslate"><span class="pre">find_bbox_union()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.unwrap_wgs84_bbox"><code class="docutils literal notranslate"><span class="pre">unwrap_wgs84_bbox()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.find_common_extent_on_grid"><code class="docutils literal notranslate"><span class="pre">find_common_extent_on_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.find_extent_on_grid"><code class="docutils literal notranslate"><span class="pre">find_extent_on_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.find_extent_on_whole_num_grid"><code class="docutils literal notranslate"><span class="pre">find_extent_on_whole_num_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.get_bbox_grid"><code class="docutils literal notranslate"><span class="pre">get_bbox_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compute-points">Compute Points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.get_bbox_centre_pt"><code class="docutils literal notranslate"><span class="pre">get_bbox_centre_pt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.find_point_on_whole_num_grid"><code class="docutils literal notranslate"><span class="pre">find_point_on_whole_num_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.get_bbox_geojson_poly"><code class="docutils literal notranslate"><span class="pre">get_bbox_geojson_poly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.geometrytools.get_bbox_wkt_poly"><code class="docutils literal notranslate"><span class="pre">get_bbox_wkt_poly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib Geometry Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-geometry-tools">
+<h1>RSGISLib Geometry Tools<a class="headerlink" href="#rsgislib-geometry-tools" title="Link to this heading"></a></h1>
+<section id="projections">
+<h2>Projections<a class="headerlink" href="#projections" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.reproj_bbox">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">reproj_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">bbox:</span> <span class="pre">~typing.Tuple[float,</span> <span class="pre">float,</span> <span class="pre">float,</span> <span class="pre">float]</span> <span class="pre">|</span> <span class="pre">~typing.List[float],</span> <span class="pre">in_osr_proj_obj:</span> <span class="pre">&lt;osgeo.osr.SpatialReference;</span> <span class="pre">proxy</span> <span class="pre">of</span> <span class="pre">&lt;Swig</span> <span class="pre">Object</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">'OSRSpatialReferenceShadow</span> <span class="pre">*'</span> <span class="pre">at</span> <span class="pre">0x1648568f0&gt;</span> <span class="pre">&gt;,</span> <span class="pre">out_osr_proj_obj:</span> <span class="pre">&lt;osgeo.osr.SpatialReference;</span> <span class="pre">proxy</span> <span class="pre">of</span> <span class="pre">&lt;Swig</span> <span class="pre">Object</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">'OSRSpatialReferenceShadow</span> <span class="pre">*'</span> <span class="pre">at</span> <span class="pre">0x164715730&gt;</span> <span class="pre">&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.reproj_bbox" title="Link to this definition"></a></dt>
+<dd><p>A function to reproject a bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – input bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>in_osr_proj_obj</strong> – an osr.SpatialReference() object representing input projection.</p></li>
+<li><p><strong>out_osr_proj_obj</strong> – an osr.SpatialReference() object representing output projection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(MinX, MaxX, MinY, MaxY)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.reproj_bbox_epsg">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">reproj_bbox_epsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.reproj_bbox_epsg" title="Link to this definition"></a></dt>
+<dd><p>A function to reproject a bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – input bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>in_epsg</strong> – an EPSG code representing input projection.</p></li>
+<li><p><strong>out_epsg</strong> – an EPSG code representing output projection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(MinX, MaxX, MinY, MaxY)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.reproj_point">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">reproj_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_osr_proj_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">&lt;osgeo.osr.SpatialReference;</span> <span class="pre">proxy</span> <span class="pre">of</span> <span class="pre">&lt;Swig</span> <span class="pre">Object</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">'OSRSpatialReferenceShadow</span> <span class="pre">*'</span> <span class="pre">at</span> <span class="pre">0x164dec370&gt;</span> <span class="pre">&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_osr_proj_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">&lt;osgeo.osr.SpatialReference;</span> <span class="pre">proxy</span> <span class="pre">of</span> <span class="pre">&lt;Swig</span> <span class="pre">Object</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">'OSRSpatialReferenceShadow</span> <span class="pre">*'</span> <span class="pre">at</span> <span class="pre">0x164de3f70&gt;</span> <span class="pre">&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.reproj_point" title="Link to this definition"></a></dt>
+<dd><p>Reproject a point from ‘in_osr_proj_obj’ to ‘out_osr_proj_obj’ where they are gdal
+osgeo.osr.SpatialReference objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_osr_proj_obj</strong> – an osr.SpatialReference() object representing input
+projection.</p></li>
+<li><p><strong>out_osr_proj_obj</strong> – an osr.SpatialReference() object representing output
+projection.</p></li>
+<li><p><strong>x</strong> – the x coordinate to be reprojected</p></li>
+<li><p><strong>y</strong> – the y coordinate to be reprojected</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>x, y.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.reproj_point_to_wgs84">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">reproj_point_to_wgs84</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">osr_proj_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">&lt;osgeo.osr.SpatialReference;</span> <span class="pre">proxy</span> <span class="pre">of</span> <span class="pre">&lt;Swig</span> <span class="pre">Object</span> <span class="pre">of</span> <span class="pre">type</span> <span class="pre">'OSRSpatialReferenceShadow</span> <span class="pre">*'</span> <span class="pre">at</span> <span class="pre">0x164de22b0&gt;</span> <span class="pre">&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.reproj_point_to_wgs84" title="Link to this definition"></a></dt>
+<dd><p>A function which reprojects a point to the WGS84 projection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>osr_proj_obj</strong> – an osr.SpatialReference() object representing input projection.</p></li>
+<li><p><strong>x</strong> – the x coordinate to be reprojected</p></li>
+<li><p><strong>y</strong> – the y coordinate to be reprojected</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>lon, lat</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.do_bboxes_intersect">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">do_bboxes_intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.do_bboxes_intersect" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether two bboxes (MinX, MaxX, MinY, MaxY) intersect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox1</strong> – The first bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>bbox2</strong> – The second bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean (True they intersect; False they do not intersect)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.does_bbox_contain">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">does_bbox_contain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.does_bbox_contain" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether bbox1 contains bbox2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox1</strong> – The first bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>bbox2</strong> – The second bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean (True bbox1 contains bbox2; False bbox1 does not contain bbox2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.bbox_equal">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">bbox_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.bbox_equal" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether two bboxes (xMin, xMax, yMin, yMax) are equal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox1</strong> – is a bbox (xMin, xMax, yMin, yMax)</p></li>
+<li><p><strong>bbox2</strong> – is a bbox (xMin, xMax, yMin, yMax)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.pt_in_bbox">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">pt_in_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.pt_in_bbox" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether a point is within a bbox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pt</strong> – the point (x, y)</p></li>
+<li><p><strong>bbox</strong> – the bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a boolean specifying whether the point is within the bbox</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculations">
+<h2>Calculations<a class="headerlink" href="#calculations" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.calc_bbox_area">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">calc_bbox_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.calc_bbox_area" title="Link to this definition"></a></dt>
+<dd><p>Calculate the area of the bbox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bbox</strong> – bounding box (MinX, MaxX, MinY, MaxY)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>area in projection of the bbox.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.calc_pt_distance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">calc_pt_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.calc_pt_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Euclidean distance between two points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x1</strong> – x1 coordinate</p></li>
+<li><p><strong>y1</strong> – y1 coordinate</p></li>
+<li><p><strong>x2</strong> – x2 coordinate</p></li>
+<li><p><strong>y2</strong> – y2 coordinate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Euclidean distance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="compute-new-bbox">
+<h2>Compute New BBOX<a class="headerlink" href="#compute-new-bbox" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.bbox_intersection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">bbox_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.bbox_intersection" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates the intersection of the two bboxes (xMin, xMax, yMin, yMax).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox1</strong> – is a bbox (xMin, xMax, yMin, yMax)</p></li>
+<li><p><strong>bbox2</strong> – is a bbox (xMin, xMax, yMin, yMax)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.bboxes_intersection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">bboxes_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bboxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.bboxes_intersection" title="Link to this definition"></a></dt>
+<dd><p>A function to find the intersection between a list of
+bboxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bboxes</strong> – a list of bboxes [(xMin, xMax, yMin, yMax)]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.buffer_bbox">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">buffer_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.buffer_bbox" title="Link to this definition"></a></dt>
+<dd><p>Buffer the input BBOX by a set amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – the bounding box (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>buf</strong> – the amount of buffer by</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the buffered bbox (MinX, MaxX, MinY, MaxY)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.find_bbox_union">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">find_bbox_union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bboxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.find_bbox_union" title="Link to this definition"></a></dt>
+<dd><p>A function which finds the union of all the bboxes inputted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bboxes</strong> – a list of bboxes [(xMin, xMax, yMin, yMax), (xMin, xMax, yMin, yMax)]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.unwrap_wgs84_bbox">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">unwrap_wgs84_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.unwrap_wgs84_bbox" title="Link to this definition"></a></dt>
+<dd><p>A function which unwraps a bbox if it projected in WGS84 and over the 180/-180 boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bbox</strong> – the bounding box (MinX, MaxX, MinY, MaxY)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of bounding boxes [(MinX, MaxX, MinY, MaxY), (MinX, MaxX, MinY, MaxY)…]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.find_common_extent_on_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">find_common_extent_on_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_extent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_extent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.find_common_extent_on_grid" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates the common extent between two extents but defines output on
+grid with defined resolutions. Useful for finding common extent on a particular image grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_extent</strong> – is a bbox (xMin, xMax, yMin, yMax) providing the base for the grid on which output will be defined.</p></li>
+<li><p><strong>base_grid</strong> – the size of the (square) grid on which output will be defined.</p></li>
+<li><p><strong>other_extent</strong> – is a bbox (xMin, xMax, yMin, yMax) to be intersected with the base_extent.</p></li>
+<li><p><strong>full_contain</strong> – is a boolean. True: moving output onto grid will increase size of bbox (i.e., intersection fully contained)
+False: move output onto grid will decrease size of bbox (i.e., bbox fully contained within intesection)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.find_extent_on_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">find_extent_on_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_extent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.find_extent_on_grid" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates the extent but defined on a grid with defined
+resolution. Useful for finding extent on a particular image grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_extent</strong> – is a bbox (xMin, xMax, yMin, yMax) providing the base for
+the grid on which output will be defined.</p></li>
+<li><p><strong>base_grid</strong> – the size of the (square) grid on which output will be defined.</p></li>
+<li><p><strong>full_contain</strong> – is a boolean. True: moving output onto grid will increase
+size of bbox (i.e., intersection fully contained)
+False: move output onto grid will decrease size
+of bbox (i.e., bbox fully contained within
+intesection)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.find_extent_on_whole_num_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">find_extent_on_whole_num_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_extent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.find_extent_on_whole_num_grid" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates the extent but defined on a grid with defined
+resolution. Useful for finding extent on a particular image grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_extent</strong> – is a bbox (xMin, xMax, yMin, yMax) providing the
+base for the grid on which output will be defined.</p></li>
+<li><p><strong>base_grid</strong> – the size of the (square) grid on which output will be defined.</p></li>
+<li><p><strong>full_contain</strong> – is a boolean. True: moving output onto grid will increase
+size of bbox (i.e., intersection fully contained)
+False: move output onto grid will decrease size of
+bbox (i.e., bbox fully contained within intesection)</p></li>
+<li><p><strong>round_vals</strong> – specify whether outputted values should be rounded. None
+for no rounding (default; None) or integer for number
+of significant figures to round to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.get_bbox_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">get_bbox_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.get_bbox_grid" title="Link to this definition"></a></dt>
+<dd><p>Create a grid with size x_size, y_size for the area represented by bbox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – a bounding box within which the grid will be created (xMin, xMax, yMin, yMax)</p></li>
+<li><p><strong>x_size</strong> – Output grid size in X axis (same unit as bbox).</p></li>
+<li><p><strong>y_size</strong> – Output grid size in Y axis (same unit as bbox).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of bounding boxes (xMin, xMax, yMin, yMax)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="compute-points">
+<h2>Compute Points<a class="headerlink" href="#compute-points" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.get_bbox_centre_pt">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">get_bbox_centre_pt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.get_bbox_centre_pt" title="Link to this definition"></a></dt>
+<dd><p>Function which returns the centre point of a bbox (xMin, xMax, yMin, yMax)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bbox</strong> – the bbox (xMin, xMax, yMin, yMax)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the centre point [xPt, yPt]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.find_point_on_whole_num_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">find_point_on_whole_num_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_grid_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_grid_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.find_point_on_whole_num_grid" title="Link to this definition"></a></dt>
+<dd><p>A function which returns places a point on to the grid defined by the
+bbox, base_x_grid and  base_y_grid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pt</strong> – the point (x, y)</p></li>
+<li><p><strong>bbox</strong> – the bounding box for the whole region defining the grid extent
+(MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>x_grid_res</strong> – the resolution of the grid in x axis</p></li>
+<li><p><strong>y_grid_res</strong> – the resolution of the grid in y axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a point (x, y) which now on the defined grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="representation">
+<h2>Representation<a class="headerlink" href="#representation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.get_bbox_geojson_poly">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">get_bbox_geojson_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.get_bbox_geojson_poly" title="Link to this definition"></a></dt>
+<dd><p>Get the bbox (xMin, xMax, yMin, yMax) represented as a GeoJSON polygon
+using dict and list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bbox</strong> – (xMin, xMax, yMin, yMax)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dict with the geojson polygon representation of the bbox.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.geometrytools.get_bbox_wkt_poly">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.geometrytools.</span></span><span class="sig-name descname"><span class="pre">get_bbox_wkt_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.geometrytools.get_bbox_wkt_poly" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a WKT polygon from a bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bbox</strong> – the bounding box (MinX, MaxX, MinY, MaxY)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>WKT polygon representation of the bounding box</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_mapping.html" class="btn btn-neutral float-left" title="RSGISLib Mapping Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_projection.html" class="btn btn-neutral float-right" title="RSGISLib Projection Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

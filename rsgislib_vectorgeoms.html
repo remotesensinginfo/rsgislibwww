@@ -1,0 +1,1332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Vector Geometry Module &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Vector Stats" href="rsgislib_vectorstats.html" />
+    <link rel="prev" title="RSGISLib Vector Attributes Module" href="rsgislib_vectorattrs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Vector Geometry Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#convert-geometries">Convert Geometries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.convert_polygon_to_polyline"><code class="docutils literal notranslate"><span class="pre">convert_polygon_to_polyline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.convert_polys_to_lines_gp"><code class="docutils literal notranslate"><span class="pre">convert_polys_to_lines_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.convert_multi_geoms_to_single"><code class="docutils literal notranslate"><span class="pre">convert_multi_geoms_to_single()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.explode_vec_lyr"><code class="docutils literal notranslate"><span class="pre">explode_vec_lyr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.explode_vec_files"><code class="docutils literal notranslate"><span class="pre">explode_vec_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.get_vec_lyr_as_pts"><code class="docutils literal notranslate"><span class="pre">get_vec_lyr_as_pts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.get_geom_pts"><code class="docutils literal notranslate"><span class="pre">get_geom_pts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.get_geoms_as_bboxs"><code class="docutils literal notranslate"><span class="pre">get_geoms_as_bboxs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.pts_to_line_geoms"><code class="docutils literal notranslate"><span class="pre">pts_to_line_geoms()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calculate-new-geometries">Calculate New Geometries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.clip_vec_lyr"><code class="docutils literal notranslate"><span class="pre">clip_vec_lyr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.clip_vec_lyr_ogr"><code class="docutils literal notranslate"><span class="pre">clip_vec_lyr_ogr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.clip_and_merge_with_roi"><code class="docutils literal notranslate"><span class="pre">clip_and_merge_with_roi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.create_alpha_shape"><code class="docutils literal notranslate"><span class="pre">create_alpha_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.calc_poly_centroids"><code class="docutils literal notranslate"><span class="pre">calc_poly_centroids()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_intersection_gp"><code class="docutils literal notranslate"><span class="pre">vec_lyr_intersection_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_difference_gp"><code class="docutils literal notranslate"><span class="pre">vec_lyr_difference_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_sym_difference_gp"><code class="docutils literal notranslate"><span class="pre">vec_lyr_sym_difference_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_identity_gp"><code class="docutils literal notranslate"><span class="pre">vec_lyr_identity_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_union_gp"><code class="docutils literal notranslate"><span class="pre">vec_lyr_union_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_intersection"><code class="docutils literal notranslate"><span class="pre">vec_lyr_intersection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_difference"><code class="docutils literal notranslate"><span class="pre">vec_lyr_difference()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_lyr_dissolve"><code class="docutils literal notranslate"><span class="pre">vec_lyr_dissolve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.buffer_vec_layer_gp"><code class="docutils literal notranslate"><span class="pre">buffer_vec_layer_gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.split_vec_by_grid"><code class="docutils literal notranslate"><span class="pre">split_vec_by_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.split_lines_to_reg_pts"><code class="docutils literal notranslate"><span class="pre">split_lines_to_reg_pts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.create_angle_lines_from_points"><code class="docutils literal notranslate"><span class="pre">create_angle_lines_from_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.create_bbox_vec_lyr"><code class="docutils literal notranslate"><span class="pre">create_bbox_vec_lyr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#edit-geometries">Edit Geometries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.simplify_geometries"><code class="docutils literal notranslate"><span class="pre">simplify_geometries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.delete_polygon_holes"><code class="docutils literal notranslate"><span class="pre">delete_polygon_holes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.shiftxy_vec_lyr"><code class="docutils literal notranslate"><span class="pre">shiftxy_vec_lyr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#remove-geometries">Remove Geometries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.rm_polys_area"><code class="docutils literal notranslate"><span class="pre">rm_polys_area()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.thin_vector_geoms"><code class="docutils literal notranslate"><span class="pre">thin_vector_geoms()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#geometry-tests">Geometry Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_intersects_vec"><code class="docutils literal notranslate"><span class="pre">vec_intersects_vec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_overlaps_vec"><code class="docutils literal notranslate"><span class="pre">vec_overlaps_vec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_within_vec"><code class="docutils literal notranslate"><span class="pre">vec_within_vec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_contains_vec"><code class="docutils literal notranslate"><span class="pre">vec_contains_vec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_touches_vec"><code class="docutils literal notranslate"><span class="pre">vec_touches_vec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.vec_crosses_vec"><code class="docutils literal notranslate"><span class="pre">vec_crosses_vec()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#spatial-index">Spatial Index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.create_rtree_index"><code class="docutils literal notranslate"><span class="pre">create_rtree_index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.bbox_intersects_index"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_index()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#applications-tools">Applications Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.estimate_future_coastline"><code class="docutils literal notranslate"><span class="pre">estimate_future_coastline()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-utilities">Internal Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.get_pt_on_line"><code class="docutils literal notranslate"><span class="pre">get_pt_on_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.find_pt_to_side"><code class="docutils literal notranslate"><span class="pre">find_pt_to_side()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.create_orthg_lines"><code class="docutils literal notranslate"><span class="pre">create_orthg_lines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.closest_line_intersection"><code class="docutils literal notranslate"><span class="pre">closest_line_intersection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.line_intersection_range"><code class="docutils literal notranslate"><span class="pre">line_intersection_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.scnd_line_intersection_range"><code class="docutils literal notranslate"><span class="pre">scnd_line_intersection_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calculate-geometry-info">Calculate Geometry Info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorgeoms.get_poly_hole_area"><code class="docutils literal notranslate"><span class="pre">get_poly_hole_area()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Vector Geometry Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-vector-geometry-module">
+<h1>RSGISLib Vector Geometry Module<a class="headerlink" href="#rsgislib-vector-geometry-module" title="Link to this heading"></a></h1>
+<section id="convert-geometries">
+<h2>Convert Geometries<a class="headerlink" href="#convert-geometries" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.convert_polygon_to_polyline">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">convert_polygon_to_polyline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_poly_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_poly_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.convert_polygon_to_polyline" title="Link to this definition"></a></dt>
+<dd><p>A function to convert a polygon vector file to a polyline file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_poly_file</strong> – Input polygon vector file</p></li>
+<li><p><strong>vec_poly_lyr</strong> – The name of the vector layer</p></li>
+<li><p><strong>vec_line_file</strong> – The output vector file</p></li>
+<li><p><strong>vec_line_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (default: GPKG).</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.convert_polys_to_lines_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">convert_polys_to_lines_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_poly_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_poly_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exterior_lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.convert_polys_to_lines_gp" title="Link to this definition"></a></dt>
+<dd><p>A function to convert a polygon vector file to a polyline file using
+geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_poly_file</strong> – Input polygon vector file</p></li>
+<li><p><strong>vec_poly_lyr</strong> – The name of the vector layer</p></li>
+<li><p><strong>vec_line_file</strong> – The output vector file</p></li>
+<li><p><strong>vec_line_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (default: GPKG).</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+<li><p><strong>exterior_lines</strong> – If True then only the outer exterior lines are outputted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.convert_multi_geoms_to_single">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">convert_multi_geoms_to_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.convert_multi_geoms_to_single" title="Link to this definition"></a></dt>
+<dd><p>A convert any multiple geometries into single geometries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file.</p></li>
+<li><p><strong>out_format</strong> – the format driver for the output vector
+file (e.g., GPKG, ESRI Shapefile).</p></li>
+<li><p><strong>out_vec_file</strong> – output file path for the vector.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.explode_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">explode_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.explode_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function to explode a vector layer separating any multiple geometries
+(e.g., multipolygons) to single geometries.</p>
+<p>Note. this function uses geopandas and therefore the vector layer is loaded
+into memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – vector layer file</p></li>
+<li><p><strong>vec_lyr</strong> – vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – output vector layer file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name (Can be None if output
+format is not GPKG).</p></li>
+<li><p><strong>out_format</strong> – The output format for the vector file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.explode_vec_files">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">explode_vec_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_vec_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_ext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gpkg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.explode_vec_files" title="Link to this definition"></a></dt>
+<dd><p>A function which explodes the multiple geometries within a list of input layers.
+The output directory must be different to the directory the input files as the
+output file name will be the same as the input name.</p>
+<p>Note. this function uses the explode_vec_lyr function which uses geopandas and
+therefore the vector layer is loaded into memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_vec_files</strong> – A list of input files.</p></li>
+<li><p><strong>output_dir</strong> – The directory where the output files will be placed.</p></li>
+<li><p><strong>out_format</strong> – The vector format for the outputs.</p></li>
+<li><p><strong>out_vec_ext</strong> – the file extension for the output files. There should not
+be a dot within the extension. e.g., gpkg, shp, geojson.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.get_vec_lyr_as_pts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">get_vec_lyr_as_pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.get_vec_lyr_as_pts" title="Link to this definition"></a></dt>
+<dd><p>Get a list of points from the vectors within an input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a list of points.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.get_geom_pts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">get_geom_pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.get_geom_pts" title="Link to this definition"></a></dt>
+<dd><p>Recursive function which extracts all the points within the an OGR geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geom</strong> – The geometry from with the points are extracted.</p></li>
+<li><p><strong>pts_lst</strong> – The list for the points, if None a list will be created.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of points.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.get_geoms_as_bboxs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">get_geoms_as_bboxs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.get_geoms_as_bboxs" title="Link to this definition"></a></dt>
+<dd><p>A function which returns a list of bounding boxes for each feature
+within the vector layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – layer within the vector file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of BBOXs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.pts_to_line_geoms">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">pts_to_line_geoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.pts_to_line_geoms" title="Link to this definition"></a></dt>
+<dd><p>A function which converts a vector file of points to a single
+line geometry. Note, if the input geometry is a multi-point then
+the geometry is exploded before the line is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+<li><p><strong>sort_col</strong> – Optionally the input points can be sorted by
+an attribute before the line is generated.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-new-geometries">
+<h2>Calculate New Geometries<a class="headerlink" href="#calculate-new-geometries" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.clip_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">clip_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_roi_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_roi_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.clip_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function which clips a vector layer using an input region of interest
+(ROI) polygon layer. This function uses geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>vec_roi_file</strong> – Input vector file defining the ROI polygon(s)</p></li>
+<li><p><strong>vec_roi_lyr</strong> – Input vector layer within the roi input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – Output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.clip_vec_lyr_ogr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">clip_vec_lyr_ogr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_roi_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_roi_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.clip_vec_lyr_ogr" title="Link to this definition"></a></dt>
+<dd><p>A function which clips a vector layer using an input region of interest
+(ROI) polygon layer. This function uses GDAL/OGR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>vec_roi_file</strong> – Input vector file defining the ROI polygon(s)</p></li>
+<li><p><strong>vec_roi_lyr</strong> – Input vector layer within the roi input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – Output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.clip_and_merge_with_roi">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">clip_and_merge_with_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_roi_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_roi_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dissolve_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explode_rslt_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ref_bkgrd'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roi_rgn_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_rgn_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.clip_and_merge_with_roi" title="Link to this definition"></a></dt>
+<dd><p>This function clips the input vector layer (vec_file) using the region
+of interest (ROI; vec_roi_file) and merges the clipped vector with the ROI.
+The input layers should both be polygon layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>vec_roi_file</strong> – Input vector file defining the ROI polygon(s)</p></li>
+<li><p><strong>vec_roi_lyr</strong> – Input vector layer within the roi input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – Output file format (Default: GPKG).</p></li>
+<li><p><strong>dissolve_lyr</strong> – After clipping the input vec_lyr the layer can optionally be
+dissolved - which would merge all neighbouring polygons.</p></li>
+<li><p><strong>ref_col_name</strong> – The name of a column which is added to the output vector
+layer to indicate which features are from the background
+ROI and those from the input vector layer (Default: ref_bkgrd)</p></li>
+<li><p><strong>roi_rgn_val</strong> – The value to indicate polygons which relate to the background
+region of interest (Default: 0).</p></li>
+<li><p><strong>data_rgn_val</strong> – The value to indicate polygons which relate to the input data
+(Default: 1).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.create_alpha_shape">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">create_alpha_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.create_alpha_shape" title="Link to this definition"></a></dt>
+<dd><p>Function which calculate an alpha shape for a set of vector features
+(which are converted to points).</p>
+<p>For this function to work you need the alphashapes module installed:
+<a class="reference external" href="https://alphashape.readthedocs.io">https://alphashape.readthedocs.io</a>
+<a class="reference external" href="https://github.com/bellockk/alphashape">https://github.com/bellockk/alphashape</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – the input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the name of the output vector layer (if None then
+the same as the input).</p></li>
+<li><p><strong>out_format</strong> – the output vector file format (e.g., GPKG)</p></li>
+<li><p><strong>alpha_val</strong> – The alpha value to create the the alpha shape
+polygon. If None then a value will be automatically
+calculate but warning this can a significant amount
+of time (i.e., hours!!)</p></li>
+<li><p><strong>alpha_vals</strong> – Alternatively, a list of alpha values can be provided
+(e.g., [75, 50, 25, 5, 2]) where first to produce a valid
+result will be outputted. i.e., the order you provide the alpha
+values will be the order they are tested. If None then the
+alpha_val parameter will be used.</p></li>
+<li><p><strong>max_iter</strong> – The maximum number of iterations for automatically selecting
+the alpha value. Note if the number iteration is not sufficient
+to find an optimum value then no value is returned.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(vec_output, alpha_val); vec_output is a boolean True an output
+produced; False no output, alpha_val - the
+alpha value used for the analysis. If a single
+value was inputted then the same value will
+be outputted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.calc_poly_centroids">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">calc_poly_centroids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.calc_poly_centroids" title="Link to this definition"></a></dt>
+<dd><p>Create a vector layer of the polygon centroids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file.</p></li>
+<li><p><strong>out_format</strong> – the format driver for the output vector file (e.g., GPKG).</p></li>
+<li><p><strong>out_vec_file</strong> – output file path for the vector.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_intersection_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_intersection_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_intersection_gp" title="Link to this definition"></a></dt>
+<dd><p>A function which performs an intersection between the vector layer and the
+overlain vector using Geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_difference_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_difference_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_difference_gp" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a difference between the vector layer and the
+overlain vector using Geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_sym_difference_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_sym_difference_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_sym_difference_gp" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a symmetric difference between the vector layer
+and the overlain vector using Geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_identity_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_identity_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_identity_gp" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a identity between the vector layer and the
+overlain vector using Geopandas.</p>
+<p>The result consists of the surface of vec_file, but with the geometries obtained
+from overlaying vec_file with vec_over_file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_union_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_union_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_union_gp" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a union between the vector layer and the
+overlain vector using Geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_intersection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_intersection" title="Link to this definition"></a></dt>
+<dd><p>A function which performs an intersection between the vector
+layer and the overlain vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_difference">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_over_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_difference" title="Link to this definition"></a></dt>
+<dd><p>A function which performs an difference between the vector layer and the overlain vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>vec_over_file</strong> – The vector file overlained on the input vector file.</p></li>
+<li><p><strong>vec_over_lyr</strong> – The vector layer overlained on the input vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>symmetric</strong> – If True then the symmetric difference will be taken.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_lyr_dissolve">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_lyr_dissolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_lyr_dissolve" title="Link to this definition"></a></dt>
+<dd><p>A function which dissolves a vector layer using a variable within the
+attribute table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>vec_col</strong> – The column within the attribute table with the variable
+to dissolve on. The variable must be categorical.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – Output file format (Default: GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.buffer_vec_layer_gp">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">buffer_vec_layer_gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buf_dist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buf_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buf_sgl_sided</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap_style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">join_style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.buffer_vec_layer_gp" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a buffer on the inputted vector layer using
+geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>buf_dist</strong> – radius of the buffer in the units of the projection.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+<li><p><strong>buf_res</strong> – resolution of the buffer around each vertex.</p></li>
+<li><p><strong>buf_sgl_sided</strong> – Option to just buffer a single side of the vector. If
+buf_dist is positive it indicates the left-hand side
+while is buf_dist is negative it indicates the
+right-hand side.</p></li>
+<li><p><strong>cap_style</strong> – round = 1, flat = 2, square = 3 (Default: 1; i.e., round)</p></li>
+<li><p><strong>join_style</strong> – mitre = 1, flat = 2, bevel = 3 (Default: 1; i.e., round)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.split_vec_by_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">split_vec_by_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_grid_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_grid_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.split_vec_by_grid" title="Link to this definition"></a></dt>
+<dd><p>A function which splits an inputted vector using a regular grid across the
+whole area - note this function internally generates a geopandas dataframe
+with a grid covering the whole area so for a set of sparse features covering
+a large area with a small grid size this function will be pretty inefficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer</p></li>
+<li><p><strong>x_grid_size</strong> – grid size in x-axis. Unit is dependent on projection.</p></li>
+<li><p><strong>y_grid_size</strong> – grid size in x-axis. Unit is dependent on projection.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer</p></li>
+<li><p><strong>out_format</strong> – Output vector format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.split_lines_to_reg_pts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">split_lines_to_reg_pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.split_lines_to_reg_pts" title="Link to this definition"></a></dt>
+<dd><p>A function which splits a line vector layer into a set of points at a
+regular intervals (defined by pt_step). The outputted points are attributed
+with a unique ID, line ID, X and Y coordinate and distance from the start
+of the line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_in_file</strong> – The inputted vector file path - this should be a
+polyline vector file</p></li>
+<li><p><strong>vec_in_lyr</strong> – The name of the vector layer</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path - this will be a points
+vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – The name of the output vector layer (if None then created
+as the same as the file name)</p></li>
+<li><p><strong>pt_step</strong> – The steps (in the unit of the coordinate system) along lines
+in the layer at which points are created.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.create_angle_lines_from_points">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">create_angle_lines_from_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.create_angle_lines_from_points" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates a set of points for each point within the input
+vector layer (which needs to be a points geometry layer) creating a set of
+lines with the angle specified between them and the length specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input points vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – input points vector layer</p></li>
+<li><p><strong>angle</strong> – the angle (in degrees) between the points</p></li>
+<li><p><strong>line_len</strong> – the length of the lines.</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer</p></li>
+<li><p><strong>out_format</strong> – the output vector format (e.g., GPKG, GeoJSON).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.create_bbox_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">create_bbox_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whole_num_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whole_num_base_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whole_num_round</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.create_bbox_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a new vector layer with a single polygon
+representing the bounding box (BBOX) / Envelope of the input
+vector layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – Output file format (Default: GPKG).</p></li>
+<li><p><strong>whole_num_grid</strong> – Specify whether the bbox coordinates are to be rounded
+on to a whole number grid. (Default: False)</p></li>
+<li><p><strong>whole_num_base_grid</strong> – the size of the (square) grid on which output
+will be defined. (Default: 10)</p></li>
+<li><p><strong>whole_num_round</strong> – specify whether outputted values should be rounded. None
+for no rounding (default; None) or integer for number
+of significant figures to round to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="edit-geometries">
+<h2>Edit Geometries<a class="headerlink" href="#edit-geometries" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.simplify_geometries">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">simplify_geometries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.simplify_geometries" title="Link to this definition"></a></dt>
+<dd><p>Create a simplified version of the input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file.</p></li>
+<li><p><strong>tolerance</strong> – simplification tolerance</p></li>
+<li><p><strong>out_format</strong> – the format driver for the output vector
+file (e.g., GPKG, ESRI Shapefile).</p></li>
+<li><p><strong>out_vec_file</strong> – output file path for the vector.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.delete_polygon_holes">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">delete_polygon_holes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.delete_polygon_holes" title="Link to this definition"></a></dt>
+<dd><p>Delete holes from the input polygons in below the area threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file.</p></li>
+<li><p><strong>out_format</strong> – the format driver for the output vector
+file (e.g., GPKG, ESRI Shapefile).</p></li>
+<li><p><strong>out_vec_file</strong> – output file path for the vector.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>area_thres</strong> – threshold below which holes are removed. If
+threshold is None then all holes are removed.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.shiftxy_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">shiftxy_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.shiftxy_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function which shifts (translates) a vector layer in the x and y axis’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>x_shift</strong> – The shift in the x axis. In the units of the coordinate system
+the file is projected in.</p></li>
+<li><p><strong>y_shift</strong> – The shift in the y axis. In the units of the coordinate system
+the file is projected in.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – Output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="remove-geometries">
+<h2>Remove Geometries<a class="headerlink" href="#remove-geometries" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.rm_polys_area">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">rm_polys_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">less_than</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.rm_polys_area" title="Link to this definition"></a></dt>
+<dd><p>A function which removes polygons with a size less than or greater
+than a defined threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer</p></li>
+<li><p><strong>area_thres</strong> – the area threshold used to remove features</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer</p></li>
+<li><p><strong>out_format</strong> – the output vector format</p></li>
+<li><p><strong>less_than</strong> – boolean specifying whether threshold is less than or greater than.
+Default: True (i.e., less than).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.thin_vector_geoms">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">thin_vector_geoms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.thin_vector_geoms" title="Link to this definition"></a></dt>
+<dd><p>A function which thins the geometries (points are the most likely) using an
+input set of polygons (most likely a grid). Just a single geometry (point)
+intersecting with a polygon (grid cell) within the grid input vector will be
+outputted. This function is expected to be used to thin a set of points, for
+example, such that only 1 point is within each 1 km grid cell.</p>
+<p>Note. the input vector files must be the same projection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – The input vector file which is to be thinned (i.e., points vector)</p></li>
+<li><p><strong>vec_lyr</strong> – The input vector layer which is to be thinned (i.e., points vector)</p></li>
+<li><p><strong>grid_vec_file</strong> – The input vector file for the polygons (grid) used to thin
+the vec_file geometries (points)</p></li>
+<li><p><strong>grid_vec_lyr</strong> – The input vector layer for the polygons (grid) used to thin
+the vec_file geometries (points)</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the layer name for the output vector.</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default GPKG)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="geometry-tests">
+<h2>Geometry Tests<a class="headerlink" href="#geometry-tests" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_intersects_vec">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_intersects_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_intersects_vec" title="Link to this definition"></a></dt>
+<dd><p>Function to test whether the comparison vector layer intersects with the
+base vector layer.</p>
+<p>Note. This function iterates through the geometries of both files performing
+a comparison and therefore can be very slow to execute for large vector files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – vector layer file used as the base layer</p></li>
+<li><p><strong>vec_base_lyr</strong> – vector layer used as the base layer</p></li>
+<li><p><strong>vec_comp_file</strong> – vector layer file used as the comparison layer</p></li>
+<li><p><strong>vec_comp_lyr</strong> – vector layer used as the comparison layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_overlaps_vec">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_overlaps_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_overlaps_vec" title="Link to this definition"></a></dt>
+<dd><p>Function to test whether the comparison vector layer overlaps with the
+base vector layer.</p>
+<p>Note. This function iterates through the geometries of both files performing
+a comparison and therefore can be very slow to execute for large vector files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – vector layer file used as the base layer</p></li>
+<li><p><strong>vec_base_lyr</strong> – vector layer used as the base layer</p></li>
+<li><p><strong>vec_comp_file</strong> – vector layer file used as the comparison layer</p></li>
+<li><p><strong>vec_comp_lyr</strong> – vector layer used as the comparison layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_within_vec">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_within_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_within_vec" title="Link to this definition"></a></dt>
+<dd><p>Function to test whether the comparison vector layer within with the
+base vector layer.</p>
+<p>Note. This function iterates through the geometries of both files performing
+a comparison and therefore can be very slow to execute for large vector files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – vector layer file used as the base layer</p></li>
+<li><p><strong>vec_base_lyr</strong> – vector layer used as the base layer</p></li>
+<li><p><strong>vec_comp_file</strong> – vector layer file used as the comparison layer</p></li>
+<li><p><strong>vec_comp_lyr</strong> – vector layer used as the comparison layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_contains_vec">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_contains_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_contains_vec" title="Link to this definition"></a></dt>
+<dd><p>Function to test whether the base vector layer contains with the
+comparison vector layer.</p>
+<p>Note. This function iterates through the geometries of both files performing
+a comparison and therefore can be very slow to execute for large vector files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – vector layer file used as the base layer</p></li>
+<li><p><strong>vec_base_lyr</strong> – vector layer used as the base layer</p></li>
+<li><p><strong>vec_comp_file</strong> – vector layer file used as the comparison layer</p></li>
+<li><p><strong>vec_comp_lyr</strong> – vector layer used as the comparison layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_touches_vec">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_touches_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_touches_vec" title="Link to this definition"></a></dt>
+<dd><p>Function to test whether the comparison vector layer touches the
+base vector layer.</p>
+<p>Note. This function iterates through the geometries of both files performing
+a comparison and therefore can be very slow to execute for large vector files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – vector layer file used as the base layer</p></li>
+<li><p><strong>vec_base_lyr</strong> – vector layer used as the base layer</p></li>
+<li><p><strong>vec_comp_file</strong> – vector layer file used as the comparison layer</p></li>
+<li><p><strong>vec_comp_lyr</strong> – vector layer used as the comparison layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.vec_crosses_vec">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">vec_crosses_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_comp_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.vec_crosses_vec" title="Link to this definition"></a></dt>
+<dd><p>Function to test whether the comparison vector layer touches the
+base vector layer.</p>
+<p>Note. This function iterates through the geometries of both files performing
+a comparison and therefore can be very slow to execute for large vector files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – vector layer file used as the base layer</p></li>
+<li><p><strong>vec_base_lyr</strong> – vector layer used as the base layer</p></li>
+<li><p><strong>vec_comp_file</strong> – vector layer file used as the comparison layer</p></li>
+<li><p><strong>vec_comp_lyr</strong> – vector layer used as the comparison layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="spatial-index">
+<h2>Spatial Index<a class="headerlink" href="#spatial-index" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.create_rtree_index">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">create_rtree_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.create_rtree_index" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a spatial index using the rtree package for the
+inputted vector file/layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file to be processed.</p></li>
+<li><p><strong>vec_lyr</strong> – The layer within the vector file for which the index is to be built.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.bbox_intersects_index">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">bbox_intersects_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geom_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.vectorgeoms.bbox_intersects_index" title="Link to this definition"></a></dt>
+<dd><p>A function which tests for intersection between the geometries and the bounding box
+using a spatial index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rt_idx</strong> – the rtree spatial index object (created using the
+create_rtree_index function)</p></li>
+<li><p><strong>geom_lst</strong> – the list of geometries as referenced in the index (created
+using the create_rtree_index function)</p></li>
+<li><p><strong>bbox</strong> – the bounding box (xMin, xMax, yMin, yMax). Same projection as
+geometries in the index.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True there is an intersection. False there is not an intersection.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="applications-tools">
+<h2>Applications Tools<a class="headerlink" href="#applications-tools" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.estimate_future_coastline">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">estimate_future_coastline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curr_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curr_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curr_vec_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_pred_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_rate_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'LRR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GeoJSON'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans_pt_order_land_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.estimate_future_coastline" title="Link to this definition"></a></dt>
+<dd><p>This function uses the outputs from an analysis such as DSAS
+(<a class="reference external" href="https://www.usgs.gov/centers/whcmsc/science/digital-shoreline-analysis-system-dsas">https://www.usgs.gov/centers/whcmsc/science/digital-shoreline-analysis-system-dsas</a>)
+to predict where a coastline will be in the future.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>curr_vec_file</strong> – The path to the current or baseline coastline vector file.</p></li>
+<li><p><strong>curr_vec_lyr</strong> – The layer name of the current or baseline coastline vector.</p></li>
+<li><p><strong>curr_vec_date</strong> – The date of the current coastline data (datetime.date object).</p></li>
+<li><p><strong>trans_vec_file</strong> – The path to the transect vector file.</p></li>
+<li><p><strong>trans_vec_lyr</strong> – The layer name of the transect vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – The path to save the output coastline vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The layer name of the output coastline vector file.</p></li>
+<li><p><strong>out_pred_date</strong> – The future date for the coastline estimation
+(datetime.date object).</p></li>
+<li><p><strong>trans_rate_col</strong> – The column name in the transect file containing the
+rate of change values (Default: “LRR”).</p></li>
+<li><p><strong>out_format</strong> – The output format for the new coastline data
+(Default: “GeoJSON”).</p></li>
+<li><p><strong>trans_pt_order_land_first</strong> – Flag indicating the order of points on the
+transect (land first if True, sea first if False).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="internal-utilities">
+<h2>Internal Utilities<a class="headerlink" href="#internal-utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.get_pt_on_line">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">get_pt_on_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.get_pt_on_line" title="Link to this definition"></a></dt>
+<dd><p>A function that calculates a point on the vector defined by pt1 and pt2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pt1</strong> – An ogr point geometry which has functions GetX() and GetY().</p></li>
+<li><p><strong>pt2</strong> – An ogr point geometry which has functions GetX() and GetY().</p></li>
+<li><p><strong>dist</strong> – The distance from pt1 the new point is to be created.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created point; returned as a set of floats: (x, y)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.find_pt_to_side">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">find_pt_to_side</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pt_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_hand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.find_pt_to_side" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate a point location at a right-angle to the vector defined
+by the points pt_start and pt_end at the location pt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pt_start</strong> – An ogr point geometry which has functions GetX(), GetY() and
+Distance().</p></li>
+<li><p><strong>pt</strong> – An ogr point geometry which has functions GetX(), GetY() and Distance().</p></li>
+<li><p><strong>pt_end</strong> – An ogr point geometry which has functions GetX(), GetY() and
+Distance().</p></li>
+<li><p><strong>line_len</strong> – The distance from the pt_start and pt_end vector to the new point.</p></li>
+<li><p><strong>left_hand</strong> – Specify which side the point is projected from the pt_start
+and pt_end vector. Default: False - project right-hand side of
+vector, True - project left-hand side of vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created point; returned as a set of floats: (x, y)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.create_orthg_lines">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">create_orthg_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_hand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.create_orthg_lines" title="Link to this definition"></a></dt>
+<dd><p>A function to create a set of lines which are orthogonal to the lines of the input
+vector file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_in_file</strong> – The inputted vector file path - this should be a
+polyline vector file</p></li>
+<li><p><strong>vec_in_lyr</strong> – The name of the vector layer</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path - this will be a polyline
+vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – The name of the output vector layer (if None then created
+as the same as the file name)</p></li>
+<li><p><strong>pt_step</strong> – The steps (in the unit of the coordinate system) along lines
+in the layer at which lines are created.</p></li>
+<li><p><strong>line_len</strong> – The length of the lines created.</p></li>
+<li><p><strong>left_hand</strong> – Specify which side the point is projected from the line
+(i.e., left or right side)
+Default: False - project right-hand side of vector, True -
+project left-hand side of vector</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.closest_line_intersection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">closest_line_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_line_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_objs_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_objs_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_x_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'start_x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_y_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'start_y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.closest_line_intersection" title="Link to this definition"></a></dt>
+<dd><p>A function which intersects each line within the input vector layer
+(vec_objs_file, vec_objs_lyr) creating a new line between the start
+point of the input layer (defined in the vector attribute table:
+start_x_field, start_y_field) and the intersection point which is
+closest to the start point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_line_file</strong> – Input lines vector file path.</p></li>
+<li><p><strong>vec_line_lyr</strong> – Input lines vector layer name.</p></li>
+<li><p><strong>vec_objs_file</strong> – The vector file for the objects (expecting polygons)
+to be intersected with.</p></li>
+<li><p><strong>vec_objs_lyr</strong> – The vector layer for the objects (expecting polygons)
+to be intersected with.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>start_x_field</strong> – The field name for the start point X coordinate for
+the input lines.</p></li>
+<li><p><strong>start_y_field</strong> – The field name for the start point Y coordinate for
+the input lines.</p></li>
+<li><p><strong>uid_field</strong> – The field name for the Unique ID (UID) of the input lines.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.line_intersection_range">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">line_intersection_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_line_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_objs_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_objs_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_x_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'start_x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_y_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'start_y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.line_intersection_range" title="Link to this definition"></a></dt>
+<dd><p>A function which intersects each line within the input vector layer
+(vec_objs_file, vec_objs_lyr) creating a new line between the closest
+intersection to the start point of the input layer (defined in the vector
+attribute table: start_x_field, start_y_field) and the intersection point
+which is furthest to the start point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_line_file</strong> – Input lines vector file path.</p></li>
+<li><p><strong>vec_line_lyr</strong> – Input lines vector layer name.</p></li>
+<li><p><strong>vec_objs_file</strong> – The vector file for the objects (expecting polygons)
+to be intersected with.</p></li>
+<li><p><strong>vec_objs_lyr</strong> – The vector layer for the objects (expecting polygons)
+to be intersected with.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>start_x_field</strong> – The field name for the start point X coordinate for
+the input lines.</p></li>
+<li><p><strong>start_y_field</strong> – The field name for the start point Y coordinate for
+the input lines.</p></li>
+<li><p><strong>uid_field</strong> – The field name for the Unique ID (UID) of the input lines.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.scnd_line_intersection_range">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">scnd_line_intersection_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_line_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_line_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_objs_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_objs_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_x_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'start_x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_y_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'start_y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">del_exist_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.scnd_line_intersection_range" title="Link to this definition"></a></dt>
+<dd><p>A function which intersects a line with a set of polygons outputting the
+lines cut to their second point of intersection. Assume, first point of
+intersection would be entering the polygon and the second point of
+intersection would be leaving the polygon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_line_file</strong> – Input lines vector file path.</p></li>
+<li><p><strong>vec_line_lyr</strong> – Input lines vector layer name.</p></li>
+<li><p><strong>vec_objs_file</strong> – The vector file for the objects (expecting polygons)
+to be intersected with.</p></li>
+<li><p><strong>vec_objs_lyr</strong> – The vector layer for the objects (expecting polygons)
+to be intersected with.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>start_x_field</strong> – The field name for the start point X coordinate
+for the input lines.</p></li>
+<li><p><strong>start_y_field</strong> – The field name for the start point Y coordinate
+for the input lines.</p></li>
+<li><p><strong>uid_field</strong> – The field name for the Unique ID (UID) of the input lines.</p></li>
+<li><p><strong>out_format</strong> – The output file format of the vector file.</p></li>
+<li><p><strong>del_exist_vec</strong> – remove output file if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-geometry-info">
+<h2>Calculate Geometry Info<a class="headerlink" href="#calculate-geometry-info" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorgeoms.get_poly_hole_area">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorgeoms.</span></span><span class="sig-name descname"><span class="pre">get_poly_hole_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorgeoms.get_poly_hole_area" title="Link to this definition"></a></dt>
+<dd><p>Get an array of the areas of the polygon holes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of areas.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_vectorattrs.html" class="btn btn-neutral float-left" title="RSGISLib Vector Attributes Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_vectorstats.html" class="btn btn-neutral float-right" title="RSGISLib Vector Stats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

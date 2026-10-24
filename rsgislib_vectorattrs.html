@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Vector Attributes Module &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Vector Geometry Module" href="rsgislib_vectorgeoms.html" />
+    <link rel="prev" title="RSGISLib WMTS Tools" href="rsgislib_tools_wmts_tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Vector Attributes Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-read-and-writing-columns">Basic Read and Writing Columns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.write_vec_column"><code class="docutils literal notranslate"><span class="pre">write_vec_column()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.write_vec_column_to_layer"><code class="docutils literal notranslate"><span class="pre">write_vec_column_to_layer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.read_vec_column"><code class="docutils literal notranslate"><span class="pre">read_vec_column()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.read_vec_columns"><code class="docutils literal notranslate"><span class="pre">read_vec_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.get_vec_cols_as_array"><code class="docutils literal notranslate"><span class="pre">get_vec_cols_as_array()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#add-columns">Add Columns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_fid_col"><code class="docutils literal notranslate"><span class="pre">add_fid_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_numeric_col_lut"><code class="docutils literal notranslate"><span class="pre">add_numeric_col_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_numeric_col"><code class="docutils literal notranslate"><span class="pre">add_numeric_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_string_col"><code class="docutils literal notranslate"><span class="pre">add_string_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_string_col_lut"><code class="docutils literal notranslate"><span class="pre">add_string_col_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_numeric_col_range_lut"><code class="docutils literal notranslate"><span class="pre">add_numeric_col_range_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_numeric_col_from_lst_lut"><code class="docutils literal notranslate"><span class="pre">add_numeric_col_from_lst_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.create_name_col"><code class="docutils literal notranslate"><span class="pre">create_name_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.create_date_col"><code class="docutils literal notranslate"><span class="pre">create_date_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_ran_vals_cols"><code class="docutils literal notranslate"><span class="pre">add_ran_vals_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#column-utilities">Column Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.drop_vec_cols"><code class="docutils literal notranslate"><span class="pre">drop_vec_cols()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.rename_vec_cols"><code class="docutils literal notranslate"><span class="pre">rename_vec_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#joins">Joins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.perform_spatial_join"><code class="docutils literal notranslate"><span class="pre">perform_spatial_join()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calculate-column-values">Calculate Column Values</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.pop_bbox_cols"><code class="docutils literal notranslate"><span class="pre">pop_bbox_cols()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_geom_bbox_cols"><code class="docutils literal notranslate"><span class="pre">add_geom_bbox_cols()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.add_unq_numeric_col"><code class="docutils literal notranslate"><span class="pre">add_unq_numeric_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.calc_npts_in_radius"><code class="docutils literal notranslate"><span class="pre">calc_npts_in_radius()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.create_angle_sets"><code class="docutils literal notranslate"><span class="pre">create_angle_sets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.create_orthogonal_angle_sets"><code class="docutils literal notranslate"><span class="pre">create_orthogonal_angle_sets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.calc_vec_area"><code class="docutils literal notranslate"><span class="pre">calc_vec_area()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.calc_vec_length"><code class="docutils literal notranslate"><span class="pre">calc_vec_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.calc_vec_pt_dist_angle"><code class="docutils literal notranslate"><span class="pre">calc_vec_pt_dist_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.calc_near_dist_to_feats"><code class="docutils literal notranslate"><span class="pre">calc_near_dist_to_feats()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-column-summaries">Get Column Summaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.get_unq_col_values"><code class="docutils literal notranslate"><span class="pre">get_unq_col_values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sort-by-attributes">Sort By Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.sort_vec_lyr"><code class="docutils literal notranslate"><span class="pre">sort_vec_lyr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#change-attribute-values">Change Attribute Values</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.find_replace_str_vec_lyr"><code class="docutils literal notranslate"><span class="pre">find_replace_str_vec_lyr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.check_str_col"><code class="docutils literal notranslate"><span class="pre">check_str_col()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#geometry-intersections">Geometry Intersections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.count_pt_intersects"><code class="docutils literal notranslate"><span class="pre">count_pt_intersects()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.annotate_vec_selection"><code class="docutils literal notranslate"><span class="pre">annotate_vec_selection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#export-attribute-table">Export Attribute Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.export_vec_attrs_to_csv"><code class="docutils literal notranslate"><span class="pre">export_vec_attrs_to_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.export_vec_attrs_to_excel"><code class="docutils literal notranslate"><span class="pre">export_vec_attrs_to_excel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.vectorattrs.export_vec_attrs_to_parquet"><code class="docutils literal notranslate"><span class="pre">export_vec_attrs_to_parquet()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Vector Attributes Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-vector-attributes-module">
+<h1>RSGISLib Vector Attributes Module<a class="headerlink" href="#rsgislib-vector-attributes-module" title="Link to this heading"></a></h1>
+<section id="basic-read-and-writing-columns">
+<h2>Basic Read and Writing Columns<a class="headerlink" href="#basic-read-and-writing-columns" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.write_vec_column">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">write_vec_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_col_datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_col_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.write_vec_column" title="Link to this definition"></a></dt>
+<dd><p>A function which will write a column to a vector file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_vec_file</strong> – The file / path to the vector data ‘file’.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The layer to which the data is to be added.</p></li>
+<li><p><strong>att_column</strong> – Name of the output column</p></li>
+<li><p><strong>att_col_datatype</strong> – ogr data type for the output column
+(e.g., ogr.OFTString, ogr.OFTInteger, ogr.OFTReal)</p></li>
+<li><p><strong>att_col_data</strong> – A list of the same length as the number of features
+in vector file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.write_vec_column_to_layer">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">write_vec_column_to_layer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_col_datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_col_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.write_vec_column_to_layer" title="Link to this definition"></a></dt>
+<dd><p>A function which will write a column to a vector layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_vec_lyr_obj</strong> – GDAL/OGR vector layer object</p></li>
+<li><p><strong>att_column</strong> – Name of the output column</p></li>
+<li><p><strong>att_col_datatype</strong> – ogr data type for the output column
+(e.g., ogr.OFTString, ogr.OFTInteger, ogr.OFTReal)</p></li>
+<li><p><strong>att_col_data</strong> – A list of the same length as the number of features
+in vector file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.read_vec_column">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">read_vec_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.vectorattrs.read_vec_column" title="Link to this definition"></a></dt>
+<dd><p>A function which will reads a column from a vector file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – The file / path to the vector data ‘file’.</p></li>
+<li><p><strong>vec_lyr</strong> – The layer to which the data is to be read from.</p></li>
+<li><p><strong>att_column</strong> – Name of the input column</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list with the column values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.read_vec_columns">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">read_vec_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.vectorattrs.read_vec_columns" title="Link to this definition"></a></dt>
+<dd><p>A function which will reads a number of column from a vector file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – The file / path to the vector data ‘file’.</p></li>
+<li><p><strong>vec_lyr</strong> – The layer to which the data is to be read from.</p></li>
+<li><p><strong>att_columns</strong> – List of input attribute column names to be read in.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of dicts with the column names as keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.get_vec_cols_as_array">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">get_vec_cols_as_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.vectorattrs.get_vec_cols_as_array" title="Link to this definition"></a></dt>
+<dd><p>A function returns an n x m numpy array with the values for the columns specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>cols</strong> – list of columns to be read and returned.</p></li>
+<li><p><strong>no_data_val</strong> – no data value used within the column values. Rows with
+a no data value will be dropped. If None then ignored
+(Default: None)</p></li>
+<li><p><strong>lower_limit</strong> – Optional lower limit to define valid values. Note the same
+value is used for all the columns listed. If a value is found
+to be outside of the threshold the whole row is removed.</p></li>
+<li><p><strong>upper_limit</strong> – Optional upper limit to define valid values. Note the same
+value is used for all the columns listed. If a value is found
+to be outside of the threshold the whole row is removed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a numpy array with the column values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="add-columns">
+<h2>Add Columns<a class="headerlink" href="#add-columns" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_fid_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_fid_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'fid'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_fid_col" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a numeric feature ID (FID) column with unique values per
+feature within the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+<li><p><strong>out_col</strong> – The output FID column name (Default: fid)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_numeric_col_lut">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_numeric_col_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'int'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_numeric_col_lut" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a numeric column based off an existing column in the
+vector file, using an dict LUT to define the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>ref_col</strong> – The column within which the unique values will be identified.</p></li>
+<li><p><strong>val_lut</strong> – A dict LUT (key should be value in ref_col and value be the
+value outputted to out_col).</p></li>
+<li><p><strong>out_col</strong> – The output numeric column</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+<li><p><strong>col_dtype</strong> – output data type (default int). Must be either “int” or “float”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_numeric_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_numeric_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_int</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_numeric_col" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a numeric column with the same value for all the features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>out_col</strong> – The output numeric column</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_val</strong> – output numeric value</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+<li><p><strong>out_col_int</strong> – Specify whether the output column should be an int datatype.
+If True (default: False) then the output column will be of
+type int. If False then it will be type float.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_string_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_string_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'str_val'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_string_col" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a string column with the same value for all the features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>out_col</strong> – The output numeric column</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_val</strong> – output numeric value</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_string_col_lut">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_string_col_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_string_col_lut" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a string (text) column based off an existing column in the
+vector file, using an dict LUT to define the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>ref_col</strong> – The column within which the unique values will be identified.</p></li>
+<li><p><strong>val_lut</strong> – A dict LUT (key should be value in ref_col and value be the
+value outputted to out_col).</p></li>
+<li><p><strong>out_col</strong> – The output numeric column</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_numeric_col_range_lut">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_numeric_col_range_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_numeric_col_range_lut" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a numerical column to the vector layer using an LUT
+and low (&gt;=) and upper (&lt;) values with reference to the input column for
+defining the output value which will be the LUT key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>vec_col</strong> – The column within which the unique values will be identified.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_vec_col</strong> – The output numeric column</p></li>
+<li><p><strong>val_lut</strong> – the LUT for defining the output values. Features outside of the
+values defined by the LUT will be set as zero. The LUT should
+define an int as the key which will be the output value and
+a tuple specifying the lower (&gt;=) and upper (&lt;) values within
+the vec_col for setting the key value.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_numeric_col_from_lst_lut">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_numeric_col_from_lst_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vals_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_numeric_col_from_lst_lut" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a numeric column based off an existing column in the
+vector file, using an list based LUT to define the values. The LUT should be
+defined as a list of tuples with the value to match as the first value and the
+second the value to be outputted. For example, (“Hello”, 1) or (“World”, 2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>ref_col</strong> – The column within which the unique values will be identified.</p></li>
+<li><p><strong>vals_lut</strong> – A list LUT which should be a list of tuples (LookUp, OutValue).</p></li>
+<li><p><strong>out_col</strong> – The output numeric column</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.create_name_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">create_name_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'names'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MinX'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MaxY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postfix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords_lat_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">int_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord_gain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_x_pad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_y_pad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_n_digts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_neg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_dec_pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec_pt_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.create_name_col" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a column in the vector layer which can define a name
+using coordinates associated with the feature. Often this is useful if a tiling
+has been created and from this a set of images are to generated for example.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name</p></li>
+<li><p><strong>out_format</strong> – The output format of the output file. (Default: GPKG)</p></li>
+<li><p><strong>out_col</strong> – The name of the output column</p></li>
+<li><p><strong>x_col</strong> – The column with the x coordinate</p></li>
+<li><p><strong>y_col</strong> – The column with the y coordinate</p></li>
+<li><p><strong>prefix</strong> – A prefix to the name</p></li>
+<li><p><strong>postfix</strong> – A postfix to the name</p></li>
+<li><p><strong>coords_lat_lon</strong> – A boolean specifying if the coordinates are lat / long</p></li>
+<li><p><strong>int_coords</strong> – A boolean specifying whether to integerise the coordinates.</p></li>
+<li><p><strong>coord_gain</strong> – Apply a gain to the coordinate before integerise.
+Default = 1.0 (i.e., no gain)</p></li>
+<li><p><strong>zero_x_pad</strong> – If larger than zero then the X coordinate will be zero padded.</p></li>
+<li><p><strong>zero_y_pad</strong> – If larger than zero then the Y coordinate will be zero padded.</p></li>
+<li><p><strong>round_n_digts</strong> – If larger than zero then the coordinates will be rounded
+to n significant digits</p></li>
+<li><p><strong>non_neg</strong> – boolean specifying whether an negative coordinates should be
+made positive. (Default: False)</p></li>
+<li><p><strong>replace_dec_pt</strong> – replace the decimal point with another string.
+Default: True</p></li>
+<li><p><strong>dec_pt_val</strong> – the value used instead of a decimal point. Default: “”
+i.e., empty string so decimal point is removed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.create_date_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">create_date_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_date_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.create_date_col" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_ran_vals_cols">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_ran_vals_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ran_vals'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_ran_vals_cols" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a new column with a random (integer) value assigned
+to each row. Note, this does not guarantee that the random values will be
+unique for each row.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+<li><p><strong>out_col</strong> – The output numeric column with the random value</p></li>
+<li><p><strong>rnd_seed</strong> – the random seed for the random number generator.
+Default is None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="column-utilities">
+<h2>Column Utilities<a class="headerlink" href="#column-utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.drop_vec_cols">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">drop_vec_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chk_cols_present</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.drop_vec_cols" title="Link to this definition"></a></dt>
+<dd><p>A function which allows vector columns to be removed from the layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer</p></li>
+<li><p><strong>drop_cols</strong> – List of columns to remove from layer</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer</p></li>
+<li><p><strong>out_format</strong> – the output vector format (Default: GPKG)</p></li>
+<li><p><strong>chk_cols_present</strong> – boolean (default: True) to check that the columns to be
+removed are present and remove those from the list
+which are not present.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.rename_vec_cols">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">rename_vec_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rname_cols_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.rename_vec_cols" title="Link to this definition"></a></dt>
+<dd><p>A function which allows vector column to be renamed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer</p></li>
+<li><p><strong>rname_cols_lut</strong> – dict look up for the columns to be renamed.
+Format: {“orig_name”: “new_name”}</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer</p></li>
+<li><p><strong>out_format</strong> – the output vector format (Default: GPKG)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="joins">
+<h2>Joins<a class="headerlink" href="#joins" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.perform_spatial_join">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">perform_spatial_join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_base_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_join_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_join_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">join_how</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'inner'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">join_op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'within'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_base_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_join_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.perform_spatial_join" title="Link to this definition"></a></dt>
+<dd><p>A function to perform a spatial join between two vector layers. This function
+uses geopandas so this needs to be installed. You also need to have the rtree
+package to generate the index used to perform the intersection.</p>
+<p>Note, defining epsg codes for the datasets does not reproject the datasets
+but just makes sure that correct projection is being used.</p>
+<p>For more information see: <a class="reference external" href="http://geopandas.org/mergingdata.html#spatial-joins">http://geopandas.org/mergingdata.html#spatial-joins</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_base_file</strong> – the base vector file with the geometries which will
+be outputted.</p></li>
+<li><p><strong>vec_base_lyr</strong> – the layer name for the base vector.</p></li>
+<li><p><strong>vec_join_file</strong> – the vector with the attributes which will be joined to
+the base vector geometries.</p></li>
+<li><p><strong>vec_join_lyr</strong> – the layer name for the join vector.</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the layer name for the output vector.</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default GPKG)</p></li>
+<li><p><strong>join_how</strong> – Specifies the type of join that will occur and which geometry
+is retained. The options are [left, right, inner]. The default
+is ‘inner’</p></li>
+<li><p><strong>join_op</strong> – Defines whether or not to join the attributes of one object
+to another. The options are [intersects, within, contains]
+and default is ‘within’</p></li>
+<li><p><strong>vec_base_epsg</strong> – Optionally provide the epsg code for the base vector layer.</p></li>
+<li><p><strong>vec_join_epsg</strong> – Optionally provide the epsg code for the join vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-column-values">
+<h2>Calculate Column Values<a class="headerlink" href="#calculate-column-values" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.pop_bbox_cols">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">pop_bbox_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xmin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xmax'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ymin'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_max_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ymax'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.pop_bbox_cols" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a polygons boundary bbox as attributes to each feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – layer within the vector file.</p></li>
+<li><p><strong>x_min_col</strong> – output column name.</p></li>
+<li><p><strong>x_max_col</strong> – output column name.</p></li>
+<li><p><strong>y_min_col</strong> – output column name.</p></li>
+<li><p><strong>y_max_col</strong> – output column name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_geom_bbox_cols">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_geom_bbox_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_x_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MinX'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_x_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MaxX'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_y_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MinY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_y_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'MaxY'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_geom_bbox_cols" title="Link to this definition"></a></dt>
+<dd><p>A function which adds columns to the vector layer with the bbox of each geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name</p></li>
+<li><p><strong>out_format</strong> – The output format of the output file. (Default: GPKG)</p></li>
+<li><p><strong>min_x_col</strong> – Name of the MinX column (Default: MinX)</p></li>
+<li><p><strong>max_x_col</strong> – Name of the MaxX column (Default: MaxX)</p></li>
+<li><p><strong>min_y_col</strong> – Name of the MinY column (Default: MinY)</p></li>
+<li><p><strong>max_y_col</strong> – Name of the MaxY column (Default: MaxY)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.add_unq_numeric_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">add_unq_numeric_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unq_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_json_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.add_unq_numeric_col" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a numeric column based off an existing column in
+the vector file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer within the input file.</p></li>
+<li><p><strong>unq_col</strong> – The column within which the unique values will be identified.</p></li>
+<li><p><strong>out_col</strong> – The output numeric column</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output file format (default GPKG).</p></li>
+<li><p><strong>lut_json_file</strong> – an optional output LUT file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.calc_npts_in_radius">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">calc_npts_in_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'n_pts_r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.calc_npts_in_radius" title="Link to this definition"></a></dt>
+<dd><p>A function which calculate the number of points intersecting within a
+radius of each point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_in_file</strong> – Input vector file path (must be points geometry)</p></li>
+<li><p><strong>vec_in_lyr</strong> – Input vector layer (must be points geometry)</p></li>
+<li><p><strong>radius</strong> – the search radius</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer</p></li>
+<li><p><strong>out_format</strong> – output vector format (Default: GPKG)</p></li>
+<li><p><strong>out_col_name</strong> – output column name (Default: n_pts_r)</p></li>
+<li><p><strong>n_cores</strong> – the number of cores to be used for the query. If -1 is
+passed then all available cores will be used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.create_angle_sets">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">create_angle_sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_set_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_angle_set_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'angle_set'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.create_angle_sets" title="Link to this definition"></a></dt>
+<dd><p>A function which creates sets of features based on an angle column. The
+assumption is that the angle is from a fixed centre point. The angle sets
+are mirrored so you can look at patterns along an angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – The input vector layer name.</p></li>
+<li><p><strong>angle_col</strong> – The name of the column within the vector layer with
+the angles must be degrees (0-360)</p></li>
+<li><p><strong>start_angle</strong> – The angle to start the angle sets from.</p></li>
+<li><p><strong>angle_set_width</strong> – The width of the angle sets - must divide in 180.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default: GPKG)</p></li>
+<li><p><strong>out_angle_set_col</strong> – The column in the output file with the column sets.
+The column sets are specified by an integer ID (1 - n)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.create_orthogonal_angle_sets">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">create_orthogonal_angle_sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_half_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_angle_set_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'angle_set'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.create_orthogonal_angle_sets" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a pair of angle sets which are orthogonal to one
+another. For example, if the start angle is 0 and the angle half width
+is 20 then the width of each set will be 40 degrees and the first set will
+be from 340 to 20 degrees. If the start angle is 60 then the first set would
+be 40-80.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – The input vector layer name.</p></li>
+<li><p><strong>angle_col</strong> – The name of the column within the vector layer with
+the angles must be degrees (0-360)</p></li>
+<li><p><strong>start_angle</strong> – The angle to start the angle sets from.</p></li>
+<li><p><strong>angle_half_width</strong> – The half width of each of the angle sets.</p></li>
+<li><p><strong>out_vec_file</strong> – The output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – The output vector layer name</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default: GPKG)</p></li>
+<li><p><strong>out_angle_set_col</strong> – The column in the output file with the column set</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.calc_vec_area">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">calc_vec_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.calc_vec_area" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a column to the attribute table with the area of
+each polygon. Geometry is expected to be polygon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – the input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer</p></li>
+<li><p><strong>out_col</strong> – the output column name</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name</p></li>
+<li><p><strong>out_format</strong> – the output vector format (Default: GPKG)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.calc_vec_length">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">calc_vec_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.calc_vec_length" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a column to the attribute table with the length of
+each vector feature. Geometry is expected to be polygon or line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – the input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer</p></li>
+<li><p><strong>out_col</strong> – the output column name</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name</p></li>
+<li><p><strong>out_format</strong> – the output vector format (Default: GPKG)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.calc_vec_pt_dist_angle">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">calc_vec_pt_dist_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_centre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_centre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'angle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dist'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.calc_vec_pt_dist_angle" title="Link to this definition"></a></dt>
+<dd><p>A function which adds a column to the attribute table with the distance and
+angle for each point from a centre point (x_centre, y_centre). If x_centre,
+y_centre are provided then they are calculated as the mean of all the points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name</p></li>
+<li><p><strong>out_format</strong> – the output vector format (Default: GPKG)</p></li>
+<li><p><strong>x_centre</strong> – Optionally the X centre point (Default: None). If None then
+calculated as the mean of all the points.</p></li>
+<li><p><strong>y_centre</strong> – Optionally the Y centre point (Default: None). If None then
+calculated as the mean of all the points.</p></li>
+<li><p><strong>angle_col</strong> – The output angle column name</p></li>
+<li><p><strong>dist_col</strong> – The output distance column name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.calc_near_dist_to_feats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">calc_near_dist_to_feats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_dist_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_dist_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dist'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.calc_near_dist_to_feats" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="get-column-summaries">
+<h2>Get Column Summaries<a class="headerlink" href="#get-column-summaries" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.get_unq_col_values">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">get_unq_col_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.vectorattrs.get_unq_col_values" title="Link to this definition"></a></dt>
+<dd><p>A function which splits a vector layer by an attribute value into either
+different layers or different output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer</p></li>
+<li><p><strong>col_name</strong> – The column name for which a list of unique values will be returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a numpy array as a list of the unique within the column.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sort-by-attributes">
+<h2>Sort By Attributes<a class="headerlink" href="#sort-by-attributes" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.sort_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">sort_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.sort_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function which sorts a vector layer based on the attributes of the layer.
+You can sort by either a single attribute or within multiple attributes
+if a list is provided. This function is implemented using geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – the input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name.</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer name.</p></li>
+<li><p><strong>sort_by</strong> – either a string with the name of a single attribute or a list
+of strings if multiple attributes are used for the sort.</p></li>
+<li><p><strong>ascending</strong> – either a bool (True: ascending; False: descending) or list
+of bools if a list of attributes was given.</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default: GPKG)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="change-attribute-values">
+<h2>Change Attribute Values<a class="headerlink" href="#change-attribute-values" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.find_replace_str_vec_lyr">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">find_replace_str_vec_lyr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">find_replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.find_replace_str_vec_lyr" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a find and replace on a string column(s) within the
+vector layer. For example, replacing a no data value (e.g., NA) with something
+more useful. This function is implemented using geopandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – the input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name.</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer name.</p></li>
+<li><p><strong>cols</strong> – a list of strings with the names of the columns to which
+the find and replace is to be applied.</p></li>
+<li><p><strong>find_replace</strong> – the value pairs where the dict keys are the values
+to be replaced and the value is the replacement
+value.</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default: GPKG)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.check_str_col">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">check_str_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_non_ascii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_dashs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_spaces</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_punc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.check_str_col" title="Link to this definition"></a></dt>
+<dd><p>A function which checks the values in a string column removing non-ascii
+characters and optionally removing spaces, dashes and punctuation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – the input vector file.</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name.</p></li>
+<li><p><strong>vec_col</strong> – the name of the column to be checked.</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – The output vector file format (Default: GPKG)</p></li>
+<li><p><strong>rm_non_ascii</strong> – If True (default True) remove any non-ascii characters
+from the string</p></li>
+<li><p><strong>rm_dashs</strong> – If True (default False) remove any dashes from the string
+and replace with underscores.</p></li>
+<li><p><strong>rm_spaces</strong> – If True (default False) remove any spaces from the string.</p></li>
+<li><p><strong>rm_punc</strong> – If True (default False) remove any punctuation
+(other than ‘_’ or ‘-’) from the string.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="geometry-intersections">
+<h2>Geometry Intersections<a class="headerlink" href="#geometry-intersections" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.count_pt_intersects">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">count_pt_intersects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_pts_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_pts_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_count_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'n_points'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_join_fid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_pts_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.count_pt_intersects" title="Link to this definition"></a></dt>
+<dd><p>A function which counts the number of points intersecting a set of polygons
+adding the count to each polygon as a new column.</p>
+<p>Note, defining epsg codes for the datasets does not reproject the datasets
+but just makes sure that correct projection is being used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_in_file</strong> – the input polygons vector file path.</p></li>
+<li><p><strong>vec_in_lyr</strong> – the input polygons vector layer name</p></li>
+<li><p><strong>vec_pts_file</strong> – the points vector file path</p></li>
+<li><p><strong>vec_pts_lyr</strong> – the points vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer name</p></li>
+<li><p><strong>out_format</strong> – the output vector format (e.g., GPKG).</p></li>
+<li><p><strong>out_count_col</strong> – the output column name (default: n_points)</p></li>
+<li><p><strong>tmp_col_name</strong> – The name of a temporary column added to the input layer
+used to ensure there are no duplicated features in the output
+layer. The default name is: “tmp_sel_join_fid”.</p></li>
+<li><p><strong>vec_in_epsg</strong> – Optionally provide the epsg code for the input vector layer.</p></li>
+<li><p><strong>vec_pts_epsg</strong> – Optionally provide the epsg code for the selection
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.annotate_vec_selection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">annotate_vec_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_sel_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_sel_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'sel_feats'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_sel_join_fid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_in_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_sel_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.annotate_vec_selection" title="Link to this definition"></a></dt>
+<dd><p>A function which spatial selects features from the input vector layer which
+intersects the selection vector layer populating a column within the output
+vector layer specifying which features intersect.</p>
+<p>Note, defining epsg codes for the datasets does not reproject the datasets
+but just makes sure that correct projection is being used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_in_file</strong> – the input vector file path.</p></li>
+<li><p><strong>vec_in_lyr</strong> – the input vector layer name</p></li>
+<li><p><strong>vec_sel_file</strong> – the selection vector file path</p></li>
+<li><p><strong>vec_sel_lyr</strong> – the selection vector layer name</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer name</p></li>
+<li><p><strong>out_col_name</strong> – the output boolean column specifying those features which
+intersect with the vec_sel_lyr layer.</p></li>
+<li><p><strong>out_format</strong> – the output vector format (e.g., GPKG).</p></li>
+<li><p><strong>tmp_col_name</strong> – The name of a temporary column added to the input layer
+used to ensure there are no duplicated features in the output
+layer. The default name is: “tmp_sel_join_fid”.</p></li>
+<li><p><strong>vec_in_epsg</strong> – Optionally provide the epsg code for the input vector layer.</p></li>
+<li><p><strong>vec_sel_epsg</strong> – Optionally provide the epsg code for the selection
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="export-attribute-table">
+<h2>Export Attribute Table<a class="headerlink" href="#export-attribute-table" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.export_vec_attrs_to_csv">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">export_vec_attrs_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.export_vec_attrs_to_csv" title="Link to this definition"></a></dt>
+<dd><p>A function which exports the attribute table from a vector layer to
+a CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – The input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – The input vector layer name</p></li>
+<li><p><strong>output_file</strong> – The output file path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.export_vec_attrs_to_excel">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">export_vec_attrs_to_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_sheet_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Sheet1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.export_vec_attrs_to_excel" title="Link to this definition"></a></dt>
+<dd><p>A function which exports the attribute table from a vector layer to
+a Excel file (<a href="#id1"><span class="problematic" id="id2">*</span></a>.xlsx).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – The input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – The input vector layer name</p></li>
+<li><p><strong>output_file</strong> – The output file path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.vectorattrs.export_vec_attrs_to_parquet">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.vectorattrs.</span></span><span class="sig-name descname"><span class="pre">export_vec_attrs_to_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gzip_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.vectorattrs.export_vec_attrs_to_parquet" title="Link to this definition"></a></dt>
+<dd><p>A function which exports the attribute table from a vector layer to
+a parquet file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – The input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – The input vector layer name</p></li>
+<li><p><strong>output_file</strong> – The output file path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_wmts_tools.html" class="btn btn-neutral float-left" title="RSGISLib WMTS Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_vectorgeoms.html" class="btn btn-neutral float-right" title="RSGISLib Vector Geometry Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

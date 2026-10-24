@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Image Change Detection &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Classification" href="rsgislib_classification.html" />
+    <link rel="prev" title="RSGISLib" href="rsgislib.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Image Change Detection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classification-outlier-change-detection">Classification Outlier Change Detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.pxloutlierchng.find_class_pyod_outliers"><code class="docutils literal notranslate"><span class="pre">find_class_pyod_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.pxloutlierchng.find_class_kurt_skew_outliers"><code class="docutils literal notranslate"><span class="pre">find_class_kurt_skew_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.pxloutlierchng.find_class_otsu_outliers"><code class="docutils literal notranslate"><span class="pre">find_class_otsu_outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.pxloutlierchng.find_class_li_outliers"><code class="docutils literal notranslate"><span class="pre">find_class_li_outliers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-to-image-change-detection">Image to Image Change Detection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.imgchngmthds.image_difference"><code class="docutils literal notranslate"><span class="pre">image_difference()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.imgchngmthds.image_ratio"><code class="docutils literal notranslate"><span class="pre">image_ratio()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.imgchngmthds.change_vector_analysis"><code class="docutils literal notranslate"><span class="pre">change_vector_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.imgchngmthds.slow_feature_analysis"><code class="docutils literal notranslate"><span class="pre">slow_feature_analysis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.changedetect.imgchngmthds.multivariate_alteration_detection"><code class="docutils literal notranslate"><span class="pre">multivariate_alteration_detection()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Image Change Detection</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-image-change-detection">
+<h1>RSGISLib Image Change Detection<a class="headerlink" href="#rsgislib-image-change-detection" title="Link to this heading"></a></h1>
+<section id="classification-outlier-change-detection">
+<h2>Classification Outlier Change Detection<a class="headerlink" href="#classification-outlier-change-detection" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.pxloutlierchng.find_class_pyod_outliers">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.pxloutlierchng.</span></span><span class="sig-name descname"><span class="pre">find_class_pyod_outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pyod_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_scores_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_mask_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.changedetect.pxloutlierchng.find_class_pyod_outliers" title="Link to this definition"></a></dt>
+<dd><p>This function uses the pyod (<a class="reference external" href="https://github.com/yzhao062/pyod">https://github.com/yzhao062/pyod</a>) library to
+find outliers within a class. It is assumed that the input images are from a
+different date than the mask (classification) and therefore the outliers will
+be related to class changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pyod_obj</strong> – an instance of a pyod.models (e.g., pyod.models.knn.KNN) pass
+parameters to the constructor</p></li>
+<li><p><strong>input_img</strong> – input image used for analysis</p></li>
+<li><p><strong>in_msk_img</strong> – input image mask use to define the region of interest.</p></li>
+<li><p><strong>output_img</strong> – output image with pixel over of 1 for within mask but
+not outlier and 2 for in mask and outlier.</p></li>
+<li><p><strong>out_scores_img</strong> – output image (optional, None and won’t be provided;
+Default None) providing the probability of
+each pixel being an outlier</p></li>
+<li><p><strong>img_mask_val</strong> – the pixel value within the mask image for the
+class of interest. (Default 1)</p></li>
+<li><p><strong>img_bands</strong> – the image bands to be used for the analysis.
+If None then all used (Default: None)</p></li>
+<li><p><strong>gdalformat</strong> – file format for the output image(s). Default KEA.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.pxloutlierchng.find_class_kurt_skew_outliers">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.pxloutlierchng.</span></span><span class="sig-name descname"><span class="pre">find_class_kurt_skew_outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contamination</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_kurtosis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_mask_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_val_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_thres_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.changedetect.pxloutlierchng.find_class_kurt_skew_outliers" title="Link to this definition"></a></dt>
+<dd><p>This function to find outliers within a class using an optimisation of the skewness
+and kurtosis. It is assumed that the input_img is from a different date than
+the mask (classification) and therefore the outliers will related to class changes.
+The skewness and kurtosis method assume that without change image values will
+be normally distributed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image for the analysis. Just a single band will be used.</p></li>
+<li><p><strong>in_msk_img</strong> – input image mask use to define the region (class) of interest.</p></li>
+<li><p><strong>output_img</strong> – output image with pixel over of 1 for within mask but
+not outlier and 2 for in mask and outlier.</p></li>
+<li><p><strong>vld_min</strong> – the minimum threshold for valid image values.</p></li>
+<li><p><strong>vld_max</strong> – the maximum threshold for valid image values.</p></li>
+<li><p><strong>init_thres</strong> – an initial estimate of the change threshold</p></li>
+<li><p><strong>low_thres</strong> – a boolean as to whether the threshold is on the upper or lower
+side of the histogram. If True (default) then outliers will be
+identified as values below the threshold. If False then outliers
+will be above the threshold.</p></li>
+<li><p><strong>contamination</strong> – An estimate of the amount of contamination (i.e., outliners)
+which is within the scene.</p></li>
+<li><p><strong>only_kurtosis</strong> – <dl class="simple">
+<dt>A boolean to specify that only the kurtosis should be used</dt><dd><p>to estimate the threshold. Default: False (i.e., both the</p>
+</dd>
+</dl>
+<p>kurtosis and skewness are used.</p>
+</p></li>
+<li><p><strong>img_mask_val</strong> – the pixel value within the in_msk_img specifying the class
+of interest.</p></li>
+<li><p><strong>img_band</strong> – the input_img image band to be used for the analysis.</p></li>
+<li><p><strong>img_val_no_data</strong> – the input_img image not data value. If None then the value
+will be read from the image header.</p></li>
+<li><p><strong>gdalformat</strong> – the output image file format. (Default: KEA)</p></li>
+<li><p><strong>plot_thres_file</strong> – A file path for a plot of the histogram with the
+threshold. If None then ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The threshold identified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.pxloutlierchng.find_class_otsu_outliers">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.pxloutlierchng.</span></span><span class="sig-name descname"><span class="pre">find_class_otsu_outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_mask_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_val_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_thres_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.changedetect.pxloutlierchng.find_class_otsu_outliers" title="Link to this definition"></a></dt>
+<dd><p>This function to find outliers within a class using an otsu thresholding. It is
+assumed that the input_img is from a different date than the mask
+(classification) and therefore the outliers will related to class changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image for the analysis. Just a single band will be used.</p></li>
+<li><p><strong>in_msk_img</strong> – input image mask use to define the region (class) of interest.</p></li>
+<li><p><strong>output_img</strong> – output image with pixel over of 1 for within mask but
+not outlier and 2 for in mask and outlier.</p></li>
+<li><p><strong>low_thres</strong> – a boolean as to whether the threshold is on the upper or lower
+side of the histogram. If True (default) then outliers will be
+identified as values below the threshold. If False then outliers
+will be above the threshold.</p></li>
+<li><p><strong>img_mask_val</strong> – the pixel value within the in_msk_img specifying the class
+of interest.</p></li>
+<li><p><strong>img_band</strong> – the input_img image band to be used for the analysis.</p></li>
+<li><p><strong>img_val_no_data</strong> – the input_img image not data value. If None then the value
+will be read from the image header.</p></li>
+<li><p><strong>gdalformat</strong> – the output image file format. (Default: KEA)</p></li>
+<li><p><strong>plot_thres_file</strong> – A file path for a plot of the histogram with the
+threshold. If None then ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The threshold identified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.pxloutlierchng.find_class_li_outliers">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.pxloutlierchng.</span></span><span class="sig-name descname"><span class="pre">find_class_li_outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_mask_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_val_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_thres_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.changedetect.pxloutlierchng.find_class_li_outliers" title="Link to this definition"></a></dt>
+<dd><p>This function to find outliers within a class using Li’s iterative Minimum Cross
+Entropy method. It is assumed that the input_img is from a different date than
+the mask (classification) and therefore the outliers will related to class changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image for the analysis. Just a single band will be used.</p></li>
+<li><p><strong>in_msk_img</strong> – input image mask use to define the region (class) of interest.</p></li>
+<li><p><strong>output_img</strong> – output image with pixel over of 1 for within mask but
+not outlier and 2 for in mask and outlier.</p></li>
+<li><p><strong>low_thres</strong> – a boolean as to whether the threshold is on the upper or lower
+side of the histogram. If True (default) then outliers will be
+identified as values below the threshold. If False then outliers
+will be above the threshold.</p></li>
+<li><p><strong>tolerance</strong> – float (optional) - Finish the computation when the
+change in the threshold in an iteration is less than
+this value. By default, this is half the smallest
+difference between data values.</p></li>
+<li><p><strong>init_thres</strong> – an initial estimate of the change threshold</p></li>
+<li><p><strong>img_mask_val</strong> – the pixel value within the in_msk_img specifying the class
+of interest.</p></li>
+<li><p><strong>img_band</strong> – the input_img image band to be used for the analysis.</p></li>
+<li><p><strong>img_val_no_data</strong> – the input_img image not data value. If None then the value
+will be read from the image header.</p></li>
+<li><p><strong>gdalformat</strong> – the output image file format. (Default: KEA)</p></li>
+<li><p><strong>plot_thres_file</strong> – A file path for a plot of the histogram with the
+threshold. If None then ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The threshold identified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="image-to-image-change-detection">
+<h2>Image to Image Change Detection<a class="headerlink" href="#image-to-image-change-detection" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.imgchngmthds.image_difference">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.imgchngmthds.</span></span><span class="sig-name descname"><span class="pre">image_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_base_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_diff_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_base_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_chng_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chng_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.changedetect.imgchngmthds.image_difference" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate the difference between two images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_base_img</strong> – The input base image file path</p></li>
+<li><p><strong>in_chng_img</strong> – The input change image file path</p></li>
+<li><p><strong>out_diff_img</strong> – Output differance image file path</p></li>
+<li><p><strong>vld_msk_img</strong> – An optional valid pixel image mask - if not specified
+the no data values of the input images will be used.</p></li>
+<li><p><strong>vld_msk_val</strong> – the pixel value within in the mask defining which pixels
+are valid. Default is 1.</p></li>
+<li><p><strong>gdalformat</strong> – Output GDAL image file format</p></li>
+<li><p><strong>apply_std</strong> – Optionally apply standardisation to the input images.</p></li>
+<li><p><strong>img_base_bands</strong> – Optionally specified a list of bands for the base image</p></li>
+<li><p><strong>img_chng_bands</strong> – Optionally specified a list of bands for the change image</p></li>
+<li><p><strong>base_img_no_data</strong> – Optionally specified nodata value for the base image</p></li>
+<li><p><strong>chng_img_no_data</strong> – Optionally specified nodata value for the change image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.imgchngmthds.image_ratio">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.imgchngmthds.</span></span><span class="sig-name descname"><span class="pre">image_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_base_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_ratio_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_base_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_chng_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chng_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.changedetect.imgchngmthds.image_ratio" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate a ratio difference between two images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_base_img</strong> – The input base image file path</p></li>
+<li><p><strong>in_chng_img</strong> – The input change image file path</p></li>
+<li><p><strong>out_ratio_img</strong> – Output ratio image file path</p></li>
+<li><p><strong>vld_msk_img</strong> – An optional valid pixel image mask - if not specified
+the no data values of the input images will be used.</p></li>
+<li><p><strong>vld_msk_val</strong> – the pixel value within in the mask defining which pixels
+are valid. Default is 1.</p></li>
+<li><p><strong>gdalformat</strong> – Output GDAL image file format</p></li>
+<li><p><strong>apply_std</strong> – Optionally apply standardisation to the input images.</p></li>
+<li><p><strong>img_base_bands</strong> – Optionally specified a list of bands for the base image</p></li>
+<li><p><strong>img_chng_bands</strong> – Optionally specified a list of bands for the change image</p></li>
+<li><p><strong>base_img_no_data</strong> – Optionally specified nodata value for the base image</p></li>
+<li><p><strong>chng_img_no_data</strong> – Optionally specified nodata value for the change image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.imgchngmthds.change_vector_analysis">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.imgchngmthds.</span></span><span class="sig-name descname"><span class="pre">change_vector_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_base_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_dist_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_base_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_chng_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_kmeans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chng_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.changedetect.imgchngmthds.change_vector_analysis" title="Link to this definition"></a></dt>
+<dd><p>A function which performs Change vector analysis (CVA) between two images.
+The two images must have exactly the extent, resolution and image size
+(width and height).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_base_img</strong> – The input base image file path</p></li>
+<li><p><strong>in_chng_img</strong> – The input change image file path</p></li>
+<li><p><strong>out_chng_img</strong> – Output binary change image file path</p></li>
+<li><p><strong>out_chng_dist_img</strong> – Output change distance image file path</p></li>
+<li><p><strong>vld_msk_img</strong> – An optional valid pixel image mask - if not specified
+the no data values of the input images will be used.</p></li>
+<li><p><strong>vld_msk_val</strong> – the pixel value within in the mask defining which pixels
+are valid. Default is 1.</p></li>
+<li><p><strong>gdalformat</strong> – Output GDAL image file format</p></li>
+<li><p><strong>apply_std</strong> – Optionally apply standardisation to the input images.</p></li>
+<li><p><strong>img_base_bands</strong> – Optionally specified a list of bands for the base image</p></li>
+<li><p><strong>img_chng_bands</strong> – Optionally specified a list of bands for the change image</p></li>
+<li><p><strong>base_img_no_data</strong> – Optionally specified nodata value for the base image</p></li>
+<li><p><strong>chng_img_no_data</strong> – Optionally specified nodata value for the change image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.imgchngmthds.slow_feature_analysis">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.imgchngmthds.</span></span><span class="sig-name descname"><span class="pre">slow_feature_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_base_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_dist_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_base_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_chng_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfa_max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfa_epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfa_norm_trans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfa_regular</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_kmeans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chng_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.changedetect.imgchngmthds.slow_feature_analysis" title="Link to this definition"></a></dt>
+<dd><p>A function which performs Slow Feature Analysis (SFA) between two images.
+The two images must have exactly the extent, resolution and image size
+(width and height). There must be at least three image bands.</p>
+<p>C. Wu, B. Du, and L. Zhang, “Slow feature analysis for change detection
+in multispectral imagery,” IEEE Trans. Geosci. Remote Sens.,
+vol. 52, no. 5, pp. 2858–2874, 2014.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_base_img</strong> – The input base image file path</p></li>
+<li><p><strong>in_chng_img</strong> – The input change image file path</p></li>
+<li><p><strong>out_chng_img</strong> – Output binary change image file path</p></li>
+<li><p><strong>out_chng_dist_img</strong> – Output change distance image file path</p></li>
+<li><p><strong>vld_msk_img</strong> – An optional valid pixel image mask - if not specified
+the no data values of the input images will be used.</p></li>
+<li><p><strong>vld_msk_val</strong> – the pixel value within in the mask defining which pixels
+are valid. Default is 1.</p></li>
+<li><p><strong>gdalformat</strong> – Output GDAL image file format</p></li>
+<li><p><strong>apply_std</strong> – Optionally apply standardisation to the input images.</p></li>
+<li><p><strong>img_base_bands</strong> – Optionally specified a list of bands for the base image</p></li>
+<li><p><strong>img_chng_bands</strong> – Optionally specified a list of bands for the change image</p></li>
+<li><p><strong>sfa_max_iter</strong> – Maximum number of iterations for the algorithm to converge.</p></li>
+<li><p><strong>sfa_epsilon</strong> – Threshold for convergence.</p></li>
+<li><p><strong>sfa_norm_trans</strong> – Specifies whether to normalise the transformation matrix</p></li>
+<li><p><strong>sfa_regular</strong> – Specifies whether to regularise the transformation matrix</p></li>
+<li><p><strong>base_img_no_data</strong> – Optionally specified nodata value for the base image</p></li>
+<li><p><strong>chng_img_no_data</strong> – Optionally specified nodata value for the change image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.changedetect.imgchngmthds.multivariate_alteration_detection">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.changedetect.imgchngmthds.</span></span><span class="sig-name descname"><span class="pre">multivariate_alteration_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_base_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_dist_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_chng_mads_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vld_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_base_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_chng_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mad_max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mad_epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_kmeans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chng_img_no_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.changedetect.imgchngmthds.multivariate_alteration_detection" title="Link to this definition"></a></dt>
+<dd><p>A function which performs Multivariate Alteration Detection (MAD) between
+two images. The two images must have exactly the extent, resolution and
+image size (width and height). MAD is a change detection algorithm based
+on canonical correlation analysis (CCA) that aims to maximize the variance
+of projection feature difference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_base_img</strong> – The input base image file path</p></li>
+<li><p><strong>in_chng_img</strong> – The input change image file path</p></li>
+<li><p><strong>out_chng_img</strong> – Output binary change image file path</p></li>
+<li><p><strong>out_chng_dist_img</strong> – Output change distance image file path</p></li>
+<li><p><strong>out_chng_mads_img</strong> – Output change MADs variates image file path</p></li>
+<li><p><strong>gdalformat</strong> – Output GDAL image file format</p></li>
+<li><p><strong>apply_std</strong> – Optionally apply standardisation to the input images.</p></li>
+<li><p><strong>img_base_bands</strong> – Optionally specified a list of bands for the base image</p></li>
+<li><p><strong>img_chng_bands</strong> – Optionally specified a list of bands for the change image</p></li>
+<li><p><strong>mad_max_iter</strong> – Maximum number of iterations for the algorithm to converge.</p></li>
+<li><p><strong>mad_epsilon</strong> – Threshold for convergence.</p></li>
+<li><p><strong>base_img_no_data</strong> – The base image no data value.</p></li>
+<li><p><strong>chng_img_no_data</strong> – The change image no data value.</p></li>
+<li><p><strong>base_img_no_data</strong> – Optionally specified nodata value for the base image</p></li>
+<li><p><strong>chng_img_no_data</strong> – Optionally specified nodata value for the change image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib.html" class="btn btn-neutral float-left" title="RSGISLib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_classification.html" class="btn btn-neutral float-right" title="RSGISLib Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

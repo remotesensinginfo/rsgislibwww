@@ -1,0 +1,1010 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Image Segmentation Module &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Timeseries Analysis Module" href="rsgislib_timeseries.html" />
+    <link rel="prev" title="RSGISLib Regression Module" href="rsgislib_regression.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Image Segmentation Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.shepherdseg.run_shepherd_segmentation"><code class="docutils literal notranslate"><span class="pre">run_shepherd_segmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.tiledsegsingle.perform_tiled_segmentation"><code class="docutils literal notranslate"><span class="pre">perform_tiled_segmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.shepherdseg.run_shepherd_segmentation_pre_calcd_stats"><code class="docutils literal notranslate"><span class="pre">run_shepherd_segmentation_pre_calcd_stats()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#clump">Clump</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.clump"><code class="docutils literal notranslate"><span class="pre">clump()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.tiledclump.perform_clumping_single_thread"><code class="docutils literal notranslate"><span class="pre">perform_clumping_single_thread()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.tiledclump.perform_clumping_multi_process"><code class="docutils literal notranslate"><span class="pre">perform_clumping_multi_process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#label">Label</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.label_pixels_from_cluster_centres"><code class="docutils literal notranslate"><span class="pre">label_pixels_from_cluster_centres()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.relabel_clumps"><code class="docutils literal notranslate"><span class="pre">relabel_clumps()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#elimination">Elimination</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.eliminate_single_pixels"><code class="docutils literal notranslate"><span class="pre">eliminate_single_pixels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.rm_small_clumps"><code class="docutils literal notranslate"><span class="pre">rm_small_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.rm_small_clumps_stepwise"><code class="docutils literal notranslate"><span class="pre">rm_small_clumps_stepwise()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#join-union">Join / Union</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.union_of_clumps"><code class="docutils literal notranslate"><span class="pre">union_of_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.tiledclump.perform_union_clumping_single_thread"><code class="docutils literal notranslate"><span class="pre">perform_union_clumping_single_thread()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.tiledclump.perform_union_clumping_multi_process"><code class="docutils literal notranslate"><span class="pre">perform_union_clumping_multi_process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#visualisation">Visualisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.mean_image"><code class="docutils literal notranslate"><span class="pre">mean_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tiles">Tiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.merge_segmentation_tiles"><code class="docutils literal notranslate"><span class="pre">merge_segmentation_tiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rsgislib.segmentation.skimgseg">scikit-image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.skimgseg.perform_felsenszwalb_segmentation"><code class="docutils literal notranslate"><span class="pre">perform_felsenszwalb_segmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.skimgseg.perform_quickshift_segmentation"><code class="docutils literal notranslate"><span class="pre">perform_quickshift_segmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.skimgseg.perform_random_walker_segmentation"><code class="docutils literal notranslate"><span class="pre">perform_random_walker_segmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.skimgseg.perform_slic_segmentation"><code class="docutils literal notranslate"><span class="pre">perform_slic_segmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.skimgseg.perform_watershed_segmentation"><code class="docutils literal notranslate"><span class="pre">perform_watershed_segmentation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#other">Other</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.generate_regular_grid"><code class="docutils literal notranslate"><span class="pre">generate_regular_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.drop_selected_clumps"><code class="docutils literal notranslate"><span class="pre">drop_selected_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.find_tile_borders_mask"><code class="docutils literal notranslate"><span class="pre">find_tile_borders_mask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.include_regions_in_clumps"><code class="docutils literal notranslate"><span class="pre">include_regions_in_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.merge_clump_images"><code class="docutils literal notranslate"><span class="pre">merge_clump_images()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.merge_equiv_clumps"><code class="docutils literal notranslate"><span class="pre">merge_equiv_clumps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.segmentation.merge_segments_to_neighbours"><code class="docutils literal notranslate"><span class="pre">merge_segments_to_neighbours()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Image Segmentation Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-image-segmentation-module">
+<h1>RSGISLib Image Segmentation Module<a class="headerlink" href="#rsgislib-image-segmentation-module" title="Link to this heading"></a></h1>
+<p>Commands to perform a series of segmentations on input imagery</p>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.shepherdseg.run_shepherd_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.shepherdseg.</span></span><span class="sig-name descname"><span class="pre">run_shepherd_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_mean_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_stretch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_delete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_n_pxls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_thres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">km_max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_in_mem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_process_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stretch_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmeans_centres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stats_json_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.shepherdseg.run_shepherd_segmentation" title="Link to this definition"></a></dt>
+<dd><p>Utility function to call the segmentation algorithm of Shepherd et al. (2019).</p>
+<p>Shepherd, J. D., Bunting, P., &amp; Dymond, J. R. (2019). Operational Large-Scale
+Segmentation of Imagery Based on Iterative Elimination. Remote Sensing, 11(6), 658.
+<a class="reference external" href="http://doi.org/10.3390/rs11060658">http://doi.org/10.3390/rs11060658</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file.</p></li>
+<li><p><strong>out_clumps_img</strong> – is a string containing the name of the output clump file.</p></li>
+<li><p><strong>out_mean_img</strong> – is the output mean image file (clumps attributed with pixel
+mean from input image) - pass ‘None’ to skip creating.</p></li>
+<li><p><strong>tmp_dir</strong> – is a file path for intermediate files (default is current
+directory).</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file
+(default = KEA).</p></li>
+<li><p><strong>calc_stats</strong> – is a bool which specifies that image statistics and pyramids
+should be built for the output images (default = True)</p></li>
+<li><p><strong>no_stretch</strong> – is a bool which specifies that the input image bands should
+not be stretched (default = False).</p></li>
+<li><p><strong>no_delete</strong> – is a bool which specifies that the temporary images created
+during processing should not be deleted once processing has
+been completed (default = False).</p></li>
+<li><p><strong>num_clusters</strong> – is an int which specifies the number of clusters within the
+KMeans clustering (default = 60).</p></li>
+<li><p><strong>min_n_pxls</strong> – is an int which specifies the minimum number pixels within a
+segments (default = 100).</p></li>
+<li><p><strong>dist_thres</strong> – specifies the distance threshold for joining the segments
+(default = 100, set to large number to turn off this option).</p></li>
+<li><p><strong>bands</strong> – is an array providing a subset of image bands to use (default
+is None to use all bands).</p></li>
+<li><p><strong>sampling</strong> – specify the subsampling of the image for the data used within
+the KMeans (default = 100; 1 == no subsampling).</p></li>
+<li><p><strong>km_max_iter</strong> – maximum iterations for KMeans.</p></li>
+<li><p><strong>process_in_mem</strong> – where functions allow it perform processing in memory
+rather than on disk.</p></li>
+<li><p><strong>save_process_stats</strong> – is a bool which specifies that the image stretch
+stats and the kMeans centre stats should be saved
+along with a header.</p></li>
+<li><p><strong>img_stretch_stats</strong> – is a string providing the file name and path for the
+image stretch stats (Output).</p></li>
+<li><p><strong>kmeans_centres</strong> – is a string providing the file name and path for the
+KMeans clusters centres (don’t include file extension;
+.gmtxt will be added to the end) (Output).</p></li>
+<li><p><strong>img_stats_json_file</strong> – is a string providing the name and path of a JSON
+file storing the image spatial extent and
+img_stretch_stats and kmeans_centres file paths
+for use by other commands (Output).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">shepherdseg</span>
+
+<span class="n">input_img</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack.kea&#39;</span>
+<span class="n">out_clumps_img</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack_clumps_elim_final.kea&#39;</span>
+<span class="n">out_mean_img</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack_clumps_elim_final_mean.kea&#39;</span>
+
+<span class="n">shepherdseg</span><span class="o">.</span><span class="n">run_shepherd_segmentation</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">out_clumps_img</span><span class="p">,</span>
+                                      <span class="n">out_mean_img</span><span class="p">,</span> <span class="n">min_n_pxls</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.tiledsegsingle.perform_tiled_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.tiledsegsingle.</span></span><span class="sig-name descname"><span class="pre">perform_tiled_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'segtmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_data_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_pxls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_thres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">km_max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.tiledsegsingle.perform_tiled_segmentation" title="Link to this definition"></a></dt>
+<dd><p>Utility function to call the segmentation algorithm of Shepherd et al. (2019) using the tiled process outlined in Clewley et al (2015).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file.</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the output clump file.</p></li>
+<li><p><strong>tmpath</strong> – is a file path for intermediate files (default is to create a directory ‘segtmp’). If path does current not exist then it will be created and deleted afterwards.</p></li>
+<li><p><strong>tile_width</strong> – is an int specifying the width of the tiles used for processing (Default 2000)</p></li>
+<li><p><strong>tile_height</strong> – is an int specifying the height of the tiles used for processing (Default 2000)</p></li>
+<li><p><strong>valid_data_threshold</strong> – is a float (value between 0 - 1) used to specify the amount of valid image pixels (i.e., not a no data value of zero) are within a tile. Tiles failing to meet this threshold are merged with ones which do (Default 0.3).</p></li>
+<li><p><strong>num_clusters</strong> – is an int which specifies the number of clusters within the KMeans clustering (default = 60).</p></li>
+<li><p><strong>min_pxls</strong> – is an int which specifies the minimum number pixels within a segments (default = 100).</p></li>
+<li><p><strong>dist_thres</strong> – specifies the distance threshold for joining the segments (default = 100, set to large number to turn off this option).</p></li>
+<li><p><strong>bands</strong> – is an array providing a subset of image bands to use (default is None to use all bands).</p></li>
+<li><p><strong>sampling</strong> – specify the subsampling of the image for the data used within the KMeans (default = 100; 1 == no subsampling).</p></li>
+<li><p><strong>km_max_iter</strong> – maximum iterations for KMeans (Default 200).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">tiledsegsingle</span>
+
+<span class="n">inputImage</span> <span class="o">=</span> <span class="s1">&#39;LS5TM_20110428_sref_submask_osgb.kea&#39;</span>
+<span class="n">clumpsImage</span> <span class="o">=</span> <span class="s1">&#39;LS5TM_20110428_sref_submask_osgb_clumps.kea&#39;</span>
+
+<span class="n">tiledsegsingle</span><span class="o">.</span><span class="n">perform_tiled_segmentation</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">clumpsImage</span><span class="p">,</span> <span class="n">tmpDIR</span><span class="o">=</span><span class="s1">&#39;rsgislibsegtmp&#39;</span><span class="p">,</span> <span class="n">tileWidth</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tileHeight</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">validDataThreshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">numClusters</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">minPxls</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">distThres</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">sampling</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kmMaxIter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.shepherdseg.run_shepherd_segmentation_pre_calcd_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.shepherdseg.</span></span><span class="sig-name descname"><span class="pre">run_shepherd_segmentation_pre_calcd_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmeans_centres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stretch_stats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_mean_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_stretch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_delete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_n_pxls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_thres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_in_mem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.shepherdseg.run_shepherd_segmentation_pre_calcd_stats" title="Link to this definition"></a></dt>
+<dd><p>Utility function to call the segmentation algorithm of Shepherd et al. (2019)
+using pre-calculated stretch stats and KMeans cluster centres.</p>
+<p>Shepherd, J. D., Bunting, P., &amp; Dymond, J. R. (2019). Operational Large-Scale
+Segmentation of Imagery Based on Iterative Elimination. Remote Sensing, 11(6),
+658. <a class="reference external" href="http://doi.org/10.3390/rs11060658">http://doi.org/10.3390/rs11060658</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file.</p></li>
+<li><p><strong>out_clumps_img</strong> – is a string containing the name of the output clump file.</p></li>
+<li><p><strong>kmeans_centres</strong> – is a string providing the file name and path for the
+KMeans clusters centres (Input)</p></li>
+<li><p><strong>img_stretch_stats</strong> – is a string providing the file name and path for the
+image stretch stats (Input - not required if
+no_stretch=True)</p></li>
+<li><p><strong>out_mean_img</strong> – is the output mean image file (clumps attributed with pixel
+mean from input image) - pass ‘None’ to skip creating.</p></li>
+<li><p><strong>tmp_dir</strong> – is a file path for intermediate files (default is current
+directory).</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file
+(default = KEA).</p></li>
+<li><p><strong>calc_stats</strong> – is a bool which specifies that image statistics and pyramids
+should be built for the output images (default = True)</p></li>
+<li><p><strong>no_stretch</strong> – is a bool which specifies that the input image bands should
+not be stretched (default = False).</p></li>
+<li><p><strong>no_delete</strong> – is a bool which specifies that the temporary images created
+during processing should not be deleted once processing has
+been completed (default = False).</p></li>
+<li><p><strong>min_n_pxls</strong> – is an int which specifies the minimum number pixels within
+a segments (default = 100).</p></li>
+<li><p><strong>dist_thres</strong> – specifies the distance threshold for joining the segments
+(default = 100, set to large number to turn off this option).</p></li>
+<li><p><strong>bands</strong> – is an array providing a subset of image bands to use (default is
+None to use all bands).</p></li>
+<li><p><strong>sampling</strong> – specify the subsampling of the image for the data used within
+the KMeans (default = 100; 1 == no subsampling).</p></li>
+<li><p><strong>process_in_mem</strong> – where functions allow it perform processing in memory
+rather than on disk.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">shepherdseg</span>
+
+<span class="n">input_img</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack.kea&#39;</span>
+<span class="n">out_clumps_img</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack_clumps_elim_final.kea&#39;</span>
+<span class="n">out_mean_img</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack_clumps_elim_final_mean.kea&#39;</span>
+<span class="n">kmeans_centres</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack_kcentres.gmtxt&#39;</span>
+<span class="n">img_stretch_stats</span> <span class="o">=</span> <span class="s1">&#39;jers1palsar_stack_stchstats.txt&#39;</span>
+
+<span class="n">shepherdseg</span><span class="o">.</span><span class="n">run_shepherd_segmentation_pre_calcd_stats</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">out_clumps_img</span><span class="p">,</span>
+                                                      <span class="n">kmeans_centres</span><span class="p">,</span>
+                                                      <span class="n">img_stretch_stats</span><span class="p">,</span>
+                                                      <span class="n">out_mean_img</span><span class="p">,</span>
+                                                      <span class="n">min_n_pxls</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="clump">
+<h2>Clump<a class="headerlink" href="#clump" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.clump">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">clump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_to_rat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.clump" title="Link to this definition"></a></dt>
+<dd><p>A function which clumps an input image (of int pixel data type) to identify connected independent sets of pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>in_memory</strong> – is a bool specifying if processing should be carried out in memory (faster if sufficient RAM is available, set to False if unsure).</p></li>
+<li><p><strong>no_data_val</strong> – is None or float</p></li>
+<li><p><strong>add_to_rat</strong> – is a boolean specifying whether the pixel value (from input_img) should be added as a RAT (Column Name: PixelVal).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.tiledclump.perform_clumping_single_thread">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.tiledclump.</span></span><span class="sig-name descname"><span class="pre">perform_clumping_single_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.tiledclump.perform_clumping_single_thread" title="Link to this definition"></a></dt>
+<dd><p>Clump the input image using a tiled processing chain allowing large images to
+be clumped more quickly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image to be clumped.</p></li>
+<li><p><strong>clumps_img</strong> – the output clumped image.</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where intermediate files will be
+written (default is ‘tmp’). Directory will be created and
+deleted if does not exist.</p></li>
+<li><p><strong>width</strong> – int for width of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>height</strong> – int for height of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>gdalformat</strong> – string with the GDAL image format for the output image
+(Default = KEA). NOTE. KEA is used as intermediate format
+internally and therefore needs to be available.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.tiledclump.perform_clumping_multi_process">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.tiledclump.</span></span><span class="sig-name descname"><span class="pre">perform_clumping_multi_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.tiledclump.perform_clumping_multi_process" title="Link to this definition"></a></dt>
+<dd><p>Clump the input image using a tiled processing chain allowing large images
+to be clumped more quickly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image to be clumped.</p></li>
+<li><p><strong>clumps_img</strong> – the output clumped image.</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where intermediate files will be
+written (default is ‘tmp’). Directory will be created and
+deleted if does not exist.</p></li>
+<li><p><strong>width</strong> – int for width of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>height</strong> – int for height of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>gdalformat</strong> – string with the GDAL image format for the output image
+(Default = KEA). NOTE. KEA is used as intermediate format
+internally and therefore needs to be available.</p></li>
+<li><p><strong>n_cores</strong> – is an int specifying the number of cores to be used for
+clumping processing.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="label">
+<h2>Label<a class="headerlink" href="#label" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.label_pixels_from_cluster_centres">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">label_pixels_from_cluster_centres</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_centres_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_zeros</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.label_pixels_from_cluster_centres" title="Link to this definition"></a></dt>
+<dd><p>Labels image pixels with the ID of the nearest cluster centre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>cluster_centres_file</strong> – is a string containing the name of the cluster centre file</p></li>
+<li><p><strong>ignore_zeros</strong> – zeros is a bool</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.relabel_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">relabel_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_memory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.relabel_clumps" title="Link to this definition"></a></dt>
+<dd><p>Relabel clumps so numbering is consecutive with output gaps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>in_memory</strong> – is a bool specifying if processing should be carried out in memory (faster if sufficient RAM is available, set to False if unsure).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="elimination">
+<h2>Elimination<a class="headerlink" href="#elimination" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.eliminate_single_pixels">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">eliminate_single_pixels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignorezeros</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.eliminate_single_pixels" title="Link to this definition"></a></dt>
+<dd><p>Eliminates single pixels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the clump file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>tmp_img</strong> – is a string containing the name of the temporary file to use</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>in_memory</strong> – is a bool specifying if processing should be carried out in memory (faster if sufficient RAM is available, set to False if unsure).</p></li>
+<li><p><strong>ignore_zeros</strong> – is a bool</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.rm_small_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">rm_small_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.rm_small_clumps" title="Link to this definition"></a></dt>
+<dd><p>A function to remove small clumps and set them with a value of 0 (i.e., no data)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clumps file - note a column called ‘Histogram’.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output clumps file</p></li>
+<li><p><strong>area_threshold</strong> – is a float containing the area threshold (in pixels)</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.rm_small_clumps_stepwise">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">rm_small_clumps_stepwise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_stch_stats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stch_stats_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_clump_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pxl_val_thres</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.rm_small_clumps_stepwise" title="Link to this definition"></a></dt>
+<dd><p>Eliminate clumps smaller than a given size from the scene, small clumps will be combined with their spectrally closest neighbouring  clump in a stepwise fashion unless over spectral distance threshold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the clump file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>use_stch_stats</strong> – is a bool</p></li>
+<li><p><strong>stch_stats_file</strong> – is a string containing the name of the stretch stats file</p></li>
+<li><p><strong>store_mean</strong> – is a bool</p></li>
+<li><p><strong>in_memory</strong> – is a bool specifying if processing should be carried out in memory (faster if sufficient RAM is available, set to False if unsure).</p></li>
+<li><p><strong>min_clump_size</strong> – is an unsigned integer providing the minimum size for clumps.</p></li>
+<li><p><strong>pxl_val_thres</strong> – is a float providing the maximum (Euclidian distance) spectral separation for which to merge clumps. Set to a large value to ignore spectral separation and always merge.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="join-union">
+<h2>Join / Union<a class="headerlink" href="#join-union" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.union_of_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">union_of_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_to_rat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.union_of_clumps" title="Link to this definition"></a></dt>
+<dd><p>The function takes the union of clumps images, combining them so all lines from all clumps are preserved in the new outputted clumps image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – is a list of input image paths</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>no_data_val</strong> – is None or float</p></li>
+<li><p><strong>add_to_rat</strong> – is a boolean specifying whether the pixel values (from input_imgs) should be added as a RAT; column names have prefix ‘<a href="#id1"><span class="problematic" id="id2">ClumpVal_</span></a>’ with index starting at 1 for each variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.tiledclump.perform_union_clumping_single_thread">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.tiledclump.</span></span><span class="sig-name descname"><span class="pre">perform_union_clumping_single_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_ref_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.tiledclump.perform_union_clumping_single_thread" title="Link to this definition"></a></dt>
+<dd><p>Clump and union with the reference image the input image using a tiled processing
+chain allowing large images to be clumped more quickly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image to be clumped.</p></li>
+<li><p><strong>in_ref_img</strong> – the reference image which the union is undertaken with
+(typically an existing classification)</p></li>
+<li><p><strong>clumps_img</strong> – the output clumped image.</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where intermediate files will be written
+(default is ‘tmp’). Directory will be created and deleted if
+does not exist.</p></li>
+<li><p><strong>width</strong> – int for width of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>height</strong> – int for height of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>gdalformat</strong> – string with the GDAL image format for the output image
+(Default = KEA). NOTE. KEA is used as intermediate format
+internally and therefore needs to be available.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.tiledclump.perform_union_clumping_multi_process">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.tiledclump.</span></span><span class="sig-name descname"><span class="pre">perform_union_clumping_multi_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_ref_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.tiledclump.perform_union_clumping_multi_process" title="Link to this definition"></a></dt>
+<dd><p>Clump and union with the reference image the input image using a tiled
+processing chain allowing large images to be clumped more quickly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the input image to be clumped.</p></li>
+<li><p><strong>in_ref_img</strong> – the reference image which the union is undertaken
+with (typically an existing classification)</p></li>
+<li><p><strong>clumps_img</strong> – the output clumped image.</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where intermediate files will be
+written (default is ‘tmp’). Directory will be created and
+deleted if does not exist.</p></li>
+<li><p><strong>width</strong> – int for width of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>height</strong> – int for height of the image tiles used for
+processing (Default = 2000).</p></li>
+<li><p><strong>gdalformat</strong> – string with the GDAL image format for the output image
+(Default = KEA). NOTE. KEA is used as intermediate format
+internally and therefore needs to be available.</p></li>
+<li><p><strong>n_cores</strong> – is an int specifying the number of cores to be used for
+clumping processing.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="visualisation">
+<h2>Visualisation<a class="headerlink" href="#visualisation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.mean_image">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">mean_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.mean_image" title="Link to this definition"></a></dt>
+<dd><p>A function to generate an image where with the mean value for each clump. Primarily for visualisation and evaluating segmentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file from which the mean is taken.</p></li>
+<li><p><strong>clumps_img</strong> – is a string containing the name of the input clumps file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image.</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="tiles">
+<h2>Tiles<a class="headerlink" href="#tiles" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.merge_segmentation_tiles">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">merge_segmentation_tiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_boundary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_overlap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.merge_segmentation_tiles" title="Link to this definition"></a></dt>
+<dd><p>Merge body clumps from tile segmentations into output file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – is a list of input image paths</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>border_msk_img</strong> – is a string containing the name of the border mask file</p></li>
+<li><p><strong>tile_boundary</strong> – is an unsigned integer containing the tile boundary pixel value</p></li>
+<li><p><strong>tile_overlap</strong> – is an unsigned integer containing the tile overlap pixel value</p></li>
+<li><p><strong>tile_body</strong> – is an unsigned integer containing the tile body pixel value</p></li>
+<li><p><strong>col_name</strong> – is a string containing the name of the object id column</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-rsgislib.segmentation.skimgseg">
+<span id="scikit-image"></span><h2>scikit-image<a class="headerlink" href="#module-rsgislib.segmentation.skimgseg" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.skimgseg.perform_felsenszwalb_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.skimgseg.</span></span><span class="sig-name descname"><span class="pre">perform_felsenszwalb_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pca_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_pxl_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.skimgseg.perform_felsenszwalb_segmentation" title="Link to this definition"></a></dt>
+<dd><p>A function to perform the Felsenszwalb segmentation algorithm from the
+scikit-image library
+(<a class="reference external" href="http://scikit-image.org/docs/stable/api/skimage.segmentation.html">http://scikit-image.org/docs/stable/api/skimage.segmentation.html</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>tmp_dir</strong> – temp DIR used to output PCA files</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image
+pyramids - note if you are not using a KEA file then the
+format needs to support RATs for this option as histogram
+and colour table are written to RAT.</p></li>
+<li><p><strong>use_pca</strong> – if there are not 1 or 3 image bands in the input file then
+you can use PCA to reduce the number of image bands.</p></li>
+<li><p><strong>n_pca_bands</strong> – the number of principle components outputs from the
+PCA - needs to be either 1 or 3.</p></li>
+<li><p><strong>scale</strong> – scikit-image Felsenszwalb parameter: ‘Free parameter.
+Higher means larger clusters.’</p></li>
+<li><p><strong>sigma</strong> – scikit-image Felsenszwalb parameter: ‘Width of Gaussian
+kernel used in preprocessing.’</p></li>
+<li><p><strong>min_size</strong> – scikit-image Felsenszwalb parameter: ‘Minimum component
+size. Enforced using postprocessing.’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.skimgseg.perform_quickshift_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.skimgseg.</span></span><span class="sig-name descname"><span class="pre">perform_quickshift_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_pxl_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_to_lab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.skimgseg.perform_quickshift_segmentation" title="Link to this definition"></a></dt>
+<dd><p>A function to perform the quickshift segmentation algorithm from the
+scikit-image library
+(<a class="reference external" href="http://scikit-image.org/docs/stable/api/skimage.segmentation.html">http://scikit-image.org/docs/stable/api/skimage.segmentation.html</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>tmp_dir</strong> – temp DIR used to output PCA files</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image
+pyramids - note if you are not using a KEA file then the
+format needs to support RATs for this option as histogram
+and colour table are written to RAT.</p></li>
+<li><p><strong>use_pca</strong> – if there are not 3 image bands in the input file then you can
+use PCA to reduce the number of image bands.</p></li>
+<li><p><strong>ratio</strong> – scikit-image Quickshift parameter: ‘Balances color-space proximity
+and image-space proximity. Higher values give more weight to
+color-space. (between 0 and 1)’</p></li>
+<li><p><strong>kernel_size</strong> – scikit-image Quickshift parameter: ‘Width of Gaussian kernel
+used in smoothing the sample density. Higher means
+fewer clusters.’</p></li>
+<li><p><strong>max_dist</strong> – scikit-image Quickshift parameter: ‘Cut-off point for
+data distances. Higher means fewer clusters.’</p></li>
+<li><p><strong>sigma</strong> – scikit-image Quickshift parameter: ‘Width for Gaussian
+smoothing as preprocessing. Zero means no smoothing.’</p></li>
+<li><p><strong>convert_to_lab</strong> – scikit-image Quickshift parameter: ‘Whether the input
+should be converted to Lab colorspace prior to segmentation.
+For this purpose, the input is assumed to be RGB.’</p></li>
+<li><p><strong>random_seed</strong> – scikit-image Quickshift parameter: ‘Random seed used
+for breaking ties.’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.skimgseg.perform_random_walker_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.skimgseg.</span></span><span class="sig-name descname"><span class="pre">perform_random_walker_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_markers_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pca_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_pxl_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">130</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.skimgseg.perform_random_walker_segmentation" title="Link to this definition"></a></dt>
+<dd><p>A function to perform the random walker segmentation algorithm from the
+scikit-image library
+(<a class="reference external" href="http://scikit-image.org/docs/stable/api/skimage.segmentation.html">http://scikit-image.org/docs/stable/api/skimage.segmentation.html</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>in_markers_img</strong> – input markers image file - markers must be uniquely numbered.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>tmp_dir</strong> – temp DIR used to output PCA files</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image
+pyramids - note if you are not using a KEA file then the format
+needs to support RATs for this option as histogram and colour
+table are written to RAT.</p></li>
+<li><p><strong>use_pca</strong> – if there are not 1 or 3 image bands in the input file then you
+can use PCA to reduce the number of image bands.</p></li>
+<li><p><strong>n_pca_bands</strong> – the number of principle components outputs from the
+PCA - needs to be either 1 or 3.</p></li>
+<li><p><strong>beta</strong> – scikit-image random_walker parameter: ‘Penalization coefficient for
+the random walker motion (the greater beta, the more difficult
+the diffusion).’</p></li>
+<li><p><strong>mode</strong> – <dl class="simple">
+<dt>scikit-image random_walker parameter: ‘Mode for solving the linear</dt><dd><p>system in the random walker algorithm. Available options
+{‘cg_mg’, ‘cg’, ‘bf’}.’</p>
+</dd>
+</dl>
+<ul>
+<li><dl class="simple">
+<dt>’bf’ (brute force): an LU factorization of the Laplacian is computed.</dt><dd><p>This is fast for small images (&lt;1024x1024), but very slow and
+memory-intensive for large images (e.g., 3-D volumes).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’cg’ (conjugate gradient): the linear system is solved iteratively</dt><dd><p>using the Conjugate Gradient method from scipy.sparse.linalg. This is
+less memory-consuming than the brute force method for large images,
+but it is quite slow.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’cg_mg’ (conjugate gradient with multigrid preconditioner): a</dt><dd><p>preconditioner is computed using a multigrid solver, then the
+solution is computed with the Conjugate Gradient method. This mode
+requires that the pyamg module (<a class="reference external" href="http://pyamg.org/">http://pyamg.org/</a>) is installed. For
+images of size &gt; 512x512, this is the recommended (fastest) mode.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>tol</strong> – scikit-image random_walker parameter: ‘tolerance to achieve when
+solving the linear system, in cg’ and ‘cg_mg’ modes.’</p></li>
+<li><p><strong>spacing</strong> – scikit-image random_walker parameter: ‘Spacing between voxels
+in each spatial dimension. If None, then the spacing between
+pixels/voxels in each dimension is assumed 1.’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.skimgseg.perform_slic_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.skimgseg.</span></span><span class="sig-name descname"><span class="pre">perform_slic_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pca_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_pxl_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_segments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compactness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_to_lab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_connectivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_size_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slic_zero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.skimgseg.perform_slic_segmentation" title="Link to this definition"></a></dt>
+<dd><p>A function to perform the slic segmentation algorithm from the
+scikit-image library
+(<a class="reference external" href="http://scikit-image.org/docs/stable/api/skimage.segmentation.html">http://scikit-image.org/docs/stable/api/skimage.segmentation.html</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>tmp_dir</strong> – temp DIR used to output PCA files</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image
+pyramids - note if you are not using a KEA file then the
+format needs to support RATs for this option as histogram
+and colour table are written to RAT.</p></li>
+<li><p><strong>use_pca</strong> – if there are not 1 or 3 image bands in the input file then
+you can use PCA to reduce the number of image bands.</p></li>
+<li><p><strong>n_pca_bands</strong> – the number of principle components outputs from the
+PCA - needs to be either 1 or 3.</p></li>
+<li><p><strong>n_segments</strong> – scikit-image Slic parameter: ‘The (approximate) number
+of labels in the segmented output image.’</p></li>
+<li><p><strong>compactness</strong> – scikit-image Slic parameter: ‘Balances color proximity
+and space proximity. Higher values give more weight to space
+proximity, making superpixel shapes more square/cubic. In
+SLICO mode, this is the initial compactness. This parameter
+depends strongly on image contrast and on the shapes of
+objects in the image. We recommend exploring possible values
+on a log scale, e.g., 0.01, 0.1, 1, 10, 100, before refining
+around a chosen value.’</p></li>
+<li><p><strong>max_iter</strong> – scikit-image Slic parameter: ‘Maximum number of iterations
+of k-means.’</p></li>
+<li><p><strong>sigma</strong> – scikit-image Slic parameter: ‘Width of Gaussian smoothing kernel
+for pre-processing for each dimension of the image. The same sigma
+is applied to each dimension in case of a scalar value. Zero means
+no smoothing. Note, that sigma is automatically scaled if it is
+scalar and a manual voxel spacing is provided (see Notes section).’</p></li>
+<li><p><strong>spacing</strong> – scikit-image Slic parameter: ‘The voxel spacing along each image
+dimension. By default, slic assumes uniform spacing (same voxel
+resolution along z, y and x). This parameter controls the weights
+of the distances along z, y, and x during k-means clustering.’</p></li>
+<li><p><strong>convert_to_lab</strong> – scikit-image Slic parameter: ‘Whether the input should be
+converted to Lab colorspace prior to segmentation. The
+input image must be RGB. Highly recommended.’</p></li>
+<li><p><strong>enforce_connectivity</strong> – scikit-image Slic parameter: ‘Whether the generated
+segments are connected or not’</p></li>
+<li><p><strong>min_size_factor</strong> – scikit-image Slic parameter: ‘Proportion of the minimum
+segment size to be removed with respect to the supposed
+segment size “depth:paramwidth*height/n_segments”’</p></li>
+<li><p><strong>max_size_factor</strong> – scikit-image Slic parameter: ‘Proportion of the maximum
+connected segment size. A value of 3 works in most of
+the cases.’</p></li>
+<li><p><strong>slic_zero</strong> – scikit-image Slic parameter: ‘Run SLIC-zero, the zero-parameter
+mode of SLIC.’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.skimgseg.perform_watershed_segmentation">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.skimgseg.</span></span><span class="sig-name descname"><span class="pre">perform_watershed_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_markers_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_pca_bands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_pxl_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compactness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">watershed_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.skimgseg.perform_watershed_segmentation" title="Link to this definition"></a></dt>
+<dd><p>A function to perform the watershed segmentation algorithm from the
+scikit-image library
+(<a class="reference external" href="http://scikit-image.org/docs/stable/api/skimage.segmentation.html">http://scikit-image.org/docs/stable/api/skimage.segmentation.html</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>in_markers_img</strong> – input markers image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>tmp_dir</strong> – temp DIR used to output PCA files</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image
+pyramids - note if you are not using a KEA file then the
+format needs to support RATs for this option as histogram
+and colour table are written to RAT.</p></li>
+<li><p><strong>use_pca</strong> – if there are not 1 or 3 image bands in the input file then you
+can use PCA to reduce the number of image bands.</p></li>
+<li><p><strong>n_pca_bands</strong> – the number of principle components outputs from the
+PCA - needs to be either 1 or 3.</p></li>
+<li><p><strong>compactness</strong> – scikit-image Watershed parameter: ‘Use compact watershed
+with given compactness parameter. Higher values result in
+more regularly-shaped watershed basins; Peer Neubert &amp; Peter
+Protzel (2014). Compact Watershed and Preemptive SLIC: On
+Improving Trade-offs of Superpixel Segmentation
+Algorithms. ICPR 2014’</p></li>
+<li><p><strong>watershed_line</strong> – scikit-image Watershed parameter: ‘If watershed_line is
+True, a one-pixel wide line separates the regions obtained
+by the watershed algorithm. The line has the label 0.’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="other">
+<h2>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.generate_regular_grid">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">generate_regular_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_x_pxls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_y_pxls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.generate_regular_grid" title="Link to this definition"></a></dt>
+<dd><p>A function to generate an image where with the mean value for each clump. Primarily for visualisation and evaluating segmentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file specifying the dimensions of the output image.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output clumps image</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+<li><p><strong>num_x_pxls</strong> – is the size of the grid cells in the X axis in pixel units.</p></li>
+<li><p><strong>num_y_pxls</strong> – is the size of the grid cells in the Y axis in pixel units.</p></li>
+<li><p><strong>offset</strong> – is a boolean specifying whether the grid should be offset, i.e., starts half way point of numXPxls and numYPxls (Default is false; optional)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.drop_selected_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">drop_selected_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sel_clumps_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.drop_selected_clumps" title="Link to this definition"></a></dt>
+<dd><p>A function to drop the selected clumps from the segmentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the filepath for the input clumps image.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output clumps image</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+<li><p><strong>sel_clumps_col</strong> – is a string defining the binary column for defining the segments to be merged (1 == selected clumps).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.find_tile_borders_mask">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">find_tile_borders_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_boundary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_overlap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.find_tile_borders_mask" title="Link to this definition"></a></dt>
+<dd><p>Mask tile borders</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – is a list of input clump image paths</p></li>
+<li><p><strong>border_msk_img</strong> – is a string containing the name of the border mask file</p></li>
+<li><p><strong>tile_boundary</strong> – is an unsigned integer containing the tile boundary pixel value</p></li>
+<li><p><strong>tile_overlap</strong> – is an unsigned integer containing the tile overlap pixel value</p></li>
+<li><p><strong>tile_body</strong> – is an unsigned integer containing the tile body pixel value</p></li>
+<li><p><strong>col_name</strong> – is a string containing the name of the object id column</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.include_regions_in_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">include_regions_in_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regions_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.include_regions_in_clumps" title="Link to this definition"></a></dt>
+<dd><p>A function to include a set of clumped regions within an existing clumps (i.e., segmentation) image.
+NOTE. You should run the relabel_clumps function on the output of this command before using further.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the filepath for the input clumps image.</p></li>
+<li><p><strong>regions_img</strong> – is a string containing the filepath for the input regions image.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output clumps image</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.merge_clump_images">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">merge_clump_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_rats</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.merge_clump_images" title="Link to this definition"></a></dt>
+<dd><p>Merge all clumps from tile segmentations into output file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – is a list of input image paths</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>merge_rats</strong> – is a boolean specifying with the image RATs are to merged (Default: false; Optional)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.merge_equiv_clumps">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">merge_equiv_clumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.merge_equiv_clumps" title="Link to this definition"></a></dt>
+<dd><p>A function to merge neighbouring clumps which have the same value - for example when merging across tile boundaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the filepath for the input clumps image.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output clumps image</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+<li><p><strong>val_columns</strong> – is a list of strings defining the value(s) used to define equivalence (typically it might be the original pixel values when clumping through tiling).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.segmentation.merge_segments_to_neighbours">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.segmentation.</span></span><span class="sig-name descname"><span class="pre">merge_segments_to_neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_vals_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sel_clumps_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_clumps_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.segmentation.merge_segments_to_neighbours" title="Link to this definition"></a></dt>
+<dd><p>A function to merge some selected clumps with the neighbours based on colour (spectral) distance where clumps identified as no data are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is a string containing the filepath for the input clumps image.</p></li>
+<li><p><strong>input_vals_img</strong> – is a string containing the filepath for the input image used to define ‘distance’.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output clumps image</p></li>
+<li><p><strong>gdalformat</strong> – is a string defining the format of the output image.</p></li>
+<li><p><strong>sel_clumps_col</strong> – is a string defining the binary column for defining the segments to be merged (1 == selected clumps).</p></li>
+<li><p><strong>no_data_clumps_col</strong> – is a string defining the binary column for defining the segments to be ignored as no data (1 == no-data clumps).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_regression.html" class="btn btn-neutral float-left" title="RSGISLib Regression Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_timeseries.html" class="btn btn-neutral float-right" title="RSGISLib Timeseries Analysis Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1126 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Data Sources &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Drone Utilities" href="rsgislib_droneutils.html" />
+    <link rel="prev" title="RSGISLib Imbalanced Classification Utilities" href="rsgislib_classification_classimblearn.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Data Sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#usgs-earth-explorer">USGS Earth Explorer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.usgs_login"><code class="docutils literal notranslate"><span class="pre">usgs_login()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.usgs_logout"><code class="docutils literal notranslate"><span class="pre">usgs_logout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.can_user_dwnld"><code class="docutils literal notranslate"><span class="pre">can_user_dwnld()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.can_user_order"><code class="docutils literal notranslate"><span class="pre">can_user_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.get_wrs_pt"><code class="docutils literal notranslate"><span class="pre">get_wrs_pt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.get_wrs_bbox"><code class="docutils literal notranslate"><span class="pre">get_wrs_bbox()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.usgs_search"><code class="docutils literal notranslate"><span class="pre">usgs_search()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.get_all_usgs_search"><code class="docutils literal notranslate"><span class="pre">get_all_usgs_search()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.get_download_ids"><code class="docutils literal notranslate"><span class="pre">get_download_ids()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.create_scene_list"><code class="docutils literal notranslate"><span class="pre">create_scene_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.remove_scene_list"><code class="docutils literal notranslate"><span class="pre">remove_scene_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.check_dwnld_opts"><code class="docutils literal notranslate"><span class="pre">check_dwnld_opts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.usgs_m2m.request_downloads"><code class="docutils literal notranslate"><span class="pre">request_downloads()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nasa-common-metadata-repository">NASA Common Metadata Repository</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.get_prods_info"><code class="docutils literal notranslate"><span class="pre">get_prods_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.check_prod_version_avail"><code class="docutils literal notranslate"><span class="pre">check_prod_version_avail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.get_max_prod_version"><code class="docutils literal notranslate"><span class="pre">get_max_prod_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.find_granules"><code class="docutils literal notranslate"><span class="pre">find_granules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.find_all_granules"><code class="docutils literal notranslate"><span class="pre">find_all_granules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.get_total_file_size"><code class="docutils literal notranslate"><span class="pre">get_total_file_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.cmr_download_file_http"><code class="docutils literal notranslate"><span class="pre">cmr_download_file_http()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.create_cmr_dwnld_db"><code class="docutils literal notranslate"><span class="pre">create_cmr_dwnld_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.nasa_cmr.download_granules_use_dwnld_db"><code class="docutils literal notranslate"><span class="pre">download_granules_use_dwnld_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#copernicus-data-space-ecosystem">Copernicus Data Space Ecosystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.copernicus_odata.get_access_token"><code class="docutils literal notranslate"><span class="pre">get_access_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.copernicus_odata.query_scn"><code class="docutils literal notranslate"><span class="pre">query_scn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.copernicus_odata.query_scn_lst"><code class="docutils literal notranslate"><span class="pre">query_scn_lst()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.copernicus_odata.download_scn"><code class="docutils literal notranslate"><span class="pre">download_scn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.copernicus_odata.download_scns"><code class="docutils literal notranslate"><span class="pre">download_scns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.copernicus_odata.get_sensor_collection_name"><code class="docutils literal notranslate"><span class="pre">get_sensor_collection_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#planet-data">Planet Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.planet_auth"><code class="docutils literal notranslate"><span class="pre">planet_auth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.run_search_planet_items"><code class="docutils literal notranslate"><span class="pre">run_search_planet_items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.run_create_planet_order"><code class="docutils literal notranslate"><span class="pre">run_create_planet_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.run_download_planet_order"><code class="docutils literal notranslate"><span class="pre">run_download_planet_order()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.run_get_planet_orders"><code class="docutils literal notranslate"><span class="pre">run_get_planet_orders()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.run_cancel_planet_orders"><code class="docutils literal notranslate"><span class="pre">run_cancel_planet_orders()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.run_download_and_validate_item"><code class="docutils literal notranslate"><span class="pre">run_download_and_validate_item()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.get_item_type_str"><code class="docutils literal notranslate"><span class="pre">get_item_type_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.get_asset_type_str"><code class="docutils literal notranslate"><span class="pre">get_asset_type_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.planet_data_api.get_bundle_type_str"><code class="docutils literal notranslate"><span class="pre">get_bundle_type_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-street-map-osm">Open Street Map (OSM)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.openstreetmap.get_osm_to_file"><code class="docutils literal notranslate"><span class="pre">get_osm_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.openstreetmap.get_osm_multi_to_file"><code class="docutils literal notranslate"><span class="pre">get_osm_multi_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.dataaccess.openstreetmap.get_osm_gdf"><code class="docutils literal notranslate"><span class="pre">get_osm_gdf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Data Sources</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-data-sources">
+<h1>RSGISLib Data Sources<a class="headerlink" href="#rsgislib-data-sources" title="Link to this heading"></a></h1>
+<p>This module has functions to help with searching for and downloading data.
+Tutorials showing how to use these functions available <a class="reference external" href="https://github.com/remotesensinginfo/rsgislib-tutorials/tree/main/11_download_datasets">here</a></p>
+<section id="usgs-earth-explorer">
+<h2>USGS Earth Explorer<a class="headerlink" href="#usgs-earth-explorer" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.usgs_login">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">usgs_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.usgs_login" title="Link to this definition"></a></dt>
+<dd><p>A function to login to the USGS m2m service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – Your username for USGS EarthExplorer. If RSGIS_USGS_USER
+environmental variable is specified then username will
+read from there is None is passed (Default: None)</p></li>
+<li><p><strong>password</strong> – Your password for USGS EarthExplorer. If RSGIS_USGS_PASS
+environmental variable is specified then password will
+read from there is None is passed (Default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the API key for the USGS session.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.usgs_logout">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">usgs_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.usgs_logout" title="Link to this definition"></a></dt>
+<dd><p>Log out of the USGS m2m system using the api_key created at login.
+:param api_key: The API key created at login to authenticate.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.can_user_dwnld">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">can_user_dwnld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.can_user_dwnld" title="Link to this definition"></a></dt>
+<dd><p>Does the user logged in with the api_key have permission to download data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api_key</strong> – The API key created at login to authenticate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean - True does have permission.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.can_user_order">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">can_user_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.can_user_order" title="Link to this definition"></a></dt>
+<dd><p>Does the user logged in with the api_key have permission to order data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api_key</strong> – The API key created at login to authenticate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean - True does have permission.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.get_wrs_pt">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">get_wrs_pt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.get_wrs_pt" title="Link to this definition"></a></dt>
+<dd><p>Get a point for the WRS row/path which can be used for a query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – The API key created at login to authenticate.</p></li>
+<li><p><strong>row</strong> – integer for row</p></li>
+<li><p><strong>path</strong> – integer for path</p></li>
+<li><p><strong>grid_version</strong> – Whether the row/path is WRS1 or WRS2. Default: WRS2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>longitude, latitude</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.get_wrs_bbox">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">get_wrs_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.get_wrs_bbox" title="Link to this definition"></a></dt>
+<dd><p>Get a bbox for the WRS row/path which can be used for a query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – The API key created at login to authenticate.</p></li>
+<li><p><strong>row</strong> – integer for row</p></li>
+<li><p><strong>path</strong> – integer for path</p></li>
+<li><p><strong>grid_version</strong> – Whether the row/path is WRS1 or WRS2. Default: WRS2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>BBOX in lon/lat (x_min, x_max, y_min, y_max)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.usgs_search">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">usgs_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poly_geom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">months</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_rslts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.usgs_search" title="Link to this definition"></a></dt>
+<dd><p>A function to search for landsat imagery from the USGS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – The name of the dataset to query.</p></li>
+<li><p><strong>api_key</strong> – The API key created at login to authenticate.</p></li>
+<li><p><strong>start_date</strong> – Start date as a datetime object. (Earlier date)</p></li>
+<li><p><strong>end_date</strong> – End date as a datetime object. (Later date)</p></li>
+<li><p><strong>cloud_min</strong> – Minimum cloud cover (Default: 0)</p></li>
+<li><p><strong>cloud_max</strong> – Maximum cloud cover.</p></li>
+<li><p><strong>bbox</strong> – (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>pt</strong> – (X, Y)</p></li>
+<li><p><strong>poly_geom</strong> – NOT IMPLEMENTED YET!</p></li>
+<li><p><strong>months</strong> – List of months as ints (1-12) you want to limit the search for.</p></li>
+<li><p><strong>full_meta</strong> – Full metadata returned (Default: False)</p></li>
+<li><p><strong>max_n_rslts</strong> – the maximum number of scenes to be returned (cannot be
+larger than 100 - if larger than 100 then use
+get_all_usgs_search function.</p></li>
+<li><p><strong>start_n</strong> – The scene number to start the data retrieval from. Note
+you probably don’t want to use this parameter but use the
+get_all_usgs_search function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of scenes found and Dict of meta-data for the number of scenes
+available.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.get_all_usgs_search">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">get_all_usgs_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_rslts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poly_geom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">months</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.get_all_usgs_search" title="Link to this definition"></a></dt>
+<dd><p>Uses the usgs_search function to retrive multiple ‘pages’ of search results. So, if
+you need more than 100 scenes you can use this function to undertake the multiple
+queries required and merge the results into a single list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – The name of the dataset to query.</p></li>
+<li><p><strong>api_key</strong> – The API key created at login to authenticate.</p></li>
+<li><p><strong>max_n_rslts</strong> – The maximum number of scenes you want returned.</p></li>
+<li><p><strong>start_date</strong> – Start date as a datetime object. (Earlier date)</p></li>
+<li><p><strong>end_date</strong> – End date as a datetime object. (Later date)</p></li>
+<li><p><strong>cloud_min</strong> – Minimum cloud cover (Default: 0)</p></li>
+<li><p><strong>cloud_max</strong> – Maximum cloud cover.</p></li>
+<li><p><strong>bbox</strong> – (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>pt</strong> – (X, Y)</p></li>
+<li><p><strong>poly_geom</strong> – NOT IMPLEMENTED YET!</p></li>
+<li><p><strong>months</strong> – List of months as ints (1-12) you want to limit the search for.</p></li>
+<li><p><strong>full_meta</strong> – Full metadata returned (Default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of scenes found through the query.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.get_download_ids">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">get_download_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.get_download_ids" title="Link to this definition"></a></dt>
+<dd><p>A function for extracting a list of display and entity IDs from a list
+of scenes as would have been returned by from a search query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scns</strong> – a list of the scenes</p></li>
+<li><p><strong>bulk</strong> – If True then only scenes available for bulk download will be outputted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of display IDs, List of Entity IDs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.create_scene_list">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">create_scene_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scn_ent_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'P1W'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.create_scene_list" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a list of scenes on the system which could be
+downloaded.</p>
+<p>ISO 8601 duration format:
+P(n)Y(n)M(n)DT(n)H(n)M(n)S</p>
+<dl>
+<dt>Where:</dt><dd><dl class="simple">
+<dt>P is the duration designator (referred to as “period”), and is always placed</dt><dd><p>at the beginning of the duration.</p>
+</dd>
+</dl>
+<p>Y is the year designator that follows the value for the number of years.
+M is the month designator that follows the value for the number of months.
+W is the week designator that follows the value for the number of weeks.
+D is the day designator that follows the value for the number of days.
+T is the time designator that precedes the time components.
+H is the hour designator that follows the value for the number of hours.
+M is the minute designator that follows the value for the number of minutes.
+S is the second designator that follows the value for the number of seconds.</p>
+</dd>
+</dl>
+<p>For example: “P3Y6M4DT12H30M5S” = A duration of three years, six months, four
+days, twelve hours, thirty minutes, and five seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – The API key created at login to authenticate user.</p></li>
+<li><p><strong>dataset</strong> – name of the dataset</p></li>
+<li><p><strong>scn_ent_ids</strong> – list of entity IDs</p></li>
+<li><p><strong>lst_name</strong> – a name for the list - can be anything you want but should
+be meaningful to you.</p></li>
+<li><p><strong>lst_period</strong> – Period the list will exist for in ISO 8601 duration format.
+Default is P1W (i.e., 1 week).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of scenes added.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.remove_scene_list">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">remove_scene_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.remove_scene_list" title="Link to this definition"></a></dt>
+<dd><p>A function to remove a scene list from the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – The API key created at login to authenticate user.</p></li>
+<li><p><strong>lst_name</strong> – a name for the list. Defined by create_scene_list.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.check_dwnld_opts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">check_dwnld_opts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwnld_filetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bundle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.check_dwnld_opts" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – The API key created at login to authenticate user.</p></li>
+<li><p><strong>lst_name</strong> – A name for the list - Defined by create_scene_list.</p></li>
+<li><p><strong>dataset</strong> – name of the dataset</p></li>
+<li><p><strong>dwnld_filetype</strong> – What you want to download. Options: bundle, band or all
+Default: is bundle which will be a tar.gz with all the
+files for the scene.</p></li>
+<li><p><strong>rm_lst</strong> – bool specifying whether the list should be deleted
+once the processing has finished.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a list of dicts with the entityId and productId.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.usgs_m2m.request_downloads">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.usgs_m2m.</span></span><span class="sig-name descname"><span class="pre">request_downloads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwlds_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwnld_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.usgs_m2m.request_downloads" title="Link to this definition"></a></dt>
+<dd><p>A function to request download URLs for a download list (from check_dwnld_opts)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_key</strong> – The API key created at login to authenticate user.</p></li>
+<li><p><strong>dwlds_lst</strong> – The available download list created and returned
+by check_dwnld_opts.</p></li>
+<li><p><strong>dwnld_label</strong> – A name for the download - can be anything you want but should
+be meaningful to you.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dict of download IDs and URL which are ready to be downloaded and
+a list of downloads IDs for scenes which are being prepared for download.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="nasa-common-metadata-repository">
+<h2>NASA Common Metadata Repository<a class="headerlink" href="#nasa-common-metadata-repository" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.get_prods_info">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">get_prods_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.get_prods_info" title="Link to this definition"></a></dt>
+<dd><p>A function which returns information for a product available from the CMR.</p>
+<p>Available products can be found here:
+<a class="reference external" href="https://earthdata.nasa.gov/eosdis/science-system-description/eosdis-standard-products">https://earthdata.nasa.gov/eosdis/science-system-description/eosdis-standard-products</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prod_short_name</strong> – The name of the product you are interested in.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of products (probably different versions).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.check_prod_version_avail">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">check_prod_version_avail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.check_prod_version_avail" title="Link to this definition"></a></dt>
+<dd><p>A function which checks if a version is available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prod_short_name</strong> – the product short name for the product of interest.</p></li>
+<li><p><strong>version</strong> – the version of the product to be retrieved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Boolean specifying whether the version is available.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.get_max_prod_version">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">get_max_prod_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.get_max_prod_version" title="Link to this definition"></a></dt>
+<dd><p>A function which attempts to find the highest (latest) version for
+a product.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prod_short_name</strong> – the product short name for the product of interest.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of the highest version.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.find_granules">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">find_granules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_dnwld</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_desc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.find_granules" title="Link to this definition"></a></dt>
+<dd><p>A function which will find granules from the CMR system for the product of
+interest using the search parameters provided.</p>
+<p><a class="reference external" href="https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html#granule-search-by-parameters">https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html#granule-search-by-parameters</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prod_short_name</strong> – the product short name for the product of interest.</p></li>
+<li><p><strong>version</strong> – the version of the product to be retrieved.</p></li>
+<li><p><strong>only_dnwld</strong> – If true (default)</p></li>
+<li><p><strong>bbox</strong> – (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>pt</strong> – (X, Y)</p></li>
+<li><p><strong>start_date</strong> – Start date as a datetime object. (Earlier date)</p></li>
+<li><p><strong>end_date</strong> – End date as a datetime object. (Later date)</p></li>
+<li><p><strong>cloud_min</strong> – Minimum cloud cover (Default: 0)</p></li>
+<li><p><strong>cloud_max</strong> – Maximum cloud cover.</p></li>
+<li><p><strong>sort_date</strong> – Sort the response by the acquisition date</p></li>
+<li><p><strong>sort_desc</strong> – Sort order (ascending or descending). Ascending: oldest version.
+Descending: newest version.</p></li>
+<li><p><strong>page_size</strong> – The number of records to be returned by a single query as a
+‘page’.</p></li>
+<li><p><strong>page_num</strong> – The page number to be retrieved allowing results greater than
+the number which will fit on a single page to be retrieved.</p></li>
+<li><p><strong>other_params</strong> – A dict of other parameters where the key is the search
+parameter name and the value is the value to search with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries with a dictionary for item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.find_all_granules">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">find_all_granules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_short_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_dnwld</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_desc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_pages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.find_all_granules" title="Link to this definition"></a></dt>
+<dd><p>A function which will find granules from the CMR system for the product of
+interest using the search parameters provided using the find_granules function
+but iterates through all the pages available to return all the available
+granules rather than just a single page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prod_short_name</strong> – the product short name for the product of interest.</p></li>
+<li><p><strong>version</strong> – the version of the product to be retrieved.</p></li>
+<li><p><strong>only_dnwld</strong> – If true (default)</p></li>
+<li><p><strong>bbox</strong> – (MinX, MaxX, MinY, MaxY)</p></li>
+<li><p><strong>pt</strong> – (X, Y)</p></li>
+<li><p><strong>start_date</strong> – Start date as a datetime object. (Earlier date)</p></li>
+<li><p><strong>end_date</strong> – End date as a datetime object. (Later date)</p></li>
+<li><p><strong>cloud_min</strong> – Minimum cloud cover (Default: 0)</p></li>
+<li><p><strong>cloud_max</strong> – Maximum cloud cover.</p></li>
+<li><p><strong>sort_date</strong> – Sort the response by the acquisition date</p></li>
+<li><p><strong>sort_desc</strong> – Sort order (ascending or descending). Ascending: oldest version.
+Descending: newest version.</p></li>
+<li><p><strong>page_size</strong> – The number of records to be returned by a single query as a
+‘page’. (Default: 100)</p></li>
+<li><p><strong>max_n_pages</strong> – the maximum number of pages returned (Default: 100)</p></li>
+<li><p><strong>other_params</strong> – A dict of other parameters where the key is the search
+parameter name and the value is the value to search with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries with a dictionary for item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.get_total_file_size">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">get_total_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">granule_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.get_total_file_size" title="Link to this definition"></a></dt>
+<dd><p>A function which using the list granules to sum the total file
+size of the granules in the list. The file size units are whatever
+has been use for the product but seems to be usually be MegaBytes (MB).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>granule_lst</strong> – List of granules from find_granules or find_all_granules</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float for the total file size.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.cmr_download_file_http">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">cmr_download_file_http</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_except</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.cmr_download_file_http" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_url</strong> – The input remote URL to be downloaded.</p></li>
+<li><p><strong>out_file_path</strong> – the local file path and file name</p></li>
+<li><p><strong>username</strong> – the username for the server</p></li>
+<li><p><strong>password</strong> – the password for the server</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean as to whether the file was successfully downloaded or not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.create_cmr_dwnld_db">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">create_cmr_dwnld_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">granule_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwnld_file_mime_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.create_cmr_dwnld_db" title="Link to this definition"></a></dt>
+<dd><p>A function which iterates through a granule list and builds a json database
+of file to be downloaded. The database can then be used to keep track of
+which files have been successfully downloaded allowing those which haven’t
+downloaded to be tried again.</p>
+<p>For the mine types, print a few of the granule list of the terminal (i.e.,
+pprint.pprint(granule_lst) and check what the mime type is for the download
+you want. However, for GEDI data it is probably application/x-hdfeos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_json</strong> – The file path for the databases JSON file.</p></li>
+<li><p><strong>granule_lst</strong> – List of granules from find_granules or find_all_granules</p></li>
+<li><p><strong>dwnld_file_mime_type</strong> – (e.g., application/x-hdfeos, application/x-hdf)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a List of producer_granule_id’s for the granules where a
+URL could not be found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.nasa_cmr.download_granules_use_dwnld_db">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.nasa_cmr.</span></span><span class="sig-name descname"><span class="pre">download_granules_use_dwnld_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_pass_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_wget</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.nasa_cmr.download_granules_use_dwnld_db" title="Link to this definition"></a></dt>
+<dd><p>A function which can use the JSON database built by create_cmr_dwnld_db to
+batch download a set of files keeping track of those which where successfully
+downloaded and those that were unsuccessful.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_json</strong> – file path for the JSON db file.</p></li>
+<li><p><strong>out_path</strong> – the output path where data should be downloaded to.</p></li>
+<li><p><strong>user_pass_file</strong> – path to an encoded (base64) username/password file</p></li>
+<li><p><strong>use_wget</strong> – boolean as to whether to use wget to download files or
+a pure python function. (Default: False - i.e., pure python).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="copernicus-data-space-ecosystem">
+<h2>Copernicus Data Space Ecosystem<a class="headerlink" href="#copernicus-data-space-ecosystem" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference external" href="rsgislib_dataaccess_copernicus_odata.html">Copernicus OData API</a> for constants.</p>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.get_access_token">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">get_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.get_access_token" title="Link to this definition"></a></dt>
+<dd><p>A function to get the access token from the Copernicus Data Space Ecosystem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – Your username for the Copernicus Data Space Ecosystem.
+If RSGIS_COP_USER environmental variable is specified
+then username will read from there is None is passed
+(Default: None)</p></li>
+<li><p><strong>password</strong> – Your password for the Copernicus Data Space Ecosystem.
+If RSGIS_COP_PASS environmental variable is specified
+then password will read from there is None is passed
+(Default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the access token Copernicus Open Access Hub.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.query_scn">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">query_scn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.query_scn" title="Link to this definition"></a></dt>
+<dd><p>A function which queries for a single scene using the scene name
+for example: S2B_MSIL2A_20240602T112119_N0510_R037_T30UVD_20240602T125034.SAFE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scn_name</strong> – name of the scene to be found</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of the information for the scene</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.query_scn_lst">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">query_scn_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_cover</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbit_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_rslts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.query_scn_lst" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the Copernicus Data Space Ecosystem OData API
+to find lists of scenes using criteria to filter the return list of
+scenes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor</strong> – The sensor / product being search for (e.g.,
+RSGIS_ODATA_SEN1 or RSGIS_ODATA_SEN2)</p></li>
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in EPSG:4326</p></li>
+<li><p><strong>start_date</strong> – a datetime object representing the start date
+(i.e., earlier date)</p></li>
+<li><p><strong>end_date</strong> – a datetime object representing the end date
+(i.e., later date)</p></li>
+<li><p><strong>cloud_cover</strong> – value between 0-100 where scenes with cloud cover less
+than the threshold will be returned</p></li>
+<li><p><strong>orbit_dir</strong> – The orbit direction ascending (RSGIS_ODATA_ORBIT_DIR_ASC)
+or descending (RSGIS_ODATA_ORBIT_DIR_DESC)</p></li>
+<li><p><strong>product_type</strong> – The product type specified as RSGIS_ODATA_PROD_TYPE*
+(e.g., RSGIS_ODATA_PROD_TYPE_S1_SLC,
+RSGIS_ODATA_PROD_TYPE_S1_GRD,
+RSGIS_ODATA_PROD_TYPE_S2_MSI_1C,
+RSGIS_ODATA_PROD_TYPE_S2_MSI_2A)</p></li>
+<li><p><strong>order_by</strong> – Order by date either ascending (RSGIS_ODATA_ORDERBY_ASC)
+or descending (RSGIS_ODATA_ORDERBY_DESC)</p></li>
+<li><p><strong>max_n_rslts</strong> – Maximum number of scenes that will be returned (default: 25)</p></li>
+<li><p><strong>start_n</strong> – An offset skipping the first n scenes. Can be used in combination
+with max_n_rslts to query in ‘pages’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns list of dictionaries containing all scene information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.download_scn">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">download_scn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scn_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.download_scn" title="Link to this definition"></a></dt>
+<dd><p>A function which downloads a single scene to the out_path.
+Note, during the download the file will be given the extension
+.incomplete until the is complete when it will be renamed. If
+available the MD5 checksum of the file will be checked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access_token</strong> – The access token to download the scene use get_access_token
+function to generate the access token.</p></li>
+<li><p><strong>scn_info</strong> – A dictionary with the scene information from query_scn or
+query_scn_lst functions.</p></li>
+<li><p><strong>out_path</strong> – The output path where the scene will be saved.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.download_scns">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">download_scns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scns_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_except</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.download_scns" title="Link to this definition"></a></dt>
+<dd><p>A function which loops through a list of scenes and downloads
+the datasets using the download_scn function. Option to print
+exceptions rather than stopping so all available scenes are
+downloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access_token</strong> – The access token to download the scene use get_access_token
+function to generate the access token.</p></li>
+<li><p><strong>scns_info</strong> – A list of dictionaries with the scene information
+from query_scn or query_scn_lst functions.</p></li>
+<li><p><strong>out_path</strong> – The output path where the scene will be saved.</p></li>
+<li><p><strong>no_except</strong> – If True (Default) then expections are not outputted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.get_sensor_collection_name">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">get_sensor_collection_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.get_sensor_collection_name" title="Link to this definition"></a></dt>
+<dd><p>A function which returns the name of a sensor collection
+for the RSGIS_ODATA_* sensor specified. This function is
+primarily used internally by the functions in this module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sensor</strong> – RSGIS_ODATA_* sensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ODATA string for the sensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="planet-data">
+<h2>Planet Data<a class="headerlink" href="#planet-data" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference external" href="rsgislib_dataaccess_planet_data_api.html">Planet Data API</a> for constants.</p>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.planet_auth">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">planet_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.planet_auth" title="Link to this definition"></a></dt>
+<dd><p>A function to authenticate with planet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – Your username for the planet. If RSGIS_PLANET_USER
+environmental variable is specified then username
+will read from there is None is passed (Default: None)</p></li>
+<li><p><strong>password</strong> – Your password for the Planet. If RSGIS_PLANET_PASS
+environmental variable is specified then password
+will read from there is None is passed (Default: None)</p></li>
+<li><p><strong>api_key</strong> – Your api key for Planet API. If RSGIS_PLANET_API_KEY then
+the api key will be read from there. Alternatively, the
+PL_API_KEY environment variable can be specified.
+(Default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a planet.Auth object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_search_planet_items">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_search_planet_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_cover</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sun_elevation_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sun_elevation_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_angle_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_angle_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_rslts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_search_planet_items" title="Link to this definition"></a></dt>
+<dd><p>A function which searches the planet API to find scenes/items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>item_type</strong> – The type of item to be downloaded (RSGIS_PLANET_ITEM_*)</p></li>
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in EPSG:4326 defining the region
+of interest.</p></li>
+<li><p><strong>start_date</strong> – a datetime object representing the start date
+(i.e., earlier date)</p></li>
+<li><p><strong>end_date</strong> – a datetime object representing the end date
+(i.e., later date)</p></li>
+<li><p><strong>cloud_cover</strong> – value between 0-100 where scenes with cloud cover less
+than the threshold will be returned. If None (default)
+then ignored.</p></li>
+<li><p><strong>sun_elevation_min</strong> – the minimum solar elevation (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>sun_elevation_max</strong> – the maximum solar elevation (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>view_angle_min</strong> – the minimum view angle (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>view_angle_max</strong> – the maximum view angle (in degrees). If None
+(default) then ignored.</p></li>
+<li><p><strong>max_n_rslts</strong> – The maximum number of results to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries containing all scene items.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_create_planet_order">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_create_planet_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundle_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_notification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_create_planet_order" title="Link to this definition"></a></dt>
+<dd><p>A function which creates an order for a list of items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>order_name</strong> – A name for the new order.</p></li>
+<li><p><strong>items</strong> – A list of dictionaries containing the items to be created.</p></li>
+<li><p><strong>item_type</strong> – The type of item to be included in the order (RSGIS_PLANET_ITEM_*)</p></li>
+<li><p><strong>bundle_type</strong> – The bundle type for the order (RSGIS_PLANET_BUNDLE_*)</p></li>
+<li><p><strong>email_notification</strong> – Boolean specifying whether you will receive an
+email notification when the order is ready to download.
+(Default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict of information for the created order (including the order id)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_download_planet_order">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_download_planet_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_download_planet_order" title="Link to this definition"></a></dt>
+<dd><p>A function which downloads an order which has been processed and ready
+to download. If the order is not ready do download then an expection
+will be thrown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>order_id</strong> – The order ID (not name) of the order to be downloaded.</p></li>
+<li><p><strong>out_file_path</strong> – the output directory where the order will be downloaded.</p></li>
+<li><p><strong>overwrite</strong> – Specify whether downloads should overwrite existing files.
+(Default = False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of downloaded file paths.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_get_planet_orders">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_get_planet_orders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_get_planet_orders" title="Link to this definition"></a></dt>
+<dd><p>A function which gets a list of all the current planet orders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of orders</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_cancel_planet_orders">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_cancel_planet_orders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_cancel_planet_orders" title="Link to this definition"></a></dt>
+<dd><p>A function which the cancels planet orders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>order_ids</strong> – optional list of order IDs to be cancelled. If None
+(Default) then all are cancelled.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of orders</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.run_download_and_validate_item">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">run_download_and_validate_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.run_download_and_validate_item" title="Link to this definition"></a></dt>
+<dd><p>A function which can be used to download a single item from a planet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>planet_auth</strong> – A planet.Auth object which can be created uing the
+rsgislib.dataccess.planet_data_api.planet_auth function.</p></li>
+<li><p><strong>item_type</strong> – The type of item to be downloaded (RSGIS_PLANET_ITEM_*)</p></li>
+<li><p><strong>item_id</strong> – The unique id for the item to be downloaded.</p></li>
+<li><p><strong>asset_type</strong> – The type of asset type to be downloaded (RSGIS_PLANET_ASSET_*)</p></li>
+<li><p><strong>out_file_path</strong> – The output file path to download the file to.</p></li>
+<li><p><strong>overwrite</strong> – Boolean to overwrite existing files if it exists.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.get_item_type_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">get_item_type_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.get_item_type_str" title="Link to this definition"></a></dt>
+<dd><p>Get the string representation of a given item type (sensor).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item_type</strong> – RSGIS_PLANET_ITEM_* value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of a given item type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.get_asset_type_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">get_asset_type_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.get_asset_type_str" title="Link to this definition"></a></dt>
+<dd><p>A function to get the string representation of a given asset type.
+:param asset_type: RSGIS_PLANET_ASSET_*
+:return: string representation of a given asset type</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.planet_data_api.get_bundle_type_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.planet_data_api.</span></span><span class="sig-name descname"><span class="pre">get_bundle_type_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.planet_data_api.get_bundle_type_str" title="Link to this definition"></a></dt>
+<dd><p>A function to get the string representation of a given bundle type.
+:param bundle_type: RSGIS_PLANET_ASSET_*
+:return: string representation of a given bundle type</p>
+</dd></dl>
+
+</section>
+<section id="open-street-map-osm">
+<h2>Open Street Map (OSM)<a class="headerlink" href="#open-street-map-osm" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.openstreetmap.get_osm_to_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.openstreetmap.</span></span><span class="sig-name descname"><span class="pre">get_osm_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osm_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsgis_geom_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4326</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4326</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip_to_roi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.openstreetmap.get_osm_to_file" title="Link to this definition"></a></dt>
+<dd><p>A function to downloads OpenStreetMap data and save it to a vector file for
+specified tags and geometry type. For information on the OSM tags, which you need
+to specify for the download see here: <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">https://wiki.openstreetmap.org/wiki/Tags</a>.</p>
+<p>You might also find <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_features">https://wiki.openstreetmap.org/wiki/Map_features</a> useful as
+these are the most common tags you might have to download. It is recommended to
+use the higher level tags such as ‘building’ (rsgislib.GEOM_POLY),
+‘highway’ (rsgislib.GEOM_LINE), ‘railway’ (rsgislib.GEOM_LINE),
+‘ferry_terminal’ (rsgislib.GEOM_PT), ‘aeroway’ (rsgislib.GEOM_PT),</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in defining the region
+of interest. Ideally in EPSG:4326 but will reproject if bbox_epsg
+is correctly defined.</p></li>
+<li><p><strong>osm_tags</strong> – The OSM tags to download (e.g., {“building”: True},
+{“highway”: True}, {“railway”: True},
+{“amenity”: “ferry_terminal”}, {“aeroway”: True})</p></li>
+<li><p><strong>rsgis_geom_type</strong> – The geometry type for the data of interest (e.g.,
+rsgislib.GEOM_PT, rsgislib.GEOM_LINE, rsgislib.GEOM_POLY)</p></li>
+<li><p><strong>bbox_epsg</strong> – the EPSG code of the bounding box - define is 4326.</p></li>
+<li><p><strong>clip_to_roi</strong> – Open to clip the OSM output to the bbox specified for the
+region of interest. (Default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a geopandas GeoDataFrame with the OSM data - note this dataframe could
+be empty if there is no data for the bbox for the tags and geometry type
+specified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.openstreetmap.get_osm_multi_to_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.openstreetmap.</span></span><span class="sig-name descname"><span class="pre">get_osm_multi_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osm_tags_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsgis_geom_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4326</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4326</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip_to_roi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.openstreetmap.get_osm_multi_to_file" title="Link to this definition"></a></dt>
+<dd><p>A function to downloads OpenStreetMap data and save it to a vector file for
+specified tags and geometry type. For information on the OSM tags, which you need
+to specify for the download see here: <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">https://wiki.openstreetmap.org/wiki/Tags</a>.</p>
+<p>You might also find <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_features">https://wiki.openstreetmap.org/wiki/Map_features</a> useful as
+these are the most common tags you might have to download. It is recommended to
+use the higher level tags such as ‘building’ (rsgislib.GEOM_POLY),
+‘highway’ (rsgislib.GEOM_LINE), ‘railway’ (rsgislib.GEOM_LINE),
+‘ferry_terminal’ (rsgislib.GEOM_PT), ‘aeroway’ (rsgislib.GEOM_PT),</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in defining the region
+of interest. Ideally in EPSG:4326 but will reproject if bbox_epsg
+is correctly defined.</p></li>
+<li><p><strong>osm_tags_lst</strong> – A list of multiple OSM tags to download (e.g., {“building”: True},
+{“highway”: True}, {“railway”: True},
+{“amenity”: “ferry_terminal”}, {“aeroway”: True}) in a list,
+each tag will be search and the results merged into a single
+output vector file.</p></li>
+<li><p><strong>rsgis_geom_type</strong> – The geometry type for the data of interest (e.g.,
+rsgislib.GEOM_PT, rsgislib.GEOM_LINE, rsgislib.GEOM_POLY)</p></li>
+<li><p><strong>bbox_epsg</strong> – the EPSG code of the bounding box - define is 4326.</p></li>
+<li><p><strong>clip_to_roi</strong> – Open to clip the OSM output to the bbox specified for the
+region of interest. (Default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a geopandas GeoDataFrame with the OSM data - note this dataframe could
+be empty if there is no data for the bbox for the tags and geometry type
+specified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.openstreetmap.get_osm_gdf">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.openstreetmap.</span></span><span class="sig-name descname"><span class="pre">get_osm_gdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osm_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsgis_geom_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4326</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip_to_roi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GeoDataFrame</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.openstreetmap.get_osm_gdf" title="Link to this definition"></a></dt>
+<dd><p>A function to downloads OpenStreetMap data into a geopandas GeoDataFrame for
+specified tags and geometry type. For information on the OSM tags, which you need
+to specify for the download see here: <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tags">https://wiki.openstreetmap.org/wiki/Tags</a>.</p>
+<p>You might also find <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_features">https://wiki.openstreetmap.org/wiki/Map_features</a> useful as
+these are the most common tags you might have to download. It is recommended to
+use the higher level tags such as ‘building’ (rsgislib.GEOM_POLY),
+‘highway’ (rsgislib.GEOM_LINE), ‘railway’ (rsgislib.GEOM_LINE),
+‘ferry_terminal’ (rsgislib.GEOM_PT), ‘aeroway’ (rsgislib.GEOM_PT),</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in defining the region
+of interest. Ideally in EPSG:4326 but will reproject if bbox_epsg
+is correctly defined.</p></li>
+<li><p><strong>osm_tags</strong> – The OSM tags to download (e.g., {“building”: True},
+{“highway”: True}, {“railway”: True},
+{“amenity”: “ferry_terminal”}, {“aeroway”: True})</p></li>
+<li><p><strong>rsgis_geom_type</strong> – The geometry type for the data of interest (e.g.,
+rsgislib.GEOM_PT, rsgislib.GEOM_LINE, rsgislib.GEOM_POLY)</p></li>
+<li><p><strong>bbox_epsg</strong> – the EPSG code of the bounding box - define is 4326.</p></li>
+<li><p><strong>clip_to_roi</strong> – Open to clip the OSM output to the bbox specified for the
+region of interest. (Default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a geopandas GeoDataFrame with the OSM data - note this dataframe could
+be empty if there is no data for the bbox for the tags and geometry type
+specified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_classification_classimblearn.html" class="btn btn-neutral float-left" title="RSGISLib Imbalanced Classification Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_droneutils.html" class="btn btn-neutral float-right" title="RSGISLib Drone Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

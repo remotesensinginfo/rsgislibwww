@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib FTP Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib HTTP Tools" href="rsgislib_tools_httptools.html" />
+    <link rel="prev" title="RSGISLib Google Cloud Tools" href="rsgislib_tools_googlecloud.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib FTP Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transverse-tree">Transverse Tree</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.get_ftp_file_listings"><code class="docutils literal notranslate"><span class="pre">get_ftp_file_listings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.create_file_listings_db"><code class="docutils literal notranslate"><span class="pre">create_file_listings_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-files">Filter Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.filter_file_listings_db"><code class="docutils literal notranslate"><span class="pre">filter_file_listings_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#download-data">Download Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.download_ftp_file"><code class="docutils literal notranslate"><span class="pre">download_ftp_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.download_curl_ftp_file"><code class="docutils literal notranslate"><span class="pre">download_curl_ftp_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.download_files_use_lst_db"><code class="docutils literal notranslate"><span class="pre">download_files_use_lst_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#upload-data">Upload Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.ftptools.upload_ftp_file"><code class="docutils literal notranslate"><span class="pre">upload_ftp_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib FTP Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-ftp-tools">
+<h1>RSGISLib FTP Tools<a class="headerlink" href="#rsgislib-ftp-tools" title="Link to this heading"></a></h1>
+<section id="transverse-tree">
+<h2>Transverse Tree<a class="headerlink" href="#transverse-tree" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.get_ftp_file_listings">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">get_ftp_file_listings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ftp_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_pass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_n_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlsd_not_avail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.ftptools.get_ftp_file_listings" title="Link to this definition"></a></dt>
+<dd><p>Traverse the FTP server directory structure to create a list of all the
+files (full paths).</p>
+<p>Note, it is not good practise to hard code passwords into you
+scripts. It would be recommended that you get the password
+from an environmental variable or config file rather than
+hard code the password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ftp_url</strong> – the url for the ftp server</p></li>
+<li><p><strong>ftp_path</strong> – the path on the ftp server where to start the
+transverse of the tree.</p></li>
+<li><p><strong>ftp_user</strong> – The username for the ftp server</p></li>
+<li><p><strong>ftp_pass</strong> – the password for the ftp server</p></li>
+<li><p><strong>ftp_timeout</strong> – in seconds (None and system default will be used;
+system defaults are usual above 300 seconds)</p></li>
+<li><p><strong>try_n_times</strong> – if server connection fails try again (sleeping for 5
+secs in between) n times for failing.</p></li>
+<li><p><strong>mlsd_not_avail</strong> – Option to support older FTP servers which don’t
+support the mlsd function. Default is False but
+if you get errors then suggest that you try
+setting this to True and trying again.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>directory by directory and simple list of files as tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.create_file_listings_db">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">create_file_listings_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_pass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_n_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlsd_not_avail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.ftptools.create_file_listings_db" title="Link to this definition"></a></dt>
+<dd><p>A function which transverses the directory structure on an ftp server
+and saves the result to a JSON database using the pysondb module.</p>
+<p>Note, it is not good practise to hard code passwords into you
+scripts. It would be recommended that you get the password
+from an environmental variable or config file rather than
+hard code the password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_json</strong> – The file path for the databases JSON file.</p></li>
+<li><p><strong>ftp_url</strong> – the url for the ftp server</p></li>
+<li><p><strong>ftp_path</strong> – the path on the ftp server where to start the
+transverse of the tree.</p></li>
+<li><p><strong>ftp_user</strong> – The username for the ftp server</p></li>
+<li><p><strong>ftp_pass</strong> – the password for the ftp server</p></li>
+<li><p><strong>ftp_timeout</strong> – in seconds (None and system default will be used;
+system defaults are usual above 300 seconds)</p></li>
+<li><p><strong>try_n_times</strong> – if server connection fails try again (sleeping for 5
+secs in between) n times for failing.</p></li>
+<li><p><strong>mlsd_not_avail</strong> – Option to support older FTP servers which don’t
+support the mlsd function. Default is False but
+if you get errors then suggest that you try
+setting this to True and trying again.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="filter-files">
+<h2>Filter Files<a class="headerlink" href="#filter-files" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.filter_file_listings_db">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">filter_file_listings_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_db_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.ftptools.filter_file_listings_db" title="Link to this definition"></a></dt>
+<dd><p>A function which filters the database to find particular files of interest.
+A list of strings is provided and comparison will be done using the python
+‘in’ operator and at least one of the filter string has to be within the
+file path/name for it to match.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_json</strong> – file path for the JSON db file.</p></li>
+<li><p><strong>filter_vals</strong> – A list of strings which will be used to select files.</p></li>
+<li><p><strong>out_db_file</strong> – output file path for JSON db file.</p></li>
+<li><p><strong>filter_path</strong> – boolean, if true then filter will be applied to full
+path, if False then just the file name (default; False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="download-data">
+<h2>Download Data<a class="headerlink" href="#download-data" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.download_ftp_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">download_ftp_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ftp_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_pass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.ftptools.download_ftp_file" title="Link to this definition"></a></dt>
+<dd><p>A function to download a file from an FTP server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ftp_url</strong> – The remote URL for the ftp server.</p></li>
+<li><p><strong>remote_file</strong> – the remote path on the ftp server for the file to be downloaded</p></li>
+<li><p><strong>local_file</strong> – the local path to where the file should be downloaded to.</p></li>
+<li><p><strong>ftp_timeout</strong> – the timeout for the download. Default: 300 seconds.</p></li>
+<li><p><strong>ftp_user</strong> – the username, if required, for the ftp server.</p></li>
+<li><p><strong>ftp_pass</strong> – the password, if required, for the ftp server.</p></li>
+<li><p><strong>print_info</strong> – bool for whether info should be printed to the console
+(default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean as to whether the file was successfully downloaded or not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.download_curl_ftp_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">download_curl_ftp_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ftp_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_pass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.ftptools.download_curl_ftp_file" title="Link to this definition"></a></dt>
+<dd><p>A function to download a file from an FTP server using curl.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ftp_url</strong> – The remote URL for the ftp server.</p></li>
+<li><p><strong>remote_file</strong> – the remote path on the ftp server for the file to be downloaded</p></li>
+<li><p><strong>local_file</strong> – the local path to where the file should be downloaded to.</p></li>
+<li><p><strong>ftp_timeout</strong> – the timeout for the download. Default: 300 seconds.</p></li>
+<li><p><strong>ftp_user</strong> – the username, if required, for the ftp server.</p></li>
+<li><p><strong>ftp_pass</strong> – the password, if required, for the ftp server.</p></li>
+<li><p><strong>print_info</strong> – bool for whether info should be printed to the console
+(default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean as to whether the file was successfully downloaded or not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.download_files_use_lst_db">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">download_files_use_lst_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_pass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_dir_struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_curl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.ftptools.download_files_use_lst_db" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the pysondb JSON database to download all the files
+recording whether files have been downloaded successful and the output
+path for the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_json</strong> – file path for the JSON db file.</p></li>
+<li><p><strong>out_dir_path</strong> – the output path where data should be downloaded to.</p></li>
+<li><p><strong>ftp_timeout</strong> – the timeout for the download. Default: 300 seconds.</p></li>
+<li><p><strong>ftp_user</strong> – the username, if required, for the ftp server.</p></li>
+<li><p><strong>ftp_pass</strong> – the password, if required, for the ftp server.</p></li>
+<li><p><strong>create_dir_struct</strong> – boolean specifying whether the folder structure on the
+ftp server should be maintained within the out_dir_path
+(True) or ignored and all the individual files just
+downloaded into the output directory as a flat
+structure (False; Default).</p></li>
+<li><p><strong>use_curl</strong> – boolean specifying whether to use CURL to download the files.
+(Default: False).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="upload-data">
+<h2>Upload Data<a class="headerlink" href="#upload-data" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.ftptools.upload_ftp_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.ftptools.</span></span><span class="sig-name descname"><span class="pre">upload_ftp_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftp_pass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.ftptools.upload_ftp_file" title="Link to this definition"></a></dt>
+<dd><p>A function for uploading a file to an ftp server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>local_file</strong> – the path to the local file to be uploaded.</p></li>
+<li><p><strong>ftp_url</strong> – the url for the ftp server for the upload.</p></li>
+<li><p><strong>remote_path</strong> – the path on the ftp server for the file to be uploaded to.
+this should not include the file name which will be taken
+from the local_file.</p></li>
+<li><p><strong>ftp_timeout</strong> – the timeout for the download. Default: 300 seconds.</p></li>
+<li><p><strong>ftp_user</strong> – the username, if required, for the ftp server.</p></li>
+<li><p><strong>ftp_pass</strong> – the password, if required, for the ftp server.</p></li>
+<li><p><strong>print_info</strong> – bool for whether info should be printed to the console
+(default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean as to whether the upload was successfully completed or otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_googlecloud.html" class="btn btn-neutral float-left" title="RSGISLib Google Cloud Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_httptools.html" class="btn btn-neutral float-right" title="RSGISLib HTTP Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

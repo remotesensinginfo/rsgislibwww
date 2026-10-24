@@ -1,0 +1,940 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Modelling &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Raster GIS Module" href="rsgislib_rastergis.html" />
+    <link rel="prev" title="RSGISLib Image Utilities Module" href="rsgislib_imageutils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Modelling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#species-distribution-modelling">Species Distribution Modelling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-samples">Generate Samples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.gen_pseudo_absences_smpls"><code class="docutils literal notranslate"><span class="pre">gen_pseudo_absences_smpls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.combine_presence_absence_data"><code class="docutils literal notranslate"><span class="pre">combine_presence_absence_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.create_train_test_sets"><code class="docutils literal notranslate"><span class="pre">create_train_test_sets()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#populate-samples">Populate Samples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.extract_env_var_data"><code class="docutils literal notranslate"><span class="pre">extract_env_var_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pop_normalise_coeffs"><code class="docutils literal notranslate"><span class="pre">pop_normalise_coeffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.apply_normalise_coeffs"><code class="docutils literal notranslate"><span class="pre">apply_normalise_coeffs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo"><code class="docutils literal notranslate"><span class="pre">EnvVarInfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-statistics">Summary Statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.comparison_box_plots"><code class="docutils literal notranslate"><span class="pre">comparison_box_plots()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.correlation_matrix"><code class="docutils literal notranslate"><span class="pre">correlation_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.calc_vif_multicollinearity"><code class="docutils literal notranslate"><span class="pre">calc_vif_multicollinearity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#model-fitting">Model Fitting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.search_mdl_params"><code class="docutils literal notranslate"><span class="pre">search_mdl_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.fit_sklearn_mdl"><code class="docutils literal notranslate"><span class="pre">fit_sklearn_mdl()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.fit_sklearn_slg_cls_mdl"><code class="docutils literal notranslate"><span class="pre">fit_sklearn_slg_cls_mdl()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.fit_kfold_sklearn_mdls"><code class="docutils literal notranslate"><span class="pre">fit_kfold_sklearn_mdls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.fit_kfold_sklearn_sgl_cls_mdls"><code class="docutils literal notranslate"><span class="pre">fit_kfold_sklearn_sgl_cls_mdls()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#model-explanation">Model Explanation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.shap_sklearn_mdl_explainer"><code class="docutils literal notranslate"><span class="pre">shap_sklearn_mdl_explainer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.salib_sklearn_mdl_sensitity"><code class="docutils literal notranslate"><span class="pre">salib_sklearn_mdl_sensitity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.sklearn_mdl_variable_response_curves"><code class="docutils literal notranslate"><span class="pre">sklearn_mdl_variable_response_curves()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#apply-models">Apply Models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pred_sklearn_mdl_prob"><code class="docutils literal notranslate"><span class="pre">pred_sklearn_mdl_prob()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pred_sklearn_mdl_cls"><code class="docutils literal notranslate"><span class="pre">pred_sklearn_mdl_cls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_mdls_prob"><code class="docutils literal notranslate"><span class="pre">pred_ensemble_sklearn_mdls_prob()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_mdls_cls"><code class="docutils literal notranslate"><span class="pre">pred_ensemble_sklearn_mdls_cls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_slg_cls_mdls_prob"><code class="docutils literal notranslate"><span class="pre">pred_ensemble_sklearn_slg_cls_mdls_prob()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_sgl_cls_mdls_cls"><code class="docutils literal notranslate"><span class="pre">pred_ensemble_sklearn_sgl_cls_mdls_cls()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-tools">Other Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.modelling.species_distribution.create_finite_mask"><code class="docutils literal notranslate"><span class="pre">create_finite_mask()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Modelling</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-modelling">
+<h1>RSGISLib Modelling<a class="headerlink" href="#rsgislib-modelling" title="Link to this heading"></a></h1>
+<section id="species-distribution-modelling">
+<h2>Species Distribution Modelling<a class="headerlink" href="#species-distribution-modelling" title="Link to this heading"></a></h2>
+<section id="generate-samples">
+<h3>Generate Samples<a class="headerlink" href="#generate-samples" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.gen_pseudo_absences_smpls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">gen_pseudo_absences_smpls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_smpls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xtra_n_smpls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presence_smpls_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presence_smpls_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presence_smpls_dist_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GeoJSON'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.gen_pseudo_absences_smpls" title="Link to this definition"></a></dt>
+<dd><p>A function which generates pseudo absences samples for species distribution
+modelling. Note, it is expected that all input files have the same projection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>out_vec_file</strong> – Output vector file path</p></li>
+<li><p><strong>out_vec_lyr</strong> – Output vector layer name</p></li>
+<li><p><strong>n_smpls</strong> – the maximum number of samples to be outputted</p></li>
+<li><p><strong>xtra_n_smpls</strong> – the number of extra samples to be produced internally so
+after the various masking steps the final number is likely
+to be near or higher than n_smpls</p></li>
+<li><p><strong>presence_smpls_vec_file</strong> – Optionally a set of presence samples can be
+provided and this is the file path to that file.
+If None then ignored (Default: None).</p></li>
+<li><p><strong>presence_smpls_vec_lyr</strong> – Optionally a set of presence samples can be
+provided and this the layer name of the vector.</p></li>
+<li><p><strong>presence_smpls_dist_thres</strong> – If provided this is a distance threshold
+to presence samples below which absences
+points are removed. Unit is the same as the
+projection of the input files.</p></li>
+<li><p><strong>out_format</strong> – The output vector format (Default: GeoJSON)</p></li>
+<li><p><strong>rnd_seed</strong> – Optionally provide a random seed for the random number generator.
+Default: None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.combine_presence_absence_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">combine_presence_absence_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">presence_smpls_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presence_smpls_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absence_smpls_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absence_smpls_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equalise_smpls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.modelling.species_distribution.combine_presence_absence_data" title="Link to this definition"></a></dt>
+<dd><p>A function which combines the presence and absence data into a single set
+with the option to equalise the number of samples within the two classes.
+The output file will only have the columns listed within env_vars and the
+classification column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>presence_smpls_vec_file</strong> – path to the vector file with the presence data.</p></li>
+<li><p><strong>presence_smpls_vec_lyr</strong> – layer name of the vector file with the presence data.</p></li>
+<li><p><strong>absence_smpls_vec_file</strong> – path to the vector file with the absence data.</p></li>
+<li><p><strong>absence_smpls_vec_lyr</strong> – layer name of the vector file with the absence data.</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data.</p></li>
+<li><p><strong>out_vec_file</strong> – the output vector file populated with presence and
+absence data.</p></li>
+<li><p><strong>out_vec_lyr</strong> – the output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – the output vector file format (Default: GPKG)</p></li>
+<li><p><strong>equalise_smpls</strong> – optionally decide whether to equalise the number of samples.
+This would normally be done if you are using a tree based
+modelling (e.g., random forests)</p></li>
+<li><p><strong>cls_col</strong> – the name of the classification column.</p></li>
+<li><p><strong>rnd_seed</strong> – A seed for the random selection. Default: None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of the variables the order in which they are present.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.create_train_test_sets">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">create_train_test_sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_prop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.create_train_test_sets" title="Link to this definition"></a></dt>
+<dd><p>A function which splits the input vector layer into training and testing sets.
+The presences (1) and absences (0) are processed separately so the proportion
+of the presence (1) and absence (0) are maintained in the training and testing
+sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – Input vector file path.</p></li>
+<li><p><strong>vec_lyr</strong> – Input vector layer name.</p></li>
+<li><p><strong>train_vec_file</strong> – Output training vector file path.</p></li>
+<li><p><strong>train_vec_lyr</strong> – Output training vector layer name.</p></li>
+<li><p><strong>test_vec_file</strong> – Output testing vector file path.</p></li>
+<li><p><strong>test_vec_lyr</strong> – Output testing vector layer name.</p></li>
+<li><p><strong>split_prop</strong> – The proportion of the data to be used as the training set.
+Default is 0.8 (i.e., 80 % for training and 20 % for testing).</p></li>
+<li><p><strong>cls_col</strong> – the classification column name.</p></li>
+<li><p><strong>out_format</strong> – the output vector file format</p></li>
+<li><p><strong>rnd_seed</strong> – Optionally provide a random seed for the random number generator.
+Default: None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="populate-samples">
+<h3>Populate Samples<a class="headerlink" href="#populate-samples" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.extract_env_var_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">extract_env_var_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smpls_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smpls_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-9999</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.extract_env_var_data" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts samples for the environment variables for a set
+of samples (either presences or absences).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_vars</strong> – A dictionary of environment variables.</p></li>
+<li><p><strong>smpls_vec_file</strong> – path to the vector file.</p></li>
+<li><p><strong>smpls_vec_lyr</strong> – layer name of the vector file.</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file populated with environment variables.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output vector file format (Default: GPKG)</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value (Default: -9999)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pop_normalise_coeffs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pop_normalise_coeffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pop_normalise_coeffs" title="Link to this definition"></a></dt>
+<dd><p>A function which populates the env_vars dictionary of EnvVarInfo objects
+with the normalisation coefficients (mean and standard deviation) calculated
+from the inputted vector data. The inputted vector data is expected to be
+the combined presences and absences data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will be populated with
+the mean and standard deviation.</p></li>
+<li><p><strong>vec_file</strong> – the input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.apply_normalise_coeffs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">apply_normalise_coeffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.apply_normalise_coeffs" title="Link to this definition"></a></dt>
+<dd><p>A function which normalises the continuous variables using the mean and
+standard deviation provided within the env_vars dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_vars</strong></p></li>
+<li><p><strong>vec_file</strong></p></li>
+<li><p><strong>vec_lyr</strong></p></li>
+<li><p><strong>out_vec_file</strong></p></li>
+<li><p><strong>out_vec_lyr</strong></p></li>
+<li><p><strong>out_format</strong></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.EnvVarInfo">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">EnvVarInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_vld_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_vld_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="Link to this definition"></a></dt>
+<dd><p>This is a class to store the defining the parameters for each environment variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the variable.</p></li>
+<li><p><strong>file</strong> – Image file path for the variable.</p></li>
+<li><p><strong>band</strong> – Band in the image representing the variable.</p></li>
+<li><p><strong>data_type</strong> – Variable type (Either rsgislib.VAR_TYPE_CONTINUOUS or
+rsgislib.VAR_TYPE_CATEGORICAL).</p></li>
+<li><p><strong>min_vld_val</strong> – The minimum valid value for the variable.</p></li>
+<li><p><strong>max_vld_val</strong> – The maximum valid value for the variable.</p></li>
+<li><p><strong>norm_mean</strong> – Mean value for normalisation.</p></li>
+<li><p><strong>norm_std</strong> – standard deviation value for normalisation.</p></li>
+<li><p><strong>name</strong> – Name of the variable.</p></li>
+<li><p><strong>file</strong> – Image file path for the variable.</p></li>
+<li><p><strong>band</strong> – Band in the image representing the variable.</p></li>
+<li><p><strong>data_type</strong> – Variable type (Either rsgislib.VAR_TYPE_CONTINUOUS or
+rsgislib.VAR_TYPE_CATEGORICAL).</p></li>
+<li><p><strong>min_vld_val</strong> – The minimum valid value for the variable.</p></li>
+<li><p><strong>max_vld_val</strong> – The maximum valid value for the variable.</p></li>
+<li><p><strong>norm_mean</strong> – Mean value for normalisation.</p></li>
+<li><p><strong>norm_std</strong> – standard deviation value for normalisation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="summary-statistics">
+<h3>Summary Statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.comparison_box_plots">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">comparison_box_plots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'boxplots'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.comparison_box_plots" title="Link to this definition"></a></dt>
+<dd><p>Create plots for each of the variables comparing the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data.</p></li>
+<li><p><strong>vec_file</strong> – the input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name</p></li>
+<li><p><strong>out_dir</strong> – output directory where the plots will be saved</p></li>
+<li><p><strong>cls_col</strong> – the column name of the class variable</p></li>
+<li><p><strong>box_plots</strong> – boolean flag indicating whether to plot boxplots (True)
+or violin plots (False; Default)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.correlation_matrix">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">correlation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_corr_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'correlation_matrix.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_plt_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'correlation_matrix.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">14</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.correlation_matrix" title="Link to this definition"></a></dt>
+<dd><p>Calculate the correlation matrix between all the variables and optionally
+output a plot of the correlation matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data.</p></li>
+<li><p><strong>vec_file</strong> – the input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name</p></li>
+<li><p><strong>out_corr_file</strong> – output correlation matrix CSV file</p></li>
+<li><p><strong>out_plt_file</strong> – output plot file (if None then ignored)</p></li>
+<li><p><strong>fig_width</strong> – The width of the plot figure</p></li>
+<li><p><strong>fig_height</strong> – The height of the plot figure</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.calc_vif_multicollinearity">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">calc_vif_multicollinearity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vif_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'vif_multicollinearity.csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.calc_vif_multicollinearity" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate variance inflation factors to
+investigate multicollinearity between predictor variables.</p>
+<p>Interpretation of VIF scores (somewhat subjective):
+1 = No multicollinearity.
+1-5 = Moderate multicollinearity.
+&gt; 5 = High multicollinearity.
+&gt; 10 = This predictor should be removed from the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data.</p></li>
+<li><p><strong>vec_file</strong> – the input vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – the input vector layer name</p></li>
+<li><p><strong>out_vif_file</strong> – output VIF CSV file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="model-fitting">
+<h3>Model Fitting<a class="headerlink" href="#model-fitting" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.search_mdl_params">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">search_mdl_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseSearchCV</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.modelling.species_distribution.search_mdl_params" title="Link to this definition"></a></dt>
+<dd><p>A function which will run a scikit-learn search (e.g., GridSearchCV)
+to find optimal parameters for the model estimator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_obj</strong> – A scikit-learn SearchCV object</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>cls_col</strong> – the name of the column specifying the class within the input
+vector layer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the estimator initialised with the best parameters and a
+dictionary of the best parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.fit_sklearn_mdl">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">fit_sklearn_mdl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roc_curve_plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.modelling.species_distribution.fit_sklearn_mdl" title="Link to this definition"></a></dt>
+<dd><p>A function which fits a single scikit-learn estimator model returning
+the accuracy statistics and optionally plotting a ROC curve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>test_vec_file</strong> – file path to a vector file with the testing data.</p></li>
+<li><p><strong>test_vec_lyr</strong> – vector layer name for the testing data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>cls_col</strong> – the name of the column specifying the class within the input
+vector layers.</p></li>
+<li><p><strong>roc_curve_plot</strong> – A file path for the ROC curve plot to be outputted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the training accuracy, testing accuracy and ROC AUC score.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.fit_sklearn_slg_cls_mdl">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">fit_sklearn_slg_cls_mdl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roc_curve_plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.modelling.species_distribution.fit_sklearn_slg_cls_mdl" title="Link to this definition"></a></dt>
+<dd><p>A function which fits a single scikit-learn outlier estimator model returning
+the accuracy statistics and optionally plotting a ROC curve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>test_vec_file</strong> – file path to a vector file with the testing data.</p></li>
+<li><p><strong>test_vec_lyr</strong> – vector layer name for the testing data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>cls_col</strong> – the name of the column specifying the class within the input
+vector layers.</p></li>
+<li><p><strong>roc_curve_plot</strong> – A file path for the ROC curve plot to be outputted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the testing accuracy and ROC AUC score.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.fit_kfold_sklearn_mdls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">fit_kfold_sklearn_mdls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_kfolds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fold_prop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sel_replacement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.modelling.species_distribution.fit_kfold_sklearn_mdls" title="Link to this definition"></a></dt>
+<dd><p>Fit an ensemble of classifiers using K-fold selection of training data subsets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>test_vec_file</strong> – file path to a vector file with the testing data.</p></li>
+<li><p><strong>test_vec_lyr</strong> – vector layer name for the testing data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>n_kfolds</strong> – The number of models to fit from training data subsets</p></li>
+<li><p><strong>fold_prop</strong> – The proportion of the training data set to use for each
+model. The proportion should be between 0 and 1. The subset
+will be randomly selected.</p></li>
+<li><p><strong>cls_col</strong> – the name of the column specifying the class within the input
+vector layers.</p></li>
+<li><p><strong>rnd_seed</strong> – Optionally provide a random seed for the random number generator.
+Default: None.</p></li>
+<li><p><strong>sel_replacement</strong> – Optionally replace the training data when creating the
+subsets. Default: True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a list of scikit-learn estimator models</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.fit_kfold_sklearn_sgl_cls_mdls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">fit_kfold_sklearn_sgl_cls_mdls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_kfolds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fold_prop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sel_replacement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.modelling.species_distribution.fit_kfold_sklearn_sgl_cls_mdls" title="Link to this definition"></a></dt>
+<dd><p>Fit an ensemble of classifiers using K-fold selection of training data subsets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>test_vec_file</strong> – file path to a vector file with the testing data.</p></li>
+<li><p><strong>test_vec_lyr</strong> – vector layer name for the testing data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>n_kfolds</strong> – The number of models to fit from training data subsets</p></li>
+<li><p><strong>fold_prop</strong> – The proportion of the training data set to use for each
+model. The proportion should be between 0 and 1. The subset
+will be randomly selected.</p></li>
+<li><p><strong>cls_col</strong> – the name of the column specifying the class within the input
+vector layers.</p></li>
+<li><p><strong>rnd_seed</strong> – Optionally provide a random seed for the random number generator.
+Default: None.</p></li>
+<li><p><strong>sel_replacement</strong> – Optionally replace the training data when creating the
+subsets. Default: True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a list of scikit-learn estimator models</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="model-explanation">
+<h3>Model Explanation<a class="headerlink" href="#model-explanation" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.shap_sklearn_mdl_explainer">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">shap_sklearn_mdl_explainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap_summary_plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap_heatmap_plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap_scatter_plots_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shap_depend_plots_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsample_n_smpls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tree_explainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_linear_explainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.shap_sklearn_mdl_explainer" title="Link to this definition"></a></dt>
+<dd><p>This functions uses the SHAP model to output feature importance and
+dependence plots for the est_cls_obj model. If neither use_tree_explainer
+or use_linear_explainer are set, then the KernelExplainer will be used
+and this works with all models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>shap_summary_plot</strong> – Output summary plot of SHAP scores.</p></li>
+<li><p><strong>shap_heatmap_plot</strong> – Output heatmap of SHAP scores.</p></li>
+<li><p><strong>shap_scatter_plots_dir</strong> – Output directory for SHAP scatter plots</p></li>
+<li><p><strong>shap_depend_plots_dir</strong> – Output directory for SHAP dependence plots</p></li>
+<li><p><strong>subsample_n_smpls</strong> – Optionally use a subset of the training samples
+for the SHAP analysis.</p></li>
+<li><p><strong>use_tree_explainer</strong> – The est_cls_obj is a tree classifier (e.g., Random
+Forests) and therefore the SHAP TreeExplainer can
+be used.</p></li>
+<li><p><strong>use_linear_explainer</strong> – The est_cls_obj is a linear classifier (e.g., Logistic
+Regression) and therefore the SHAP LinearExplainer can
+be used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.salib_sklearn_mdl_sensitity">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">salib_sklearn_mdl_sensitity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sobol_plot_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sobol_overall_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sobol_first_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sobol_second_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.salib_sklearn_mdl_sensitity" title="Link to this definition"></a></dt>
+<dd><p>This functions uses the SALib sobol sensitivity analysis to assess the feature
+importance and first and second order responses within the est_cls_obj model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>n_samples</strong> – the number of samples to be generated and used for the sobol
+modelling.</p></li>
+<li><p><strong>sobol_plot_file</strong> – Output sobol plot file path.</p></li>
+<li><p><strong>sobol_overall_file</strong> – Output overall sobol variance values CSV file.</p></li>
+<li><p><strong>sobol_first_file</strong> – Output first order sobol variance values CSV file.</p></li>
+<li><p><strong>sobol_second_file</strong> – Output second order sobol variance values CSV file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.sklearn_mdl_variable_response_curves">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">sklearn_mdl_variable_response_curves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_plots_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clsid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalised_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.sklearn_mdl_variable_response_curves" title="Link to this definition"></a></dt>
+<dd><p>A function to generate response curves for a scikit learn classifier. To
+generate the response curves the mean presence values are used for the
+environment variables and then each variable is varied in turn across the
+full range of values within the presence and absence data training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>train_vec_file</strong> – file path to a vector file with the training data.</p></li>
+<li><p><strong>train_vec_lyr</strong> – vector layer name for the training data.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis. The names must be the column names
+within the vector layer.</p></li>
+<li><p><strong>output_file</strong> – output CSV file with the response curve data.</p></li>
+<li><p><strong>response_plots_dir</strong> – output directory where the response curve plots
+will be outputted.</p></li>
+<li><p><strong>n_samples</strong> – the number of samples to be generated to generate the
+response curves</p></li>
+<li><p><strong>cls_col</strong> – the name of the column specifying the class within the input
+vector layers.</p></li>
+<li><p><strong>normalised_data</strong> – boolean specifying whether the input data is normalised.
+If the data is normalised then to aid interpretation of
+the resulting response curves the orignal values will be
+used. Default: False</p></li>
+<li><p><strong>env_vars</strong> – If the data is normalised then a dictionary of environment
+variables populated onto the train_vec_lyr data if required.
+The EnvVarInfo will provide the normalisation (mean and
+standard deviation) values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="apply-models">
+<h3>Apply Models<a class="headerlink" href="#apply-models" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pred_sklearn_mdl_prob">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pred_sklearn_mdl_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_img_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pred_sklearn_mdl_prob" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates the probability of the presence of the species of
+interest using the trained model. Note, the est_cls_obj must have the
+predict_proba function available to use by this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will provide the image
+file path, image band and normalisation (mean and
+standard deviation) values.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis - specifies the order of the variables
+presented to the classifier.</p></li>
+<li><p><strong>output_img</strong> – the output image path</p></li>
+<li><p><strong>gdalformat</strong> – the output image format</p></li>
+<li><p><strong>normalise_data</strong> – boolean specifying whether to normalise the input data.
+This should be used if the model was trained with
+normalised data. The mean and standard deviation of
+variables used for normalisation should be provided
+through the env_vars dict of EnvVarInfo objects.</p></li>
+<li><p><strong>calc_img_stats</strong> – boolean specifying whether to calculate the image
+statistic and pyramids are built for the output image.
+Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pred_sklearn_mdl_cls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pred_sklearn_mdl_cls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_img_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pred_sklearn_mdl_cls" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates the binary classification for the presence
+of the species of interest using the trained model. Note, the est_cls_obj
+must have the predict function available to use by this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_obj</strong> – a scikit-learn estimator model</p></li>
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will provide the image
+file path, image band and normalisation (mean and
+standard deviation) values.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis - specifies the order of the variables
+presented to the classifier.</p></li>
+<li><p><strong>output_img</strong> – the output image path</p></li>
+<li><p><strong>gdalformat</strong> – the output image format</p></li>
+<li><p><strong>normalise_data</strong> – boolean specifying whether to normalise the input data.
+This should be used if the model was trained with
+normalised data. The mean and standard deviation of
+variables used for normalisation should be provided
+through the env_vars dict of EnvVarInfo objects.</p></li>
+<li><p><strong>calc_img_stats</strong> – boolean specifying whether to calculate the image
+statistic and pyramids are built for the output image.
+Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pred_ensemble_sklearn_mdls_prob">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pred_ensemble_sklearn_mdls_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_objs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_dir'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_img_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_mdls_prob" title="Link to this definition"></a></dt>
+<dd><p>A function which runs an ensemble of trained classifier models estimating the
+probability of the species presence. The ensemble results are combined by
+calculating the median of the probability from each model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_objs</strong> – A list of scikit-learn estimator models which have been
+trained.</p></li>
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will provide the image
+file path, image band and normalisation (mean and
+standard deviation) values.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis - specifies the order of the variables
+presented to the classifier.</p></li>
+<li><p><strong>output_img</strong> – the output image path</p></li>
+<li><p><strong>gdalformat</strong> – the output image format</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where the intermediate image files
+will be outputted.</p></li>
+<li><p><strong>normalise_data</strong> – boolean specifying whether to normalise the input data.
+This should be used if the model was trained with
+normalised data. The mean and standard deviation of
+variables used for normalisation should be provided
+through the env_vars dict of EnvVarInfo objects.</p></li>
+<li><p><strong>calc_img_stats</strong> – boolean specifying whether to calculate the image
+statistic and pyramids are built for the output image.
+Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pred_ensemble_sklearn_mdls_cls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pred_ensemble_sklearn_mdls_cls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_objs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_dir'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_img_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_mdls_cls" title="Link to this definition"></a></dt>
+<dd><p>A function which runs an ensemble of trained classifier models estimating the
+binary classification of the species presence. The ensemble results are combined by
+calculating the number of times a pixel is included in the presences class
+from each model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_objs</strong> – A list of scikit-learn estimator models which have been
+trained.</p></li>
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will provide the image
+file path, image band and normalisation (mean and
+standard deviation) values.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis - specifies the order of the variables
+presented to the classifier.</p></li>
+<li><p><strong>output_img</strong> – the output image path</p></li>
+<li><p><strong>gdalformat</strong> – the output image format</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where the intermediate image files
+will be outputted.</p></li>
+<li><p><strong>normalise_data</strong> – boolean specifying whether to normalise the input data.
+This should be used if the model was trained with
+normalised data. The mean and standard deviation of
+variables used for normalisation should be provided
+through the env_vars dict of EnvVarInfo objects.</p></li>
+<li><p><strong>calc_img_stats</strong> – boolean specifying whether to calculate the image
+statistic and pyramids are built for the output image.
+Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pred_ensemble_sklearn_slg_cls_mdls_prob">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pred_ensemble_sklearn_slg_cls_mdls_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_objs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_dir'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_img_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_slg_cls_mdls_prob" title="Link to this definition"></a></dt>
+<dd><p>A function which runs an ensemble of trained classifier models estimating the
+probability of the species presence. The ensemble results are combined by
+calculating the median of the probability from each model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_objs</strong> – A list of scikit-learn estimator models which have been
+trained.</p></li>
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will provide the image
+file path, image band and normalisation (mean and
+standard deviation) values.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis - specifies the order of the variables
+presented to the classifier.</p></li>
+<li><p><strong>output_img</strong> – the output image path</p></li>
+<li><p><strong>gdalformat</strong> – the output image format</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where the intermediate image files
+will be outputted.</p></li>
+<li><p><strong>normalise_data</strong> – boolean specifying whether to normalise the input data.
+This should be used if the model was trained with
+normalised data. The mean and standard deviation of
+variables used for normalisation should be provided
+through the env_vars dict of EnvVarInfo objects.</p></li>
+<li><p><strong>calc_img_stats</strong> – boolean specifying whether to calculate the image
+statistic and pyramids are built for the output image.
+Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.pred_ensemble_sklearn_sgl_cls_mdls_cls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">pred_ensemble_sklearn_sgl_cls_mdls_cls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">est_cls_objs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">BaseEstimator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_dir'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalise_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_img_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.pred_ensemble_sklearn_sgl_cls_mdls_cls" title="Link to this definition"></a></dt>
+<dd><p>A function which runs an ensemble of trained classifier models estimating the
+binary classification of the species presence. The ensemble results are combined by
+calculating the number of times a pixel is included in the presences class
+from each model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>est_cls_objs</strong> – A list of scikit-learn estimator models which have been
+trained.</p></li>
+<li><p><strong>in_msk_img</strong> – File path to a valid mask image which defines the region
+of interest.</p></li>
+<li><p><strong>img_msk_val</strong> – The value within the mask image which defines the region
+of interest</p></li>
+<li><p><strong>env_vars</strong> – A dictionary of environment variables populated onto both the
+presence and absence data. The EnvVarInfo will provide the image
+file path, image band and normalisation (mean and
+standard deviation) values.</p></li>
+<li><p><strong>analysis_vars</strong> – a list of environmental variables to be used
+for the analysis - specifies the order of the variables
+presented to the classifier.</p></li>
+<li><p><strong>output_img</strong> – the output image path</p></li>
+<li><p><strong>gdalformat</strong> – the output image format</p></li>
+<li><p><strong>tmp_dir</strong> – the temporary directory where the intermediate image files
+will be outputted.</p></li>
+<li><p><strong>normalise_data</strong> – boolean specifying whether to normalise the input data.
+This should be used if the model was trained with
+normalised data. The mean and standard deviation of
+variables used for normalisation should be provided
+through the env_vars dict of EnvVarInfo objects.</p></li>
+<li><p><strong>calc_img_stats</strong> – boolean specifying whether to calculate the image
+statistic and pyramids are built for the output image.
+Default: True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="other-tools">
+<h3>Other Tools<a class="headerlink" href="#other-tools" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.modelling.species_distribution.create_finite_mask">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.modelling.species_distribution.</span></span><span class="sig-name descname"><span class="pre">create_finite_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#rsgislib.modelling.species_distribution.EnvVarInfo" title="rsgislib.modelling.species_distribution.EnvVarInfo"><span class="pre">EnvVarInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tmp_msk_dir'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.modelling.species_distribution.create_finite_mask" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_imageutils.html" class="btn btn-neutral float-left" title="RSGISLib Image Utilities Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_rastergis.html" class="btn btn-neutral float-right" title="RSGISLib Raster GIS Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

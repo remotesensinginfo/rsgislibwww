@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Clumps Classification Utilities &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Scikit-Learn Unsupervised Pixel Classification" href="rsgislib_classification_clustersklearn.html" />
+    <link rel="prev" title="RSGISLib Keras Image Chips Classification" href="rsgislib_classification_classkeraschips.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classsklearn.html">RSGISLib Scikit-Learn Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classlightgbm.html">RSGISLib LightGBM Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classxgboost.html">RSGISLib XGBoost Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classcatboost.html">RSGISLib CatBoost Image Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraspxl.html">RSGISLib Keras Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraschips.html">RSGISLib Keras Image Chips Classification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Clumps Classification Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#populate-rat-training">Populate RAT Training</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classratutils.populate_clumps_with_class_training"><code class="docutils literal notranslate"><span class="pre">populate_clumps_with_class_training()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-data-for-training">Extract Data for Training</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classratutils.extract_rat_col_data"><code class="docutils literal notranslate"><span class="pre">extract_rat_col_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_clustersklearn.html">RSGISLib Scikit-Learn Unsupervised Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classimblearn.html">RSGISLib Imbalanced Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#pixel-training-data">Pixel Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#chips-training-data">Chips Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#post-classification-refinement">Post Classification Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-samples">Accuracy Assessment Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-stats">Accuracy Assessment Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#classification-utility-classes">Classification Utility Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_classification.html">RSGISLib Classification</a></li>
+      <li class="breadcrumb-item active">RSGISLib Clumps Classification Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-clumps-classification-utilities">
+<h1>RSGISLib Clumps Classification Utilities<a class="headerlink" href="#rsgislib-clumps-classification-utilities" title="Link to this heading"></a></h1>
+<p>The steps to undertaking a classification using clumps are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Image segmentation to generate clumps</p></li>
+<li><p>Populate attributes to clumps</p></li>
+<li><p>Generate training and populate to clumps</p></li>
+<li><p>Train the classifier</p></li>
+<li><p>Apply the classifier</p></li>
+<li><p>Collapse to generate a classification.</p></li>
+</ul>
+</div></blockquote>
+<p>If you have undertaken an image segmentation and want to use those segments for a classification using RSGISLib then you need to use the image clumps representation. This is described in the paper below:</p>
+<p>Clewley, D., Bunting, P., Shepherd, J., Gillingham, S., Flood, N., Dymond, J., Lucas, R., Armston, J., Moghaddam, M. (2014). A Python-Based Open Source System for Geographic Object-Based Image Analysis (GEOBIA) Utilizing Raster Attribute Tables Remote Sensing  6(7), 6111 6135. <a class="reference external" href="https://dx.doi.org/10.3390/rs6076111">https://dx.doi.org/10.3390/rs6076111</a></p>
+<p>Commonly we would use the Shepherd et al., (2019) segmentation using the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">segutils</span>
+
+<span class="n">input_img</span> <span class="o">=</span> <span class="s2">&quot;S2_UVD_27sept_27700_sub.kea&quot;</span>
+<span class="n">clumps_img</span> <span class="o">=</span> <span class="s2">&quot;s2_uvd_27sept_clumps.kea&quot;</span>
+<span class="n">tmp_path</span> <span class="o">=</span> <span class="s2">&quot;./tmp&quot;</span>
+<span class="n">segutils</span><span class="o">.</span><span class="n">runShepherdSegmentation</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">clumps_img</span><span class="p">,</span> <span class="n">tmpath</span><span class="o">=</span><span class="n">tmp_path</span><span class="p">,</span> <span class="n">numClusters</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">minPxls</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">distThres</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">sampling</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kmMaxIter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Shepherd, J., Bunting, P., Dymond, J. (2019). Operational Large-Scale Segmentation of Imagery Based on Iterative Elimination Remote Sensing  11(6), 658. <a class="reference external" href="https://dx.doi.org/10.3390/rs11060658">https://dx.doi.org/10.3390/rs11060658</a></p>
+<p>To populate the clumps (i.e., segments or objects) with the attribute information used for the classification you need to use the functions within the rsgislib.rastergis module, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.rastergis</span>
+
+<span class="c1"># Populate with all statistics (min, max, mean, standard deviation)</span>
+<span class="n">bandinfo</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">minField</span><span class="o">=</span><span class="s1">&#39;BlueMin&#39;</span><span class="p">,</span> <span class="n">maxField</span><span class="o">=</span><span class="s1">&#39;BlueMax&#39;</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;BlueMean&#39;</span><span class="p">,</span> <span class="n">stdDevField</span><span class="o">=</span><span class="s1">&#39;BlueStdev&#39;</span><span class="p">))</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">minField</span><span class="o">=</span><span class="s1">&#39;GrnMin&#39;</span><span class="p">,</span> <span class="n">maxField</span><span class="o">=</span><span class="s1">&#39;GrnMax&#39;</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;GrnMean&#39;</span><span class="p">,</span> <span class="n">stdDevField</span><span class="o">=</span><span class="s1">&#39;GrnStdev&#39;</span><span class="p">))</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">minField</span><span class="o">=</span><span class="s1">&#39;RedMin&#39;</span><span class="p">,</span> <span class="n">maxField</span><span class="o">=</span><span class="s1">&#39;RedMax&#39;</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;RedMean&#39;</span><span class="p">,</span> <span class="n">stdDevField</span><span class="o">=</span><span class="s1">&#39;RedStdev&#39;</span><span class="p">))</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">minField</span><span class="o">=</span><span class="s1">&#39;RE1Min&#39;</span><span class="p">,</span> <span class="n">maxField</span><span class="o">=</span><span class="s1">&#39;RE1Max&#39;</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;RE1Mean&#39;</span><span class="p">,</span> <span class="n">stdDevField</span><span class="o">=</span><span class="s1">&#39;RE1Stdev&#39;</span><span class="p">))</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">populateRATWithStats</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">clumps_img</span><span class="p">,</span> <span class="n">bandinfo</span><span class="p">)</span>
+
+<span class="c1"># Populate with just mean statistic</span>
+<span class="n">bandinfo</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;BlueMean&#39;</span><span class="p">))</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;GrnMean&#39;</span><span class="p">))</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;RedMean&#39;</span><span class="p">))</span>
+<span class="n">bandinfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">BandAttStats</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">meanField</span><span class="o">=</span><span class="s1">&#39;RE1Mean&#39;</span><span class="p">))</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">populateRATWithStats</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">clumps_img</span><span class="p">,</span> <span class="n">bandinfo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To train the classifier you need to create a column within the clump raster attribute table (RAT) specifying the class for the clumps being used for training. Training is often provided as vector layers, using a rastergis helper function you can generate the training data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.rastergis</span>
+
+<span class="n">classes_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">classes_dict</span><span class="p">[</span><span class="s1">&#39;Mangroves&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Mangroves.shp&#39;</span><span class="p">]</span>
+<span class="n">classes_dict</span><span class="p">[</span><span class="s1">&#39;Other&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Other.shp&#39;</span><span class="p">]</span>
+<span class="n">tmp_path</span> <span class="o">=</span> <span class="s1">&#39;./tmp&#39;</span>
+<span class="n">classes_int_col_in</span> <span class="o">=</span> <span class="s1">&#39;ClassInt&#39;</span>
+<span class="n">classes_name_col</span> <span class="o">=</span> <span class="s1">&#39;ClassStr&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">rastergis</span><span class="o">.</span><span class="n">populateClumpsWithClassTraining</span><span class="p">(</span><span class="n">clumps_img</span><span class="p">,</span> <span class="n">classes_dict</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">,</span> <span class="n">classes_int_col_in</span><span class="p">,</span> <span class="n">classes_name_col</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="populate-rat-training">
+<h2>Populate RAT Training<a class="headerlink" href="#populate-rat-training" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classratutils.populate_clumps_with_class_training">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classratutils.</span></span><span class="sig-name descname"><span class="pre">populate_clumps_with_class_training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes_int_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes_name_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classratutils.populate_clumps_with_class_training" title="Link to this definition"></a></dt>
+<dd><p>A function to populate a clumps file with training from a series of
+vector layers (1 per class)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – input clumps file.</p></li>
+<li><p><strong>classes_info</strong> – A list of rsgislb.classification.ClassVecSamplesInfoObj
+objects. Note, the file_h5 variable is not needed in
+this function.</p></li>
+<li><p><strong>tmp_dir</strong> – File path (which needs to exist) where files can
+temporally be written.</p></li>
+<li><p><strong>classes_int_col</strong> – Output column name for integer values representing
+each class.</p></li>
+<li><p><strong>classes_name_col</strong> – Output column name for string class names.</p></li>
+<li><p><strong>rat_band</strong> – The band within the input image the RAT is associated with.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="extract-data-for-training">
+<h2>Extract Data for Training<a class="headerlink" href="#extract-data-for-training" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classratutils.extract_rat_col_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classratutils.</span></span><span class="sig-name descname"><span class="pre">extract_rat_col_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sel_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sel_col_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rat_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classratutils.extract_rat_col_data" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts column values to be used as training, testing, validation
+sets for building a classifier. The data will be saved within a HDF5 file. Note,
+this function reads each whole column into memory and then subsets it so for very
+large RATs this might cause problems.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – The inputted clumps file with the associated RAT.</p></li>
+<li><p><strong>cols</strong> – a list of the columns to be exported. Note, they will be stored in the
+HDF5 file in the order specified here and therefore this order is
+important and needs to be maintained when this is used going forward
+(e.g., when applying a classifier trained using this data.</p></li>
+<li><p><strong>sel_col</strong> – The column within the RAT specifying which rows will be exported.</p></li>
+<li><p><strong>sel_col_val</strong> – The value in the sel_col which indicated which rows are to be
+exported.</p></li>
+<li><p><strong>out_h5_file</strong> – The output HDF5 file the data will be exported to.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file (e.g.,
+rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+<li><p><strong>rat_band</strong> – The band within the input image the RAT is associated with.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_classification_classkeraschips.html" class="btn btn-neutral float-left" title="RSGISLib Keras Image Chips Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_classification_clustersklearn.html" class="btn btn-neutral float-right" title="RSGISLib Scikit-Learn Unsupervised Pixel Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

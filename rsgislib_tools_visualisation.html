@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Visualisation Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Google Cloud Tools" href="rsgislib_tools_googlecloud.html" />
+    <link rel="prev" title="RSGISLib Check Datasets Tools" href="rsgislib_tools_checkdatasets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Visualisation Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_kmz_img"><code class="docutils literal notranslate"><span class="pre">create_kmz_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_webtiles_img_no_stats_msk"><code class="docutils literal notranslate"><span class="pre">create_webtiles_img_no_stats_msk()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_webtiles_img"><code class="docutils literal notranslate"><span class="pre">create_webtiles_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_quicklook_imgs"><code class="docutils literal notranslate"><span class="pre">create_quicklook_imgs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_mbtile_file"><code class="docutils literal notranslate"><span class="pre">create_mbtile_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_webtiles_vis_gtiff_img"><code class="docutils literal notranslate"><span class="pre">create_webtiles_vis_gtiff_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_quicklook_overview_imgs"><code class="docutils literal notranslate"><span class="pre">create_quicklook_overview_imgs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.burn_in_binary_msk"><code class="docutils literal notranslate"><span class="pre">burn_in_binary_msk()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_quicklook_overview_imgs_vec_overlay"><code class="docutils literal notranslate"><span class="pre">create_quicklook_overview_imgs_vec_overlay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.create_visual_overview_imgs_vec_extent"><code class="docutils literal notranslate"><span class="pre">create_visual_overview_imgs_vec_extent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.tools.visualisation.overlay_vec_on_img"><code class="docutils literal notranslate"><span class="pre">overlay_vec_on_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib Visualisation Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-visualisation-tools">
+<h1>RSGISLib Visualisation Tools<a class="headerlink" href="#rsgislib-visualisation-tools" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_kmz_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_kmz_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reproj_wgs84</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">finite_msk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_kmz_img" title="Link to this definition"></a></dt>
+<dd><p>A function to convert an input image to a KML/KMZ file, where the input image
+is stretched and bands sub-selected / ordered as required for visualisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>output_file</strong> – output image file (extension kmz for KMZ output /
+kml for KML output)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>reproj_wgs84</strong> – specify whether the image should be explicitly reprojected
+to WGS84 Lat/Long before transformation to KML.</p></li>
+<li><p><strong>finite_msk</strong> – specify whether the image data should be masked so all
+values are finite before stretching.</p></li>
+<li><p><strong>tmp_dir</strong> – A temp directory path for processing files.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_webtiles_img_no_stats_msk">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_webtiles_img_no_stats_msk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'2-10'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">finite_msk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_webtiles_img_no_stats_msk" title="Link to this definition"></a></dt>
+<dd><p>A function to convert an input image to a tile cache for web map servers, where the input image
+is stretched and bands sub-selected / ordered as required for visualisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>out_dir</strong> – output directory within which the cache will be created.</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected. (e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>zoom_levels</strong> – The zoom levels to be created for the web tile cache.</p></li>
+<li><p><strong>resample</strong> – Method of resampling (average,near,bilinear,cubic,cubicspline,lanczos,antialias)</p></li>
+<li><p><strong>finite_msk</strong> – specify whether the image data should be masked so all values are finite before stretching.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.
+(TMS: gdal2tiles.py native. XYZ: GIS Compatible)</p></li>
+<li><p><strong>tmp_dir</strong> – A temp directory path for processing files.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_webtiles_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_webtiles_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'2-10'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stats_msk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">webview</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_webtiles_img" title="Link to this definition"></a></dt>
+<dd><p>A function to produce a web cache for the input image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>out_dir</strong> – output directory within which the cache will be created.</p></li>
+<li><p><strong>zoom_levels</strong> – The zoom levels to be created for the web tile cache.</p></li>
+<li><p><strong>img_stats_msk</strong> – Optional (default=None) input image which is used to define
+regions calculate the image stats for stretch.</p></li>
+<li><p><strong>img_msk_vals</strong> – The pixel(s) value define the region of interest in the
+image mask (can be list of values or single value).</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary files /
+directories. If not provided (i.e., input is None) then a local
+directory will be define in the same folder as the input image.</p></li>
+<li><p><strong>webview</strong> – Provide default GDAL leaflet web viewer.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.
+(TMS: gdal2tiles.py native. XYZ: GIS Compatible)</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_quicklook_imgs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_quicklook_imgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'quicklook.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stats_msk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_quicklook_imgs" title="Link to this definition"></a></dt>
+<dd><p>A function to produce a quicklook image(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>output_imgs</strong> – a single output image or list of output images. The same
+size as output_img_sizes.</p></li>
+<li><p><strong>output_img_sizes</strong> – the output image size (in pixels) or list of output
+image sizes.</p></li>
+<li><p><strong>scale_axis</strong> – the axis to which the output_img_sizes refer. Options:
+width, height or auto. Auto applies the output_img_sizes to
+the longest of the two axes.</p></li>
+<li><p><strong>img_stats_msk</strong> – Optional (default=None) input image which is used to
+define regions calculate the image stats for stretch.</p></li>
+<li><p><strong>img_msk_vals</strong> – The pixel(s) value define the region of interest in the
+image mask (can be list of values or single value).</p></li>
+<li><p><strong>stretch_file</strong> – a stretch stats file to standardise the stretch between
+a number of input files.</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary files /
+directories. If not provided (i.e., input is None) then a local
+directory will be define in the same folder as the input image.</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_mbtile_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_mbtile_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_mbtiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stats_msk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'PNG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_mbtile_file" title="Link to this definition"></a></dt>
+<dd><p>A function to produce an MBTile file for visualisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>output_mbtiles</strong> – output MBTiles file which will be created.</p></li>
+<li><p><strong>scale_input_img</strong> – The scale of the output image with respect to the input
+as a percentage (e.g., 50% reduction in size).</p></li>
+<li><p><strong>img_stats_msk</strong> – Optional (default=None) input image which is used to
+define regions calculate the image stats for stretch.</p></li>
+<li><p><strong>img_msk_vals</strong> – The pixel(s) value define the region of interest in the
+image mask (can be list of values or single value).</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary files /
+directories. If not provided (i.e., input is None) then a local
+directory will be define in the same folder as the input image.</p></li>
+<li><p><strong>tile_format</strong> – Specify the tile file format to use, options: PNG, PNG8
+and JPG. Default: PNG</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_webtiles_vis_gtiff_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_webtiles_vis_gtiff_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaled_gtiff_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'2-10'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_stats_msk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_vals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">webview</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_webtiles_vis_gtiff_img" title="Link to this definition"></a></dt>
+<dd><p>A function to produce web cache and scaled and stretched geotiff.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>output_dir</strong> – output directory within which the cache will be created.</p></li>
+<li><p><strong>scaled_gtiff_img</strong> – output geotiff image path and file name.</p></li>
+<li><p><strong>zoom_levels</strong> – The zoom levels to be created for the web tile cache.</p></li>
+<li><p><strong>img_stats_msk</strong> – Optional (default=None) input image which is used to
+define regions calculate the image stats for stretch.</p></li>
+<li><p><strong>img_msk_vals</strong> – The pixel(s) value define the region of interest in the
+image mask (can be list of values or single value).</p></li>
+<li><p><strong>stretch_file</strong> – a stretch stats file to standardise the stretch between
+a number of input files.</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary files /
+directories. If not provided (i.e., input is None) then a local
+directory will be define in the same folder as the input image.</p></li>
+<li><p><strong>webview</strong> – Provide default GDAL leaflet web viewer.</p></li>
+<li><p><strong>scale</strong> – the scale output geotiff. Input is percentage in the x-axis.
+If zero (default) then no scaling will be applied.</p></li>
+<li><p><strong>tms</strong> – if TMS is True then a tile grid in TMS format is returned with
+the grid origin at the bottom-left. If False then an XYZ tile grid
+format is used with the origin in the top-left.
+(TMS: gdal2tiles.py native. XYZ: GIS Compatible)</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_quicklook_overview_imgs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_quicklook_overview_imgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'quicklook.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_quicklook_overview_imgs" title="Link to this definition"></a></dt>
+<dd><p>A function to produce an overview quicklook for a number of input images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary
+files / directories.</p></li>
+<li><p><strong>output_imgs</strong> – a single output image or list of output images. The same
+size as output_img_sizes. The output format is JPEG.</p></li>
+<li><p><strong>output_img_sizes</strong> – the output image size (in pixels) or list of output
+image sizes.</p></li>
+<li><p><strong>scale_axis</strong> – the axis to which the output_img_sizes refer. Options: width,
+height or auto. Auto applies the output_img_sizes to the
+longest of the two axes.</p></li>
+<li><p><strong>stretch_file</strong> – a stretch stats file to standardise the stretch between
+a number of input files.</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.burn_in_binary_msk">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">burn_in_binary_msk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msk_colour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.burn_in_binary_msk" title="Link to this definition"></a></dt>
+<dd><p>A function which is used for visualisation applications where a rasterised
+binary mask is ‘burnt’ into a base image with a user selected colour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_image</strong> – the base image with continuous output values. It is expected
+that this image has 8uint pixel values.</p></li>
+<li><p><strong>mask_img</strong> – the binary mask (value 1 will be used) to be ‘burnt’
+into the base_image.</p></li>
+<li><p><strong>output_img</strong> – the output image file name and path</p></li>
+<li><p><strong>gdalformat</strong> – the GDAL image file format of the output image file.</p></li>
+<li><p><strong>msk_colour</strong> – the colour of the pixels burnt in to the base image. Should
+have the same number of dimensions as the input base image
+has image bands. Default, if None is 255.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_quicklook_overview_imgs_vec_overlay">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_quicklook_overview_imgs_vec_overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_overlay_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_overlay_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'quicklook.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'JPEG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_clrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_quicklook_overview_imgs_vec_overlay" title="Link to this definition"></a></dt>
+<dd><p>A function to produce an overview quicklook with a vector overlain for
+a number of input images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary
+files / directories.</p></li>
+<li><p><strong>vec_overlay_file</strong> – an vector overlay which will be rasterised to the
+overlay on the output images.</p></li>
+<li><p><strong>vec_overlay_lyr</strong> – the layer name for the vector overlay.</p></li>
+<li><p><strong>output_imgs</strong> – a single output image or list of output images. The same size
+as output_img_sizes.</p></li>
+<li><p><strong>output_img_sizes</strong> – the output image size (in pixels) or list of output
+image sizes.</p></li>
+<li><p><strong>gdalformat</strong> – the output file format - probably either JPG, PNG or GTIFF.</p></li>
+<li><p><strong>scale_axis</strong> – the axis to which the output_img_sizes refer. Options: width,
+height or auto. Auto applies the output_img_sizes to the
+longest of the two axes.</p></li>
+<li><p><strong>stretch_file</strong> – a stretch stats file to standardise the stretch between a
+number of input files.</p></li>
+<li><p><strong>overlay_clrs</strong> – list of output pixel values defining colour for the overlay
+image (value between 0-255). The list should be the same
+length as the number of input image bands (i.e., specified
+by bands). If None then default all values are all 255.</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.create_visual_overview_imgs_vec_extent">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">create_visual_overview_imgs_vec_extent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_extent_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_extent_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_imgs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'quicklook.tif'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GTIFF'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_stretch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.create_visual_overview_imgs_vec_extent" title="Link to this definition"></a></dt>
+<dd><p>A function to produce an 8bit overview image (i.e., stretched visualisation)
+with an optional specified extent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – input image file (any format that gdal supports)</p></li>
+<li><p><strong>bands</strong> – a string (comma seperated) with the bands to be selected.
+(e.g., ‘1’, ‘1,2,3’, ‘5,6,4’)</p></li>
+<li><p><strong>tmp_dir</strong> – an input directory which can be used to write temporary
+files / directories.</p></li>
+<li><p><strong>vec_extent_file</strong> – an vector file to define the extent of the output
+image files.</p></li>
+<li><p><strong>vec_extent_lyr</strong> – the layer name for the vector extent.</p></li>
+<li><p><strong>output_imgs</strong> – a single output image or list of output images. The same
+size as output_img_sizes.</p></li>
+<li><p><strong>output_img_sizes</strong> – the output image size (in pixels) or list of output
+image sizes.</p></li>
+<li><p><strong>gdalformat</strong> – the output file format - probably either JPG, PNG or GTIFF.</p></li>
+<li><p><strong>scale_axis</strong> – the axis to which the output_img_sizes refer. Options: width,
+height or auto. Auto applies the output_img_sizes to the
+longest of the two axes.</p></li>
+<li><p><strong>stretch_file</strong> – a stretch stats file to standardise the stretch between a
+number of input files. If export_stretch_file is True then
+this variable is used as the output stretch file path.</p></li>
+<li><p><strong>export_stretch_file</strong> – If true then the stretch parameters are outputted
+as a text file to the path defined by stretch_file.</p></li>
+<li><p><strong>no_data_val</strong> – Optionally provide an input image no data value otherwise
+it will be read from the input image header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.visualisation.overlay_vec_on_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.visualisation.</span></span><span class="sig-name descname"><span class="pre">overlay_vec_on_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_overlay_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_overlay_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'PNG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_clrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.visualisation.overlay_vec_on_img" title="Link to this definition"></a></dt>
+<dd><p>A function to overlay a vector layer on to a raster image ‘burning’ in the vector
+as a particular colour. This is most appropriate for polyline vectors, polygons
+will be filled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – The input image, usually a stretched byte (8uint) image ready
+for visualisation but needs spatial header information associated.</p></li>
+<li><p><strong>output_img</strong> – A output image file commonly in none specialist format such
+as JPEG, PNG or TIFF.</p></li>
+<li><p><strong>vec_overlay_file</strong> – The vector file to overlay (recommended to be a
+polyline vector)</p></li>
+<li><p><strong>vec_overlay_lyr</strong> – The name of the vector layer</p></li>
+<li><p><strong>tmp_dir</strong> – A temporary were processing stage file can be written
+during processing.</p></li>
+<li><p><strong>gdalformat</strong> – The output format - commonly PNG, JPEG or GTIFF.</p></li>
+<li><p><strong>overlay_clrs</strong> – An array with the output pixel values for the vector overlay,
+needs the same length as the number of image bands. If None
+then the overlay will be white (i.e., [255, 255, 255].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_checkdatasets.html" class="btn btn-neutral float-left" title="RSGISLib Check Datasets Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_googlecloud.html" class="btn btn-neutral float-right" title="RSGISLib Google Cloud Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

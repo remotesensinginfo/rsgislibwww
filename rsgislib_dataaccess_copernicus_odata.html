@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copernicus Data Space Ecosystem OData API &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Copernicus Data Space Ecosystem OData API</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rsgislib.dataaccess.copernicus_odata">
+<span id="copernicus-data-space-ecosystem-odata-api"></span><h1>Copernicus Data Space Ecosystem OData API<a class="headerlink" href="#module-rsgislib.dataaccess.copernicus_odata" title="Link to this heading"></a></h1>
+<p>Tools for accessing (searching and downloading) datasets from the
+Copernicus Data Space Ecosystem OData API.</p>
+<section id="sensors">
+<h2>Sensors:<a class="headerlink" href="#sensors" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_ODATA_SEN1 = 1</p></li>
+<li><p>RSGIS_ODATA_SEN1_RTC = 11</p></li>
+<li><p>RSGIS_ODATA_SEN2 = 2</p></li>
+<li><p>RSGIS_ODATA_SEN3 = 3</p></li>
+<li><p>RSGIS_ODATA_SEN5P = 5</p></li>
+<li><p>RSGIS_ODATA_SEN6 = 6</p></li>
+<li><p>RSGIS_ODATA_COP_DEM = 100</p></li>
+<li><p>RSGIS_ODATA_SMOS = 101</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="orbit-direction">
+<h2>Orbit Direction:<a class="headerlink" href="#orbit-direction" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_ODATA_ORBIT_DIR_ASC = 1</p></li>
+<li><p>RSGIS_ODATA_ORBIT_DIR_DESC = 2</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="order-by-direction">
+<h2>Order By Direction:<a class="headerlink" href="#order-by-direction" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_ODATA_ORDERBY_ASC = 1</p></li>
+<li><p>RSGIS_ODATA_ORDERBY_DESC = 2</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="product-types">
+<h2>Product Types:<a class="headerlink" href="#product-types" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>RSGIS_ODATA_PROD_TYPE_S1_SLC = 101</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S1_GRD = 102</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S1_OCN = 103</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S2_MSI_1C = 201</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S2_MSI_2A = 202</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SR_1_SRA = 301</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SR_1_SRA_A = 302</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SR_1_SRA_BS = 303</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SR_2_LAN = 304</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_OL_1_EFR = 305</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_OL_1_ERR = 306</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_OL_2_LFR = 307</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_OL_2_LRR = 308</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SL_1_RBT = 309</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SL_2_LST = 310</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SY_2_SYN = 311</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SY_2_V10 = 312</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SY_2_VG1 = 313</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SY_2_VGP = 314</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SY_2_AOD = 315</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S3_SL_2_FRP = 316</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_IR_SIR = 501</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_IR_UVN = 502</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD1 = 503</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD2 = 504</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD3 = 505</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD4 = 506</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD5 = 507</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD6 = 508</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD7 = 509</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L1B_RA_BD8 = 510</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_AER_AI = 511</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_AER_LH = 512</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_CH4 = 513</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_CLOUD = 514</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_CO = 515</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_HCHO = 516</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_NO2 = 517</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_NP_BD3 = 518</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_NP_BD6 = 519</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_NP_BD7 = 520</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_O3_TCL = 521</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_O3 = 522</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_L2_SO2 = 523</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_AUX_CTMFCT = 524</p></li>
+<li><p>RSGIS_ODATA_PROD_TYPE_S5P_AUX_CTMANA = 525</p></li>
+</ul>
+</div></blockquote>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.download_scn">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">download_scn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scn_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.download_scn" title="Link to this definition"></a></dt>
+<dd><p>A function which downloads a single scene to the out_path.
+Note, during the download the file will be given the extension
+.incomplete until the is complete when it will be renamed. If
+available the MD5 checksum of the file will be checked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access_token</strong> – The access token to download the scene use get_access_token
+function to generate the access token.</p></li>
+<li><p><strong>scn_info</strong> – A dictionary with the scene information from query_scn or
+query_scn_lst functions.</p></li>
+<li><p><strong>out_path</strong> – The output path where the scene will be saved.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.download_scns">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">download_scns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scns_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_except</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.download_scns" title="Link to this definition"></a></dt>
+<dd><p>A function which loops through a list of scenes and downloads
+the datasets using the download_scn function. Option to print
+exceptions rather than stopping so all available scenes are
+downloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access_token</strong> – The access token to download the scene use get_access_token
+function to generate the access token.</p></li>
+<li><p><strong>scns_info</strong> – A list of dictionaries with the scene information
+from query_scn or query_scn_lst functions.</p></li>
+<li><p><strong>out_path</strong> – The output path where the scene will be saved.</p></li>
+<li><p><strong>no_except</strong> – If True (Default) then expections are not outputted.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.get_access_token">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">get_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.get_access_token" title="Link to this definition"></a></dt>
+<dd><p>A function to get the access token from the Copernicus Data Space Ecosystem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – Your username for the Copernicus Data Space Ecosystem.
+If RSGIS_COP_USER environmental variable is specified
+then username will read from there is None is passed
+(Default: None)</p></li>
+<li><p><strong>password</strong> – Your password for the Copernicus Data Space Ecosystem.
+If RSGIS_COP_PASS environmental variable is specified
+then password will read from there is None is passed
+(Default: None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the access token Copernicus Open Access Hub.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.get_sensor_collection_name">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">get_sensor_collection_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.get_sensor_collection_name" title="Link to this definition"></a></dt>
+<dd><p>A function which returns the name of a sensor collection
+for the RSGIS_ODATA_* sensor specified. This function is
+primarily used internally by the functions in this module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sensor</strong> – RSGIS_ODATA_* sensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ODATA string for the sensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.query_scn">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">query_scn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.query_scn" title="Link to this definition"></a></dt>
+<dd><p>A function which queries for a single scene using the scene name
+for example: S2B_MSIL2A_20240602T112119_N0510_R037_T30UVD_20240602T125034.SAFE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scn_name</strong> – name of the scene to be found</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of the information for the scene</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.dataaccess.copernicus_odata.query_scn_lst">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.dataaccess.copernicus_odata.</span></span><span class="sig-name descname"><span class="pre">query_scn_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_cover</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbit_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_rslts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.dataaccess.copernicus_odata.query_scn_lst" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the Copernicus Data Space Ecosystem OData API
+to find lists of scenes using criteria to filter the return list of
+scenes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor</strong> – The sensor / product being search for (e.g.,
+RSGIS_ODATA_SEN1 or RSGIS_ODATA_SEN2)</p></li>
+<li><p><strong>bbox</strong> – is a bbox (xMin, xMax, yMin, yMax) in EPSG:4326</p></li>
+<li><p><strong>start_date</strong> – a datetime object representing the start date
+(i.e., earlier date)</p></li>
+<li><p><strong>end_date</strong> – a datetime object representing the end date
+(i.e., later date)</p></li>
+<li><p><strong>cloud_cover</strong> – value between 0-100 where scenes with cloud cover less
+than the threshold will be returned</p></li>
+<li><p><strong>orbit_dir</strong> – The orbit direction ascending (RSGIS_ODATA_ORBIT_DIR_ASC)
+or descending (RSGIS_ODATA_ORBIT_DIR_DESC)</p></li>
+<li><p><strong>product_type</strong> – The product type specified as RSGIS_ODATA_PROD_TYPE*
+(e.g., RSGIS_ODATA_PROD_TYPE_S1_SLC,
+RSGIS_ODATA_PROD_TYPE_S1_GRD,
+RSGIS_ODATA_PROD_TYPE_S2_MSI_1C,
+RSGIS_ODATA_PROD_TYPE_S2_MSI_2A)</p></li>
+<li><p><strong>order_by</strong> – Order by date either ascending (RSGIS_ODATA_ORDERBY_ASC)
+or descending (RSGIS_ODATA_ORDERBY_DESC)</p></li>
+<li><p><strong>max_n_rslts</strong> – Maximum number of scenes that will be returned (default: 25)</p></li>
+<li><p><strong>start_n</strong> – An offset skipping the first n scenes. Can be used in combination
+with max_n_rslts to query in ‘pages’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns list of dictionaries containing all scene information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

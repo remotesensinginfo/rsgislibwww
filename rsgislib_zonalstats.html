@@ -1,0 +1,1090 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Zonal Stats Module &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="RSGISLib Vector Utils Module" href="rsgislib_vectorutils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Zonal Stats Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#points">Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.ext_point_band_values_file"><code class="docutils literal notranslate"><span class="pre">ext_point_band_values_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.ext_point_band_values"><code class="docutils literal notranslate"><span class="pre">ext_point_band_values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#polygons">Polygons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_band_stats_file"><code class="docutils literal notranslate"><span class="pre">calc_zonal_band_stats_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_band_stats"><code class="docutils literal notranslate"><span class="pre">calc_zonal_band_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_poly_pts_band_stats_file"><code class="docutils literal notranslate"><span class="pre">calc_zonal_poly_pts_band_stats_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_poly_pts_band_stats"><code class="docutils literal notranslate"><span class="pre">calc_zonal_poly_pts_band_stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts_file"><code class="docutils literal notranslate"><span class="pre">calc_zonal_band_stats_test_poly_pts_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts"><code class="docutils literal notranslate"><span class="pre">calc_zonal_band_stats_test_poly_pts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_band_pxl_counts_file"><code class="docutils literal notranslate"><span class="pre">calc_zonal_band_pxl_counts_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.calc_zonal_band_pxl_counts"><code class="docutils literal notranslate"><span class="pre">calc_zonal_band_pxl_counts()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extracting-pixels-to-hdf5">Extracting Pixels to HDF5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.extract_zone_img_values_to_hdf"><code class="docutils literal notranslate"><span class="pre">extract_zone_img_values_to_hdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.extract_zone_img_band_values_to_hdf"><code class="docutils literal notranslate"><span class="pre">extract_zone_img_band_values_to_hdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.extract_zone_band_values_to_h5_file"><code class="docutils literal notranslate"><span class="pre">extract_zone_band_values_to_h5_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.extract_zone_band_values_to_h5"><code class="docutils literal notranslate"><span class="pre">extract_zone_band_values_to_h5()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.random_sample_hdf5_file"><code class="docutils literal notranslate"><span class="pre">random_sample_hdf5_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.split_sample_hdf5_file"><code class="docutils literal notranslate"><span class="pre">split_sample_hdf5_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.merge_extracted_hdf5_data"><code class="docutils literal notranslate"><span class="pre">merge_extracted_hdf5_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.merge_extracted_hdf5_vars_data"><code class="docutils literal notranslate"><span class="pre">merge_extracted_hdf5_vars_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extracting-image-chips-to-hdf5">Extracting Image Chips to HDF5</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.extract_chip_zone_image_band_values_to_hdf"><code class="docutils literal notranslate"><span class="pre">extract_chip_zone_image_band_values_to_hdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.split_sample_chip_hdf5_file"><code class="docutils literal notranslate"><span class="pre">split_sample_chip_hdf5_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.merge_extracted_hdf5_chip_data"><code class="docutils literal notranslate"><span class="pre">merge_extracted_hdf5_chip_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.extract_ref_chip_zone_image_band_values_to_hdf"><code class="docutils literal notranslate"><span class="pre">extract_ref_chip_zone_image_band_values_to_hdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.split_sample_ref_chip_hdf5_file"><code class="docutils literal notranslate"><span class="pre">split_sample_ref_chip_hdf5_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.merge_extracted_hdf5_chip_ref_data"><code class="docutils literal notranslate"><span class="pre">merge_extracted_hdf5_chip_ref_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hdf-utilities">HDF Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.msk_h5_smpls_to_finite_values"><code class="docutils literal notranslate"><span class="pre">msk_h5_smpls_to_finite_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.filter_h5_smpls_var_range"><code class="docutils literal notranslate"><span class="pre">filter_h5_smpls_var_range()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.get_hdf5_data"><code class="docutils literal notranslate"><span class="pre">get_hdf5_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.write_data_to_h5"><code class="docutils literal notranslate"><span class="pre">write_data_to_h5()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.zonalstats.get_var_from_hdf5_data"><code class="docutils literal notranslate"><span class="pre">get_var_from_hdf5_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Zonal Stats Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-zonal-stats-module">
+<h1>RSGISLib Zonal Stats Module<a class="headerlink" href="#rsgislib-zonal-stats-module" title="Link to this heading"></a></h1>
+<p>For undertaking a pixel-in-polygon analysis you need to consider the size of the
+polygons with respect to the size of the pixels being intersected.</p>
+<p>Where the pixels are small with respect to the polygons so there is at least one pixel
+within the polygon then the best function to use is:</p>
+<ul class="simple">
+<li><p>rsgislib.zonalstats.calc_zonal_band_stats</p></li>
+</ul>
+<p>If the pixels are large with respect to the polygons then use the following function
+which intersects the polygon centroid.</p>
+<ul class="simple">
+<li><p>rsgislib.zonalstats.calc_zonal_poly_pts_band_stats</p></li>
+</ul>
+<p>If the pixel size in between and/or polygons are varied in size such that it is not
+certain that all polygons will contain a pixel then the following function will first
+attempt to intersect the polygon with the pixels and if there is not a pixel within
+the polygon then the centriod is used.</p>
+<ul class="simple">
+<li><p>rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts</p></li>
+</ul>
+<section id="points">
+<h2>Points<a class="headerlink" href="#points" title="Link to this heading"></a></h2>
+<p>These functions extract values from an image for a set of vector points.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.ext_point_band_values_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">ext_point_band_values_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reproj_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.ext_point_band_values_file" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts point values for an input vector file for a
+particular image band.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file which specifies the
+features and where the output stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>min_thres</strong> – a lower threshold for values which will be included in the
+stats calculation.</p></li>
+<li><p><strong>max_thres</strong> – a upper threshold for values which will be included in the
+stats calculation.</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value if no valid pixels are within
+the polygon.</p></li>
+<li><p><strong>out_field</strong> – the name of the field in the vector layer where the pixel
+values will be written.</p></li>
+<li><p><strong>reproj_vec</strong> – boolean to specify whether the vector layer should be
+reprojected on the fly during processing if the projections are
+different. Default: False to ensure it is the users intention.</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.ext_point_band_values">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">ext_point_band_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reproj_vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.ext_point_band_values" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts point values for an input vector file for a
+particular image band.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_lyr_obj</strong> – OGR vector layer object containing the geometries being
+processed and to which the stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>min_thres</strong> – a lower threshold for values which will be included in the
+stats calculation.</p></li>
+<li><p><strong>max_thres</strong> – a upper threshold for values which will be included in the
+stats calculation.</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value if no valid pixels are within
+the polygon.</p></li>
+<li><p><strong>out_field</strong> – the name of the field in the vector layer where the pixel
+values will be written.</p></li>
+<li><p><strong>reproj_vec</strong> – boolean to specify whether the vector layer should be
+reprojected on the fly during processing if the projections are
+different. Default: False to ensure it is the users intention.</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="polygons">
+<h2>Polygons<a class="headerlink" href="#polygons" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_band_stats_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_band_stats_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_band_stats_file" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates zonal statistics for a particular image band.
+If you know that the pixels in the values image are small with respect to
+the polygons then use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file which specifies the
+features and where the output stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>min_thres</strong> – a lower threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>max_thres</strong> – a upper threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value if no valid pixels are within
+the polygon.</p></li>
+<li><p><strong>min_field</strong> – the name of the field for the min value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>max_field</strong> – the name of the field for the max value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>mean_field</strong> – the name of the field for the mean value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>stddev_field</strong> – the name of the field for the standard deviation value (None
+or not specified to be ignored).</p></li>
+<li><p><strong>sum_field</strong> – the name of the field for the sum value (None or not specified to
+be ignored).</p></li>
+<li><p><strong>count_field</strong> – the name of the field for the count (of number of pixels) value
+(None or not specified to be ignored).</p></li>
+<li><p><strong>mode_field</strong> – the name of the field for the mode value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>median_field</strong> – the name of the field for the median value (None or not
+specified to be ignored).</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_band_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_band_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_band_stats" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates zonal statistics for a particular image band.
+If you know that the pixels in the values image are small with respect to
+the polygons then use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_lyr_obj</strong> – OGR vector layer object containing the geometries being
+processed and to which the stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>min_thres</strong> – a lower threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>max_thres</strong> – a upper threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value if no valid pixels are within
+the polygon.</p></li>
+<li><p><strong>min_field</strong> – the name of the field for the min value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>max_field</strong> – the name of the field for the max value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>mean_field</strong> – the name of the field for the mean value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>stddev_field</strong> – the name of the field for the standard deviation value (None
+or not specified to be ignored).</p></li>
+<li><p><strong>sum_field</strong> – the name of the field for the sum value (None or not specified to
+be ignored).</p></li>
+<li><p><strong>count_field</strong> – the name of the field for the count (of number of pixels) value
+(None or not specified to be ignored).</p></li>
+<li><p><strong>mode_field</strong> – the name of the field for the mode value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>median_field</strong> – the name of the field for the median value (None or not
+specified to be ignored).</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_poly_pts_band_stats_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_poly_pts_band_stats_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_poly_pts_band_stats_file" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts zonal stats for a polygon using the polygon centroid.
+This is useful when you are intersecting a low resolution image with respect to
+the polygon resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file which specifies the
+features and where the output stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band will
+be ignored.</p></li>
+<li><p><strong>out_field</strong> – output field name within the vector layer.</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_poly_pts_band_stats">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_poly_pts_band_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_poly_pts_band_stats" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts zonal stats for a polygon using the polygon centroid.
+This is useful when you are intesecting a low resolution image with respect to
+the polygon resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_lyr_obj</strong> – OGR vector layer object containing the geometries being
+processed and to which the stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>out_field</strong> – output field name within the vector layer.</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is
+the projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_band_stats_test_poly_pts_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts_file" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates zonal statistics for a particular image band. If
+unsure then use this function. This function tests whether 1 or more pixels has
+been found within the polygon and if not then the centroid use used to find a
+value for the polygon.</p>
+<p>If you are unsure as to whether the pixels are small enough to be contained
+within all the polygons then use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file which specifies the
+features and where the output stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>min_thres</strong> – a lower threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>max_thres</strong> – a upper threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value if no valid pixels are within
+the polygon.</p></li>
+<li><p><strong>percentile</strong> – the percentile value to calculate (value between 0 and
+100 inclusive).</p></li>
+<li><p><strong>percentile_field</strong> – the name of the field for the percentile value (None or
+not specified to be ignored).</p></li>
+<li><p><strong>min_field</strong> – the name of the field for the min value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>max_field</strong> – the name of the field for the max value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>mean_field</strong> – the name of the field for the mean value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>stddev_field</strong> – the name of the field for the standard deviation value (None
+or not specified to be ignored).</p></li>
+<li><p><strong>sum_field</strong> – the name of the field for the sum value (None or not specified to
+be ignored).</p></li>
+<li><p><strong>count_field</strong> – the name of the field for the count (of number of pixels) value
+(None or not specified to be ignored).</p></li>
+<li><p><strong>mode_field</strong> – the name of the field for the mode value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>median_field</strong> – the name of the field for the median value (None or not
+specified to be ignored).</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_band_stats_test_poly_pts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stddev_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_band_stats_test_poly_pts" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates zonal statistics for a particular image band. If
+unsure then use this function. This function tests whether 1 or more pixels has
+been found within the polygon and if not then the centroid use used to find a
+value for the polygon.</p>
+<p>If you are unsure as to whether the pixels are small enough to be contained
+within all the polygons then use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_lyr_obj</strong> – OGR vector layer object containing the geometries being
+processed and to which the stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>min_thres</strong> – a lower threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>max_thres</strong> – a upper threshold for values which will be included in
+the stats calculation.</p></li>
+<li><p><strong>out_no_data_val</strong> – output no data value if no valid pixels are within
+the polygon.</p></li>
+<li><p><strong>percentile</strong> – the percentile value to calculate (value between 0 and
+100 inclusive).</p></li>
+<li><p><strong>percentile_field</strong> – the name of the field for the percentile value (None or
+not specified to be ignored).</p></li>
+<li><p><strong>min_field</strong> – the name of the field for the min value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>max_field</strong> – the name of the field for the max value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>mean_field</strong> – the name of the field for the mean value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>stddev_field</strong> – the name of the field for the standard deviation value (None
+or not specified to be ignored).</p></li>
+<li><p><strong>sum_field</strong> – the name of the field for the sum value (None or not specified to
+be ignored).</p></li>
+<li><p><strong>count_field</strong> – the name of the field for the count (of number of pixels) value
+(None or not specified to be ignored).</p></li>
+<li><p><strong>mode_field</strong> – the name of the field for the mode value (None or not specified
+to be ignored).</p></li>
+<li><p><strong>median_field</strong> – the name of the field for the median value (None or not
+specified to be ignored).</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_band_pxl_counts_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_band_pxl_counts_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vals_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pxl_count'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_band_pxl_counts_file" title="Link to this definition"></a></dt>
+<dd><p>A function which counts the number of pixels for a set of image pixel values.
+It is expected that this function will be used with integer input images with
+specific values (e.g., Land cover map).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file which specifies the
+features and where the output stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>vals_lut</strong> – a dictionary with the pixel value of to be coutned as the key
+and the field name as the value.</p></li>
+<li><p><strong>total_field</strong> – The field name for the total number of pixels within the
+polygon. Default: pxl_count</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.calc_zonal_band_pxl_counts">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">calc_zonal_band_pxl_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vals_lut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pxl_count'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.calc_zonal_band_pxl_counts" title="Link to this definition"></a></dt>
+<dd><p>A function which counts the number of pixels for a set of image pixel values.
+It is expected that this function will be used with integer input images with
+specific values (e.g., Land cover map).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_lyr_obj</strong> – OGR vector layer object containing the geometries being
+processed and to which the stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>vals_lut</strong> – a dictionary with the pixel value of to be coutned as the key
+and the field name as the value.</p></li>
+<li><p><strong>total_field</strong> – The field name for the total number of pixels within the
+polygon. Default: pxl_count</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="extracting-pixels-to-hdf5">
+<h2>Extracting Pixels to HDF5<a class="headerlink" href="#extracting-pixels-to-hdf5" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.extract_zone_img_values_to_hdf">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">extract_zone_img_values_to_hdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msk_img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.extract_zone_img_values_to_hdf" title="Link to this definition"></a></dt>
+<dd><p>Extract the all the pixel values for raster regions to a HDF5 file
+(1 column for each image band).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input file</p></li>
+<li><p><strong>in_msk_img</strong> – is a string containing the name and path of the input
+image mask file.</p></li>
+<li><p><strong>out_h5_file</strong> – is a string containing the name and path of the output
+HDF5 file</p></li>
+<li><p><strong>mask_val</strong> – is an integer with the value of the pixel within the mask for
+which values are to be extracted (Default: 1)</p></li>
+<li><p><strong>datatype</strong> – is a rsgislib.TYPE_* value providing the data type of
+the output image. Default is None and therefore the datatype
+will match the input_img.</p></li>
+<li><p><strong>msk_img_band</strong> – is the bands within the mask image (Default: 1)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.zonalstats</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_values_to_hdf</span><span class="p">(</span><span class="n">input_img</span> <span class="o">=</span> <span class="s2">&quot;landsat.tif&quot;</span><span class="p">,</span>
+                                                   <span class="n">in_msk_img</span> <span class="o">=</span> <span class="s2">&quot;mask_img.tif&quot;</span><span class="p">,</span>
+                                                   <span class="n">out_h5_file</span> <span class="o">=</span> <span class="s2">&quot;img_pxl_vals.h5&quot;</span><span class="p">,</span>
+                                                   <span class="n">mask_val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                                   <span class="n">msk_img_band</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                                   <span class="n">datatype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.extract_zone_img_band_values_to_hdf">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">extract_zone_img_band_values_to_hdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_img_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msk_img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.extract_zone_img_band_values_to_hdf" title="Link to this definition"></a></dt>
+<dd><p>Extract the all the pixel values for raster regions to a HDF5 file
+(1 column for each image band).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_img_info</strong> – is a list of rsgislib.imageutils.ImageBandInfo objects with
+the image file names and list of image bands within that file
+to be extracted.</p></li>
+<li><p><strong>in_msk_img</strong> – is a string containing the name and path of the input
+image mask file.</p></li>
+<li><p><strong>out_h5_file</strong> – is a string containing the name and path of the output HDF5 file</p></li>
+<li><p><strong>mask_val</strong> – is an integer with the value of the pixel within the mask for
+which values are to be extracted (Default: 1)</p></li>
+<li><p><strong>datatype</strong> – is a rsgislib.TYPE_* value providing the data type of
+the output image. Default is None and therefore the datatype
+will match the first image in the in_img_info list.</p></li>
+<li><p><strong>msk_img_band</strong> – is the bands within the mask image (Default: 1)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.zonalstats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imageutils</span>
+
+<span class="n">in_img_info</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="n">in_img_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">ImageBandInfo</span><span class="p">(</span>
+        <span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;landsat.tif&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ls&quot;</span><span class="p">,</span>
+        <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">in_img_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">ImageBandInfo</span><span class="p">(</span>
+        <span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;ndvi.tif&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ndvi&quot;</span><span class="p">,</span>
+        <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">in_img_info</span><span class="o">=</span><span class="n">in_img_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="s2">&quot;mask_img.tif&quot;</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="s2">&quot;out_pxl_vals.h5&quot;</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">msk_img_band</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32FLOAT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.extract_zone_band_values_to_h5_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">extract_zone_band_values_to_h5_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_img_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_unq_id_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.extract_zone_band_values_to_h5_file" title="Link to this definition"></a></dt>
+<dd><p>A function which exports the pixels for the selected band intersecting with
+each feature in the raster image to a HDF5 file. The input vector layer requires
+a column with a unique ID which can be inserted into the output file name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_file</strong> – input vector file</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer within the input file which specifies the
+features and where the output stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the stats
+will be calculated. If defined the no data value of the band
+will be ignored.</p></li>
+<li><p><strong>out_img_base</strong> – The base path and file name for the output files.
+for example /path/to/file/something would produce an
+output file /path/to/file/something_1.h5</p></li>
+<li><p><strong>zone_unq_id_field</strong> – The column name within the vector layer with the
+unique ID which will be added to the output file
+name.</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.extract_zone_band_values_to_h5">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">extract_zone_band_values_to_h5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec_lyr_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_img_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_unq_id_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_def_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.extract_zone_band_values_to_h5" title="Link to this definition"></a></dt>
+<dd><p>A function which exports the pixels for the selected band intersecting with
+each feature in the raster image to a HDF5 file. The input vector layer requires
+a column with a unique ID which can be inserted into the output file name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec_lyr_obj</strong> – OGR vector layer object containing the geometries being
+processed and to which the stats will be written.</p></li>
+<li><p><strong>input_img</strong> – the values image</p></li>
+<li><p><strong>img_band</strong> – the index (starting at 1) of the image band for which the pixels
+to be exported.</p></li>
+<li><p><strong>out_img_base</strong> – The base path and file name for the output files.
+for example /path/to/file/something would produce an
+output file /path/to/file/something_1.h5</p></li>
+<li><p><strong>zone_unq_id_field</strong> – The column name within the vector layer with the
+unique ID which will be added to the output file
+name.</p></li>
+<li><p><strong>vec_def_epsg</strong> – an EPSG code can be specified for the vector layer is the
+projection is not well defined within the inputted
+vector layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.random_sample_hdf5_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">random_sample_hdf5_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.random_sample_hdf5_file" title="Link to this definition"></a></dt>
+<dd><p>A function which randomly samples a HDF5 of extracted values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_h5_file</strong> – is a string with the path to the input file.</p></li>
+<li><p><strong>out_h5_file</strong> – is a string with the path to the output file.</p></li>
+<li><p><strong>sample</strong> – is an integer with the number values to be sampled from the input file.</p></li>
+<li><p><strong>rnd_seed</strong> – is an integer which seeds the random number generator.</p></li>
+<li><p><strong>datatype</strong> – is a rsgislib.TYPE_* value providing the data type of the output image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.split_sample_hdf5_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">split_sample_hdf5_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_p1_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_p2_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.split_sample_hdf5_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_h5_file</strong> – is a string with the path to the input file.</p></li>
+<li><p><strong>out_h5_p1_file</strong> – is a string with the path to the output file.</p></li>
+<li><p><strong>out_h5_p2_file</strong> – is a string with the path to the output file.</p></li>
+<li><p><strong>sample</strong> – is an integer with the number values to be sampled from the input file.</p></li>
+<li><p><strong>rnd_seed</strong> – is an integer which seeds the random number generator.</p></li>
+<li><p><strong>datatype</strong> – is a rsgislib.TYPE_* value providing the data type of the output image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.merge_extracted_hdf5_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">merge_extracted_hdf5_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.merge_extracted_hdf5_data" title="Link to this definition"></a></dt>
+<dd><p>A function to merge a list of HDF files (e.g., from
+rsgislib.zonalstats.extractZoneImageBandValues2HDF)
+with the same number of variables (i.e., columns) into a single
+file. For example, if class training regions have been sourced
+from multiple images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5_files</strong> – a list of input files.</p></li>
+<li><p><strong>out_h5_file</strong> – the output file.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inTrainSamples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MSS_CloudTrain1.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;MSS_CloudTrain2.h5&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;MSS_CloudTrain3.h5&#39;</span><span class="p">]</span>
+<span class="n">cloudTrainSamples</span> <span class="o">=</span> <span class="s1">&#39;LandsatMSS_CloudTrainingSamples.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">merge_extracted_hdf5_data</span><span class="p">(</span><span class="n">inTrainSamples</span><span class="p">,</span> <span class="n">cloudTrainSamples</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.merge_extracted_hdf5_vars_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">merge_extracted_hdf5_vars_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.merge_extracted_hdf5_vars_data" title="Link to this definition"></a></dt>
+<dd><p>A function to merge a list of HDF files (e.g., from
+rsgislib.zonalstats.extractZoneImageBandValues2HDF)
+with the same number of features (i.e., rows) but
+different number of variables into a single file.
+For example, if class training regions have been
+sourced from multiple images (e.g., months)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5_files</strong> – a list of input files.</p></li>
+<li><p><strong>out_h5_file</strong> – the output file.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="extracting-image-chips-to-hdf5">
+<h2>Extracting Image Chips to HDF5<a class="headerlink" href="#extracting-image-chips-to-hdf5" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.extract_chip_zone_image_band_values_to_hdf">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">extract_chip_zone_image_band_values_to_hdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_image_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chip_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_hdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_chips</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.extract_chip_zone_image_band_values_to_hdf" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts a chip/window of image pixel values. The expectation is
+that this is used to train a classifier (see deep learning functions
+in classification) but it could be used to extract image ‘chips’ for other purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_image_info</strong> – is a list of rsgislib.imageutils.ImageBandInfo objects
+specifying the input images and bands</p></li>
+<li><p><strong>image_mask</strong> – is a single band input image to specify the regions of interest</p></li>
+<li><p><strong>mask_value</strong> – is the pixel value within the imageMask to specify the
+region of interest</p></li>
+<li><p><strong>chip_size</strong> – is the chip size .</p></li>
+<li><p><strong>output_hdf</strong> – is the output HDF5 file. If it all ready exists then it
+is overwritten.</p></li>
+<li><p><strong>rotate_chips</strong> – specify whether you wish to have the image chips rotated
+during extraction to increase the number of samples. Default
+is None and will therefore be ignored. Otherwise, provide
+a list of rotation angles in degrees (e.g., [30, 60, 90,
+120, 180])</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file (e.g.,
+rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.split_sample_chip_hdf5_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">split_sample_chip_hdf5_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remain_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.split_sample_chip_hdf5_file" title="Link to this definition"></a></dt>
+<dd><p>A function to split the HDF5 outputs from the
+rsgislib.zonalstats.extract_chip_zone_image_band_values_to_hdf
+function into two sets by taking a random set with the defined sample
+size from the input file, saving the sample and the remainder to output HDF5 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_h5_file</strong> – The input HDF5 file to the split.</p></li>
+<li><p><strong>sample_h5_file</strong> – The output HDF5 file with the sample outputted.</p></li>
+<li><p><strong>remain_h5_file</strong> – The output HDF5 file with the remainder outputted.</p></li>
+<li><p><strong>sample_size</strong> – An integer specifying the size of the sample to be taken.</p></li>
+<li><p><strong>rnd_seed</strong> – An integer specifying the seed for the random number generator,
+allowing the same ‘random’ sample to be taken.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.merge_extracted_hdf5_chip_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">merge_extracted_hdf5_chip_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.merge_extracted_hdf5_chip_data" title="Link to this definition"></a></dt>
+<dd><p>A function to merge a list of HDF files
+(e.g., from rsgislib.zonalstats.extract_chip_zone_image_band_values_to_hdf)
+with the same number of variables (i.e., image bands) and chip size into
+a single file. For example, if class training regions have been sourced
+from multiple images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5_files</strong> – a list of input files.</p></li>
+<li><p><strong>out_h5_file</strong> – the output file.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inTrainSamples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MSS_CloudTrain1.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;MSS_CloudTrain2.h5&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;MSS_CloudTrain3.h5&#39;</span><span class="p">]</span>
+<span class="n">cloudTrainSamples</span> <span class="o">=</span> <span class="s1">&#39;LandsatMSS_CloudTrainingSamples.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">merge_extracted_hdf5_chip_data</span><span class="p">(</span><span class="n">inTrainSamples</span><span class="p">,</span>
+                                                   <span class="n">cloudTrainSamples</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.extract_ref_chip_zone_image_band_values_to_hdf">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">extract_ref_chip_zone_image_band_values_to_hdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_image_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_img_band</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chip_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_hdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotate_chips</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.extract_ref_chip_zone_image_band_values_to_hdf" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts a chip/window of image pixel values. The expectation is
+that this is used to train a classifier (see deep learning functions in
+classification) but it could be used to extract image ‘chips’ for other purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_image_info</strong> – is a list of rsgislib.imageutils.ImageBandInfo objects
+specifying the input images and bands</p></li>
+<li><p><strong>ref_img</strong> – is an image file (same pixel size and projection as the other
+input images) which is used as the class training</p></li>
+<li><p><strong>ref_img_band</strong> – is the image band in the reference image to be used (only a
+single reference band can be used).</p></li>
+<li><p><strong>image_mask</strong> – is a single band input image to specify the regions of interest</p></li>
+<li><p><strong>mask_value</strong> – is the pixel value within the imageMask to specify the
+region of interest</p></li>
+<li><p><strong>chip_size</strong> – is the chip size .</p></li>
+<li><p><strong>output_hdf</strong> – is the output HDF5 file. If it all ready exists then it
+is overwritten.</p></li>
+<li><p><strong>rotate_chips</strong> – specify whether you wish to have the image chips rotated
+during extraction to increase the number of samples. Default
+is None and will therefore be ignored. Otherwise, provide a
+list of rotation angles in degrees (e.g., [30, 60, 90,
+120, 180])</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.split_sample_ref_chip_hdf5_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">split_sample_ref_chip_hdf5_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remain_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.split_sample_ref_chip_hdf5_file" title="Link to this definition"></a></dt>
+<dd><p>A function to split the HDF5 outputs from the
+rsgislib.zonalstats.extract_chip_zone_image_band_values_to_hdf
+function into two sets by taking a random set with the defined sample size
+from the input file, saving the sample and the remainder to output HDF5 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_h5_file</strong> – The input HDF5 file to the split.</p></li>
+<li><p><strong>sample_h5_file</strong> – The output HDF5 file with the sample outputted.</p></li>
+<li><p><strong>remain_h5_file</strong> – The output HDF5 file with the remainder outputted.</p></li>
+<li><p><strong>sample_size</strong> – An integer specifying the size of the sample to be taken.</p></li>
+<li><p><strong>rnd_seed</strong> – An integer specifying the seed for the random number generator,
+allowing the same ‘random’ sample to be taken.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.merge_extracted_hdf5_chip_ref_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">merge_extracted_hdf5_chip_ref_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.merge_extracted_hdf5_chip_ref_data" title="Link to this definition"></a></dt>
+<dd><p>A function to merge a list of HDF files
+(e.g., from rsgislib.zonalstats.extract_ref_chip_zone_image_band_values_to_hdf)
+with the same number of variables (i.e., image bands) and chip size into
+a single file. For example, if class training regions have been sourced
+from multiple images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5_files</strong> – a list of input files.</p></li>
+<li><p><strong>out_h5_file</strong> – the output file.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inTrainSamples</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MSS_CloudTrain1.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;MSS_CloudTrain2.h5&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;MSS_CloudTrain3.h5&#39;</span><span class="p">]</span>
+<span class="n">cloudTrainSamples</span> <span class="o">=</span> <span class="s1">&#39;LandsatMSS_CloudTrainingSamples.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">merge_extracted_hdf5_chip_ref_data</span><span class="p">(</span><span class="n">inTrainSamples</span><span class="p">,</span>
+                                                       <span class="n">cloudTrainSamples</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="hdf-utilities">
+<h2>HDF Utilities<a class="headerlink" href="#hdf-utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.msk_h5_smpls_to_finite_values">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">msk_h5_smpls_to_finite_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits_all_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.msk_h5_smpls_to_finite_values" title="Link to this definition"></a></dt>
+<dd><p>A function to remove values from a HDF5 sample file which are not finite.
+Upper and lower values can also be specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_h5_file</strong> – Input HDF5 file.</p></li>
+<li><p><strong>out_h5_file</strong> – Output HDF5 file.</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+<li><p><strong>lower_limit</strong> – Optional lower value threshold (if None then not used).</p></li>
+<li><p><strong>upper_limit</strong> – Optional upper value threshold (if None then not used).</p></li>
+<li><p><strong>limits_all_vars</strong> – If upper or lower thresholds specified then specify
+whether any or all of the variables need to be above
+the threshold.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.filter_h5_smpls_var_range">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">filter_h5_smpls_var_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.filter_h5_smpls_var_range" title="Link to this definition"></a></dt>
+<dd><p>A function which filters the data in the H5 file using the data values
+of one variable. The function will remove rows where the value of the
+specified variable is not within the range specified. Note, you must specify
+at least the lower_limit or upper_limit but both can also be specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_h5_file</strong> – Input HDF5 file.</p></li>
+<li><p><strong>out_h5_file</strong> – Output HDF5 file.</p></li>
+<li><p><strong>var_idx</strong> – The index of the variable to be used for filtering. Note,
+indexing numbering starts at 0.</p></li>
+<li><p><strong>lower_limit</strong> – Optional lower value threshold (if None then not used).</p></li>
+<li><p><strong>upper_limit</strong> – Optional upper value threshold (if None then not used).</p></li>
+<li><p><strong>datatype</strong> – is the data type used for the output HDF5 file
+(e.g., rsgislib.TYPE_32FLOAT). If None (default)
+then the output data type will be float32.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.get_hdf5_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">get_hdf5_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.zonalstats.get_hdf5_data" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>A function to get the data from a list of HDF files</dt><dd><p>(e.g., from rsgislib.zonalstats.extract_zone_img_band_values_to_hdf)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>h5_files</strong> – a list of input files.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy array with the data or None is there is no data to return.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.write_data_to_h5">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">write_data_to_h5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_h5_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.zonalstats.write_data_to_h5" title="Link to this definition"></a></dt>
+<dd><p>A function which writes the data array to a HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_arr</strong> – Numpy array - shape: samples x variables</p></li>
+<li><p><strong>out_h5_file</strong> – the output hdf5 file path</p></li>
+<li><p><strong>datatype</strong> – the output data type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.zonalstats.get_var_from_hdf5_data">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.zonalstats.</span></span><span class="sig-name descname"><span class="pre">get_var_from_hdf5_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h5_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.zonalstats.get_var_from_hdf5_data" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>A function to get the data for a specific variable from a list of HDF files</dt><dd><p>(e.g., from rsgislib.zonalstats.extract_zone_img_band_values_to_hdf)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>h5_files</strong> – a list of input files.</p></li>
+<li><p><strong>var_idx</strong> – the index for the variable of interest. Note array indexing
+starts at 0. So if you want image band 2 then that will be
+index 1 etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy array with the data or None is there is no data to return.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_vectorutils.html" class="btn btn-neutral float-left" title="RSGISLib Vector Utils Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

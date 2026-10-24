@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Spectral Unmixing &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Image Utilities Module" href="rsgislib_imageutils.html" />
+    <link rel="prev" title="RSGISLib Image Registration" href="rsgislib_imageregistration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Spectral Unmixing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#endmembers">Endmembers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.extract_avg_endmembers"><code class="docutils literal notranslate"><span class="pre">extract_avg_endmembers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.read_endmembers_mtxt"><code class="docutils literal notranslate"><span class="pre">read_endmembers_mtxt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.write_endmembers_mtxt"><code class="docutils literal notranslate"><span class="pre">write_endmembers_mtxt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.plot_endmembers"><code class="docutils literal notranslate"><span class="pre">plot_endmembers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.are_endmembers_equal"><code class="docutils literal notranslate"><span class="pre">are_endmembers_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.calc_ppi"><code class="docutils literal notranslate"><span class="pre">calc_ppi()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#single-endmember-linear-unmixing">Single Endmember Linear Unmixing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.spec_unmix_spts_ucls"><code class="docutils literal notranslate"><span class="pre">spec_unmix_spts_ucls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.spec_unmix_spts_nnls"><code class="docutils literal notranslate"><span class="pre">spec_unmix_spts_nnls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.spec_unmix_spts_fcls"><code class="docutils literal notranslate"><span class="pre">spec_unmix_spts_fcls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.spec_unmix_pymcr_nnls"><code class="docutils literal notranslate"><span class="pre">spec_unmix_pymcr_nnls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.spec_unmix_pymcr_fcls"><code class="docutils literal notranslate"><span class="pre">spec_unmix_pymcr_fcls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.exhcon_linear_spec_unmix"><code class="docutils literal notranslate"><span class="pre">exhcon_linear_spec_unmix()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mutli-endmember-linear-unmixing">Mutli Endmember Linear Unmixing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.summarise_multi_endmember_linear_unmixing"><code class="docutils literal notranslate"><span class="pre">summarise_multi_endmember_linear_unmixing()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utilties">Utilties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.rescale_unmixing_results"><code class="docutils literal notranslate"><span class="pre">rescale_unmixing_results()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.predict_refl_linear_unmixing"><code class="docutils literal notranslate"><span class="pre">predict_refl_linear_unmixing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalc.specunmixing.calc_unmixing_rmse_residual_err"><code class="docutils literal notranslate"><span class="pre">calc_unmixing_rmse_residual_err()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Spectral Unmixing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-spectral-unmixing">
+<h1>RSGISLib Spectral Unmixing<a class="headerlink" href="#rsgislib-spectral-unmixing" title="Link to this heading"></a></h1>
+<section id="endmembers">
+<h2>Endmembers<a class="headerlink" href="#endmembers" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.extract_avg_endmembers">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">extract_avg_endmembers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pxl_in_poly_method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.extract_avg_endmembers" title="Link to this definition"></a></dt>
+<dd><p>Extract the average endmembers per class which are saved as an appropriate 
+matrix file to be used within the linear spectral unmixing commands. 
+Each polygon defined is another endmember in the outputted matric file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image.</p></li>
+<li><p><strong>vec_file</strong> – is a string containing the name of the input vector.</p></li>
+<li><p><strong>vec_lyr</strong> – is a string containing the name of the input vector layer name.</p></li>
+<li><p><strong>out_file</strong> – is a string containing name of the output matrix file - do not include the file extension (.mtxt).
+The file extension will get added during the analysis. Be aware of this when inputting this file 
+into further processing steps as the file extension (.mtxt) will then be needed.</p></li>
+<li><p><strong>pxl_in_poly_method</strong> – is the method for determining if a pixel is included with a polygon of type rsgislib.zonalstats.METHOD_*.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.read_endmembers_mtxt">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">read_endmembers_mtxt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.read_endmembers_mtxt" title="Link to this definition"></a></dt>
+<dd><p>A function to read endmembers mtxt file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endmembers_file</strong> – File path to the mtxt input file.</p></li>
+<li><p><strong>gain</strong> – A gain for the endmembers (input endmember / gain = output endmember).
+If 1 then ignored.</p></li>
+<li><p><strong>weight</strong> – Optional (if None ignored) to provide a weight to implement the
+approach of Scarth et al (2010) adding a weight to the least squares
+optimisation to get the abundances to sum to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[m, n, end_mem_arr]; m size, n size and a numpy array with the end members</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.write_endmembers_mtxt">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">write_endmembers_mtxt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endmembers_np_arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.write_endmembers_mtxt" title="Link to this definition"></a></dt>
+<dd><p>A function to creates endmembers mtxt file from a numpy array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endmembers_np_arr</strong> – Numpy array (m, n) with the endmembers.</p></li>
+<li><p><strong>endmembers_file</strong> – File path to the mtxt output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.plot_endmembers">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">plot_endmembers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmember_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_plot_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.plot_endmembers" title="Link to this definition"></a></dt>
+<dd><p>A function to plot endmembers for visualisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endmembers_file</strong> – input endmembers file (.mtxt)</p></li>
+<li><p><strong>endmember_names</strong> – the names of the endmembers in the same order as the
+endmembers_file.</p></li>
+<li><p><strong>out_plot_file</strong> – the output plot file.</p></li>
+<li><p><strong>plot_title</strong> – A title for the plot (Optional)</p></li>
+<li><p><strong>gain</strong> – A gain to get the reflectance values as a percentage (Optional)
+(e.g., if multiplied by 1000 then the gain would be 10
+if multiplied by 10,000 then the gain would be 100 )</p></li>
+<li><p><strong>wavelengths</strong> – A list of wavelengths for the image bands. Optional, if not
+provided then band numbers will be used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.are_endmembers_equal">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">are_endmembers_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_endmember_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmp_endmember_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flt_dif</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.are_endmembers_equal" title="Link to this definition"></a></dt>
+<dd><p>A function which compares two endmembers files to check whether they are
+equal or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ref_endmember_file</strong> – File path to the mtxt input file.</p></li>
+<li><p><strong>cmp_endmember_file</strong> – File path to the mtxt input file.</p></li>
+<li><p><strong>flt_dif</strong> – A threshold for comparing two floating point numbers as being
+identical - this avoids issues with rounding and the number of
+decimal figures stored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.calc_ppi">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">calc_ppi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lthres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uthres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.calc_ppi" title="Link to this definition"></a></dt>
+<dd><p>A function which calculate the pixel purity index (PPI). Using an appropriate
+number of iterations this can take a little while to run. Note, the whole input
+image is read into memory.</p>
+<p>It is recommended that you use the an MNF/PCA output and rescale that so all
+bands have the same range to improve the PPI result.</p>
+<dl class="simple">
+<dt>Boardman J.W., Kruse F.A, and Green R.O., “Mapping Target Signatures via</dt><dd><p>Partial Unmixing of AVIRIS Data,” Pasadena, California, USA, 23 Jan 1995,
+URI: <a class="reference external" href="http://hdl.handle.net/2014/33635">http://hdl.handle.net/2014/33635</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – image values image file path.</p></li>
+<li><p><strong>output_img</strong> – output image</p></li>
+<li><p><strong>gdalformat</strong> – GDAL file format (e.g., KEA) of the output image.</p></li>
+<li><p><strong>niters</strong> – number of iterations</p></li>
+<li><p><strong>thres</strong> – a threshold in the image space (after again as been applied) to
+select more pixels around the extreme (e.g., 1% reflectance)</p></li>
+<li><p><strong>img_gain</strong> – the gain by which the image was multipled, reflectance images
+are typically multiplied by 1000 or 10000. The result should be
+an image with a range 0-1.</p></li>
+<li><p><strong>seed</strong> – seed for the random squence of numbers being generated. Using the
+same seed will result in the same seqence and therefore the
+same output.</p></li>
+<li><p><strong>calc_stats</strong> – whether to calculate image statistics and pyramids on
+the output image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="single-endmember-linear-unmixing">
+<h2>Single Endmember Linear Unmixing<a class="headerlink" href="#single-endmember-linear-unmixing" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.spec_unmix_spts_ucls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">spec_unmix_spts_ucls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.spec_unmix_spts_ucls" title="Link to this definition"></a></dt>
+<dd><p>This function performs spectral unmixing using an unconstrain model
+using the pysptools module</p>
+<p>Note, pysptools needs to be installed to use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>valid_msk_img</strong> – an image file representing the valid data region</p></li>
+<li><p><strong>valid_msk_val</strong> – image pixel value in the mask for the valid data region</p></li>
+<li><p><strong>output_img</strong> – the output image file</p></li>
+<li><p><strong>endmembers_file</strong> – the endmembers (<a href="#id1"><span class="problematic" id="id2">*</span></a>.mtxt) file extracted using the
+specunmixing.extractAvgEndMembers function</p></li>
+<li><p><strong>gdalformat</strong> – the output file format. (Default: KEA)</p></li>
+<li><p><strong>gain</strong> – A gain for the endmembers and image spectra (input spectra / gain =
+output spectra). If 1 then ignored.</p></li>
+<li><p><strong>weight</strong> – Optional (if None ignored) to provide a weight to implement the
+approach of Scarth et al (2010) adding a weight to the least squares
+optimisation to get the abundances to sum to 1.</p></li>
+<li><p><strong>calc_stats</strong> – Boolean specifying whether to calculate pyramids and
+metadata stats (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>References:</dt><dd><p>Scarth, P., Roder, A., &amp; Schmidt, M. (2010). Tracking grazing pressure
+and climate interaction—The role of Landsat fractional cover in time
+series analysis. Proceedings of the 15th Australasian Remote Sensing
+and Photogrammetry Conference Australia: Alice Springs.
+<a class="reference external" href="http://dx.doi.org/10.6084/m9">http://dx.doi.org/10.6084/m9</a>.ﬁgshare.94250.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.spec_unmix_spts_nnls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">spec_unmix_spts_nnls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.spec_unmix_spts_nnls" title="Link to this definition"></a></dt>
+<dd><p>This function performs spectral unmixing using non-negative least squares
+using the pysptools module</p>
+<p>Note, pysptools needs to be installed to use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>valid_msk_img</strong> – an image file representing the valid data region</p></li>
+<li><p><strong>valid_msk_val</strong> – image pixel value in the mask for the valid data region</p></li>
+<li><p><strong>output_img</strong> – the output image file</p></li>
+<li><p><strong>endmembers_file</strong> – the endmembers (<a href="#id3"><span class="problematic" id="id4">*</span></a>.mtxt) file extracted using the
+specunmixing.extractAvgEndMembers function</p></li>
+<li><p><strong>gdalformat</strong> – the output file format. (Default: KEA)</p></li>
+<li><p><strong>gain</strong> – A gain for the endmembers and image spectra (input spectra / gain =
+output spectra). If 1 then ignored.</p></li>
+<li><p><strong>weight</strong> – Optional (if None ignored) to provide a weight to implement the
+approach of Scarth et al (2010) adding a weight to the least
+squares optimisation to get the abundances to sum to 1.</p></li>
+<li><p><strong>calc_stats</strong> – Boolean specifying whether to calculate pyramids and
+metadata stats (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>References:</dt><dd><p>Scarth, P., Roder, A., &amp; Schmidt, M. (2010). Tracking grazing pressure
+and climate interaction—The role of Landsat fractional cover in time
+series analysis. Proceedings of the 15th Australasian Remote Sensing
+and Photogrammetry Conference Australia: Alice Springs.
+<a class="reference external" href="http://dx.doi.org/10.6084/m9">http://dx.doi.org/10.6084/m9</a>.ﬁgshare.94250.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.spec_unmix_spts_fcls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">spec_unmix_spts_fcls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.spec_unmix_spts_fcls" title="Link to this definition"></a></dt>
+<dd><p>This function performs spectral unmixing using a full constrained (non-negative
+and sum to 1) module using the pysptools module</p>
+<p>Note, pysptools and cvxopt modules need to be installed to use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>valid_msk_img</strong> – an image file representing the valid data region</p></li>
+<li><p><strong>valid_msk_val</strong> – image pixel value in the mask for the valid data region</p></li>
+<li><p><strong>output_img</strong> – the output image file</p></li>
+<li><p><strong>endmembers_file</strong> – the endmembers (<a href="#id5"><span class="problematic" id="id6">*</span></a>.mtxt) file extracted using the
+specunmixing.extractAvgEndMembers function</p></li>
+<li><p><strong>gdalformat</strong> – the output file format. (Default: KEA)</p></li>
+<li><p><strong>gain</strong> – A gain for the endmembers and image spectra (input spectra / gain =
+output spectra). If 1 then ignored.</p></li>
+<li><p><strong>calc_stats</strong> – Boolean specifying whether to calculate pyramids and metadata
+stats (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.spec_unmix_pymcr_nnls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">spec_unmix_pymcr_nnls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.spec_unmix_pymcr_nnls" title="Link to this definition"></a></dt>
+<dd><p>This function performs spectral unmixing using non-negative least squares
+using the pymcr module</p>
+<p>Note, pymcr needs to be installed to use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>valid_msk_img</strong> – an image file representing the valid data region</p></li>
+<li><p><strong>valid_msk_val</strong> – image pixel value in the mask for the valid data region</p></li>
+<li><p><strong>output_img</strong> – the output image file</p></li>
+<li><p><strong>endmembers_file</strong> – the endmembers (<a href="#id7"><span class="problematic" id="id8">*</span></a>.mtxt) file extracted using the
+specunmixing.extractAvgEndMembers function</p></li>
+<li><p><strong>gdalformat</strong> – the output file format. (Default: KEA)</p></li>
+<li><p><strong>gain</strong> – A gain for the endmembers and image spectra (input spectra / gain =
+output spectra). If 1 then ignored.</p></li>
+<li><p><strong>weight</strong> – Optional (if None ignored) to provide a weight to implement the
+approach of Scarth et al (2010) adding a weight to the least squares
+optimisation to get the abundances to sum to 1.</p></li>
+<li><p><strong>calc_stats</strong> – Boolean specifying whether to calculate pyramids and metadata
+stats (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>References:</dt><dd><p>Scarth, P., Roder, A., &amp; Schmidt, M. (2010). Tracking grazing pressure
+and climate interaction—The role of Landsat fractional cover in time
+series analysis. Proceedings of the 15th Australasian Remote Sensing
+and Photogrammetry Conference Australia: Alice Springs.
+<a class="reference external" href="http://dx.doi.org/10.6084/m9">http://dx.doi.org/10.6084/m9</a>.ﬁgshare.94250.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.spec_unmix_pymcr_fcls">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">spec_unmix_pymcr_fcls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_msk_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.spec_unmix_pymcr_fcls" title="Link to this definition"></a></dt>
+<dd><p>This function performs spectral unmixing using a full constrained (non-negative
+and sum to 1) module using the pymcr module</p>
+<p>Note, pymcr needs to be installed to use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>valid_msk_img</strong> – an image file representing the valid data region</p></li>
+<li><p><strong>valid_msk_val</strong> – image pixel value in the mask for the valid data region</p></li>
+<li><p><strong>output_img</strong> – the output image file</p></li>
+<li><p><strong>endmembers_file</strong> – the endmembers (<a href="#id9"><span class="problematic" id="id10">*</span></a>.mtxt) file extracted using the
+specunmixing.extractAvgEndMembers function</p></li>
+<li><p><strong>gdalformat</strong> – the output file format. (Default: KEA)</p></li>
+<li><p><strong>gain</strong> – A gain for the endmembers and image spectra (input spectra / gain =
+output spectra). If 1 then ignored.</p></li>
+<li><p><strong>calc_stats</strong> – Boolean specifying whether to calculate pyramids and metadata
+stats (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.exhcon_linear_spec_unmix">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">exhcon_linear_spec_unmix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmember_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.exhcon_linear_spec_unmix" title="Link to this definition"></a></dt>
+<dd><p>Performs an exhaustive constrained linear spectral unmixing of the input image for a set of endmembers.</p>
+<p><strong>Warning. This methods is slow (!!) to execute</strong></p>
+<p>Endmember polygons are extracted using rsgislib.imagecalc.specunmixing.extract_avg_endmembers() where each polygon 
+defines an endmember.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg KEA</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>endmember_file</strong> – is a string containing the names of the file containing the end members (.mtxt)</p></li>
+<li><p><strong>step_res</strong> – is a float specifying the gap between steps in the search space. Value needs to be between 0 and 1. (i.e., 0.05)</p></li>
+<li><p><strong>gain</strong> – is a float specifying a gain which can be applied to the output pixel values (outvalue = offset + (gain * value)). Optional, default = 1.</p></li>
+<li><p><strong>offset</strong> – is a float specifying an offset which can be applied to the output pixel values (outvalue = offset + (gain * value)). Optional, default = 0.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imagecalc.specunmixing</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib</span>
+
+<span class="n">imageLSImage</span> <span class="o">=</span> <span class="s2">&quot;./LS8_20130519_lat52lon42_r24p204_rad_srefstdmdl.kea&quot;</span>
+<span class="n">unmixedImage</span> <span class="o">=</span> <span class="s2">&quot;./LS8_20130519_lat52lon42_r24p204_rad_srefstdmdl_unmix.kea&quot;</span>
+<span class="n">roiSHP</span> <span class="o">=</span> <span class="s2">&quot;./ROIs.shp&quot;</span>
+<span class="n">roiSHPLyr</span> <span class="o">=</span> <span class="s2">&quot;ROIs&quot;</span>
+<span class="n">endmembersFile</span> <span class="o">=</span> <span class="s2">&quot;./endmembers&quot;</span>
+
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imagecalc</span><span class="o">.</span><span class="n">specunmixing</span><span class="o">.</span><span class="n">extract_avg_endmembers</span><span class="p">(</span><span class="n">imageLSImage</span><span class="p">,</span> <span class="n">roiSHP</span><span class="p">,</span> <span class="n">roiSHPLyr</span><span class="p">,</span> <span class="n">endmembersFile</span><span class="p">)</span>
+
+<span class="n">lsumGain</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">lsumOffset</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">endmembersFile</span> <span class="o">=</span> <span class="s2">&quot;./endmembers.mtxt&quot;</span>
+<span class="n">stepResolution</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imagecalc</span><span class="o">.</span><span class="n">specunmixing</span><span class="o">.</span><span class="n">exhcon_linear_spec_unmix</span><span class="p">(</span><span class="n">imageLSImage</span><span class="p">,</span> <span class="s2">&quot;KEA&quot;</span><span class="p">,</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32FLOAT</span><span class="p">,</span> <span class="n">unmixedImage</span><span class="p">,</span> <span class="n">endmembersFile</span><span class="p">,</span> <span class="n">stepResolution</span><span class="p">,</span> <span class="n">lsumGain</span><span class="p">,</span> <span class="n">lsumOffset</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="mutli-endmember-linear-unmixing">
+<h2>Mutli Endmember Linear Unmixing<a class="headerlink" href="#mutli-endmember-linear-unmixing" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.summarise_multi_endmember_linear_unmixing">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">summarise_multi_endmember_linear_unmixing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_unmixed_datasets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_unmix_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_ref_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.summarise_multi_endmember_linear_unmixing" title="Link to this definition"></a></dt>
+<dd><p>A function which merges multiple linear spectral unmixing results using different
+methods of unmixing, endmembers and number of endmembers so create a single
+combined unmixed result. The Root Mean Square Percentage Error (RMSPE) is used
+to identified which unmixing is the ‘best’ on a per-pixel basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – the original input reflectance image file.</p></li>
+<li><p><strong>in_unmixed_datasets</strong> – a list of ImageEndmemberInfo objects with the unmixed
+image, endmember file and list of endmember names.</p></li>
+<li><p><strong>out_unmix_img</strong> – the output summarised unmixed image.</p></li>
+<li><p><strong>out_ref_img</strong> – the output reference image referencing the image/endmembers
+associated with each pixel. If the KEA format is used then
+the RAT will be populated with the file path to the endmembers</p></li>
+<li><p><strong>tmp_dir</strong> – a tmp directory where outputs will be written during processing and
+can be deleted once processing is finished.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format (Default: KEA)</p></li>
+<li><p><strong>calc_stats</strong> – Specify whether image pyramids and statistics will be calculated.
+(Default: True). If True and the output file format is KEA then
+the reference image RAT will be populated with the endmember
+file names.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="utilties">
+<h2>Utilties<a class="headerlink" href="#utilties" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.rescale_unmixing_results">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">rescale_unmixing_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.rescale_unmixing_results" title="Link to this definition"></a></dt>
+<dd><p>A function which rescales an output from a spectral unmixing
+(e.g., rsgislib.imagecalc.specunmixing.spec_unmix_spts_ucls) so that
+negative values are removed (set to 0) and each pixel sums to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputImg</strong> – Input image with the spectral unmixing result
+(pixels need to range from 0-1)</p></li>
+<li><p><strong>outputImg</strong> – Output image with the result of the rescaling (pixel values
+will be in range 0-1 without scale factor &gt; 1)</p></li>
+<li><p><strong>gdalformat</strong> – the file format of the output file.</p></li>
+<li><p><strong>calc_stats</strong> – if true then image statistics and pyramids for the output image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.predict_refl_linear_unmixing">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">predict_refl_linear_unmixing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_unmix_coefs_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.predict_refl_linear_unmixing" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate the predicted pixel value using the inputted
+abundances and endmembers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_unmix_coefs_img</strong> – The unmixed abundance coefficients.</p></li>
+<li><p><strong>endmembers_file</strong> – The endmembers file used for the unmixing in the
+RSGISLib mtxt format.</p></li>
+<li><p><strong>output_img</strong> – The file path to the GDAL writable output image</p></li>
+<li><p><strong>gdalformat</strong> – The output image format to be used.</p></li>
+<li><p><strong>calc_stats</strong> – If True (default) then image statistics and pyramids are
+calculated for the output images</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalc.specunmixing.calc_unmixing_rmse_residual_err">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalc.specunmixing.</span></span><span class="sig-name descname"><span class="pre">calc_unmixing_rmse_residual_err</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_unmix_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endmembers_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalc.specunmixing.calc_unmixing_rmse_residual_err" title="Link to this definition"></a></dt>
+<dd><p>A function to calculate the prediction residual, RMSE and RMSPE using the defined
+abundances and endmembers.</p>
+<p>RMSE: Root Mean Squared Error
+RMSPE: Root Mean Squared Percentage Error</p>
+<p>Note. the residual and RMSE will be scaled with the input data so if you have
+multiplied your reflectance values by 1000 (i.e., range 0 - 1000) then the
+residual and RMSE values will also be in this range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_refl_img</strong> – The original input reference image.</p></li>
+<li><p><strong>input_unmix_coef_img</strong> – The unmixed abundance coefficients.</p></li>
+<li><p><strong>endmembers_file</strong> – The endmembers file used for the unmixing in the
+RSGISLib mtxt format.</p></li>
+<li><p><strong>output_image</strong> – The file path to the GDAL writable output image
+(Band 1: RMSE,  Band 2: RMSPE, Band 3: Residual)</p></li>
+<li><p><strong>gdalformat</strong> – The output image format to be used.</p></li>
+<li><p><strong>calc_stats</strong> – If True (default) then image statistics and pyramids are
+calculated for the output images</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_imageregistration.html" class="btn btn-neutral float-left" title="RSGISLib Image Registration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_imageutils.html" class="btn btn-neutral float-right" title="RSGISLib Image Utilities Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

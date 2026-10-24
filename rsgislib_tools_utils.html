@@ -1,0 +1,1090 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Utility Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Mapping Tools" href="rsgislib_tools_mapping.html" />
+    <link rel="prev" title="RSGISLib File Tools" href="rsgislib_tools_filetools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Utility Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unique-value">Unique Value</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.uid_generator"><code class="docutils literal notranslate"><span class="pre">uid_generator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#text-file-i-o">Text File I/O</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.read_text_file"><code class="docutils literal notranslate"><span class="pre">read_text_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.read_text_file_no_new_lines"><code class="docutils literal notranslate"><span class="pre">read_text_file_no_new_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.read_text_file_to_list"><code class="docutils literal notranslate"><span class="pre">read_text_file_to_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.write_list_to_file"><code class="docutils literal notranslate"><span class="pre">write_list_to_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.write_data_to_file"><code class="docutils literal notranslate"><span class="pre">write_data_to_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.create_ascii_text_file"><code class="docutils literal notranslate"><span class="pre">create_ascii_text_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.prettify_xml_file"><code class="docutils literal notranslate"><span class="pre">prettify_xml_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#json-file-i-o">JSON File I/O</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.write_dict_to_json"><code class="docutils literal notranslate"><span class="pre">write_dict_to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.write_dict_to_json_gz"><code class="docutils literal notranslate"><span class="pre">write_dict_to_json_gz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.read_json_to_dict"><code class="docutils literal notranslate"><span class="pre">read_json_to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.read_gz_json_to_dict"><code class="docutils literal notranslate"><span class="pre">read_gz_json_to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parse-dict-json">Parse Dict/JSON</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_to_json_str"><code class="docutils literal notranslate"><span class="pre">dict_to_json_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_does_path_exist"><code class="docutils literal notranslate"><span class="pre">dict_struct_does_path_exist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_str_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_str_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_boolean_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_boolean_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_date_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_date_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_datetime_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_datetime_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_str_list_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_str_list_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_numeric_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_numeric_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.dict_struct_get_list_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_list_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#strings">Strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.zero_pad_num_str"><code class="docutils literal notranslate"><span class="pre">zero_pad_num_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.remove_repeated_chars"><code class="docutils literal notranslate"><span class="pre">remove_repeated_chars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.check_str"><code class="docutils literal notranslate"><span class="pre">check_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#encode-string">Encode String</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.encode_base64_text"><code class="docutils literal notranslate"><span class="pre">encode_base64_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.decode_base64_text"><code class="docutils literal notranslate"><span class="pre">decode_base64_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.create_username_password_file"><code class="docutils literal notranslate"><span class="pre">create_username_password_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.get_username_password"><code class="docutils literal notranslate"><span class="pre">get_username_password()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numeric">Numeric</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.is_number"><code class="docutils literal notranslate"><span class="pre">is_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.in_bounds"><code class="docutils literal notranslate"><span class="pre">in_bounds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.mixed_signs"><code class="docutils literal notranslate"><span class="pre">mixed_signs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.negative"><code class="docutils literal notranslate"><span class="pre">negative()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.is_odd"><code class="docutils literal notranslate"><span class="pre">is_odd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#colours">Colours</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.hex_to_rgb"><code class="docutils literal notranslate"><span class="pre">hex_to_rgb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.rgb_to_hex"><code class="docutils literal notranslate"><span class="pre">rgb_to_hex()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dates">Dates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.get_days_since"><code class="docutils literal notranslate"><span class="pre">get_days_since()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.get_days_since_date"><code class="docutils literal notranslate"><span class="pre">get_days_since_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.find_month_end_date"><code class="docutils literal notranslate"><span class="pre">find_month_end_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.get_datetime_increment_lst"><code class="docutils literal notranslate"><span class="pre">get_datetime_increment_lst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.is_summer_winter"><code class="docutils literal notranslate"><span class="pre">is_summer_winter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.create_year_month_start_end_lst"><code class="docutils literal notranslate"><span class="pre">create_year_month_start_end_lst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.create_year_month_n_months_lst"><code class="docutils literal notranslate"><span class="pre">create_year_month_n_months_lst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#powerset">Powerset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.powerset_iter"><code class="docutils literal notranslate"><span class="pre">powerset_iter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.powerset_lst"><code class="docutils literal notranslate"><span class="pre">powerset_lst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.create_var_list"><code class="docutils literal notranslate"><span class="pre">create_var_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compute-environment">Compute Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.get_environment_variable"><code class="docutils literal notranslate"><span class="pre">get_environment_variable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utils.num_process_cores"><code class="docutils literal notranslate"><span class="pre">num_process_cores()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib Utility Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-utility-tools">
+<h1>RSGISLib Utility Tools<a class="headerlink" href="#rsgislib-utility-tools" title="Link to this heading"></a></h1>
+<section id="unique-value">
+<h2>Unique Value<a class="headerlink" href="#unique-value" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.uid_generator">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">uid_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.uid_generator" title="Link to this definition"></a></dt>
+<dd><p>A function which will generate a ‘random’ string of the specified length
+based on the UUID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – the length of the returned string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string of length size.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="text-file-i-o">
+<h2>Text File I/O<a class="headerlink" href="#text-file-i-o" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.read_text_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">read_text_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.read_text_file" title="Link to this definition"></a></dt>
+<dd><p>Read a text file into a single string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – File path to the input file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.read_text_file_no_new_lines">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">read_text_file_no_new_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.read_text_file_no_new_lines" title="Link to this definition"></a></dt>
+<dd><p>Read a text file into a single string removing new lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – File path to the input file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.read_text_file_to_list">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">read_text_file_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_empty_lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.read_text_file_to_list" title="Link to this definition"></a></dt>
+<dd><p>Read a text file into a list where each line is an element in the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – File path to the input file.</p></li>
+<li><p><strong>include_empty_lines</strong> – Include empty lines within the line (Default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.write_list_to_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">write_list_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.write_list_to_file" title="Link to this definition"></a></dt>
+<dd><p>Write a list a text file, one line per item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_lst</strong> – List of values to be written to the output file.</p></li>
+<li><p><strong>out_file</strong> – File path to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.write_data_to_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">write_data_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.write_data_to_file" title="Link to this definition"></a></dt>
+<dd><p>Write some data (a string or can be converted to a string using str(data_val) to
+an output text file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_val</strong> – Data to be written to the output file.</p></li>
+<li><p><strong>out_file</strong> – File path to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.create_ascii_text_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">create_ascii_text_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.create_ascii_text_file" title="Link to this definition"></a></dt>
+<dd><p>A function which will ensure that an input text file will
+only have ascii characters. Non-ascii characters will be
+removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – input file path</p></li>
+<li><p><strong>output_file</strong> – output file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.prettify_xml_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">prettify_xml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.prettify_xml_file" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>A function which prettifies an XML file - i.e.,
+inserts new lines and tabs.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – The input file path.</p></li>
+<li><p><strong>output_file</strong> – The output file path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="json-file-i-o">
+<h2>JSON File I/O<a class="headerlink" href="#json-file-i-o" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.write_dict_to_json">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">write_dict_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.write_dict_to_json" title="Link to this definition"></a></dt>
+<dd><p>Write some data to a JSON file. The data would commonly be structured as a dict
+but could also be a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> – The dict (or list) to be written to the output JSON file.</p></li>
+<li><p><strong>out_file</strong> – The file path to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.write_dict_to_json_gz">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">write_dict_to_json_gz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.write_dict_to_json_gz" title="Link to this definition"></a></dt>
+<dd><p>Write some data to a JSON file compressed with gzip. The data would commonly be
+structured as a dict but could also be a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> – The dict (or list) to be written to the output JSON file.</p></li>
+<li><p><strong>out_file</strong> – The file path to the output file.</p></li>
+<li><p><strong>encoding</strong> – the character set encoding (default: utf-8)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.read_json_to_dict">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">read_json_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.read_json_to_dict" title="Link to this definition"></a></dt>
+<dd><p>Read a JSON file. Will return a list or dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – input JSON file path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.read_gz_json_to_dict">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">read_gz_json_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.read_gz_json_to_dict" title="Link to this definition"></a></dt>
+<dd><p>Read a JSON file. Will return a list or dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – input JSON file path.</p></li>
+<li><p><strong>encoding</strong> – the character set encoding (default: utf-8)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="parse-dict-json">
+<h2>Parse Dict/JSON<a class="headerlink" href="#parse-dict-json" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_to_json_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_to_json_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_to_json_str" title="Link to this definition"></a></dt>
+<dd><p>Write some data to a JSON file. The data would commonly be structured as a dict
+but could also be a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dict</strong> – The dict (or list) to be written to the output JSON file.</p></li>
+<li><p><strong>out_file</strong> – The file path to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_does_path_exist">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_does_path_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_does_path_exist" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether a path exists within JSON file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_str_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_str_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_str_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a single string value from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+<li><p><strong>valid_values</strong> – An optional list of valid values. An exception will be
+thrown if a list is provided and the string value found
+is not within the list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the string value at the path provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_boolean_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_boolean_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_boolean_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a single boolean value from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_date_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_date_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y-%m-%d'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_date_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a single date value from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+<li><p><strong>date_format</strong> – a string or list of strings for the date/time format
+to be parsed by datetime.datetime.strptime.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a date object with the value at the path specified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_datetime_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_datetime_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_time_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y-%m-%dT%H:%M:%S.%f'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_datetime_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a single date value from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+<li><p><strong>date_time_format</strong> – a string or list of strings for the date/time format
+to be parsed by datetime.datetime.strptime.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>datetime object with the value at the path provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_str_list_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_str_list_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_str_list_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a list of string values from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+<li><p><strong>valid_values</strong> – An optional list of valid values. An exception will be
+thrown if a list is provided and a string value found
+is not within the list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_numeric_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_numeric_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_numeric_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a single numeric value from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings specifying the path within the structure</p></li>
+<li><p><strong>valid_lower</strong> – optional lower valid bounds, error throw if outside the bounds.</p></li>
+<li><p><strong>valid_upper</strong> – optional upper valid bounds, error throw if outside the bounds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>numeric value at path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.dict_struct_get_list_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">dict_struct_get_list_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_struct_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.dict_struct_get_list_value" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a list of values from a JSON structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_struct_obj</strong> – the structure of dicts (i.e., JSON) to be searched</p></li>
+<li><p><strong>tree_sequence</strong> – list of strings  specifying the path within the structure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.zero_pad_num_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">zero_pad_num_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_n_digts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integerise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.zero_pad_num_str" title="Link to this definition"></a></dt>
+<dd><p>A function which zero pads a number to make a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_val</strong> – number value to be processed.</p></li>
+<li><p><strong>str_len</strong> – the number of characters in the output string.</p></li>
+<li><p><strong>round_num</strong> – boolean whether to round the input number value.</p></li>
+<li><p><strong>round_n_digts</strong> – If rounding, the number of digits following decimal
+points to round to.</p></li>
+<li><p><strong>integerise</strong> – boolean whether to integerise the input number</p></li>
+<li><p><strong>absolute</strong> – make number positive.</p></li>
+<li><p><strong>gain</strong> – apply a gain before integerising.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string with the padded numeric value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.remove_repeated_chars">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">remove_repeated_chars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat_char</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.remove_repeated_chars" title="Link to this definition"></a></dt>
+<dd><p>A function which removes repeated characters within a string for the
+specified character</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_val</strong> – The input string.</p></li>
+<li><p><strong>repeat_char</strong> – The character</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string without repeat_char</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.check_str">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">check_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_non_ascii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_dashs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_spaces</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_punc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.check_str" title="Link to this definition"></a></dt>
+<dd><p>A function which can check a string removing spaces (replaced with underscores),
+remove punctuation and any non ascii characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_val</strong> – the input string to be processed.</p></li>
+<li><p><strong>rm_non_ascii</strong> – If True (default False) remove any non-ascii characters
+from the string</p></li>
+<li><p><strong>rm_dashs</strong> – If True (default False) remove any dashes from the string
+and replace with underscores.</p></li>
+<li><p><strong>rm_spaces</strong> – If True (default False) remove any spaces from the string.</p></li>
+<li><p><strong>rm_punc</strong> – If True (default False) remove any punctuation
+(other than ‘_’ or ‘-’) from the string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns a string outputted from the processing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="encode-string">
+<h2>Encode String<a class="headerlink" href="#encode-string" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.encode_base64_text">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">encode_base64_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.encode_base64_text" title="Link to this definition"></a></dt>
+<dd><p>A function which encoded the input text using base64 into bytes.
+Useful for storing passwords in configure files, which while not
+secure means they cannot just be read as plain text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>plain_txt</strong> – The input string to be encoded</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output encoded string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.decode_base64_text">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">decode_base64_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_encoded_txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.decode_base64_text" title="Link to this definition"></a></dt>
+<dd><p>A function which decoded text encoded using the encode_base64_text function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>in_encoded_txt</strong> – Input encoded byte string (i.e., encoded using
+the encode_base64_text function).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Output plain text string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.create_username_password_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">create_username_password_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.create_username_password_file" title="Link to this definition"></a></dt>
+<dd><p>A function which will create a username/password file where the
+username and password are encoded using base64 so the information
+is not stored in plain text - note this is note ‘secure’ just means
+that someone cannot just read the plain text username and password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – string with the username</p></li>
+<li><p><strong>password</strong> – string with the password</p></li>
+<li><p><strong>out_file</strong> – output file path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.get_username_password">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_username_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.get_username_password" title="Link to this definition"></a></dt>
+<dd><p>A function which retrieves a username and password from an input file
+where the data has been encoded with base64.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – input file path.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>plain text username and password</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="numeric">
+<h2>Numeric<a class="headerlink" href="#numeric" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.is_number">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">is_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.is_number" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether the input string contains a number of not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.in_bounds">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">in_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.in_bounds" title="Link to this definition"></a></dt>
+<dd><p>Checks whether a value or array of values is within specified bounds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – value or numpy array of values to check.</p></li>
+<li><p><strong>lower</strong> – lower bound</p></li>
+<li><p><strong>upper</strong> – upper bound</p></li>
+<li><p><strong>upper_strict</strong> – True is less than upper; False is less than equal to upper</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.mixed_signs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">mixed_signs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.mixed_signs" title="Link to this definition"></a></dt>
+<dd><p>Check whether an array of numbers has a mix of positive and negative values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – list of values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.negative">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">negative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.negative" title="Link to this definition"></a></dt>
+<dd><p>Is the maximum number in the list negative.
+:param x: list of values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.is_odd">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">is_odd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.is_odd" title="Link to this definition"></a></dt>
+<dd><p>A function which tests whether a number is odd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number</strong> – number value to test.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True = input number is odd; False = input number is even</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="colours">
+<h2>Colours<a class="headerlink" href="#colours" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.hex_to_rgb">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">hex_to_rgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'int'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'int'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.hex_to_rgb" title="Link to this definition"></a></dt>
+<dd><p>A function which converts an hexadecimal colour representation to RGB values
+between 0 and 255.</p>
+<p>For example: #b432be is equal to: 180, 50, 190</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hex_str</strong> – Input hex string which can be either 7 or 6 characters long.
+If 7 characters then the first character will be a #.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>R, G, B tuple</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.utils</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">hex_to_rgb</span><span class="p">(</span><span class="s2">&quot;#b432be&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.rgb_to_hex">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">rgb_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalised</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.rgb_to_hex" title="Link to this definition"></a></dt>
+<dd><p>A function which converts red, green, blue values to a hexadecimal colour
+representation.</p>
+<p>For example: 180, 50, 190 is equal to: #b432be</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> – number with range either 0-255 or 0-1 if normalised</p></li>
+<li><p><strong>g</strong> – number with range either 0-255 or 0-1 if normalised</p></li>
+<li><p><strong>b</strong> – number with range either 0-255 or 0-1 if normalised</p></li>
+<li><p><strong>normalised</strong> – a boolean specifying the inputs are in range 0-1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string with hexadecimal colour representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="dates">
+<h2>Dates<a class="headerlink" href="#dates" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.get_days_since">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_days_since</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day_of_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.get_days_since" title="Link to this definition"></a></dt>
+<dd><p>Calculate the number of days from a base data to a defined year/day.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – int with year XXXX (e.g., 2020)</p></li>
+<li><p><strong>day_of_year</strong> – int with the day within the year (1-365)</p></li>
+<li><p><strong>base_date</strong> – a datetime.date object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int (n days)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.get_days_since_date">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_days_since_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.get_days_since_date" title="Link to this definition"></a></dt>
+<dd><p>Calculate the number of days from a base data to a defined year/day.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – int with year XXXX (e.g., 2020)</p></li>
+<li><p><strong>month</strong> – int month in year (1-12) (e.g., 6)</p></li>
+<li><p><strong>day</strong> – int with the day within the month (1-31) (e.g., 20)</p></li>
+<li><p><strong>base_date</strong> – a datetime.date object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int (n days)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.find_month_end_date">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">find_month_end_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.find_month_end_date" title="Link to this definition"></a></dt>
+<dd><p>A function which returns the date of the last day of the month.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – int for the year (e.g., 2019)</p></li>
+<li><p><strong>month</strong> – month (e.g., 9)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>last day of the month date</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.get_datetime_increment_lst">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_datetime_increment_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.utils.get_datetime_increment_lst" title="Link to this definition"></a></dt>
+<dd><p>A function which returns a list of datetime objects from the start
+date in steps of the interval until the date is greater than the
+end date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_date</strong> – the start datetime of the sequence</p></li>
+<li><p><strong>end_date</strong> – the end datetime of the sequence</p></li>
+<li><p><strong>interval</strong> – the interval as a timedelta object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of datetime objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.is_summer_winter">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">is_summer_winter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.is_summer_winter" title="Link to this definition"></a></dt>
+<dd><p>A function which returns an integer specifying whether the date provided
+is within the summer or winter for a given latitude.</p>
+<p>Southern Hemisphere Winter: May - November
+Northern Hemisphere Winter: March - October</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat</strong> – float for the latitude</p></li>
+<li><p><strong>date</strong> – a datetime.date object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int (1 == summer; 2 == winter)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.create_year_month_start_end_lst">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">create_year_month_start_end_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.utils.create_year_month_start_end_lst" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a list of year and month tuples from a start
+and end month and year.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_year</strong> – int with the start year</p></li>
+<li><p><strong>start_month</strong> – int with the start month</p></li>
+<li><p><strong>end_year</strong> – int with the end year</p></li>
+<li><p><strong>end_month</strong> – int with the end month</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tuples (year, month)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.create_year_month_n_months_lst">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">create_year_month_n_months_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_months_fwd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_months_bwd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.utils.create_year_month_n_months_lst" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a list of year and month tuples from a start
+and end month and year.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_year</strong> – int with the start year</p></li>
+<li><p><strong>start_month</strong> – int with the start month</p></li>
+<li><p><strong>n_months_fwd</strong> – int with the number of months ahead</p></li>
+<li><p><strong>n_months_bwd</strong> – int with the number of months behind</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tuples (year, month)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="powerset">
+<h2>Powerset<a class="headerlink" href="#powerset" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.powerset_iter">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">powerset_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utils.powerset_iter" title="Link to this definition"></a></dt>
+<dd><p>A function which returns an iterator (generator) for all the subsets
+of the inputted set (i.e., the powerset)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params inset<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the input set for which the powerset will be produced</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.powerset_lst">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">powerset_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.powerset_lst" title="Link to this definition"></a></dt>
+<dd><p>A function which returns a list for all the subsets
+of the inputted set (i.e., the powerset)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params inset<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the input set for which the powerset will be produced</p>
+</dd>
+<dt class="field-even">Params min_items<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional parameter specifying the minimum number
+of items in the output sets. If 0 or below then
+ignored. Default is 0.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.create_var_list">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">create_var_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_vals_lsts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.utils.create_var_list" title="Link to this definition"></a></dt>
+<dd><p>A function which will produce a list of dictionaries with all the combinations
+of the input variables listed (i.e., the powerset).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_vals_lsts</strong> – dictionary with each value having a list of values.</p></li>
+<li><p><strong>val_dict</strong> – variable used in iterative nature of function which lists
+the variable for which are still to be looped through. Would
+normally not be provided by the user as default is None. Be
+careful if you set as otherwise you might not get a correct
+or valid result.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of dictionaries with the same keys are the input but only a
+single value will be associate with key rather than a list.</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.utils</span>
+<span class="n">seg_vars_ranges</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">seg_vars_ranges</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+<span class="n">seg_vars_ranges</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+<span class="n">seg_vars_ranges</span><span class="p">[</span><span class="s1">&#39;minsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+<span class="n">seg_vars</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">create_var_list</span><span class="p">(</span><span class="n">seg_vars_ranges</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="compute-environment">
+<h2>Compute Environment<a class="headerlink" href="#compute-environment" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.get_environment_variable">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_environment_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.get_environment_variable" title="Link to this definition"></a></dt>
+<dd><p>A function to get an environmental variable, if variable is not present
+returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var</strong> – the name of the environmental variable to get the value for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value of env var.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utils.num_process_cores">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utils.</span></span><span class="sig-name descname"><span class="pre">num_process_cores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utils.num_process_cores" title="Link to this definition"></a></dt>
+<dd><p>A functions which returns the number of processing cores available on the machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_filetools.html" class="btn btn-neutral float-left" title="RSGISLib File Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_mapping.html" class="btn btn-neutral float-right" title="RSGISLib Mapping Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

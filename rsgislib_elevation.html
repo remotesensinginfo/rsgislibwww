@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Elevation &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Image Calculations" href="rsgislib_imagecalc.html" />
+    <link rel="prev" title="RSGISLib Drone Utilities" href="rsgislib_droneutils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Elevation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slope-and-aspect">Slope and Aspect</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.slope"><code class="docutils literal notranslate"><span class="pre">slope()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.slope_pxl_res_img"><code class="docutils literal notranslate"><span class="pre">slope_pxl_res_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.aspect"><code class="docutils literal notranslate"><span class="pre">aspect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.aspect_pxl_res_img"><code class="docutils literal notranslate"><span class="pre">aspect_pxl_res_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.catagorise_aspect"><code class="docutils literal notranslate"><span class="pre">catagorise_aspect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flitering">Flitering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.dtm_aspect_median_filter"><code class="docutils literal notranslate"><span class="pre">dtm_aspect_median_filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.fill_dem_soille_gratin_1994"><code class="docutils literal notranslate"><span class="pre">fill_dem_soille_gratin_1994()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.plane_fit_detreat_dem"><code class="docutils literal notranslate"><span class="pre">plane_fit_detreat_dem()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.resampling_detread_dem"><code class="docutils literal notranslate"><span class="pre">resampling_detread_dem()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#masking">Masking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.shadow_mask"><code class="docutils literal notranslate"><span class="pre">shadow_mask()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#incidence-existance-angle">Incidence / Existance Angle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.local_incidence_angle"><code class="docutils literal notranslate"><span class="pre">local_incidence_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.local_existance_angle"><code class="docutils literal notranslate"><span class="pre">local_existance_angle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#visualisation">Visualisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.hillshade"><code class="docutils literal notranslate"><span class="pre">hillshade()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.hillshade_pxl_res_img"><code class="docutils literal notranslate"><span class="pre">hillshade_pxl_res_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fusion">Fusion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.fft_dem_fusion"><code class="docutils literal notranslate"><span class="pre">fft_dem_fusion()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#roughness">Roughness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.roughness.calc_simple_roughness_profile_metrics"><code class="docutils literal notranslate"><span class="pre">calc_simple_roughness_profile_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.roughness.calc_munro_roughness_profile_metrics"><code class="docutils literal notranslate"><span class="pre">calc_munro_roughness_profile_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.roughness.calc_smith_roughness_metrics"><code class="docutils literal notranslate"><span class="pre">calc_smith_roughness_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.elevation.roughness.calc_all_roughness_profile_metrics"><code class="docutils literal notranslate"><span class="pre">calc_all_roughness_profile_metrics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Elevation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-elevation">
+<h1>RSGISLib Elevation<a class="headerlink" href="#rsgislib-elevation" title="Link to this heading"></a></h1>
+<section id="slope-and-aspect">
+<h2>Slope and Aspect<a class="headerlink" href="#slope-and-aspect" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.slope">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">slope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.slope" title="Link to this definition"></a></dt>
+<dd><p>Calculates a slope layer given an input elevation model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+<li><p><strong>unit</strong> – is a string specifying the output unit (‘degrees’ or ‘radians’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.slope_pxl_res_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">slope_pxl_res_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_pxl_res_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.slope_pxl_res_img" title="Link to this definition"></a></dt>
+<dd><p>Calculates a slope layer given an input elevation model and external pixel 
+resolution image, which allows the slope to be calculated for images in 
+projections (e.g., EPSG:4326) which do not use the same units as the 
+elevation values (e.g., metres).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dem_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>in_pxl_res_img</strong> – is a string containing the name and path of the input image.
+specifying the image pixel resolutions. Band 1: East-West 
+resolution and Band 2 is the North-South resolution.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>unit</strong> – is a string specifying the output unit (‘degrees’ or ‘radians’).</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.aspect">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">aspect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.aspect" title="Link to this definition"></a></dt>
+<dd><p>Calculates a aspect layer given an input elevation model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.aspect_pxl_res_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">aspect_pxl_res_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_pxl_res_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.aspect_pxl_res_img" title="Link to this definition"></a></dt>
+<dd><p>Calculates a aspect layer given an input elevation model and external pixel 
+resolution image, which allows the slope to be calculated for images in 
+projections (e.g., EPSG:4326) which do not use the same units as the 
+elevation values (e.g., metres).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dem_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>in_pxl_res_img</strong> – is a string containing the name and path of the input image.
+specifying the image pixel resolutions. Band 1: East-West 
+resolution and Band 2 is the North-South resolution.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.catagorise_aspect">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">catagorise_aspect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.catagorise_aspect" title="Link to this definition"></a></dt>
+<dd><p>Creates an aspect layer which is categorised into 8 catergories from 0-45, 
+45-90, 90-135, 135-180, 180-225, 225-270, 270-315 and 315-360.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input aspect (in degrees) file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="flitering">
+<h2>Flitering<a class="headerlink" href="#flitering" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.dtm_aspect_median_filter">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">dtm_aspect_median_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_aspect_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_h_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.dtm_aspect_median_filter" title="Link to this definition"></a></dt>
+<dd><p>Filter the DTM for noise using a median filter with an aspect restriction (i.e., only pixels within the aspect range of the centre pixel will be used within the median filter).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dem_img</strong> – is a string containing the name and path of the input DTM file.</p></li>
+<li><p><strong>in_aspect_img</strong> – is a string containing the name and path of the input Aspect file (in degrees).</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>aspect_range</strong> – is a float with the range of from the centre pixel in degrees.</p></li>
+<li><p><strong>win_h_size</strong> – is an integer for half the window size.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.fill_dem_soille_gratin_1994">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">fill_dem_soille_gratin_1994</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_vld_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.fill_dem_soille_gratin_1994" title="Link to this definition"></a></dt>
+<dd><p>Filter the local minima in a DEM using the Soille and Gratin 1994 algorithm.</p>
+<p>Soille, P., and Gratin, C. (1994). An efficient algorithm for drainage network
+extraction on DEMs. J. Visual Communication and Image Representation. 5(2). 181-189.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dem_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>in_vld_img</strong> – is a string containing the name and path to a binary image specifying the valid data region (1 == valid)</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.elevation</span>
+<span class="n">inputDEMImage</span> <span class="o">=</span> <span class="s1">&#39;DEM.kea&#39;</span>
+<span class="n">validMaskImage</span> <span class="o">=</span> <span class="s1">&#39;ValidRegionMask.kea&#39;</span>
+<span class="n">outFilledImage</span> <span class="o">=</span> <span class="s1">&#39;DEM_filled.kea&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">elevation</span><span class="o">.</span><span class="n">fill_dem_soille_gratin_1994</span><span class="p">(</span><span class="n">inputDEMImage</span><span class="p">,</span> <span class="n">validMaskImage</span><span class="p">,</span> <span class="n">outFilledImage</span><span class="p">,</span> <span class="s1">&#39;KEA&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.plane_fit_detreat_dem">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">plane_fit_detreat_dem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.plane_fit_detreat_dem" title="Link to this definition"></a></dt>
+<dd><p>An algorithm to detread a DEM using local plane fitting. The winSize will define the scale
+at which the DEM will be detreaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+<li><p><strong>win_size</strong> – is an integer with the window size within which the plane is fitted.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.elevation</span>
+<span class="n">inputDEMImage</span> <span class="o">=</span> <span class="s1">&#39;DEM.kea&#39;</span>
+<span class="n">outDEMImage</span> <span class="o">=</span> <span class="s1">&#39;DEM_Detread.kea&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">elevation</span><span class="o">.</span><span class="n">plane_fit_detreat_dem</span><span class="p">(</span><span class="n">inputDEMImage</span><span class="p">,</span> <span class="n">outDEMImage</span><span class="p">,</span> <span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.resampling_detread_dem">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">resampling_detread_dem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resmp_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_resmp_mthd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">up_smpl_mthd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.resampling_detread_dem" title="Link to this definition"></a></dt>
+<dd><p>A function which using image resampling to down sample the input DEM (image)
+to the specified resolution and then up samples it back to the original resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – Input image - note only band 1 is used</p></li>
+<li><p><strong>output_img</strong> – Output image path</p></li>
+<li><p><strong>resmp_res</strong> – The intermediate down sample resolution.</p></li>
+<li><p><strong>gdalformat</strong> – output image format (e.g., KEA, GTIFF).</p></li>
+<li><p><strong>no_data_val</strong> – the DEM no data value. If None then read from
+input image header.</p></li>
+<li><p><strong>datatype</strong> – The output image data type. If None then the same as the
+input image.</p></li>
+<li><p><strong>tmp_dir</strong> – A temp directory for intermediate outputs. If None then one is
+created.</p></li>
+<li><p><strong>low_resmp_mthd</strong> – The method used to down sample the input image.
+Default: rsgislib.INTERP_AVERAGE</p></li>
+<li><p><strong>up_smpl_mthd</strong> – The method used to up sample the down sampled image.
+Default: rsgislib.INTERP_CUBICSPLINE</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="masking">
+<h2>Masking<a class="headerlink" href="#masking" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.shadow_mask">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">shadow_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.shadow_mask" title="Link to this definition"></a></dt>
+<dd><p>Calculates a shadow mask given an input elevation model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>azimuth</strong> – is a float with the solar azimuth in degrees.</p></li>
+<li><p><strong>zenith</strong> – is a float with the solar zenith in degrees.</p></li>
+<li><p><strong>max_height</strong> – is a float with the maximum height for the ray tracing (should be above the maximum elevation within the scene).:param gdalformat: is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="incidence-existance-angle">
+<h2>Incidence / Existance Angle<a class="headerlink" href="#incidence-existance-angle" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.local_incidence_angle">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">local_incidence_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.local_incidence_angle" title="Link to this definition"></a></dt>
+<dd><p>Calculates a local solar incidence angle layer given an input elevation model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>azimuth</strong> – is a float with the solar azimuth in degrees.</p></li>
+<li><p><strong>zenith</strong> – is a float with the solar zenith in degrees.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.local_existance_angle">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">local_existance_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.local_existance_angle" title="Link to this definition"></a></dt>
+<dd><p>Calculates a local solar existance angle layer given an input elevation model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>azimuth</strong> – is a float with the solar azimuth in degrees.</p></li>
+<li><p><strong>zenith</strong> – is a float with the solar zenith in degrees.</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="visualisation">
+<h2>Visualisation<a class="headerlink" href="#visualisation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.hillshade">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">hillshade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.hillshade" title="Link to this definition"></a></dt>
+<dd><p>Calculates a hillshade layer given an input elevation model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>azimuth</strong> – is a float with the solar azimuth in degrees (Good value is 315).</p></li>
+<li><p><strong>zenith</strong> – is a float with the solar zenith in degrees (Good value is 45).</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.hillshade_pxl_res_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">hillshade_pxl_res_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_pxl_res_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.hillshade_pxl_res_img" title="Link to this definition"></a></dt>
+<dd><p>Calculates a hillshade layer given an input elevation model and external pixel 
+resolution image, which allows the slope to be calculated for images in 
+projections (e.g., EPSG:4326) which do not use the same units as the 
+elevation values (e.g., metres).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dem_img</strong> – is a string containing the name and path of the input DEM file.</p></li>
+<li><p><strong>in_pxl_res_img</strong> – is a string containing the name and path of the input image.
+specifying the image pixel resolutions. Band 1: East-West 
+resolution and Band 2 is the North-South resolution.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name and path of the output file.</p></li>
+<li><p><strong>azimuth</strong> – is a float with the solar azimuth in degrees (Good value is 315).</p></li>
+<li><p><strong>zenith</strong> – is a float with the solar zenith in degrees (Good value is 45).</p></li>
+<li><p><strong>gdalformat</strong> – is a string with the output image format for the GDAL driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="fusion">
+<h2>Fusion<a class="headerlink" href="#fusion" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.fft_dem_fusion">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.</span></span><span class="sig-name descname"><span class="pre">fft_dem_fusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high_res_dem_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low_res_dem_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fused_dem_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.fft_dem_fusion" title="Link to this definition"></a></dt>
+<dd><p>This function merges DEMs (any single band file) using a fourier
+transformation where the low frequency component is taken from the
+lower resolution DEM and the high frequency component is taken from
+the higher resolution DEM.</p>
+<p>This is an implementation ideas from:</p>
+<p>Karkee, M., Steward, B. L., &amp; Aziz, S. A. (2008). Improving quality
+of public domain digital elevation models through data fusion.
+Biosystems Engineering, 101(3), 293–305.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>high_res_DEM_img</strong> – is an input image file for the high resolution DEM file.</p></li>
+<li><p><strong>low_res_DEM_img</strong> – is an input image file for the low resolution DEM file.</p></li>
+<li><p><strong>fused_DEM_img</strong> – is an output image file for the resulting fused DEM.</p></li>
+<li><p><strong>c_size</strong> – is the threshold (int) defining the high and low frequencies.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">elevation</span>
+
+<span class="n">high_res_DEM_img</span> <span class="o">=</span> <span class="s2">&quot;N09E009_TDX_12m_EGM08.tif&quot;</span>
+<span class="n">low_res_DEM_img</span> <span class="o">=</span> <span class="s2">&quot;N09E009_SRTM_30m_EGM08.tif&quot;</span>
+<span class="n">fused_DEM_img</span> <span class="o">=</span> <span class="s2">&quot;NO9E009_SRTM_TDX_EGM08_fusion.tif&quot;</span>
+<span class="n">c_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">elevation</span><span class="o">.</span><span class="n">fft_dem_fusion</span><span class="p">(</span><span class="n">highResDEMImg</span><span class="p">,</span> <span class="n">lowResDEMImg</span><span class="p">,</span> <span class="n">fusedDEMImg</span><span class="p">,</span> <span class="n">cSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="roughness">
+<h2>Roughness<a class="headerlink" href="#roughness" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.roughness.calc_simple_roughness_profile_metrics">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.roughness.</span></span><span class="sig-name descname"><span class="pre">calc_simple_roughness_profile_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xbox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ybox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend_poly_order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_plot_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.roughness.calc_simple_roughness_profile_metrics" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the CalcProfileRoughMetrics class to calculate
+roughness metrics in x and y axis of the window of data provided.
+The metrics calculated are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Average roughness (RA): Average of profile height deviations from the mean</p></li>
+<li><p>Random roughness (RR)</p></li>
+<li><p>Quadratic mean roughness (RQ) - Sum of absolute slopes.</p></li>
+<li><p>The microrelief index (MIF)</p></li>
+<li><p>Maximum valley depth below the mean line (RV)</p></li>
+<li><p>Maximum peak height above the mean line (RP)</p></li>
+<li><p>Maximum peak to valley height of the profile (RZ)</p></li>
+<li><p>Skewness, or measure of asymmetry of the profile about the mean line (RSK)</p></li>
+<li><p>Kurtosis, or measure of peakedness (or tailedness) of the profile about the mean line (RKU)</p></li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference external" href="https://en.wikipedia.org/wiki/Surface_roughness">https://en.wikipedia.org/wiki/Surface_roughness</a> for more information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>vec_file</strong> – input vector file - needs to be a point type.</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer name.</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output vector file format (e.g., GeoJSON)</p></li>
+<li><p><strong>interp_method</strong> – the interpolation method used when reorientating the image
+data. Default: rsgislib.INTERP_CUBIC</p></li>
+<li><p><strong>angle_col</strong> – name of the column within the vector attribute table defining the
+rotation (relative to north; 0 = North) for each point. If
+None (Default) then no rotation applied. (Unit is degrees)</p></li>
+<li><p><strong>x_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the x axis. Note, this is half the bbox
+width. (Unit is image pixels)</p></li>
+<li><p><strong>y_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the y axis. Note, this is half the bbox
+height. (Unit is image pixels)</p></li>
+<li><p><strong>no_data_val</strong> – the image no data value. If None then taken from the input
+image header.</p></li>
+<li><p><strong>detrend</strong> – Boolean to specify whether to detrend the surface or not.
+Default: True</p></li>
+<li><p><strong>detrend_poly_order</strong> – the order of the polynomial used to detrend
+the surface.</p></li>
+<li><p><strong>export_plot_path</strong> – If a directory path is provided then plots will be
+created for each of the sample windows. This is
+expected to be a debugging and data exploration tool
+as it significantly slows processing. If None (default)
+then no plots will be exported.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.roughness.calc_munro_roughness_profile_metrics">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.roughness.</span></span><span class="sig-name descname"><span class="pre">calc_munro_roughness_profile_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xbox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ybox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend_poly_order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_plot_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.roughness.calc_munro_roughness_profile_metrics" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the CalcMunroRoughnessMetric class to calculate
+the munro Z0 roughness metrics in x and y axis of the window of data provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>vec_file</strong> – input vector file - needs to be a point type.</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer name.</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output vector file format (e.g., GeoJSON)</p></li>
+<li><p><strong>interp_method</strong> – the interpolation method used when reorientating the image
+data. Default: rsgislib.INTERP_CUBIC</p></li>
+<li><p><strong>angle_col</strong> – name of the column within the vector attribute table defining the
+rotation (relative to north; 0 = North) for each point. If
+None (Default) then no rotation applied. (Unit is degrees)</p></li>
+<li><p><strong>x_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the x axis. Note, this is half the bbox
+width. (Unit is image pixels)</p></li>
+<li><p><strong>y_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the y axis. Note, this is half the bbox
+height. (Unit is image pixels)</p></li>
+<li><p><strong>no_data_val</strong> – the image no data value. If None then taken from the input
+image header.</p></li>
+<li><p><strong>detrend</strong> – Boolean to specify whether to detrend the surface or not.
+Default: True</p></li>
+<li><p><strong>detrend_poly_order</strong> – the order of the polynomial used to detrend
+the surface.</p></li>
+<li><p><strong>export_plot_path</strong> – If a directory path is provided then plots will be
+created for each of the sample windows. This is
+expected to be a debugging and data exploration tool
+as it significantly slows processing. If None (default)
+then no plots will be exported.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.roughness.calc_smith_roughness_metrics">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.roughness.</span></span><span class="sig-name descname"><span class="pre">calc_smith_roughness_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xbox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ybox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_plot_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.roughness.calc_smith_roughness_metrics" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the CalcSmithRoughnessMetric class to calculate
+the smith et al 2016 Z0 roughness metrics in x and y axis of the
+window of data provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>vec_file</strong> – input vector file - needs to be a point type.</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer name.</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output vector file format (e.g., GeoJSON)</p></li>
+<li><p><strong>interp_method</strong> – the interpolation method used when reorientating the image
+data. Default: rsgislib.INTERP_CUBIC</p></li>
+<li><p><strong>angle_col</strong> – name of the column within the vector attribute table defining the
+rotation (relative to north; 0 = North) for each point. If
+None (Default) then no rotation applied. (Unit is degrees)</p></li>
+<li><p><strong>x_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the x axis. Note, this is half the bbox
+width. (Unit is image pixels)</p></li>
+<li><p><strong>y_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the y axis. Note, this is half the bbox
+height. (Unit is image pixels)</p></li>
+<li><p><strong>no_data_val</strong> – the image no data value. If None then taken from the input
+image header.</p></li>
+<li><p><strong>detrend</strong> – Boolean to specify whether to detrend the surface or not.
+Default: True</p></li>
+<li><p><strong>export_plot_path</strong> – If a directory path is provided then plots will be
+created for each of the sample windows. This is
+expected to be a debugging and data exploration tool
+as it significantly slows processing. If None (default)
+then no plots will be exported.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.elevation.roughness.calc_all_roughness_profile_metrics">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.elevation.roughness.</span></span><span class="sig-name descname"><span class="pre">calc_all_roughness_profile_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'GPKG'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'xbox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_box_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ybox'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detrend_poly_order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.elevation.roughness.calc_all_roughness_profile_metrics" title="Link to this definition"></a></dt>
+<dd><p>A function which uses the CalcProfileRoughMetrics and CalcMunroRoughnessMetric
+classes to calculate roughness metrics in x and y axis of the window of
+data provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>vec_file</strong> – input vector file - needs to be a point type.</p></li>
+<li><p><strong>vec_lyr</strong> – input vector layer name.</p></li>
+<li><p><strong>out_vec_file</strong> – output vector file path.</p></li>
+<li><p><strong>out_vec_lyr</strong> – output vector layer name.</p></li>
+<li><p><strong>out_format</strong> – output vector file format (e.g., GeoJSON)</p></li>
+<li><p><strong>interp_method</strong> – the interpolation method used when reorientating the image
+data. Default: rsgislib.INTERP_CUBIC</p></li>
+<li><p><strong>angle_col</strong> – name of the column within the vector attribute table defining the
+rotation (relative to north; 0 = North) for each point. If
+None (Default) then no rotation applied. (Unit is degrees)</p></li>
+<li><p><strong>x_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the x axis. Note, this is half the bbox
+width. (Unit is image pixels)</p></li>
+<li><p><strong>y_box_col</strong> – name of the column within the vector attribute table defining
+the size of the bbox in the y axis. Note, this is half the bbox
+height. (Unit is image pixels)</p></li>
+<li><p><strong>no_data_val</strong> – the image no data value. If None then taken from the input
+image header.</p></li>
+<li><p><strong>detrend</strong> – Boolean to specify whether to detrend the surface or not.
+Default: True</p></li>
+<li><p><strong>detrend_poly_order</strong> – the order of the polynomial used to detrend
+the surface.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_droneutils.html" class="btn btn-neutral float-left" title="RSGISLib Drone Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_imagecalc.html" class="btn btn-neutral float-right" title="RSGISLib Image Calculations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

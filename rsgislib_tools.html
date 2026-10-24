@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib File Tools" href="rsgislib_tools_filetools.html" />
+    <link rel="prev" title="RSGISLib Timeseries Analysis Module" href="rsgislib_timeseries.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-tools">
+<h1>RSGISLib Tools<a class="headerlink" href="#rsgislib-tools" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#naming">Naming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_file_basename"><code class="docutils literal notranslate"><span class="pre">get_file_basename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_dir_name"><code class="docutils literal notranslate"><span class="pre">get_dir_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.split_path_all"><code class="docutils literal notranslate"><span class="pre">split_path_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#searching">Searching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.find_file"><code class="docutils literal notranslate"><span class="pre">find_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.find_file_none"><code class="docutils literal notranslate"><span class="pre">find_file_none()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.find_files_ext"><code class="docutils literal notranslate"><span class="pre">find_files_ext()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.find_files_mpaths_ext"><code class="docutils literal notranslate"><span class="pre">find_files_mpaths_ext()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.find_first_file"><code class="docutils literal notranslate"><span class="pre">find_first_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_files_mod_time"><code class="docutils literal notranslate"><span class="pre">get_files_mod_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.find_files_size_limits"><code class="docutils literal notranslate"><span class="pre">find_files_size_limits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_dir_list"><code class="docutils literal notranslate"><span class="pre">get_dir_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_dir_list_srch"><code class="docutils literal notranslate"><span class="pre">get_dir_list_srch()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#archives">Archives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_directory_archive"><code class="docutils literal notranslate"><span class="pre">create_directory_archive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_targz_arch"><code class="docutils literal notranslate"><span class="pre">create_targz_arch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.untar_file"><code class="docutils literal notranslate"><span class="pre">untar_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.untar_gz_file"><code class="docutils literal notranslate"><span class="pre">untar_gz_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.unzip_file"><code class="docutils literal notranslate"><span class="pre">unzip_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.untar_bz_file"><code class="docutils literal notranslate"><span class="pre">untar_bz_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#file-info">File Info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.file_is_hidden"><code class="docutils literal notranslate"><span class="pre">file_is_hidden()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_file_size"><code class="docutils literal notranslate"><span class="pre">get_file_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_file_mod_time"><code class="docutils literal notranslate"><span class="pre">get_file_mod_time()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#sorting">Sorting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.sort_imgs_to_dirs_utm"><code class="docutils literal notranslate"><span class="pre">sort_imgs_to_dirs_utm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.natural_sort_file_names"><code class="docutils literal notranslate"><span class="pre">natural_sort_file_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.sort_file_by_datetime"><code class="docutils literal notranslate"><span class="pre">sort_file_by_datetime()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#deleting">Deleting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.delete_file_with_basename"><code class="docutils literal notranslate"><span class="pre">delete_file_with_basename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.delete_file_silent"><code class="docutils literal notranslate"><span class="pre">delete_file_silent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.rm_files_size_gt"><code class="docutils literal notranslate"><span class="pre">rm_files_size_gt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#lock-files">Lock Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.get_file_lock"><code class="docutils literal notranslate"><span class="pre">get_file_lock()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.release_file_lock"><code class="docutils literal notranslate"><span class="pre">release_file_lock()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.clean_file_locks"><code class="docutils literal notranslate"><span class="pre">clean_file_locks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#file-hash">File Hash</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha1_hash"><code class="docutils literal notranslate"><span class="pre">create_sha1_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha224_hash"><code class="docutils literal notranslate"><span class="pre">create_sha224_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha256_hash"><code class="docutils literal notranslate"><span class="pre">create_sha256_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha384_hash"><code class="docutils literal notranslate"><span class="pre">create_sha384_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha512_hash"><code class="docutils literal notranslate"><span class="pre">create_sha512_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_md5_hash"><code class="docutils literal notranslate"><span class="pre">create_md5_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_blake2b_hash"><code class="docutils literal notranslate"><span class="pre">create_blake2b_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_blake2s_hash"><code class="docutils literal notranslate"><span class="pre">create_blake2s_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha3_224_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_224_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha3_256_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_256_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha3_384_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_384_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.create_sha3_512_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_512_hash()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html#other">Other</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_filetools.html#rsgislib.tools.filetools.convert_file_size_units"><code class="docutils literal notranslate"><span class="pre">convert_file_size_units()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#unique-value">Unique Value</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.uid_generator"><code class="docutils literal notranslate"><span class="pre">uid_generator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#text-file-i-o">Text File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.read_text_file"><code class="docutils literal notranslate"><span class="pre">read_text_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.read_text_file_no_new_lines"><code class="docutils literal notranslate"><span class="pre">read_text_file_no_new_lines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.read_text_file_to_list"><code class="docutils literal notranslate"><span class="pre">read_text_file_to_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.write_list_to_file"><code class="docutils literal notranslate"><span class="pre">write_list_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.write_data_to_file"><code class="docutils literal notranslate"><span class="pre">write_data_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.create_ascii_text_file"><code class="docutils literal notranslate"><span class="pre">create_ascii_text_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.prettify_xml_file"><code class="docutils literal notranslate"><span class="pre">prettify_xml_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#json-file-i-o">JSON File I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.write_dict_to_json"><code class="docutils literal notranslate"><span class="pre">write_dict_to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.write_dict_to_json_gz"><code class="docutils literal notranslate"><span class="pre">write_dict_to_json_gz()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.read_json_to_dict"><code class="docutils literal notranslate"><span class="pre">read_json_to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.read_gz_json_to_dict"><code class="docutils literal notranslate"><span class="pre">read_gz_json_to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#parse-dict-json">Parse Dict/JSON</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_to_json_str"><code class="docutils literal notranslate"><span class="pre">dict_to_json_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_does_path_exist"><code class="docutils literal notranslate"><span class="pre">dict_struct_does_path_exist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_str_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_str_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_boolean_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_boolean_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_date_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_date_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_datetime_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_datetime_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_str_list_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_str_list_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_numeric_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_numeric_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.dict_struct_get_list_value"><code class="docutils literal notranslate"><span class="pre">dict_struct_get_list_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#strings">Strings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.zero_pad_num_str"><code class="docutils literal notranslate"><span class="pre">zero_pad_num_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.remove_repeated_chars"><code class="docutils literal notranslate"><span class="pre">remove_repeated_chars()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.check_str"><code class="docutils literal notranslate"><span class="pre">check_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#encode-string">Encode String</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.encode_base64_text"><code class="docutils literal notranslate"><span class="pre">encode_base64_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.decode_base64_text"><code class="docutils literal notranslate"><span class="pre">decode_base64_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.create_username_password_file"><code class="docutils literal notranslate"><span class="pre">create_username_password_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.get_username_password"><code class="docutils literal notranslate"><span class="pre">get_username_password()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#numeric">Numeric</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.is_number"><code class="docutils literal notranslate"><span class="pre">is_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.in_bounds"><code class="docutils literal notranslate"><span class="pre">in_bounds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.mixed_signs"><code class="docutils literal notranslate"><span class="pre">mixed_signs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.negative"><code class="docutils literal notranslate"><span class="pre">negative()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.is_odd"><code class="docutils literal notranslate"><span class="pre">is_odd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#colours">Colours</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.hex_to_rgb"><code class="docutils literal notranslate"><span class="pre">hex_to_rgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.rgb_to_hex"><code class="docutils literal notranslate"><span class="pre">rgb_to_hex()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#dates">Dates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.get_days_since"><code class="docutils literal notranslate"><span class="pre">get_days_since()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.get_days_since_date"><code class="docutils literal notranslate"><span class="pre">get_days_since_date()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.find_month_end_date"><code class="docutils literal notranslate"><span class="pre">find_month_end_date()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.get_datetime_increment_lst"><code class="docutils literal notranslate"><span class="pre">get_datetime_increment_lst()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.is_summer_winter"><code class="docutils literal notranslate"><span class="pre">is_summer_winter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.create_year_month_start_end_lst"><code class="docutils literal notranslate"><span class="pre">create_year_month_start_end_lst()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.create_year_month_n_months_lst"><code class="docutils literal notranslate"><span class="pre">create_year_month_n_months_lst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#powerset">Powerset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.powerset_iter"><code class="docutils literal notranslate"><span class="pre">powerset_iter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.powerset_lst"><code class="docutils literal notranslate"><span class="pre">powerset_lst()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.create_var_list"><code class="docutils literal notranslate"><span class="pre">create_var_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html#compute-environment">Compute Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.get_environment_variable"><code class="docutils literal notranslate"><span class="pre">get_environment_variable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utils.html#rsgislib.tools.utils.num_process_cores"><code class="docutils literal notranslate"><span class="pre">num_process_cores()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html#map-vector-layers">Map Vector Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_vec_lyr_map"><code class="docutils literal notranslate"><span class="pre">create_vec_lyr_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_choropleth_vec_lyr_map"><code class="docutils literal notranslate"><span class="pre">create_choropleth_vec_lyr_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_vec_pt_density_map"><code class="docutils literal notranslate"><span class="pre">create_vec_pt_density_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html#map-raster-layers">Map Raster Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_raster_img_map"><code class="docutils literal notranslate"><span class="pre">create_raster_img_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_raster_cmap_img_map"><code class="docutils literal notranslate"><span class="pre">create_raster_cmap_img_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_thematic_raster_map"><code class="docutils literal notranslate"><span class="pre">create_thematic_raster_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.create_wmts_img_map"><code class="docutils literal notranslate"><span class="pre">create_wmts_img_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html#background-layers">Background Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.add_contextily_basemap"><code class="docutils literal notranslate"><span class="pre">add_contextily_basemap()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html#overview-maps">Overview Maps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.get_overview_info"><code class="docutils literal notranslate"><span class="pre">get_overview_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.add_overview_maps"><code class="docutils literal notranslate"><span class="pre">add_overview_maps()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html#add-extras-to-map">Add Extras to Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.draw_bboxes_to_axis"><code class="docutils literal notranslate"><span class="pre">draw_bboxes_to_axis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.add_axis_label"><code class="docutils literal notranslate"><span class="pre">add_axis_label()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.calc_y_fig_size"><code class="docutils literal notranslate"><span class="pre">calc_y_fig_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.define_axis_extent"><code class="docutils literal notranslate"><span class="pre">define_axis_extent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_mapping.html#rsgislib.tools.mapping.define_map_tick_spacing"><code class="docutils literal notranslate"><span class="pre">define_map_tick_spacing()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html#projections">Projections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.reproj_bbox"><code class="docutils literal notranslate"><span class="pre">reproj_bbox()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.reproj_bbox_epsg"><code class="docutils literal notranslate"><span class="pre">reproj_bbox_epsg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.reproj_point"><code class="docutils literal notranslate"><span class="pre">reproj_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.reproj_point_to_wgs84"><code class="docutils literal notranslate"><span class="pre">reproj_point_to_wgs84()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html#testing">Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.do_bboxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_bboxes_intersect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.does_bbox_contain"><code class="docutils literal notranslate"><span class="pre">does_bbox_contain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.bbox_equal"><code class="docutils literal notranslate"><span class="pre">bbox_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.pt_in_bbox"><code class="docutils literal notranslate"><span class="pre">pt_in_bbox()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html#calculations">Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.calc_bbox_area"><code class="docutils literal notranslate"><span class="pre">calc_bbox_area()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.calc_pt_distance"><code class="docutils literal notranslate"><span class="pre">calc_pt_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html#compute-new-bbox">Compute New BBOX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.bbox_intersection"><code class="docutils literal notranslate"><span class="pre">bbox_intersection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.bboxes_intersection"><code class="docutils literal notranslate"><span class="pre">bboxes_intersection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.buffer_bbox"><code class="docutils literal notranslate"><span class="pre">buffer_bbox()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.find_bbox_union"><code class="docutils literal notranslate"><span class="pre">find_bbox_union()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.unwrap_wgs84_bbox"><code class="docutils literal notranslate"><span class="pre">unwrap_wgs84_bbox()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.find_common_extent_on_grid"><code class="docutils literal notranslate"><span class="pre">find_common_extent_on_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.find_extent_on_grid"><code class="docutils literal notranslate"><span class="pre">find_extent_on_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.find_extent_on_whole_num_grid"><code class="docutils literal notranslate"><span class="pre">find_extent_on_whole_num_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.get_bbox_grid"><code class="docutils literal notranslate"><span class="pre">get_bbox_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html#compute-points">Compute Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.get_bbox_centre_pt"><code class="docutils literal notranslate"><span class="pre">get_bbox_centre_pt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.find_point_on_whole_num_grid"><code class="docutils literal notranslate"><span class="pre">find_point_on_whole_num_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html#representation">Representation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.get_bbox_geojson_poly"><code class="docutils literal notranslate"><span class="pre">get_bbox_geojson_poly()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_geometrytools.html#rsgislib.tools.geometrytools.get_bbox_wkt_poly"><code class="docutils literal notranslate"><span class="pre">get_bbox_wkt_poly()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html#representation">Representation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.get_epsg_code_from_wkt"><code class="docutils literal notranslate"><span class="pre">get_epsg_code_from_wkt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.get_wkt_from_epsg_code"><code class="docutils literal notranslate"><span class="pre">get_wkt_from_epsg_code()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html#gdal-osr">GDAL / OSR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.get_osr_prj_obj"><code class="docutils literal notranslate"><span class="pre">get_osr_prj_obj()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html#conversion">Conversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.degrees_to_metres"><code class="docutils literal notranslate"><span class="pre">degrees_to_metres()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.metres_to_degrees"><code class="docutils literal notranslate"><span class="pre">metres_to_degrees()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html#numeric-representation">Numeric Representation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.get_deg_coord_as_str"><code class="docutils literal notranslate"><span class="pre">get_deg_coord_as_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html#calculation">Calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_projection.html#rsgislib.tools.projection.great_circle_distance"><code class="docutils literal notranslate"><span class="pre">great_circle_distance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html#statistical-plots">Statistical Plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.residual_plot"><code class="docutils literal notranslate"><span class="pre">residual_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.residual_density_plot"><code class="docutils literal notranslate"><span class="pre">residual_density_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.quantile_plot"><code class="docutils literal notranslate"><span class="pre">quantile_plot()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html#image-plots">Image Plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.plot_image_spectra"><code class="docutils literal notranslate"><span class="pre">plot_image_spectra()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.plot_image_comparison"><code class="docutils literal notranslate"><span class="pre">plot_image_comparison()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.plot_image_histogram"><code class="docutils literal notranslate"><span class="pre">plot_image_histogram()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html#vector-plots">Vector Plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.plot_vec_fields"><code class="docutils literal notranslate"><span class="pre">plot_vec_fields()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html#visualise-raster-data">Visualise Raster Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.get_gdal_raster_mpl_imshow"><code class="docutils literal notranslate"><span class="pre">get_gdal_raster_mpl_imshow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.get_gdal_thematic_raster_mpl_imshow"><code class="docutils literal notranslate"><span class="pre">get_gdal_thematic_raster_mpl_imshow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.linear_stretch_np_arr"><code class="docutils literal notranslate"><span class="pre">linear_stretch_np_arr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.cumulative_stretch_np_arr"><code class="docutils literal notranslate"><span class="pre">cumulative_stretch_np_arr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.stdev_stretch_np_arr"><code class="docutils literal notranslate"><span class="pre">stdev_stretch_np_arr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.manual_stretch_np_arr"><code class="docutils literal notranslate"><span class="pre">manual_stretch_np_arr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.limit_range_np_arr"><code class="docutils literal notranslate"><span class="pre">limit_range_np_arr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html#legends">Legends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.create_legend_info_dict"><code class="docutils literal notranslate"><span class="pre">create_legend_info_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.create_legend_info_dict_from_cls_info"><code class="docutils literal notranslate"><span class="pre">create_legend_info_dict_from_cls_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.create_legend_img"><code class="docutils literal notranslate"><span class="pre">create_legend_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.create_legend_img_file"><code class="docutils literal notranslate"><span class="pre">create_legend_img_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.create_legend_img_mpl_ax"><code class="docutils literal notranslate"><span class="pre">create_legend_img_mpl_ax()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html#other">Other</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.gen_colour_lst"><code class="docutils literal notranslate"><span class="pre">gen_colour_lst()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.add_img_to_axis"><code class="docutils literal notranslate"><span class="pre">add_img_to_axis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.update_y_tick_lbls"><code class="docutils literal notranslate"><span class="pre">update_y_tick_lbls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_plotting.html#rsgislib.tools.plotting.hide_matplotlib_axis_border"><code class="docutils literal notranslate"><span class="pre">hide_matplotlib_axis_border()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#normalisation">Normalisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.standarise_img_data"><code class="docutils literal notranslate"><span class="pre">standarise_img_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.normalise_img_data"><code class="docutils literal notranslate"><span class="pre">normalise_img_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#histogram-thresholds">Histogram Thresholds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_otsu_threshold"><code class="docutils literal notranslate"><span class="pre">calc_otsu_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_yen_threshold"><code class="docutils literal notranslate"><span class="pre">calc_yen_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_isodata_threshold"><code class="docutils literal notranslate"><span class="pre">calc_isodata_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_hist_cross_entropy"><code class="docutils literal notranslate"><span class="pre">calc_hist_cross_entropy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_li_threshold"><code class="docutils literal notranslate"><span class="pre">calc_li_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_kurt_skew_threshold"><code class="docutils literal notranslate"><span class="pre">calc_kurt_skew_threshold()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#histograms">Histograms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.get_nbins_histogram"><code class="docutils literal notranslate"><span class="pre">get_nbins_histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.get_bin_centres"><code class="docutils literal notranslate"><span class="pre">get_bin_centres()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#feature-selection">Feature Selection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.corr_feature_selection"><code class="docutils literal notranslate"><span class="pre">corr_feature_selection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.lassolars_feature_selection"><code class="docutils literal notranslate"><span class="pre">lassolars_feature_selection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#statistical-tests">Statistical Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.breusch_pagan_test"><code class="docutils literal notranslate"><span class="pre">breusch_pagan_test()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.calc_pandas_vif"><code class="docutils literal notranslate"><span class="pre">calc_pandas_vif()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.cqv_threshold"><code class="docutils literal notranslate"><span class="pre">cqv_threshold()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#summary-statistics">Summary Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.bin_accuracy_scores_prob"><code class="docutils literal notranslate"><span class="pre">bin_accuracy_scores_prob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.accuracy_scores_binary"><code class="docutils literal notranslate"><span class="pre">accuracy_scores_binary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.bias_score"><code class="docutils literal notranslate"><span class="pre">bias_score()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.decompose_bias_variance"><code class="docutils literal notranslate"><span class="pre">decompose_bias_variance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#numpy-array-manipulation">Numpy Array Manipulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_stats.html#rsgislib.tools.stats.mask_data_to_valid"><code class="docutils literal notranslate"><span class="pre">mask_data_to_valid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html#variograms">Variograms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html#conversion">Conversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_maths.html#rsgislib.tools.maths.round_to_nearest_val"><code class="docutils literal notranslate"><span class="pre">round_to_nearest_val()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html#animate-images">Animate Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.animate_img_set"><code class="docutils literal notranslate"><span class="pre">animate_img_set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html#exif-metadata">EXIF Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.list_exif_info"><code class="docutils literal notranslate"><span class="pre">list_exif_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.get_exif_info"><code class="docutils literal notranslate"><span class="pre">get_exif_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.list_exif_info_pil"><code class="docutils literal notranslate"><span class="pre">list_exif_info_pil()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html#pdf-utilities">PDF Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.extract_images_from_pdf"><code class="docutils literal notranslate"><span class="pre">extract_images_from_pdf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.add_pdf_blank_pages"><code class="docutils literal notranslate"><span class="pre">add_pdf_blank_pages()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html#qr-codes">QR Codes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_imagetools.html#rsgislib.tools.imagetools.create_qr_code"><code class="docutils literal notranslate"><span class="pre">create_qr_code()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html#landsat">Landsat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_sensors.html#rsgislib.tools.sensors.read_landsat_mtl_to_dict"><code class="docutils literal notranslate"><span class="pre">read_landsat_mtl_to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html#sentinel-2">Sentinel-2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_sensors.html#rsgislib.tools.sensors.read_sen2_l2a_mtd_to_dict"><code class="docutils literal notranslate"><span class="pre">read_sen2_l2a_mtd_to_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html#rsgislib.tools.sysprofile.create_mem_cpu_profile"><code class="docutils literal notranslate"><span class="pre">create_mem_cpu_profile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html#rsgislib.tools.sysprofile.plot_mem_cpu_profile"><code class="docutils literal notranslate"><span class="pre">plot_mem_cpu_profile()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html#rsgislib.tools.testimages.create_random_int_img"><code class="docutils literal notranslate"><span class="pre">create_random_int_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#convert-indexing">Convert Indexing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.convert_between_tms_xyz"><code class="docutils literal notranslate"><span class="pre">convert_between_tms_xyz()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.flip_xyz_tms_tiles"><code class="docutils literal notranslate"><span class="pre">flip_xyz_tms_tiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#find-path-tile">Find Path/Tile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_quadkey_for_tile_path"><code class="docutils literal notranslate"><span class="pre">get_quadkey_for_tile_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_tile_path_from_quadkey"><code class="docutils literal notranslate"><span class="pre">get_tile_path_from_quadkey()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_tiles"><code class="docutils literal notranslate"><span class="pre">get_tiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_web_mercator_xy"><code class="docutils literal notranslate"><span class="pre">get_web_mercator_xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_xy_mercator_lonlat"><code class="docutils literal notranslate"><span class="pre">get_xy_mercator_lonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.xy_mercator_bounds"><code class="docutils literal notranslate"><span class="pre">xy_mercator_bounds()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#tile-info">Tile Info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_tile_for_point"><code class="docutils literal notranslate"><span class="pre">get_tile_for_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_tile_tl_lonlat"><code class="docutils literal notranslate"><span class="pre">get_tile_tl_lonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.get_tile_bbox"><code class="docutils literal notranslate"><span class="pre">get_tile_bbox()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#internal-functions">Internal Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.resolution"><code class="docutils literal notranslate"><span class="pre">resolution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html#rsgislib.tools.tilecacheutils.truncate_lng_lat"><code class="docutils literal notranslate"><span class="pre">truncate_lng_lat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html#word">Word</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_whole_doc"><code class="docutils literal notranslate"><span class="pre">docx_replace_whole_doc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_body_content"><code class="docutils literal notranslate"><span class="pre">docx_replace_body_content()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_body_tables"><code class="docutils literal notranslate"><span class="pre">docx_replace_body_tables()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_header_content"><code class="docutils literal notranslate"><span class="pre">docx_replace_header_content()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_header_tables"><code class="docutils literal notranslate"><span class="pre">docx_replace_header_tables()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_footer_content"><code class="docutils literal notranslate"><span class="pre">docx_replace_footer_content()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_msofficetools.html#rsgislib.tools.msofficetools.docx_replace_footer_tables"><code class="docutils literal notranslate"><span class="pre">docx_replace_footer_tables()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html#epsg">EPSG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.epsg_for_utm"><code class="docutils literal notranslate"><span class="pre">epsg_for_utm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.utm_from_epsg"><code class="docutils literal notranslate"><span class="pre">utm_from_epsg()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html#validity">Validity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.check_valid_zone"><code class="docutils literal notranslate"><span class="pre">check_valid_zone()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html#lat-lon-to-utm">Lat / Lon to UTM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.from_latlon"><code class="docutils literal notranslate"><span class="pre">from_latlon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.to_latlon"><code class="docutils literal notranslate"><span class="pre">to_latlon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.latitude_to_zone_letter"><code class="docutils literal notranslate"><span class="pre">latitude_to_zone_letter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.latlon_to_zone_number"><code class="docutils literal notranslate"><span class="pre">latlon_to_zone_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.min_max_eastings_for_lat"><code class="docutils literal notranslate"><span class="pre">min_max_eastings_for_lat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.latlon_arr_to_utm_zone_number"><code class="docutils literal notranslate"><span class="pre">latlon_arr_to_utm_zone_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.latlon_to_mode_utm_zone_number"><code class="docutils literal notranslate"><span class="pre">latlon_to_mode_utm_zone_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.zone_number_to_central_longitude"><code class="docutils literal notranslate"><span class="pre">zone_number_to_central_longitude()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_utm.html#rsgislib.tools.utm.split_wgs84_bbox_utm_zones"><code class="docutils literal notranslate"><span class="pre">split_wgs84_bbox_utm_zones()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#images">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.run_check_gdal_image_file"><code class="docutils literal notranslate"><span class="pre">run_check_gdal_image_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.run_check_gdal_image_files"><code class="docutils literal notranslate"><span class="pre">run_check_gdal_image_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.check_gdal_image_file"><code class="docutils literal notranslate"><span class="pre">check_gdal_image_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.cmp_to_ref_imgs"><code class="docutils literal notranslate"><span class="pre">cmp_to_ref_imgs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#vectors">Vectors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.run_check_gdal_vector_file"><code class="docutils literal notranslate"><span class="pre">run_check_gdal_vector_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.run_check_gdal_vector_files"><code class="docutils literal notranslate"><span class="pre">run_check_gdal_vector_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.check_gdal_vector_file"><code class="docutils literal notranslate"><span class="pre">check_gdal_vector_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#hdf5-files">HDF5 Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.run_check_hdf5_file"><code class="docutils literal notranslate"><span class="pre">run_check_hdf5_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.run_check_hdf5_files"><code class="docutils literal notranslate"><span class="pre">run_check_hdf5_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_checkdatasets.html#rsgislib.tools.checkdatasets.check_hdf5_file"><code class="docutils literal notranslate"><span class="pre">check_hdf5_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_kmz_img"><code class="docutils literal notranslate"><span class="pre">create_kmz_img()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_webtiles_img_no_stats_msk"><code class="docutils literal notranslate"><span class="pre">create_webtiles_img_no_stats_msk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_webtiles_img"><code class="docutils literal notranslate"><span class="pre">create_webtiles_img()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_quicklook_imgs"><code class="docutils literal notranslate"><span class="pre">create_quicklook_imgs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_mbtile_file"><code class="docutils literal notranslate"><span class="pre">create_mbtile_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_webtiles_vis_gtiff_img"><code class="docutils literal notranslate"><span class="pre">create_webtiles_vis_gtiff_img()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_quicklook_overview_imgs"><code class="docutils literal notranslate"><span class="pre">create_quicklook_overview_imgs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.burn_in_binary_msk"><code class="docutils literal notranslate"><span class="pre">burn_in_binary_msk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_quicklook_overview_imgs_vec_overlay"><code class="docutils literal notranslate"><span class="pre">create_quicklook_overview_imgs_vec_overlay()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.create_visual_overview_imgs_vec_extent"><code class="docutils literal notranslate"><span class="pre">create_visual_overview_imgs_vec_extent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html#rsgislib.tools.visualisation.overlay_vec_on_img"><code class="docutils literal notranslate"><span class="pre">overlay_vec_on_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html#rsgislib.tools.googlecloud.blob_exists"><code class="docutils literal notranslate"><span class="pre">blob_exists()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html#rsgislib.tools.googlecloud.list_files"><code class="docutils literal notranslate"><span class="pre">list_files()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html#rsgislib.tools.googlecloud.upload_to_google_bucket"><code class="docutils literal notranslate"><span class="pre">upload_to_google_bucket()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html#transverse-tree">Transverse Tree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.get_ftp_file_listings"><code class="docutils literal notranslate"><span class="pre">get_ftp_file_listings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.create_file_listings_db"><code class="docutils literal notranslate"><span class="pre">create_file_listings_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html#filter-files">Filter Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.filter_file_listings_db"><code class="docutils literal notranslate"><span class="pre">filter_file_listings_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html#download-data">Download Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.download_ftp_file"><code class="docutils literal notranslate"><span class="pre">download_ftp_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.download_curl_ftp_file"><code class="docutils literal notranslate"><span class="pre">download_curl_ftp_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.download_files_use_lst_db"><code class="docutils literal notranslate"><span class="pre">download_files_use_lst_db()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html#upload-data">Upload Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_ftptools.html#rsgislib.tools.ftptools.upload_ftp_file"><code class="docutils literal notranslate"><span class="pre">upload_ftp_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html#check-urls">Check URLs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.check_url_exists"><code class="docutils literal notranslate"><span class="pre">check_url_exists()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html#access-http-apis">Access HTTP APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.check_http_response"><code class="docutils literal notranslate"><span class="pre">check_http_response()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.send_http_json_request"><code class="docutils literal notranslate"><span class="pre">send_http_json_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html#download-data">Download Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.download_file_http"><code class="docutils literal notranslate"><span class="pre">download_file_http()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.wget_download_file"><code class="docutils literal notranslate"><span class="pre">wget_download_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html#database-tools">Database Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.create_file_listings_db"><code class="docutils literal notranslate"><span class="pre">create_file_listings_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rsgislib_tools_httptools.html#rsgislib.tools.httptools.download_http_files_use_lst_db"><code class="docutils literal notranslate"><span class="pre">download_http_files_use_lst_db()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html#rsgislib.tools.webtools.find_web_imgs"><code class="docutils literal notranslate"><span class="pre">find_web_imgs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html#rsgislib.tools.webtools.find_web_files"><code class="docutils literal notranslate"><span class="pre">find_web_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html#rsgislib.tools.wmts_tools.get_wmts_layer_list"><code class="docutils literal notranslate"><span class="pre">get_wmts_layer_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html#rsgislib.tools.wmts_tools.get_wmts_as_img"><code class="docutils literal notranslate"><span class="pre">get_wmts_as_img()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_timeseries.html" class="btn btn-neutral float-left" title="RSGISLib Timeseries Analysis Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_filetools.html" class="btn btn-neutral float-right" title="RSGISLib File Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

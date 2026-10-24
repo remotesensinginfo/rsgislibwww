@@ -1,0 +1,1166 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib File Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Utility Tools" href="rsgislib_tools_utils.html" />
+    <link rel="prev" title="RSGISLib Tools" href="rsgislib_tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib File Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#naming">Naming</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_file_basename"><code class="docutils literal notranslate"><span class="pre">get_file_basename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_dir_name"><code class="docutils literal notranslate"><span class="pre">get_dir_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.split_path_all"><code class="docutils literal notranslate"><span class="pre">split_path_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#searching">Searching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.find_file"><code class="docutils literal notranslate"><span class="pre">find_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.find_file_none"><code class="docutils literal notranslate"><span class="pre">find_file_none()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.find_files_ext"><code class="docutils literal notranslate"><span class="pre">find_files_ext()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.find_files_mpaths_ext"><code class="docutils literal notranslate"><span class="pre">find_files_mpaths_ext()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.find_first_file"><code class="docutils literal notranslate"><span class="pre">find_first_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_files_mod_time"><code class="docutils literal notranslate"><span class="pre">get_files_mod_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.find_files_size_limits"><code class="docutils literal notranslate"><span class="pre">find_files_size_limits()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_dir_list"><code class="docutils literal notranslate"><span class="pre">get_dir_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_dir_list_srch"><code class="docutils literal notranslate"><span class="pre">get_dir_list_srch()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#archives">Archives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_directory_archive"><code class="docutils literal notranslate"><span class="pre">create_directory_archive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_targz_arch"><code class="docutils literal notranslate"><span class="pre">create_targz_arch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.untar_file"><code class="docutils literal notranslate"><span class="pre">untar_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.untar_gz_file"><code class="docutils literal notranslate"><span class="pre">untar_gz_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.unzip_file"><code class="docutils literal notranslate"><span class="pre">unzip_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.untar_bz_file"><code class="docutils literal notranslate"><span class="pre">untar_bz_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#file-info">File Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.file_is_hidden"><code class="docutils literal notranslate"><span class="pre">file_is_hidden()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_file_size"><code class="docutils literal notranslate"><span class="pre">get_file_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_file_mod_time"><code class="docutils literal notranslate"><span class="pre">get_file_mod_time()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sorting">Sorting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.sort_imgs_to_dirs_utm"><code class="docutils literal notranslate"><span class="pre">sort_imgs_to_dirs_utm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.natural_sort_file_names"><code class="docutils literal notranslate"><span class="pre">natural_sort_file_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.sort_file_by_datetime"><code class="docutils literal notranslate"><span class="pre">sort_file_by_datetime()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deleting">Deleting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.delete_file_with_basename"><code class="docutils literal notranslate"><span class="pre">delete_file_with_basename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.delete_file_silent"><code class="docutils literal notranslate"><span class="pre">delete_file_silent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.rm_files_size_gt"><code class="docutils literal notranslate"><span class="pre">rm_files_size_gt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lock-files">Lock Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.get_file_lock"><code class="docutils literal notranslate"><span class="pre">get_file_lock()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.release_file_lock"><code class="docutils literal notranslate"><span class="pre">release_file_lock()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.clean_file_locks"><code class="docutils literal notranslate"><span class="pre">clean_file_locks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#file-hash">File Hash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha1_hash"><code class="docutils literal notranslate"><span class="pre">create_sha1_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha224_hash"><code class="docutils literal notranslate"><span class="pre">create_sha224_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha256_hash"><code class="docutils literal notranslate"><span class="pre">create_sha256_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha384_hash"><code class="docutils literal notranslate"><span class="pre">create_sha384_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha512_hash"><code class="docutils literal notranslate"><span class="pre">create_sha512_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_md5_hash"><code class="docutils literal notranslate"><span class="pre">create_md5_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_blake2b_hash"><code class="docutils literal notranslate"><span class="pre">create_blake2b_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_blake2s_hash"><code class="docutils literal notranslate"><span class="pre">create_blake2s_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha3_224_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_224_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha3_256_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_256_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha3_384_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_384_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.create_sha3_512_hash"><code class="docutils literal notranslate"><span class="pre">create_sha3_512_hash()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other">Other</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.filetools.convert_file_size_units"><code class="docutils literal notranslate"><span class="pre">convert_file_size_units()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utm.html">RSGISLib UTM Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib File Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-file-tools">
+<h1>RSGISLib File Tools<a class="headerlink" href="#rsgislib-file-tools" title="Link to this heading"></a></h1>
+<section id="naming">
+<h2>Naming<a class="headerlink" href="#naming" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_file_basename">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_file_basename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_valid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_comps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_n_exts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_file_basename" title="Link to this definition"></a></dt>
+<dd><p>Uses os.path module to return file basename (i.e., path and extension removed)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – string for the input file name and path</p></li>
+<li><p><strong>check_valid</strong> – if True then resulting basename will be checked for punctuation
+characters (other than underscores) and spaces, punctuation
+will be either removed and spaces changed to an underscore.
+(Default = False)</p></li>
+<li><p><strong>n_comps</strong> – if &gt; 0 then the resulting basename will be split using underscores
+and the return based name will be defined using the n_comps
+components split by under scores.</p></li>
+<li><p><strong>rm_n_exts</strong> – used where an input file has more than one extension
+(e.g., tar.gz) and only n extensions should be removed.
+Default: 0 which will removed all extensions calculated
+based on the number of full-stops (.) within the file name.
+If a value of 1 was provided for filename.tar.gz then the
+returns output would be filename.tar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>basename for file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_dir_name">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_dir_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_dir_name" title="Link to this definition"></a></dt>
+<dd><p>A function which returns just the name of the directory of the input path
+(file or directory) without the rest of the path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – string for the input path (file or directory) name and path</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>directory name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.split_path_all">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">split_path_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.split_path_all" title="Link to this definition"></a></dt>
+<dd><p>A function which splits all the components within a file path
+into a list of components rather than the os.path.split function
+which just splits the last item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_path</strong> – the input file path.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of the file path components.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="searching">
+<h2>Searching<a class="headerlink" href="#searching" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.find_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">find_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.find_file" title="Link to this definition"></a></dt>
+<dd><p>Search for a single file with a path using glob. Therefore, the file
+path returned is a true path. Within the file_search provide the file
+name with ‘*’ as wildcard(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – string for the input directory path</p></li>
+<li><p><strong>file_search</strong> – string with a * wildcard for the file being searched for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string with the path to the file</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">,</span> <span class="s2">&quot;*N15W093*.tif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.find_file_none">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">find_file_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.find_file_none" title="Link to this definition"></a></dt>
+<dd><p>Search for a single file with a path using glob. Therefore, the file
+path returned is a true path. Within the file_search provide the file
+name with ‘*’ as wildcard(s). Returns None is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – string for the input directory path</p></li>
+<li><p><strong>file_search</strong> – string with a * wildcard for the file being searched for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string with the path to the file</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">find_file_none</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">,</span> <span class="s2">&quot;*N15W093*.tif&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">file_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.find_files_ext">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">find_files_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.find_files_ext" title="Link to this definition"></a></dt>
+<dd><p>Find all the files within a directory structure with a specific file ending.
+The files are return as dictionary using the file name as the dictionary key.
+This means you cannot have files with the same name within the structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – the base directory path within which to search.</p></li>
+<li><p><strong>ending</strong> – the file ending (e.g., .txt, or txt or .kea, kea).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict with file name as key</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">file_paths</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">find_files_ext</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">,</span> <span class="s2">&quot;.tif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.find_files_mpaths_ext">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">find_files_mpaths_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.find_files_mpaths_ext" title="Link to this definition"></a></dt>
+<dd><p>Find all the files within a list of input directories and the structure beneath
+with a specific file ending. The files are return as dictionary using the file
+name as the dictionary key. This means you cannot have files with the same name
+within the structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_paths</strong> – a list of base directory paths within which to search.</p></li>
+<li><p><strong>ending</strong> – the file ending (e.g., .txt, or txt or .kea, kea).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict with file name as key</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">dir_paths</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;in/dir&quot;</span><span class="p">,</span> <span class="s2">&quot;test/dir&quot;</span><span class="p">,</span> <span class="s2">&quot;img/files&quot;</span><span class="p">]</span>
+<span class="n">file_paths</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">find_files_mpaths_ext</span><span class="p">(</span><span class="n">dir_paths</span><span class="p">,</span> <span class="s2">&quot;.tif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.find_first_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">find_first_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtn_except</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.find_first_file" title="Link to this definition"></a></dt>
+<dd><p>Search for a single file with a path using glob. Therefore, the file
+path returned is a true path. Within the file_search provide the file
+name with ‘*’ as wildcard(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – The directory within which to search, note that the search will
+be within sub-directories within the base directory until a file
+meeting the search criteria are met.</p></li>
+<li><p><strong>file_search</strong> – The file search string in the file name and must contain a
+wild character (i.e., <a href="#id1"><span class="problematic" id="id2">*</span></a>).</p></li>
+<li><p><strong>rtn_except</strong> – if True then an exception will be raised if no file or multiple
+files are found (default). If False then None will be returned
+rather than an exception raised.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The file found (or None if rtn_except=False)</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">file_paths</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">find_first_file</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">,</span> <span class="s2">&quot;*N15W093*.tif&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_files_mod_time">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_files_mod_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt_before</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_files_mod_time" title="Link to this definition"></a></dt>
+<dd><p>A function which subsets a list of files based on datetime of
+last modification. The function also does a check as to whether
+a file exists, files which don’t exist will be ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_lst</strong> – The list of file path - represented as strings.</p></li>
+<li><p><strong>dt_before</strong> – a datetime object with a date/time where files modified
+before this will be returned</p></li>
+<li><p><strong>dt_after</strong> – a datetime object with a date/time where files modified
+after this will be returned</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+
+<span class="n">input_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;in/dir/*.tif&quot;</span><span class="p">)</span>
+<span class="n">dt_before</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">get_files_mod_time</span><span class="p">(</span><span class="n">input_files</span><span class="p">,</span> <span class="n">dt_before</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.find_files_size_limits">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">find_files_size_limits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.find_files_size_limits" title="Link to this definition"></a></dt>
+<dd><p>Search for files with a path using glob. Therefore, the file
+paths returned is a true path. Within the file_search provide the file
+names with ‘*’ as wildcard(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – string for the input directory path</p></li>
+<li><p><strong>file_search</strong> – string with a * wildcard for the file being searched for.</p></li>
+<li><p><strong>min_size</strong> – the minimum file size in bytes (default is 0)</p></li>
+<li><p><strong>max_size</strong> – the maximum file size in bytes, if None (default) then ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string with the path to the file</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">file_paths</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">find_files_size_limits</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">,</span>
+                                                             <span class="s2">&quot;*N15W093*.tif&quot;</span><span class="p">,</span>
+                                                             <span class="mi">0</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_dir_list">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_dir_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inc_hidden</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_dir_list" title="Link to this definition"></a></dt>
+<dd><p>Function which get the list of directories within the specified path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – file path to search within</p></li>
+<li><p><strong>inc_hidden</strong> – boolean specifying whether hidden files should be
+included (default=False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of directory paths</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">get_dir_list</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_dir_list_srch">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_dir_list_srch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_inc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inc_hidden</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_dir_list_srch" title="Link to this definition"></a></dt>
+<dd><p>Function which get the list of directories within the specified path where
+the name contains a particular string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – file path to search within</p></li>
+<li><p><strong>name_inc</strong> – string within the directory name</p></li>
+<li><p><strong>inc_hidden</strong> – boolean specifying whether hidden files should be
+included (default=False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of directory paths</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">get_dir_list</span><span class="p">(</span><span class="s2">&quot;in/dir&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="archives">
+<h2>Archives<a class="headerlink" href="#archives" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_directory_archive">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_directory_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_arch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_directory_archive" title="Link to this definition"></a></dt>
+<dd><p>A function which creates an archive from an input directory. This function uses
+subprocess to call the appropriate command line function.</p>
+<p>Please note that this function has similar functionality to shutil.make_archive
+and I would recommend you use that but I found it sometimes produces an error so
+I provided this function which uses the terminal functions as a drop in replacement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dir</strong> – The input directory path for which the archive with be created.</p></li>
+<li><p><strong>out_arch</strong> – The output archive file path and name. Note this should not
+include an extension as this will be added automatically.</p></li>
+<li><p><strong>arch_format</strong> – The format for the archive. The options are: zip, tar,
+gztar, bztar, xztar</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a string with the full file path and name, including the file extension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_targz_arch">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_targz_arch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_arch_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.filetools.create_targz_arch" title="Link to this definition"></a></dt>
+<dd><p>A function which can be used to create a tar.gz file containing the
+list of input files. If you wish to remove some of the directory
+structure from the file paths in provided then a single base_path
+can be provided and will be removed from the file paths in the archive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_arch_file</strong> – the output tar.gz file path</p></li>
+<li><p><strong>file_list</strong> – the list of files to be added to the archive.</p></li>
+<li><p><strong>base_path</strong> – the base path which will be removed from all the input files.
+Note, this means all the input files must have the same base
+path. Optional: Default is None (i.e., ignored).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.untar_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">untar_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gen_arch_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.untar_file" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts data from a tar file into the specified
+output directory. Optionally, an output directory of the same name
+as the archive file can be created for the output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_file</strong> – The input archive file.</p></li>
+<li><p><strong>out_dir</strong> – The output directory which must exist (if gen_arch_dir=True then
+a new directory will be created within the out_dir</p></li>
+<li><p><strong>gen_arch_dir</strong> – Create a new directory with the same name as the input file
+where the output files will be extracted to. (Default: True)</p></li>
+<li><p><strong>verbose</strong> – If True (default: False) then more user feedback will be printed
+to the console.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output directory where data was extracted to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.untar_gz_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">untar_gz_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gen_arch_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.untar_gz_file" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts data from a tar.gz file into the specified
+output directory. Optionally, an output directory of the same name
+as the archive file can be created for the output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_file</strong> – The input archive file.</p></li>
+<li><p><strong>out_dir</strong> – The output directory which must exist (if gen_arch_dir=True then
+a new directory will be created within the out_dir</p></li>
+<li><p><strong>gen_arch_dir</strong> – Create a new directory with the same name as the input file
+where the output files will be extracted to. (Default: True)</p></li>
+<li><p><strong>verbose</strong> – If True (default: False) then more user feedback will be printed
+to the console.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output directory where data was extracted to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.unzip_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">unzip_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gen_arch_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.unzip_file" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts data from a zip file into the specified
+output directory. Optionally, an output directory of the same name
+as the archive file can be created for the output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_file</strong> – The input archive file.</p></li>
+<li><p><strong>out_dir</strong> – The output directory which must exist (if gen_arch_dir=True then
+a new directory will be created within the out_dir</p></li>
+<li><p><strong>gen_arch_dir</strong> – Create a new directory with the same name as the input file
+where the output files will be extracted to. (Default: True)</p></li>
+<li><p><strong>verbose</strong> – If True (default: False) then more user feedback will be printed
+to the console.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output directory where data was extracted to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.untar_bz_file">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">untar_bz_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gen_arch_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.untar_bz_file" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts data from a tar.bz file into the specified
+output directory. Optionally, an output directory of the same name
+as the archive file can be created for the output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_file</strong> – The input archive file.</p></li>
+<li><p><strong>out_dir</strong> – The output directory which must exist (if gen_arch_dir=True then
+a new directory will be created within the out_dir</p></li>
+<li><p><strong>gen_arch_dir</strong> – Create a new directory with the same name as the input file
+where the output files will be extracted to. (Default: True)</p></li>
+<li><p><strong>verbose</strong> – If True (default: False) then more user feedback will be printed
+to the console.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output directory where data was extracted to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="file-info">
+<h2>File Info<a class="headerlink" href="#file-info" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.file_is_hidden">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">file_is_hidden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.file_is_hidden" title="Link to this definition"></a></dt>
+<dd><p>A function to test whether a file or folder is ‘hidden’ or not on the
+file system. Should be cross platform between Linux/UNIX and windows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dir_path</strong> – input file path to be tested</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean (True = hidden)</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.tools.filetools</span>
+<span class="k">if</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">filetools</span><span class="o">.</span><span class="n">file_is_hidden</span><span class="p">(</span><span class="s2">&quot;in/dir/img.kea&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File is hidden&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_file_size">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bytes'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_file_size" title="Link to this definition"></a></dt>
+<dd><p>A function which returns the file size of a file in the specified unit.</p>
+<p>Units:
+* bytes
+* kb - kilobytes  (bytes / 1024)
+* mb - megabytes  (bytes / 1024^2)
+* gb - gigabytes  (bytes / 1024^3)
+* tb - terabytes  (bytes / 1024^4)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – the path to the file for which the size is to be calculated.</p></li>
+<li><p><strong>unit</strong> – the unit for the file size. Options: bytes, kb, mb, gb, tb</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float for the file size.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_file_mod_time">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_file_mod_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_file_mod_time" title="Link to this definition"></a></dt>
+<dd><p>A function which finding the modification time of a file and returns it as
+a datetime object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – The file path as a string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modification time as a datetime object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sorting">
+<h2>Sorting<a class="headerlink" href="#sorting" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.sort_imgs_to_dirs_utm">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">sort_imgs_to_dirs_utm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_search_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_base_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.filetools.sort_imgs_to_dirs_utm" title="Link to this definition"></a></dt>
+<dd><p>A function which will sort a series of input image files which
+a projected using the UTM system into individual directories per
+UTM zone. Please note that the input files are moved on your system!!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs_dir</strong> – directory where the input files are to be found.</p></li>
+<li><p><strong>file_search_str</strong> – the wildcard search string to find files within
+the input directory (e.g., “in_dir/<a href="#id3"><span class="problematic" id="id4">*</span></a>.kea”).</p></li>
+<li><p><strong>out_base_dir</strong> – the output directory where the UTM folders will be created
+and the files copied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.natural_sort_file_names">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">natural_sort_file_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.natural_sort_file_names" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a natural sort of a list of files. For example,
+if you start file names with dates (YYYYMMDD) then this function will return
+the list of file names in date order (earliest first).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>in_file_lst</strong> – the input list of file paths. The get_file_basename function
+is used to extract the file name which is used for the sort.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the sorted list of names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.sort_file_by_datetime">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">sort_file_by_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.sort_file_by_datetime" title="Link to this definition"></a></dt>
+<dd><p>A function which sorts a list of file based on the list the file was
+last modified. The list will be outputted in ascending order (i.e., oldest
+to earliest). The python function os.path.getmtime is used to access the
+modified file for the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>in_file_lst</strong> – the input list of file paths, which need to be accessible.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the sorted list of names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="deleting">
+<h2>Deleting<a class="headerlink" href="#deleting" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.delete_file_with_basename">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">delete_file_with_basename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_rms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.filetools.delete_file_with_basename" title="Link to this definition"></a></dt>
+<dd><p>Function to delete all the files which have a path
+and base name defined in the input_file attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – string for the input file name and path</p></li>
+<li><p><strong>print_rms</strong> – print the files being deleted (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.delete_file_silent">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">delete_file_silent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.delete_file_silent" title="Link to this definition"></a></dt>
+<dd><p>A function which can be used in-place of os.remove to delete
+a file but if checks if the file exists and only calls os.remove
+if it does exist but also catches any Exceptions from os.remove
+and just returns a boolean as to whether the input_file has been
+removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – input file path for the file which is to be removed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean (True: File was removed or did not exist. False:
+os.remove through an Exception so assume file was not removed)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.rm_files_size_gt">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">rm_files_size_gt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_srch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rm_use_basename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.filetools.rm_files_size_gt" title="Link to this definition"></a></dt>
+<dd><p>A function which removes all the files from the search path which are
+greater than the specified size.</p>
+<p>Note, the file_path and file_srch will be merged with os.path.join.
+e.g., file_path=”/hello/world”, file_srch=”<em>.txt” would result in
+“/hello/world/</em>.txt”. Wild characters can get put in both parts if
+needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – The directory within which the files will be search for.</p></li>
+<li><p><strong>file_srch</strong> – The search string (must have a wild card ‘*’ for glob).</p></li>
+<li><p><strong>min_size</strong> – the minimum valid size, above this size the files will
+be deleted. In bytes.</p></li>
+<li><p><strong>rm_file</strong> – If True then files will be deleted if False then a list of
+‘rm file’ commands will be produced rather than the files
+actually being deleted. (default: False)</p></li>
+<li><p><strong>rm_use_basename</strong> – If True then all files with the same base name (i.e.,
+same name but different file extension) within the same
+directory will also be deleted. Useful if you have file
+formats which have multiple files. (default: False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="lock-files">
+<h2>Lock Files<a class="headerlink" href="#lock-files" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.get_file_lock">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">get_file_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_except</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.get_file_lock" title="Link to this definition"></a></dt>
+<dd><p>A function which gets a lock on a file.</p>
+<p>The lock file will be a unix hidden file (i.e., starts with a .) and it will
+have .lok added to the end. E.g., for input file hello_world.txt the lock file
+will be .hello_world.txt.lok. The contents of the lock file will be the time and
+date of creation.</p>
+<p>Using the default parameters (sleep 1 second and wait 120 iterations) if the
+lock isn’t available it will be retried every second for 120 seconds (i.e., 2 mins).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – The input file for which the lock will be created.</p></li>
+<li><p><strong>sleep_period</strong> – time in seconds to sleep for, if the lock isn’t
+available. (Default=1 second)</p></li>
+<li><p><strong>wait_iters</strong> – the number of iterations to wait for before giving
+up. (Default=120)</p></li>
+<li><p><strong>use_except</strong> – Boolean. If True then an exception will be thrown if the lock
+is not available. If False (default) False will be returned
+if the lock is not successful.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>boolean. True: lock was successfully gained. False: lock was not gained.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.release_file_lock">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">release_file_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.filetools.release_file_lock" title="Link to this definition"></a></dt>
+<dd><p>A function which releases a lock file for the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_file</strong> – The input file for which the lock will be created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.clean_file_locks">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">clean_file_locks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3600</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.filetools.clean_file_locks" title="Link to this definition"></a></dt>
+<dd><p>A function which cleans up any remaining lock file (i.e., if an application
+has crashed). The timeout time will be compared with the time written within
+the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – the file path to search for lock files (i.e., “.*.lok”)</p></li>
+<li><p><strong>timeout</strong> – the time (in seconds) for the timeout. Default: 3600 (1 hours)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="file-hash">
+<h2>File Hash<a class="headerlink" href="#file-hash" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha1_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha1_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha1_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA1 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA1 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA1 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha224_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha224_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha224_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA224 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA224 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA224 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha256_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha256_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha256_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA256 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA256 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA256 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha384_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha384_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha384_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA384 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA384 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA384 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha512_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha512_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha512_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA512 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA512 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA512 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_md5_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_md5_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_md5_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the MD5 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the MD5 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>MD5 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_blake2b_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_blake2b_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_blake2b_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the Blake2B hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the Blake2B hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Blake2B hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_blake2s_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_blake2s_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_blake2s_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the Blake2S hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the Blake2S hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Blake2S hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha3_224_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha3_224_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha3_224_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA3_224 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA3_224 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA3_224 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha3_256_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha3_256_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha3_256_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA3_256 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA3_256 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA3_256 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha3_384_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha3_384_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha3_384_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA3_384 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA3_384 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA3_384 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.create_sha3_512_hash">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">create_sha3_512_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.create_sha3_512_hash" title="Link to this definition"></a></dt>
+<dd><p>A function which calculates finds the SHA3_512 hash string of the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – the input file for which the SHA3_512 hash string with be found.</p></li>
+<li><p><strong>block_size</strong> – the size of the blocks the file is read in in bytes
+(default 4096; i.e., 4kb)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SHA3_512 hash string of the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="other">
+<h2>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.filetools.convert_file_size_units">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.filetools.</span></span><span class="sig-name descname"><span class="pre">convert_file_size_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.tools.filetools.convert_file_size_units" title="Link to this definition"></a></dt>
+<dd><p>A function which converts between file size units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_size</strong> – input file size</p></li>
+<li><p><strong>in_unit</strong> – the input unit for the file size. Options: bytes, kb, mb, gb, tb</p></li>
+<li><p><strong>out_unit</strong> – the output unit for the file size. Options: bytes, kb, mb, gb, tb</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float for the output file size</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools.html" class="btn btn-neutral float-left" title="RSGISLib Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_utils.html" class="btn btn-neutral float-right" title="RSGISLib Utility Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

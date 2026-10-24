@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Keras Image Chips Classification &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Clumps Classification Utilities" href="rsgislib_classification_classratutils.html" />
+    <link rel="prev" title="RSGISLib Keras Pixel Classification" href="rsgislib_classification_classkeraspxl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classsklearn.html">RSGISLib Scikit-Learn Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classlightgbm.html">RSGISLib LightGBM Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classxgboost.html">RSGISLib XGBoost Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classcatboost.html">RSGISLib CatBoost Image Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraspxl.html">RSGISLib Keras Pixel Classification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Keras Image Chips Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#training-functions">Training Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classkeraschips.train_keras_chips_pixel_classifier"><code class="docutils literal notranslate"><span class="pre">train_keras_chips_pixel_classifier()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#classify-functions">Classify Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classkeraschips.apply_keras_chips_pixel_classifier"><code class="docutils literal notranslate"><span class="pre">apply_keras_chips_pixel_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classkeraschips.train_keras_chips_ref_classifier"><code class="docutils literal notranslate"><span class="pre">train_keras_chips_ref_classifier()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classratutils.html">RSGISLib Clumps Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_clustersklearn.html">RSGISLib Scikit-Learn Unsupervised Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classimblearn.html">RSGISLib Imbalanced Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#pixel-training-data">Pixel Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#chips-training-data">Chips Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#post-classification-refinement">Post Classification Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-samples">Accuracy Assessment Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-stats">Accuracy Assessment Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#classification-utility-classes">Classification Utility Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_classification.html">RSGISLib Classification</a></li>
+      <li class="breadcrumb-item active">RSGISLib Keras Image Chips Classification</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-keras-image-chips-classification">
+<h1>RSGISLib Keras Image Chips Classification<a class="headerlink" href="#rsgislib-keras-image-chips-classification" title="Link to this heading"></a></h1>
+<p>These functions are first attempts and connecting spatial image data with window based (convolutional) neural networks. These functions and other will be developed as our research and understanding of these methods move forward.</p>
+<p>The application is similar to the RSGISLib classification modules. However, custom functions have been created to extract image training data and you need to keep in mind some of things about the network structure to fit to the shape/order of the data extracted.</p>
+<p><strong>Get Sample Data</strong></p>
+<p>Training data is defined using a raster image where for each pixel defined as the training data for a given class a window centred on that pixel will be extracted.</p>
+<p>If that raster is already available then you can use the rsgislib.imageutils.extractChipZoneImageBandValues2HDF function to extract the training data to a HDF5 file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imageutils</span>
+
+<span class="n">chip_h_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">imgBandInfo</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">imgBandInfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">ImageBandInfo</span><span class="p">(</span><span class="s1">&#39;sen2_refl_img.kea&#39;</span><span class="p">,</span> <span class="s1">&#39;sen2&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">mangrove_train_pxls_img</span> <span class="o">=</span> <span class="s1">&#39;mangrove_sample_pxls.kea&#39;</span>
+<span class="n">mangrove_train_chips_h5</span> <span class="o">=</span> <span class="s1">&#39;mangrove_sample_chips.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">extractChipZoneImageBandValues2HDF</span><span class="p">(</span><span class="n">imgBandInfo</span><span class="p">,</span> <span class="n">mangrove_train_pxls_img</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">chip_h_size</span><span class="p">,</span> <span class="n">mangrove_train_chips_h5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The chip_h_size is half the size of the chip extracted. The chip size will always be an odd size, for example an input value of 5 will result in an output chip size of 11. A value of 10 a chip size of 21.</p>
+</div>
+<p>If vector layers are being used to define the training data then the helper function rsgislib.classification.get_class_training_chips_data can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imageutils</span>
+
+<span class="n">chip_h_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">mangrove_samples</span> <span class="o">=</span> <span class="s1">&#39;class_samples_mangrove.h5&#39;</span>
+<span class="n">other_samples</span> <span class="o">=</span> <span class="s1">&#39;class_samples_other.h5&#39;</span>
+<span class="n">water_samples</span> <span class="o">=</span> <span class="s1">&#39;class_samples_water.h5&#39;</span>
+
+<span class="n">classVecSampleInfo</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">classVecSampleInfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassVecSamplesInfoObj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">classname</span><span class="o">=</span><span class="s2">&quot;Mangrove&quot;</span><span class="p">,</span> <span class="n">vecfile</span><span class="o">=</span><span class="s2">&quot;class_samples_mangrove.geojson&quot;</span><span class="p">,</span> <span class="n">veclyr</span><span class="o">=</span><span class="s2">&quot;class_samples_mangrove&quot;</span><span class="p">,</span> <span class="n">fileH5</span><span class="o">=</span><span class="n">mangrove_samples</span><span class="p">))</span>
+<span class="n">classVecSampleInfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassVecSamplesInfoObj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">classname</span><span class="o">=</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span> <span class="n">vecfile</span><span class="o">=</span><span class="s2">&quot;class_samples_other.geojson&quot;</span><span class="p">,</span> <span class="n">veclyr</span><span class="o">=</span><span class="s2">&quot;class_samples_other&quot;</span><span class="p">,</span> <span class="n">fileH5</span><span class="o">=</span><span class="n">other_samples</span><span class="p">))</span>
+<span class="n">classVecSampleInfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassVecSamplesInfoObj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">classname</span><span class="o">=</span><span class="s2">&quot;Water&quot;</span><span class="p">,</span> <span class="n">vecfile</span><span class="o">=</span><span class="s2">&quot;class_samples_water.geojson&quot;</span><span class="p">,</span> <span class="n">veclyr</span><span class="o">=</span><span class="s2">&quot;class_samples_water&quot;</span><span class="p">,</span> <span class="n">fileH5</span><span class="o">=</span><span class="n">water_samples</span><span class="p">))</span>
+
+<span class="n">imgBandInfo</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">imgBandInfo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">ImageBandInfo</span><span class="p">(</span><span class="s1">&#39;sen2_refl_img.kea&#39;</span><span class="p">,</span> <span class="s1">&#39;sen2&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">tmp_path</span> <span class="o">=</span> <span class="s1">&#39;./tmp&#39;</span>
+
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">get_class_training_chips_data</span><span class="p">(</span><span class="n">imgBandInfo</span><span class="p">,</span> <span class="n">classVecSampleInfo</span><span class="p">,</span> <span class="n">chip_h_size</span><span class="p">,</span> <span class="n">tmp_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To split those input samples into training, validation and training data then the rsgislib.classification.split_chip_sample_train_valid_test function is used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mangrove_samples_train</span> <span class="o">=</span> <span class="s1">&#39;class_samples_mangrove_train.h5&#39;</span>
+<span class="n">mangrove_samples_valid</span> <span class="o">=</span> <span class="s1">&#39;class_samples_mangrove_valid.h5&#39;</span>
+<span class="n">mangrove_samples_test</span> <span class="o">=</span> <span class="s1">&#39;class_samples_mangrove_test.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_chip_sample_train_valid_test</span><span class="p">(</span><span class="n">mangrove_samples</span><span class="p">,</span> <span class="n">mangrove_samples_train</span><span class="p">,</span> <span class="n">mangrove_samples_valid</span><span class="p">,</span> <span class="n">mangrove_samples_test</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+
+<span class="n">other_samples_train</span> <span class="o">=</span> <span class="s1">&#39;class_samples_other_train.h5&#39;</span>
+<span class="n">other_samples_valid</span> <span class="o">=</span> <span class="s1">&#39;class_samples_other_valid.h5&#39;</span>
+<span class="n">other_samples_test</span> <span class="o">=</span> <span class="s1">&#39;class_samples_other_test.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_chip_sample_train_valid_test</span><span class="p">(</span><span class="n">other_samples</span><span class="p">,</span> <span class="n">other_samples_train</span><span class="p">,</span> <span class="n">other_samples_valid</span><span class="p">,</span> <span class="n">other_samples_test</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+
+<span class="n">water_samples_train</span> <span class="o">=</span> <span class="s1">&#39;class_samples_water_train.h5&#39;</span>
+<span class="n">water_samples_valid</span> <span class="o">=</span> <span class="s1">&#39;class_samples_water_valid.h5&#39;</span>
+<span class="n">water_samples_test</span> <span class="o">=</span> <span class="s1">&#39;class_samples_water_test.h5&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_chip_sample_train_valid_test</span><span class="p">(</span><span class="n">water_samples</span><span class="p">,</span> <span class="n">water_samples_train</span><span class="p">,</span> <span class="n">water_samples_valid</span><span class="p">,</span> <span class="n">water_samples_test</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Training Classifer</strong></p>
+<p>First you need to define a classifier using Keras:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">keras.optimizers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">keras.losses</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Activation</span>
+
+<span class="c1"># input_shape: [n_bands, chip_size, chip_size]</span>
+<span class="c1"># chip_size = (chip_h_size * 2) + 1</span>
+<span class="c1"># data_format must be &#39;channels_first&#39; (i.e., bands first)</span>
+
+<span class="c1"># THIS CLASSIFIER IS NOT AN EXAMPLE OF A GOOD CLASSIFIER STRUCTURE - DO NOT COPY AND USE!!</span>
+<span class="n">cls_mdl</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;channels_first&#39;</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="c1"># The final layer must be the same size as the number of classes and use a softmax activation.</span>
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="n">cls_mdl</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(),</span> <span class="n">loss</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">categorical_crossentropy</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The classification model can then be trained, note this can take a lot of time (hours/days) and it might be recommended that you have your system setup so Keras/Tensorflow can use the GPU for processing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification.classkeraschips</span>
+
+<span class="n">clsinfodict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">clsinfodict</span><span class="p">[</span><span class="s1">&#39;Mangroves&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">out_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">trainfileH5</span><span class="o">=</span><span class="n">mangroves_samples_train</span><span class="p">,</span> <span class="n">testfileH5</span><span class="o">=</span><span class="n">mangroves_samples_test</span><span class="p">,</span> <span class="n">validfileH5</span><span class="o">=</span><span class="n">mangroves_samples_valid</span><span class="p">,</span> <span class="n">red</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">green</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">blue</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">clsinfodict</span><span class="p">[</span><span class="s1">&#39;Other&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">out_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">trainfileH5</span><span class="o">=</span><span class="n">other_samples_train</span><span class="p">,</span> <span class="n">testfileH5</span><span class="o">=</span><span class="n">other_samples_test</span><span class="p">,</span> <span class="n">validfileH5</span><span class="o">=</span><span class="n">other_samples_valid</span><span class="p">,</span> <span class="n">red</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">green</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blue</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">clsinfodict</span><span class="p">[</span><span class="s1">&#39;Water&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">out_id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">trainfileH5</span><span class="o">=</span><span class="n">water_samples_train</span><span class="p">,</span> <span class="n">testfileH5</span><span class="o">=</span><span class="n">water_samples_test</span><span class="p">,</span> <span class="n">validfileH5</span><span class="o">=</span><span class="n">water_samples_valid</span><span class="p">,</span> <span class="n">red</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">green</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">blue</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+<span class="n">out_mdl_file</span> <span class="o">=</span> <span class="s1">&#39;basic_chip_mdl.h5&#39;</span>
+
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classkeraschips</span><span class="o">.</span><span class="n">train_keras_chips_pixel_classifier</span><span class="p">(</span><span class="n">cls_mdl</span><span class="p">,</span> <span class="n">clsinfodict</span><span class="p">,</span> <span class="n">out_mdl_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Apply Classifier</strong></p>
+<p>The following code allows you to re-opening the model you have trained, it would be common for the training phase to take a long period of time (hours, even days!!) so you will likely have separate training and application scripts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_model</span>
+<span class="n">cls_mdl</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;basic_chip_mdl.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Apply the classifier to scene:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">img_mask</span> <span class="o">=</span> <span class="s1">&#39;mangrove_habitat_img.kea&#39;</span>
+<span class="n">out_cls_img</span> <span class="o">=</span> <span class="s1">&#39;class_out_img.kea&#39;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classkeraspxl</span><span class="o">.</span><span class="n">apply_keras_pixel_classifier</span><span class="p">(</span><span class="n">clsinfodict</span><span class="p">,</span> <span class="n">cls_mdl</span><span class="p">,</span> <span class="n">img_mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">imgs_info</span><span class="p">,</span> <span class="n">chip_h_size</span><span class="p">,</span> <span class="n">out_cls_img</span><span class="p">,</span> <span class="s1">&#39;KEA&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="training-functions">
+<h2>Training Functions<a class="headerlink" href="#training-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classkeraschips.train_keras_chips_pixel_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classkeraschips.</span></span><span class="sig-name descname"><span class="pre">train_keras_chips_pixel_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_mdl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classkeraschips.train_keras_chips_pixel_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which trains a neural network defined using the keras API for the classification of remotely sensed data.
+A dict of class information, as ClassInfoObj objects, is defined with the training data.</p>
+<p>This function requires that tensorflow and keras modules to be installed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_mdl_file</strong> – The output model which can be loaded to perform a classification.</p></li>
+<li><p><strong>cls_info_dict</strong> – dict (key is string with class name) of ClassInfoObj objects defining the training data.</p></li>
+<li><p><strong>out_mdl_file</strong> – A file path to save the trained model as a hdf5 file. If None then ignored.</p></li>
+<li><p><strong>train_epochs</strong> – The number of epochs to use for training</p></li>
+<li><p><strong>train_batch_size</strong> – The batch size to use for training.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="classify-functions">
+<h2>Classify Functions<a class="headerlink" href="#classify-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classkeraschips.apply_keras_chips_pixel_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classkeraschips.</span></span><span class="sig-name descname"><span class="pre">apply_keras_chips_pixel_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_train_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keras_cls_mdl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_img_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_mask_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_file_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chip_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_class_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_clr_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classkeraschips.apply_keras_chips_pixel_classifier" title="Link to this definition"></a></dt>
+<dd><p>This function applies a trained single pixel keras model to an image. The function train_keras_pixel_classifier
+can be used to train such as model. The output image will contain the hard membership of the predicted class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>class_train_info</strong> – dict (where the key is the class name) of rsgislib.classification.ClassInfoObj
+objects which will be used to train the classifier (i.e., train_keras_pixel_classifier()),
+provide pixel value id and RGB class values.</p></li>
+<li><p><strong>keras_cls_mdl</strong> – a trained keras model object, with a input dimensions equivlent to the number of image
+bands specified in the imgFileInfo input and output layer which provides an output array
+of the length of the number of classes.</p></li>
+<li><p><strong>in_img_mask</strong> – is an image file providing a mask to specify where should be classified. Simplest mask is all the
+valid data regions (rsgislib.imageutils.gen_valid_mask)</p></li>
+<li><p><strong>img_mask_val</strong> – the pixel value within the imgMask to limit the region to which the classification is applied.
+Can be used to create a heirachical classification.</p></li>
+<li><p><strong>img_file_info</strong> – a list of rsgislib.imageutils.ImageBandInfo objects (also used within
+rsgislib.zonalstats.extract_zone_img_band_values_to_hdf) to identify which images and bands are to
+be used for the classification so it adheres to the training data.</p></li>
+<li><p><strong>out_class_img</strong> – Output image which will contain the hard classification.</p></li>
+<li><p><strong>norm_function</strong> – Normalisation function to apply before running classification</p></li>
+<li><p><strong>chip_size</strong> – is the chip size to be extracted.</p></li>
+<li><p><strong>gdalformat</strong> – is the output image format - all GDAL supported formats are supported.</p></li>
+<li><p><strong>class_clr_names</strong> – default is True and therefore a colour table will the colours specified in ClassInfoObj
+and a class_names (from classTrainInfo) column will be added to the output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classkeraschips.train_keras_chips_ref_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classkeraschips.</span></span><span class="sig-name descname"><span class="pre">train_keras_chips_ref_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_mdl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_data_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_data_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classkeraschips.train_keras_chips_ref_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which trains a neural network defined using the keras API for the classification of remotely sensed data.</p>
+<p>This function requires that tensorflow and keras modules to be installed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls_mdl</strong> – The Keras model which has already been defined.</p></li>
+<li><p><strong>train_data_file</strong> – a HDF5 file with training data (needs to have elements /DATA/DATA and /DATA/REF)</p></li>
+<li><p><strong>valid_data_file</strong> – a HDF5 file with validation data (needs to have elements /DATA/DATA and /DATA/REF)</p></li>
+<li><p><strong>test_data_file</strong> – a HDF5 file with testing data (needs to have elements /DATA/DATA and /DATA/REF)</p></li>
+<li><p><strong>n_classes</strong> – integer specifying the number of classes within the system</p></li>
+<li><p><strong>out_mdl_file</strong> – A file path to save the trained model as a hdf5 file. If None then ignored.</p></li>
+<li><p><strong>train_epochs</strong> – The number of epochs to use for training</p></li>
+<li><p><strong>train_batch_size</strong> – The batch size to use for training.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_classification_classkeraspxl.html" class="btn btn-neutral float-left" title="RSGISLib Keras Pixel Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_classification_classratutils.html" class="btn btn-neutral float-right" title="RSGISLib Clumps Classification Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

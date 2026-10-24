@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Scikit-Learn Unsupervised Pixel Classification &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Imbalanced Classification Utilities" href="rsgislib_classification_classimblearn.html" />
+    <link rel="prev" title="RSGISLib Clumps Classification Utilities" href="rsgislib_classification_classratutils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classsklearn.html">RSGISLib Scikit-Learn Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classlightgbm.html">RSGISLib LightGBM Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classxgboost.html">RSGISLib XGBoost Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classcatboost.html">RSGISLib CatBoost Image Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraspxl.html">RSGISLib Keras Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraschips.html">RSGISLib Keras Image Chips Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classratutils.html">RSGISLib Clumps Classification Utilities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib Scikit-Learn Unsupervised Pixel Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pixel-clustering">Pixel Clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.clustersklearn.img_pixel_sample_cluster"><code class="docutils literal notranslate"><span class="pre">img_pixel_sample_cluster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.clustersklearn.img_pixel_tiled_cluster"><code class="docutils literal notranslate"><span class="pre">img_pixel_tiled_cluster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.clustersklearn.img_pixel_cluster"><code class="docutils literal notranslate"><span class="pre">img_pixel_cluster()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rat-clustering">RAT Clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.clustersklearn.cluster_sklearn_rat"><code class="docutils literal notranslate"><span class="pre">cluster_sklearn_rat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classimblearn.html">RSGISLib Imbalanced Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#pixel-training-data">Pixel Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#chips-training-data">Chips Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#post-classification-refinement">Post Classification Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-samples">Accuracy Assessment Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-stats">Accuracy Assessment Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#classification-utility-classes">Classification Utility Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_classification.html">RSGISLib Classification</a></li>
+      <li class="breadcrumb-item active">RSGISLib Scikit-Learn Unsupervised Pixel Classification</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-scikit-learn-unsupervised-pixel-classification">
+<h1>RSGISLib Scikit-Learn Unsupervised Pixel Classification<a class="headerlink" href="#rsgislib-scikit-learn-unsupervised-pixel-classification" title="Link to this heading"></a></h1>
+<p>To use the unsupervised classification functions you need to create an instance of a scikit-learn cluster (<a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html">https://scikit-learn.org/stable/modules/clustering.html</a>). For example K-Means:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">MiniBatchKMeans</span>
+<span class="n">sklclusterer</span> <span class="o">=</span> <span class="n">MiniBatchKMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can then run one of the module functions, first we’ll import the module and define our images:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">input_img</span> <span class="o">=</span> <span class="s2">&quot;S2_UVD_27sept_27700_sub.kea&quot;</span>
+<span class="n">output_img</span> <span class="o">=</span> <span class="s2">&quot;S2_UVD_27sept_27700_sub_clusters.kea&quot;</span>
+</pre></div>
+</div>
+<p>Using all the image pixels, this can be time and memory intensive so this would normally be used for smaller datasets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">clustersklearn</span><span class="o">.</span><span class="n">img_pixel_cluster</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">output_img</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="n">noDataVal</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">clusterer</span><span class="o">=</span><span class="n">sklclusterer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you have a larger image then you might want to use one of the other two functions, which either performs the clustering in tiles and therefore has tile boundaries, alternatively, you can sample the input image performing the clustering on the sample and then applying to the whole image.</p>
+<p>Clustering using tiling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">clustersklearn</span><span class="o">.</span><span class="n">img_pixel_tiled_cluster</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">output_img</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="n">noDataVal</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">clusterer</span><span class="o">=</span><span class="n">sklclusterer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Clustering using samples, the imgSamp parameter specifies the size of the sample taken, in the example below it will be every 100th pixel (i.e., a 1 percent sample):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">clustersklearn</span><span class="o">.</span><span class="n">img_pixel_sample_cluster</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">output_img</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="n">noDataVal</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">imgSamp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">clusterer</span><span class="o">=</span><span class="n">sklclusterer</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="pixel-clustering">
+<h2>Pixel Clustering<a class="headerlink" href="#pixel-clustering" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.clustersklearn.img_pixel_sample_cluster">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.clustersklearn.</span></span><span class="sig-name descname"><span class="pre">img_pixel_sample_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_img_smpl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusterer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MiniBatchKMeans(batch_size=100,</span> <span class="pre">n_clusters=60)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mean_shift_est_band_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.clustersklearn.img_pixel_sample_cluster" title="Link to this definition"></a></dt>
+<dd><p>A function which allows a clustering to be performed using the algorithms available
+within the scikit-learn library. The clusterer is trained on a sample of the input
+image and then applied using the predict function (therefore this function is only
+compatible with clustering algorithms which have the predict function implemented)
+to the whole image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>no_data_val</strong> – no data value associated with the input image.</p></li>
+<li><p><strong>n_img_smpl</strong> – the input image sampling. (e.g., 100 is every 100th pixel)</p></li>
+<li><p><strong>clusterer</strong> – clusterer from scikit-learn which must have a predict function.</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image pyramids -
+note if you are not using a KEA file then the format needs to
+support RATs for this option as histogram and colour table
+are written to RAT.</p></li>
+<li><p><strong>use_mean_shift_est_band_width</strong> – use the mean-shift algorithm as the clusterer
+(pass None as the clusterer) where the
+bandwidth is calculated from the data itself.</p></li>
+<li><p><strong>datatype</strong> – the output image data type - needs to be a
+rsgislib datatype (e.g., rsgislib.TYPE_8UINT)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.clustersklearn.img_pixel_tiled_cluster">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.clustersklearn.</span></span><span class="sig-name descname"><span class="pre">img_pixel_tiled_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusterer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MiniBatchKMeans(batch_size=100,</span> <span class="pre">n_clusters=60)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mean_shift_est_band_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_x_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tile_y_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.clustersklearn.img_pixel_tiled_cluster" title="Link to this definition"></a></dt>
+<dd><p>A function which allows a clustering to be performed using the algorithms available
+within the scikit-learn library. The clusterer is applied to a single tile at a time
+and therefore produces tile boundaries in the result. However, memory is controlled
+such that usage isn’t excessive which it could be when processing a whole image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>no_data_val</strong> – no data value associated with the input image.</p></li>
+<li><p><strong>clusterer</strong> – clusterer from scikit-learn which must have a predict function.</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image pyramids -
+note if you are not using a KEA file then the format needs to
+support RATs for this option as histogram and colour table
+are written to RAT.</p></li>
+<li><p><strong>use_mean_shift_est_band_width</strong> – use the mean-shift algorithm as the clusterer
+(pass None as the clusterer) where the
+bandwidth is calculated from the data itself.</p></li>
+<li><p><strong>tile_x_size</strong> – tile size in the x-axis in pixels.</p></li>
+<li><p><strong>tile_y_size</strong> – tile size in the y-axis in pixels.</p></li>
+<li><p><strong>datatype</strong> – the output image data type - needs to be a
+rsgislib datatype (e.g., rsgislib.TYPE_8UINT)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.clustersklearn.img_pixel_cluster">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.clustersklearn.</span></span><span class="sig-name descname"><span class="pre">img_pixel_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusterer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MiniBatchKMeans(batch_size=100,</span> <span class="pre">n_clusters=60)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mean_shift_est_band_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.clustersklearn.img_pixel_cluster" title="Link to this definition"></a></dt>
+<dd><p>A function which allows a clustering to be performed using the algorithms available
+within the scikit-learn library. The clusterer is applied to the whole image in one
+operation therefore requires the whole image to be loaded into memory. However,
+if there is sufficient memory all the clustering algorithms within scikit-learn can
+be applied without boundary artifacts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – input image file.</p></li>
+<li><p><strong>output_img</strong> – output image file.</p></li>
+<li><p><strong>gdalformat</strong> – output image file format.</p></li>
+<li><p><strong>no_data_val</strong> – no data value associated with the input image.</p></li>
+<li><p><strong>clusterer</strong> – clusterer from scikit-learn which must have a predict function.</p></li>
+<li><p><strong>calc_stats</strong> – calculate image pixel statistics, histogram and image pyramids -
+note if you are not using a KEA file then the format needs to
+support RATs for this option as histogram and colour table
+are written to RAT.</p></li>
+<li><p><strong>use_mean_shift_est_band_width</strong> – use the mean-shift algorithm as the clusterer
+(pass None as the clusterer) where the
+bandwidth is calculated from the data itself.</p></li>
+<li><p><strong>datatype</strong> – the output image data type - needs to be a
+rsgislib datatype (e.g., rsgislib.TYPE_8UINT)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rat-clustering">
+<h2>RAT Clustering<a class="headerlink" href="#rat-clustering" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.clustersklearn.cluster_sklearn_rat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.clustersklearn.</span></span><span class="sig-name descname"><span class="pre">cluster_sklearn_rat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sk_clusterer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BaseEstimator</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MiniBatchKMeans(batch_size=100,</span> <span class="pre">n_clusters=60)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'OutClass'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roi_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roi_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.clustersklearn.cluster_sklearn_rat" title="Link to this definition"></a></dt>
+<dd><p>A function which will apply an scikit-learn clustering (i.e., unsupervised
+classification) within a Raster Attribute Table (RAT).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – is the clumps image on which the clustering is to
+be performed</p></li>
+<li><p><strong>variables</strong> – is an array of column names which are to be used for
+the clustering</p></li>
+<li><p><strong>sk_clusterer</strong> – an instance of a scikit-learn clustering algorithm</p></li>
+<li><p><strong>out_col</strong> – is the output column</p></li>
+<li><p><strong>roi_col</strong> – is a column name for a column which specifies the region
+to be clustered. If None ignored (Default: None)</p></li>
+<li><p><strong>roi_val</strong> – is a int value used within the roi_col to select a
+region to be clustered (Default: 1)</p></li>
+<li><p><strong>sub_sample</strong> – Subsample the data for fitting the clusterer. Provide
+the proprotion (0-1) to be used for the clustering.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_classification_classratutils.html" class="btn btn-neutral float-left" title="RSGISLib Clumps Classification Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_classification_classimblearn.html" class="btn btn-neutral float-right" title="RSGISLib Imbalanced Classification Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

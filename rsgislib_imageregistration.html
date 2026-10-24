@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Image Registration &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Spectral Unmixing" href="rsgislib_imagecalc_spectralunmixing.html" />
+    <link rel="prev" title="RSGISLib Image Morphology" href="rsgislib_imagemorphology.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Image Registration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#whole-image-shift">Whole Image Shift</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.find_image_offset"><code class="docutils literal notranslate"><span class="pre">find_image_offset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.apply_offset_to_image"><code class="docutils literal notranslate"><span class="pre">apply_offset_to_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tie-point-generation">Tie Point Generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.basic_registration"><code class="docutils literal notranslate"><span class="pre">basic_registration()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.single_layer_registration"><code class="docutils literal notranslate"><span class="pre">single_layer_registration()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#warping">Warping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.warp_with_gcps_with_gdal"><code class="docutils literal notranslate"><span class="pre">warp_with_gcps_with_gdal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#other">Other</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.gcp_to_gdal"><code class="docutils literal notranslate"><span class="pre">gcp_to_gdal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imageregistration.add_vec_pts_as_gcps_to_img"><code class="docutils literal notranslate"><span class="pre">add_vec_pts_as_gcps_to_img()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Image Registration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-image-registration">
+<h1>RSGISLib Image Registration<a class="headerlink" href="#rsgislib-image-registration" title="Link to this heading"></a></h1>
+<p>The image registration module contains algorithms for matching images together, either
+to find a whole image shift or for generating tie points matching two image which
+can then be used to warp the input image.</p>
+<p>There are two tie point generation algorithms are available for registration:
+basic, and singlelayer. The single layer algorithm is a simplified version of the
+algorithm proposed in:</p>
+<p>Bunting, P.J., Labrosse, F. &amp; Lucas, R.M., 2010. A multi-resolution area-based
+technique for automatic multi-modal image registration. Image and Vision Computing,
+28(8), pp.1203-1219.</p>
+<p>Image distance metrics:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>METRIC_EUCLIDEAN = 1</p></li>
+<li><p>METRIC_SQDIFF = 2</p></li>
+<li><p>METRIC_MANHATTEN = 3</p></li>
+<li><p>METRIC_CORELATION = 4</p></li>
+</ul>
+</div></blockquote>
+<p>GCP Output Types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>TYPE_ENVI_IMG2IMG = 1</p></li>
+<li><p>TYPE_ENVI_IMG2MAP = 2</p></li>
+<li><p>TYPE_RSGIS_IMG2MAP = 3</p></li>
+<li><p>TYPE_RSGIS_MAPOFFS = 4</p></li>
+</ul>
+</div></blockquote>
+<section id="whole-image-shift">
+<h2>Whole Image Shift<a class="headerlink" href="#whole-image-shift" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.find_image_offset">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">find_image_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_ref_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_float_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_img_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flt_img_bands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_pxl_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.find_image_offset" title="Link to this definition"></a></dt>
+<dd><p>Calculate and X/Y offset between the input reference and float images.
+This function will calculate the similarity intersecting regions of the
+two images and identified an X/Y where the similarity is greatest.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_ref_img</strong> – is a string providing reference image which to which the floating image is to be registered.n:param in_float_img: is a string providing the floating image to be registered to the reference image</p></li>
+<li><p><strong>ref_img_bands</strong> – is a list of image bands which are to be used to calculate the image similarity from the reference image.</p></li>
+<li><p><strong>flt_img_bands</strong> – is a list of image bands which are to be used to calculate the image similarity from the floating image.</p></li>
+<li><p><strong>metric_type</strong> – is an the similarity metric used to compare images of type rsgislib.imageregistration.METRIC_*</p></li>
+<li><p><strong>x_search</strong> – is the number of pixels in the x-axis the image can be moved either side of the centre.</p></li>
+<li><p><strong>y_search</strong> – is the number of pixels in the y-axis the image can be moved either side of the centre.</p></li>
+<li><p><strong>sub_pxl_res</strong> – is an optional (if not specified then no sub-pixel component will be estimated) int specifying the sub-pixel resolution to which the pixel shifts are estimated. Note that the values are positive integers such that a value of 2 will result in a sub pixel resolution of 0.5 of a pixel and a value 4 will be 0.25 of a pixel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(x_offset, y_offset)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.apply_offset_to_image">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">apply_offset_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.apply_offset_to_image" title="Link to this definition"></a></dt>
+<dd><p>Apply a linear X,Y offset to the image header - does not change the pixel values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string providing the input image.</p></li>
+<li><p><strong>output_img</strong> – is a string providing the output image.</p></li>
+<li><p><strong>gdalformat</strong> – is a string providing the output format (e.g., KEA).</p></li>
+<li><p><strong>datatype</strong> – is a rsgislib.TYPE_* value providing the output data type.</p></li>
+<li><p><strong>x_offset</strong> – is a float specifying the X offset to be applied to the image.</p></li>
+<li><p><strong>y_offset</strong> – is a float specifying the Y offset to be applied to the image.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">imageregistration</span>
+<span class="n">inputImage</span> <span class="o">=</span> <span class="s1">&#39;./Rasters/injune_p142_casi_sub_utm_single_band_offset3x3y.vrt&#39;</span>
+<span class="n">outputImage</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/injune_p142_casi_sub_utm_single_band_offset3x3y_fixed.kea&#39;</span>
+<span class="n">gdalformat</span> <span class="o">=</span> <span class="s1">&#39;KEA&#39;</span>
+<span class="n">datatype</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32INT</span>
+<span class="n">imageregistration</span><span class="o">.</span><span class="n">apply_offset_to_image</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span> <span class="n">outputImage</span><span class="p">,</span> <span class="n">gdalformat</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="tie-point-generation">
+<h2>Tie Point Generation<a class="headerlink" href="#tie-point-generation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.basic_registration">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">basic_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_ref_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_float_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_gcp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_gap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd_ref_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd_flt_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_pxl_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.basic_registration" title="Link to this definition"></a></dt>
+<dd><p>Generate tie points between floating and reference image using basic algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_ref_img</strong> – is a string providing reference image which to which the floating image is to be registered.n:param in_float_img: is a string providing the floating image to be registered to the reference image</p></li>
+<li><p><strong>out_gcp_file</strong> – is a string giving specifying the output file, containing the generated tie points</p></li>
+<li><p><strong>pixel_gap</strong> – is an int specifying the gap, in image pixels, between the initial tie points (this is for both the x and y axis)</p></li>
+<li><p><strong>threshold</strong> – is a float providing the threshold for the image metric above/below (depending on image metric) which matching is consider insufficient to be reliable and therefore the match will be ignored.</p></li>
+<li><p><strong>win_size</strong> – is an int providing the size of the window around each tie point which will be used for the matching</p></li>
+<li><p><strong>search_area</strong> – is an int providing the distance (in pixels) from the tie point start point which will be searched.</p></li>
+<li><p><strong>sd_ref_thres</strong> – is a float which defines the standard deviation for the window around each tie point below which it is deemed there is insufficient information to perform a match</p></li>
+<li><p><strong>sd_flt_thres</strong> – is a float which defines the standard deviation for the window around each tie point below which it is deemed there is insufficient information to perform a match. Note, that the tie point window has to be below the threshold for both the reference and floating image to be ignored</p></li>
+<li><p><strong>sub_pxl_res</strong> – is an int specifying the sub-pixel resolution to which the pixel shifts are estimated. Note that the values are positive integers such that a value of 2 will result in a sub pixel resolution of 0.5 of a pixel and a value 4 will be 0.25 of a pixel.</p></li>
+<li><p><strong>metric_type</strong> – is an the similarity metric used to compare images of type rsgislib.imageregistration.METRIC_*</p></li>
+<li><p><strong>output_type</strong> – is an the format of the output file of type rsgislib.imageregistration.TYPE_*</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reference</span> <span class="o">=</span> <span class="s1">&#39;ref.kea&#39;</span>
+<span class="n">floating</span> <span class="o">=</span> <span class="s1">&#39;float.kea&#39;</span>
+<span class="n">pixelGap</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">window</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">search</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">stddevRef</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">stddevFloat</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">subpixelresolution</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">metric</span> <span class="o">=</span> <span class="n">imageregistration</span><span class="o">.</span><span class="n">METRIC_CORELATION</span>
+<span class="n">outputType</span> <span class="o">=</span> <span class="n">imageregistration</span><span class="o">.</span><span class="n">TYPE_RSGIS_IMG2MAP</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/injune_p142_casi_sub_utm_tie_points.txt&#39;</span>
+<span class="n">imageregistration</span><span class="o">.</span><span class="n">basic_registration</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">floating</span><span class="p">,</span> <span class="n">pixelGap</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="n">stddevRef</span><span class="p">,</span> <span class="n">stddevFloat</span><span class="p">,</span> <span class="n">subpixelresolution</span><span class="p">,</span> <span class="n">metric</span><span class="p">,</span> <span class="n">outputType</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.single_layer_registration">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">single_layer_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_ref_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_float_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_gcp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_gap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd_ref_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd_flt_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_pxl_res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_n_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">move_chng_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_smooth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.single_layer_registration" title="Link to this definition"></a></dt>
+<dd><p>Generate tie points between floating and reference image using a single connected layer of tie points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_ref_img</strong> – is a string providing reference image which to which the floating image is to be registered.n:param in_float_img: is a string providing the floating image to be registered to the reference image</p></li>
+<li><p><strong>out_gcp_file</strong> – is a string giving specifying the output file, containing the generated tie points</p></li>
+<li><p><strong>pixel_gap</strong> – is an int specifying the gap, in image pixels, between the initial tie points (this is for both the x and y axis) which matching is consider insufficient to be reliable and therefore the match will be ignored.</p></li>
+<li><p><strong>threshold</strong> – is a float providing the threshold for the image metric above/below (depending on image metric) which matching is consider insufficient to be reliable and therefore the match will be ignored.</p></li>
+<li><p><strong>win_size</strong> – is an int providing the size of the window around each tie point which will be used for the matching</p></li>
+<li><p><strong>search_area</strong> – is an int providing the distance (in pixels) from the tie point start point which will be searched.</p></li>
+<li><p><strong>sd_ref_thres</strong> – is a float which defines the standard deviation for the window around each tie point below which it is deemed there is insufficient information to perform a match</p></li>
+<li><p><strong>sd_flt_thres</strong> – is a float which defines the standard deviation for the window around each tie point below which it is deemed there is insufficient information to perform a match. Note, that the tie point window has to be below the threshold for both the reference and floating image to be ignored</p></li>
+<li><p><strong>sub_pxl_res</strong> – is an int specifying the sub-pixel resolution to which the pixel shifts are estimated. Note that the values are positive integers such that a value of 2 will result in a sub pixel resolution of 0.5 of a pixel and a value 4 will be 0.25 of a pixel.</p></li>
+<li><p><strong>dist_threshold</strong> – is an int giving the distance (in pixels) to be connected within the layer.</p></li>
+<li><p><strong>max_n_iters</strong> – is an int giving the maximum number of iterations of the tie point grid to find an optimal set of tie points</p></li>
+<li><p><strong>move_chng_thres</strong> – is a float providing the threshold for the average amount of tie point movement for the optimisation to be terminated</p></li>
+<li><p><strong>p_smooth</strong> – is a float providing the ‘p’ parameter for the inverse weighted distance calculation. A value of 2 should be used by default</p></li>
+<li><p><strong>metric_type</strong> – is an the similarity metric used to compare images of type rsgislib.imageregistration.METRIC_*</p></li>
+<li><p><strong>output_type</strong> – is an the format of the output file of type rsgislib.imageregistration.TYPE_*</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">imageregistration</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="s1">&#39;ref.kea&#39;</span>
+<span class="n">floating</span> <span class="o">=</span> <span class="s1">&#39;float.kea&#39;</span>
+<span class="n">pixelGap</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">window</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">search</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">stddevRef</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">stddevFloat</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">subpixelresolution</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">metric</span> <span class="o">=</span> <span class="n">imageregistration</span><span class="o">.</span><span class="n">METRIC_CORELATION</span>
+<span class="n">outputType</span> <span class="o">=</span> <span class="n">imageregistration</span><span class="o">.</span><span class="n">TYPE_RSGIS_IMG2MAP</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/injune_p142_casi_sub_utm_tie_points.txt&#39;</span>
+<span class="n">imageregistration</span><span class="o">.</span><span class="n">single_layer_registration</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">floating</span><span class="p">,</span> <span class="n">pixelGap</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="n">stddevRef</span><span class="p">,</span> <span class="n">stddevFloat</span><span class="p">,</span> <span class="n">subpixelresolution</span><span class="p">,</span> <span class="n">metric</span><span class="p">,</span> <span class="n">outputType</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="warping">
+<h2>Warping<a class="headerlink" href="#warping" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.warp_with_gcps_with_gdal">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">warp_with_gcps_with_gdal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_ref_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_process_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_poly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poly_order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multi_thread</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.warp_with_gcps_with_gdal" title="Link to this definition"></a></dt>
+<dd><p>A utility function to warp an image file (in_process_img) using GCPs defined within
+the image header - this is the same as using the gdalwarp utility. However, the
+output image will have the same pixel grid and dimensions as the input reference
+image (in_ref_img).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_ref_img</strong> – is the input reference image to which the processing image
+is to resampled to.</p></li>
+<li><p><strong>in_process_img</strong> – is the image which is to be resampled.</p></li>
+<li><p><strong>output_img</strong> – is the output image file.</p></li>
+<li><p><strong>gdalformat</strong> – is the gdal format for the output image.</p></li>
+<li><p><strong>interp_method</strong> – is the interpolation method used to resample the image
+[bilinear, lanczos, cubicspline, nearestneighbour, cubic,
+average, mode]</p></li>
+<li><p><strong>use_tps</strong> – is a boolean specifying that the thin plated splines method of
+warping should be used (i.e., rubbersheet); Default False.</p></li>
+<li><p><strong>use_poly</strong> – is a boolean specifying that a polynomial method of warping
+is used; Default True</p></li>
+<li><p><strong>poly_order</strong> – is the order of the polynomial used to represent the
+transformation (1, 2 or 3). Only used if use_poly=True</p></li>
+<li><p><strong>use_multi_thread</strong> – is a boolean specifying whether multiple processing
+cores should be used for the warping.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="other">
+<h2>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.gcp_to_gdal">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">gcp_to_gdal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_gcp_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.gcp_to_gdal" title="Link to this definition"></a></dt>
+<dd><p>Adds tie points to GDAL file, suitable for warping using the gdalwarp command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string providing the input image.</p></li>
+<li><p><strong>in_gcp_file</strong> – is a string providing the input text file containing the tie points.</p></li>
+<li><p><strong>output_img</strong> – is a string providing the output image.</p></li>
+<li><p><strong>gdalformat</strong> – is a string providing the output format (e.g., KEA).</p></li>
+<li><p><strong>datatype</strong> – is a rsgislib.TYPE_* value providing the output data type.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib</span><span class="w"> </span><span class="kn">import</span> <span class="n">imageregistration</span>
+<span class="n">inputImage</span> <span class="o">=</span> <span class="s1">&#39;./Rasters/injune_p142_casi_sub_utm_single_band_offset3x3y.vrt&#39;</span>
+<span class="n">inputGCPs</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/injune_p142_casi_sub_utm_tie_points_basic.txt&#39;</span>
+<span class="n">outputImage</span> <span class="o">=</span> <span class="s1">&#39;./TestOutputs/injune_p142_casi_sub_utm_single_band_offset3x3y_gcps.kea&#39;</span>
+<span class="n">gdalformat</span> <span class="o">=</span> <span class="s1">&#39;KEA&#39;</span>
+<span class="n">datatype</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_32INT</span>
+<span class="n">imageregistration</span><span class="o">.</span><span class="n">gcp_to_gdal</span><span class="p">(</span><span class="n">inputImage</span><span class="p">,</span><span class="n">inputGCPs</span><span class="p">,</span> <span class="n">outputImage</span><span class="p">,</span> <span class="n">gdalformat</span><span class="p">,</span> <span class="n">gdaltype</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imageregistration.add_vec_pts_as_gcps_to_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imageregistration.</span></span><span class="sig-name descname"><span class="pre">add_vec_pts_as_gcps_to_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec_lyr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gcp_x_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'x_match'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gcp_y_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'y_match'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gcp_z_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gcp_epsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imageregistration.add_vec_pts_as_gcps_to_img" title="Link to this definition"></a></dt>
+<dd><p>A function which uses a points vector layer to specify GCP locations within the
+image with attributes to the vector layer used to specify the GCP spatial
+location.</p>
+<p>Note. input_img and output_img can be the same file path if you do not
+want an new output image to be created (i.e., for the input file to be edited)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – The input image file path</p></li>
+<li><p><strong>output_img</strong> – The output image path</p></li>
+<li><p><strong>vec_file</strong> – the vector file path</p></li>
+<li><p><strong>vec_lyr</strong> – the vector layer name</p></li>
+<li><p><strong>gcp_x_col</strong> – column within the vector layer specifying the GCP x coordinates</p></li>
+<li><p><strong>gcp_y_col</strong> – column within the vector layer specifying the GCP y coordinates</p></li>
+<li><p><strong>gcp_z_col</strong> – column within the vector layer specifying the GCP x coordinates.
+The Z coordinate is optional, Default is None.</p></li>
+<li><p><strong>gcp_epsg</strong> – Optionally specify an EPSG code for the projection the GCP points.
+If None (Default) then the projection of the input image will
+used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_imagemorphology.html" class="btn btn-neutral float-left" title="RSGISLib Image Morphology" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_imagecalc_spectralunmixing.html" class="btn btn-neutral float-right" title="RSGISLib Spectral Unmixing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,951 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib Image Calibration &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Image Filter" href="rsgislib_imagefilter.html" />
+    <link rel="prev" title="RSGISLib Image Calculations" href="rsgislib_imagecalc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RSGISLib Image Calibration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#radiance">Radiance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.landsat_to_radiance"><code class="docutils literal notranslate"><span class="pre">landsat_to_radiance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.landsat_to_radiance_multi_add"><code class="docutils literal notranslate"><span class="pre">landsat_to_radiance_multi_add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.spot5_to_radiance"><code class="docutils literal notranslate"><span class="pre">spot5_to_radiance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.worldview2_to_radiance"><code class="docutils literal notranslate"><span class="pre">worldview2_to_radiance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.toa_refl_to_radiance"><code class="docutils literal notranslate"><span class="pre">toa_refl_to_radiance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#top-of-atmosphere-reflectance">Top-of Atmosphere Reflectance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.radiance_to_toa_refl"><code class="docutils literal notranslate"><span class="pre">radiance_to_toa_refl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.landsat_thermal_rad_to_brightness"><code class="docutils literal notranslate"><span class="pre">landsat_thermal_rad_to_brightness()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#surface-reflectance-6s">Surface Reflectance (6S)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.apply_6s_coeff_single_param"><code class="docutils literal notranslate"><span class="pre">apply_6s_coeff_single_param()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.apply_6s_coeff_elev_aot_lut_param"><code class="docutils literal notranslate"><span class="pre">apply_6s_coeff_elev_aot_lut_param()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.apply_6s_coeff_elev_lut_param"><code class="docutils literal notranslate"><span class="pre">apply_6s_coeff_elev_lut_param()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.calc_standardised_reflectance_sd2010"><code class="docutils literal notranslate"><span class="pre">calc_standardised_reflectance_sd2010()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#surface-reflectance-dos">Surface Reflectance (DOS)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.apply_subtract_offsets"><code class="docutils literal notranslate"><span class="pre">apply_subtract_offsets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.apply_subtract_single_offsets"><code class="docutils literal notranslate"><span class="pre">apply_subtract_single_offsets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.perform_dos_calc"><code class="docutils literal notranslate"><span class="pre">perform_dos_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#irradiance">Irradiance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.calc_irradiance_img_elev_lut"><code class="docutils literal notranslate"><span class="pre">calc_irradiance_img_elev_lut()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-masking">Cloud Masking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.calc_clear_sky_regions"><code class="docutils literal notranslate"><span class="pre">calc_clear_sky_regions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.saturated_pixels_mask"><code class="docutils literal notranslate"><span class="pre">saturated_pixels_mask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.calc_nadir_img_view_angle"><code class="docutils literal notranslate"><span class="pre">calc_nadir_img_view_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.get_julian_day"><code class="docutils literal notranslate"><span class="pre">get_julian_day()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.calc_solar_distance"><code class="docutils literal notranslate"><span class="pre">calc_solar_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.get_esun_value"><code class="docutils literal notranslate"><span class="pre">get_esun_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.visibility_to_aot"><code class="docutils literal notranslate"><span class="pre">visibility_to_aot()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#solar-angles">Solar Angles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.solarangles.get_solar_irr_convention_solar_azimuth_from_usgs"><code class="docutils literal notranslate"><span class="pre">get_solar_irr_convention_solar_azimuth_from_usgs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.solarangles.get_solar_irr_convention_solar_azimuth_from_trad"><code class="docutils literal notranslate"><span class="pre">get_solar_irr_convention_solar_azimuth_from_trad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.solarangles.calc_solar_azimuth_zenith"><code class="docutils literal notranslate"><span class="pre">calc_solar_azimuth_zenith()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#landsat-collection-2-utilities">Landsat Collection 2  Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.sensorlvl1data.create_stacked_toa_ls_oli_cl2_lv1_img"><code class="docutils literal notranslate"><span class="pre">create_stacked_toa_ls_oli_cl2_lv1_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.sensorlvl2data.create_stacked_sref_ls_oli_cl2_lv2_img"><code class="docutils literal notranslate"><span class="pre">create_stacked_sref_ls_oli_cl2_lv2_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.sensorlvl2data.create_stacked_sref_ls_4_5_7_lv2_img"><code class="docutils literal notranslate"><span class="pre">create_stacked_sref_ls_4_5_7_lv2_img()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.sensorlvl2data.parse_landsat_c2_qa_pixel_img"><code class="docutils literal notranslate"><span class="pre">parse_landsat_c2_qa_pixel_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sentinel-2-utilities">Sentinel-2  Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rsgislib.imagecalibration.sensorlvl2data.create_stacked_sen2_esa_l2a_img"><code class="docutils literal notranslate"><span class="pre">create_stacked_sen2_esa_l2a_img()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RSGISLib Image Calibration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-image-calibration">
+<h1>RSGISLib Image Calibration<a class="headerlink" href="#rsgislib-image-calibration" title="Link to this heading"></a></h1>
+<section id="radiance">
+<h2>Radiance<a class="headerlink" href="#radiance" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.landsat_to_radiance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">landsat_to_radiance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandDefnSeq</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.landsat_to_radiance" title="Link to this definition"></a></dt>
+<dd><p>Converts Landsat DN values to at sensor radiance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>bandDefnSeq</strong> – is a sequence of rsgislib.imagecalibration.CmdsLandsatRadianceGainsOffsets objects that define the inputs
+* band_name - Name of image band in output file.
+* input_img - input image file.
+* img_band - Index (starting from 1) of the band in the image file.
+* l_min - lMin value from Landsat header.
+* l_max - lMax value from Landsat header.
+* q_cal_min - qCalMin value from Landsat header.
+* q_cal_max - qCalMax value from Landsat header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.landsat_to_radiance_multi_add">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">landsat_to_radiance_multi_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandDefnSeq</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.landsat_to_radiance_multi_add" title="Link to this definition"></a></dt>
+<dd><p>Converts Landsat DN values to at sensor radiance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>bandDefnSeq</strong> – is a sequence of rsgislib.imagecalibration.CmdsLandsatRadianceGainsOffsets objects that define the inputs
+* band_name - Name of image band in output file.
+* input_img - input image file.
+* img_band - Index (starting from 1) of the band in the image file.
+* addVal - RADIANCE_ADD value from Landsat header.
+* multiVal - RADIANCE_MULT value from Landsat header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.spot5_to_radiance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">spot5_to_radiance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_defs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.spot5_to_radiance" title="Link to this definition"></a></dt>
+<dd><p>Converts WorldView2 DN values to at sensor radiance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>band_defs</strong> – is a sequence of rsgislib.imagecalibration.CmdsSPOT5RadianceGainsOffsets objects in order of the input image bands that define the inputs
+* band_name - Name of image band in output file.
+* img_band - Index (starting from 1) of the output image band order (i.e., to reorder the image bands).
+* gain - PHYSICAL_GAIN value from SPOT5 XML header.
+* bias - PHYSICAL_BIAS value from SPOT5 XML header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.worldview2_to_radiance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">worldview2_to_radiance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_defs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.worldview2_to_radiance" title="Link to this definition"></a></dt>
+<dd><p>Converts WorldView2 DN values to at sensor radiance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>band_defs</strong> – is a sequence of rsgislib.imagecalibration.CmdsWorldView2RadianceGainsOffsets objects that define the inputs
+* band_name - Name of image band in output file.
+* img_band - Index (starting from 1) of the band in the image file.
+* abs_cal_fact - ABSCALFACTOR value from WorldView2 XML header.
+* eff_bandwidth - EFFECTIVEBANDWIDTH value from WorldView2 XML header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.toa_refl_to_radiance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">toa_refl_to_radiance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_irradiance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.toa_refl_to_radiance" title="Link to this definition"></a></dt>
+<dd><p>Converts at sensor (Top of Atmosphere; TOA) reflectance values to at sensor radiance.
+This is the inverse of imagecalibration.radiance_to_toa_refl().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_imgs</strong> – can be either a single input image file with the same number of bands as the list of ESUN values or a list of single band images (same number of as the number of ESUN values).</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>scale_factor</strong> – is a float which can be used to scale the output pixel values (e.g., multiple by 1000), set as 1 if not wanted.</p></li>
+<li><p><strong>solar_dist</strong> – is a float specifying the solar-earth distance (see imagecalibration.calc_solar_distance).</p></li>
+<li><p><strong>solar_zenith</strong> – is a a float with the solar zenith in degrees at the time of the acquisition (note 90-solarElevation = solarZenith).</p></li>
+<li><p><strong>solar_irradiance</strong> – is a sequence of floats each with the name ‘irradiance’ (ESUN) which is in order of the bands in the input image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="top-of-atmosphere-reflectance">
+<h2>Top-of Atmosphere Reflectance<a class="headerlink" href="#top-of-atmosphere-reflectance" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.radiance_to_toa_refl">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">radiance_to_toa_refl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_irradiance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.radiance_to_toa_refl" title="Link to this definition"></a></dt>
+<dd><p>Converts at sensor radiance values to Top of Atmosphere Reflectance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>scale_factor</strong> – is a float which can be used to scale the output pixel values (e.g., multiple by 1000), set as 1 if not wanted.</p></li>
+<li><p><strong>year</strong> – is an int with the year of the sensor acquisition.</p></li>
+<li><p><strong>month</strong> – is an int with the month of the sensor acquisition.</p></li>
+<li><p><strong>day</strong> – is an int with the day of the sensor acquisition.</p></li>
+<li><p><strong>solar_zenith</strong> – is a a float with the solar zenith in degrees at the time of the acquisition (note 90-solarElevation = solarZenith).</p></li>
+<li><p><strong>solar_irradiance</strong> – is a sequence of floats each with the name ‘irradiance’ which is in order of the bands in the input image.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.landsat_thermal_rad_to_brightness">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">landsat_thermal_rad_to_brightness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_defs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.landsat_thermal_rad_to_brightness" title="Link to this definition"></a></dt>
+<dd><p>Converts Landsat TM thermal radiation to degrees celsius for at sensor temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input file path.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output file path.</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>scale_factor</strong> – is a float which can be used to scale the output pixel values (e.g., multiple by 1000), set as 1 for no scaling.</p></li>
+<li><p><strong>band_defs</strong> – is a sequence of rsgislib.imagecalibration.CmdsLandsatThermalCoeffs objects that define the inputs
+*  band_name - Name of image band in output file.
+*  img_band - Index (starting from 1) of the band in the image file.
+*  k1 - k1 coefficient from Landsat header.
+*  k2 - k2 coefficient from Landsat header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="surface-reflectance-6s">
+<h2>Surface Reflectance (6S)<a class="headerlink" href="#surface-reflectance-6s" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.apply_6s_coeff_single_param">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">apply_6s_coeff_single_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_no_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.apply_6s_coeff_single_param" title="Link to this definition"></a></dt>
+<dd><p>Converts at sensor radiance values to surface reflectance by applying coefficients from the 6S model for each band (aX, bX, cX).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>scale_factor</strong> – is a float which can be used to scale the output pixel values (e.g., multiple by 1000), set as 1 for no scaling.</p></li>
+<li><p><strong>no_data_val</strong> – is a float which if all bands contain that value will be ignored.</p></li>
+<li><p><strong>use_no_data</strong> – is a boolean as to whether the no data value specified is to be used.</p></li>
+<li><p><strong>band_coeffs</strong> – is a sequence of objects with the following named fields.
+* band - An integer specifying the image band in the input file.
+* aX - A float for the aX coefficient.
+* bX - A float for the bX coefficient.
+* cX - A float for the cX coefficient.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.apply_6s_coeff_elev_aot_lut_param">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">apply_6s_coeff_elev_aot_lut_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_rad_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_aot_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_no_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_lut_coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.apply_6s_coeff_elev_aot_lut_param" title="Link to this definition"></a></dt>
+<dd><p>Converts at sensor radiance values to surface reflectance by applying coefficients from the 6S model for each band (aX, bX, cX), where the coefficients can be varied for surface elevation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_rad_img</strong> – is a string containing the name of the input Radiance image file</p></li>
+<li><p><strong>in_dem_img</strong> – is a string containing the name of the input DEM image file (needs to be the same projection and resolution as radiance image.)</p></li>
+<li><p><strong>in_aot_img</strong> – is a string containing the name of the input AOT image file</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>scale_factor</strong> – is a float which can be used to scale the output pixel values (e.g., multiple by 1000), set as 1 for no scaling.</p></li>
+<li><p><strong>no_data_val</strong> – is a float which if all bands contain that value will be ignored.</p></li>
+<li><p><strong>use_no_data</strong> – is a boolean as to whether the no data value specified is to be used.</p></li>
+<li><p><strong>band_lut_coeffs</strong> – <p>is a sequence of objects with the following named fields - note these are expected to be in elevation order (low to high and then AOT order (low to high).
+* ‘Elev’ - The elevation for the element in the LUT (in metres).</p>
+<blockquote>
+<div><ul>
+<li><p>’AOT’ - The AOT value for this element within the LUT.</p></li>
+<li><dl class="simple">
+<dt>’Coeffs’ - The sequence of 6S coeffecients for the given elevation and AOT for the element in the LUT.</dt><dd><ul>
+<li><p>’band’ - An integer specifying the image band in the input file (band numbers start at 1).</p></li>
+<li><p>’aX’ - A float for the aX coefficient.</p></li>
+<li><p>’bX’ - A float for the bX coefficient.</p></li>
+<li><p>’cX’ - A float for the cX coefficient.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.apply_6s_coeff_elev_lut_param">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">apply_6s_coeff_elev_lut_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_rad_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_no_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_lut_coeffs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.apply_6s_coeff_elev_lut_param" title="Link to this definition"></a></dt>
+<dd><p>Converts at sensor radiance values to surface reflectance by applying coefficients from the 6S model for each band (aX, bX, cX), where the coefficients can be varied for surface elevation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_rad_img</strong> – is a string containing the name of the input Radiance image file</p></li>
+<li><p><strong>in_dem_img</strong> – is a string containing the name of the input DEM image file (needs to be the same projection and resolution as radiance image.)</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>scale_factor</strong> – is a float which can be used to scale the output pixel values (e.g., multiple by 1000), set as 1 for no scaling.</p></li>
+<li><p><strong>no_data_val</strong> – is a float which if all bands contain that value will be ignored.</p></li>
+<li><p><strong>use_no_data</strong> – is a boolean as to whether the no data value specified is to be used.</p></li>
+<li><p><strong>band_lut_coeffs</strong> – <p>is a sequence of objects with the following named fields - note these are expected to be in elevation order (low to high).
+* ‘Elev’ - The elevation for the element in the LUT (in metres).
+* ‘Coeffs’ - The sequence of 6S coeffecients for the given elevation for the element in the LUT.</p>
+<blockquote>
+<div><ul>
+<li><p>’band’ - An integer specifying the image band in the input file (band numbers start at 1).</p></li>
+<li><p>’aX’ - A float for the aX coefficient.</p></li>
+<li><p>’bX’ - A float for the bX coefficient.</p></li>
+<li><p>’cX’ - A float for the cX coefficient.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.calc_standardised_reflectance_sd2010">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">calc_standardised_reflectance_sd2010</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_data_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_sref_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_solar_irr_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_inc_angle_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_exit_angle_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brdf_beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_inc_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_exit_angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.calc_standardised_reflectance_sd2010" title="Link to this definition"></a></dt>
+<dd><p>Calculate standardised reflectance, with respect to solar and view angles, as defined by Shepherd and Dymond (2010)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_data_msk_img</strong> – is a string containing the name and path to a binary mask specifying the region to be calculated (1 = True)</p></li>
+<li><p><strong>in_sref_img</strong> – is a surface reflectance image</p></li>
+<li><p><strong>in_solar_irr_img</strong> – is the solar irradiance for each band of the SREF image. The image will have four times the number of bands as the SREF with Direct, Diffuse, Environment and Total irradiance for each (generated by imagecalibration.calc_irradiance_img_elev_lut).</p></li>
+<li><p><strong>in_inc_angle_img</strong> – is a string containing the name and path to a file with the incidence angle for each pixel.</p></li>
+<li><p><strong>in_exit_angle_img</strong> – is a string containing the name and path to a file with the existance angle for each pixel.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>scale_factor</strong> – is a float with the scale factor to convert the SREF image to a range of 0-1 (e.g., 1000)</p></li>
+<li><p><strong>brdf_beta</strong> – is the beta parameters in equation 8 in Shepherd and Dymond (2010) for solar elevations between 50 - 70 degrees a value of 1 can be used.</p></li>
+<li><p><strong>out_inc_angle</strong> – is the incidence angle to which the output image is standardised to (Recommend: 0).</p></li>
+<li><p><strong>out_exit_angle</strong> – is the exitance angle to which the output image is standardised to (Recommend: 0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="surface-reflectance-dos">
+<h2>Surface Reflectance (DOS)<a class="headerlink" href="#surface-reflectance-dos" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.apply_subtract_offsets">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">apply_subtract_offsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_offs_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_neg_int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_no_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dark_refl_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.apply_subtract_offsets" title="Link to this definition"></a></dt>
+<dd><p>This function performs a dark obejct subtraction (DOS) using a set of defined offsets for retriving surface reflectance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>in_offs_img</strong> – is a string containing the name of the input offsets image file, which must have the same number of bands as the input image.:param output_img: is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>non_neg_int</strong> – is a boolean specifying whether any negative values from the offset application should be removed (i.e., set to 1; 0 being no data).</p></li>
+<li><p><strong>use_no_data</strong> – a boolean specifying whether a no data value is present within the input image.</p></li>
+<li><p><strong>no_data_val</strong> – is a float specifying the no data value for the input image.</p></li>
+<li><p><strong>dark_refl_val</strong> – is a float specifying the minimum value within the reflectance value used for the dark targets used for the subtraction</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.apply_subtract_single_offsets">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">apply_subtract_single_offsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_neg_int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_no_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_data_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dark_refl_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_offsets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.apply_subtract_single_offsets" title="Link to this definition"></a></dt>
+<dd><p>This function performs a dark object subtraction (DOS) using a set of defined offsets for retriving surface reflectance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name of the input image file</p></li>
+<li><p><strong>outputFile</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>datatype</strong> – is an containing one of the values from rsgislib.TYPE_*</p></li>
+<li><p><strong>non_neg_int</strong> – is a boolean specifying whether any negative values from the offset application should be removed (i.e., set to 1; 0 being no data).</p></li>
+<li><p><strong>use_no_data</strong> – a boolean specifying whether a no data value is present within the input image.</p></li>
+<li><p><strong>no_data_val</strong> – is a float specifying the no data value for the input image.</p></li>
+<li><p><strong>dark_refl_val</strong> – is a float specifying the minimum value within the reflectance value used for the dark targets used for the subtraction:param band_offsets: is a list of offset values to be applied to the input image bands (specified with keyword ‘offset’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.perform_dos_calc">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">perform_dos_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonNegative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noDataVal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">darkObjReflVal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">darkObjPercentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copyBandNames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calcStatsPyd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.perform_dos_calc" title="Link to this definition"></a></dt>
+<dd><p>A command to perform a dark object subtraction (DOS) on an input image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputFile</strong> – input image to which the DOS method is to be applied. Typically, this image with be in top of atmosphere reflectance (TOA)</p></li>
+<li><p><strong>outputFile</strong> – the output image file</p></li>
+<li><p><strong>gdalformat</strong> – the output image file format (default = KEA)</p></li>
+<li><p><strong>nonNegative</strong> – is a boolean specifying where negative output pixel values will be accepted (Dafualt is True; i.e., no negative values)</p></li>
+<li><p><strong>noDataVal</strong> – is the no data value within the input image file.</p></li>
+<li><p><strong>darkObjReflVal</strong> – is an offset which is applied to all pixel values to make a minimum reflectance value (Default = 0)</p></li>
+<li><p><strong>darkObjPercentile</strong> – is the percentile of the input image used to define the dark object threshold, range is 0 - 1 (Default is 0.01; i.e., 1%).</p></li>
+<li><p><strong>copyBandNames</strong> – is a boolean specifying that the band names of the input image should be copied to the output image file (Default: True)</p></li>
+<li><p><strong>calcStatsPyd</strong> – is a boolean specifying that the image stats and pyramids should be calculated on the output image (Default: True)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imagecalibration</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imagecalibration</span><span class="o">.</span><span class="n">perform_dos_calc</span><span class="p">(</span><span class="s2">&quot;LS5TM_20110701_lat52lon421_r24p204_rad_toa.kea&quot;</span><span class="p">,</span> <span class="s1">&#39;LS5TM_20110701_lat52lon421_r24p204_rad_toa_dos.kea&quot;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="irradiance">
+<h2>Irradiance<a class="headerlink" href="#irradiance" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.calc_irradiance_img_elev_lut">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">calc_irradiance_img_elev_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_data_msk_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dem_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_inc_angle_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_slope_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_sref_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_shadow_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_zenith</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeff_lut</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.calc_irradiance_img_elev_lut" title="Link to this definition"></a></dt>
+<dd><p>Calculate the incoming irradiance (Direct, Diffuse, Environment and Total) for sloped surfaces (Eq 1. Shepherd and Dymond 2010).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_data_msk_img</strong> – is a string containing the name and path to a binary mask specifying the region to be calculated (1 = True)</p></li>
+<li><p><strong>in_dem_img</strong> – is a string containing the name of the input DEM image file.</p></li>
+<li><p><strong>in_inc_angle_img</strong> – is a string containing the name and path to a file with the incidence angle for each pixel.</p></li>
+<li><p><strong>in_slope_img</strong> – is a string containing the name and path to a file with the slope in degrees for each pixel.</p></li>
+<li><p><strong>in_sref_img</strong> – is a surface reflectance image with the same number of bands for measurements are provided for in the LUT</p></li>
+<li><p><strong>in_shadow_img</strong> – is a binary mask image for the areas of the image in direct shadow (pixel value 1) and therefore don’t recieve any direct irradiance.</p></li>
+<li><p><strong>output_img</strong> – is a string containing the name of the output image file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>solar_zenith</strong> – is a float with the solar zenith for the whole scene.</p></li>
+<li><p><strong>scale_factor</strong> – is a float with the scale factor to convert the SREF image to a range of 0-1</p></li>
+<li><p><strong>coeff_lut</strong> – <p>is a sequence of objects with the following named fields - note these are expected to be in elevation order (low to high).
+* ‘Elev’ - The elevation for the element in the LUT (in metres).
+* ‘BandVals’ - The sequence of solar irradiance values for the bands in the SREF image.</p>
+<blockquote>
+<div><ul>
+<li><p>’band’ - An integer specifying the image band in the input file (band numbers start at 1).</p></li>
+<li><p>’DirIrr’ - A float for the direct irradiance for this band and elevation (i.e., as provided by 6S).</p></li>
+<li><p>’DifIrr’ - A float for the diffuse irradiance for this band and elevation (i.e., as provided by 6S).</p></li>
+<li><p>’EnvIrr’ - A float for the environment irradiance for this band and elevation (i.e., as provided by 6S).</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="cloud-masking">
+<h2>Cloud Masking<a class="headerlink" href="#cloud-masking" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.calc_clear_sky_regions">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">calc_clear_sky_regions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cloudsImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validAreaImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputClearSkyMask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outFormat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmpPath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tmpClearSky'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deleteTmpFiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initClearSkyRegionDist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initClearSkyRegionMinSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">finalClearSkyRegionDist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">morphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.calc_clear_sky_regions" title="Link to this definition"></a></dt>
+<dd><p>Given a cloud mask, identify the larger extent regions of useful clear-sky regions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cloudsImg</strong> – An image with the input mask of the cloud (pixel == 1) and shadow (pixel == 2)</p></li>
+<li><p><strong>validAreaImg</strong> – A mask of the image data area (1 = valid and 0 = not-valid; i.e., outside of the data area)</p></li>
+<li><p><strong>outputClearSkyMask</strong> – The output mask of the clear sky areas</p></li>
+<li><p><strong>outFormat</strong> – The output image format.</p></li>
+<li><p><strong>tmpPath</strong> – The path for temporay images produced during the processing to be stored (Default: ‘tmpClearSky’; Note. all temp files are generated as KEA files).</p></li>
+<li><p><strong>deleteTmpFiles</strong> – Boolean as to whether the intermediate files should be deleted following processing (Default: True - delete files).</p></li>
+<li><p><strong>initClearSkyRegionDist</strong> – The distance in metres from a cloud/shadow object for the initial identification of clear sky regions (Default: 5000)</p></li>
+<li><p><strong>initClearSkyRegionMinSize</strong> – The minimum size (in pixels) of the initial clear sky regions (Default: 3000 pixels)</p></li>
+<li><p><strong>finalClearSkyRegionDist</strong> – The distance in metres from a cloud/shadow object for the final boundaries of the clear sky regions (Default: 1000)</p></li>
+<li><p><strong>morphSize</strong> – the size of the circular morphological operator used to tidy up the result (Default: 21)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imagecalibration</span>
+<span class="n">cloudsImg</span> <span class="o">=</span> <span class="s2">&quot;Outputs/LS8_20160605_lat52lon261_r24p203_clouds.kea&quot;</span>
+<span class="n">validAreaImg</span> <span class="o">=</span> <span class="s2">&quot;Outputs/LS8_20160605_lat52lon261_r24p203_valid.kea&quot;</span>
+<span class="n">outputMask</span> <span class="o">=</span> <span class="s2">&quot;Outputs/LS8_20160605_lat52lon261_r24p203_openskyvalid.kea&quot;</span>
+<span class="n">tmpPath</span> <span class="o">=</span> <span class="s2">&quot;temp&quot;</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imagecalibration</span><span class="o">.</span><span class="n">calc_clear_sky_regions</span><span class="p">(</span><span class="n">cloudsImg</span><span class="p">,</span> <span class="n">validAreaImg</span><span class="p">,</span> <span class="n">outputMask</span><span class="p">,</span> <span class="s1">&#39;KEA&#39;</span><span class="p">,</span> <span class="n">tmpPath</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.saturated_pixels_mask">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">saturated_pixels_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">band_defs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.saturated_pixels_mask" title="Link to this definition"></a></dt>
+<dd><p>Creates a mask of the saturated image pixels on a per band basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_img</strong> – is a string containing the name of the output file</p></li>
+<li><p><strong>gdalformat</strong> – is a string containing the GDAL format for the output file - eg ‘KEA’</p></li>
+<li><p><strong>band_defs</strong> – is a sequence of rsgislib.imagecalibration.CmdsSaturatedPixel objects that define the inputs
+*  band_name - Name of image band in output file.
+*  input_img - input image file.
+*  img_band - Index (starting from 1) of the band in the image file.
+*  satVal - Saturation value for the image band.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.calc_nadir_img_view_angle">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">calc_nadir_img_view_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_xx_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_xy_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_xx_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_xy_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_yx_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_yy_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_yx_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_yy_col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.calc_nadir_img_view_angle" title="Link to this definition"></a></dt>
+<dd><p>Calculate the sensor view angle for each pixel for a nadir sensor. Need to provide the satellite altitude in metres, for Landsat this is 705000.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – is a string containing the name/path of the input file for the image footprint. This file needs to be to have a RAT with only one clump with pixel value 1.</p></li>
+<li><p><strong>output_img</strong> – is a string for the name/path of the output file with the view angles.</p></li>
+<li><p><strong>gdalformat</strong> – is a string for the GDAL format</p></li>
+<li><p><strong>altitude</strong> – is a float in metres for the satellite altitude.</p></li>
+<li><p><strong>min_xx_col</strong> – is a string for the minXX column in the RAT.</p></li>
+<li><p><strong>min_xy_col</strong> – is a string for the minXY column in the RAT.</p></li>
+<li><p><strong>max_xx_col</strong> – is a string for the maxXX column in the RAT.</p></li>
+<li><p><strong>max_xy_col</strong> – is a string for the maxXY column in the RAT.</p></li>
+<li><p><strong>min_yx_col</strong> – is a string for the minYX column in the RAT.</p></li>
+<li><p><strong>min_yy_col</strong> – is a string for the minYY column in the RAT.</p></li>
+<li><p><strong>max_yx_col</strong> – is a string for the maxYX column in the RAT.</p></li>
+<li><p><strong>max_yy_col</strong> – is a string for the maxYY column in the RAT.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.get_julian_day">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">get_julian_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.get_julian_day" title="Link to this definition"></a></dt>
+<dd><p>Calculates the julian day for the input date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – is an int with the year of the sensor acquisition.</p></li>
+<li><p><strong>month</strong> – is an int with the month of the sensor acquisition.</p></li>
+<li><p><strong>day</strong> – is an int with the day of the sensor acquisition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>julianDay - float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.calc_solar_distance">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">calc_solar_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">julian_day</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.calc_solar_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculates the earth-solar distance from the given julian day.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>julian_day</strong> – is an int with the julian day of the sensor acquisition.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solarDistance - float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.get_esun_value">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">get_esun_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radiance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toaRefl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solarZenith</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.get_esun_value" title="Link to this definition"></a></dt>
+<dd><p>Get the ESUN value where a radiance and TOA Reflectance value are known for a pixel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radiance</strong> – input at sensor radiance value.</p></li>
+<li><p><strong>toaRefl</strong> – input the known at sensor (top of atmosphere) reflectance value for the given radiance.</p></li>
+<li><p><strong>day</strong> – input the day of the acquisition.</p></li>
+<li><p><strong>month</strong> – input the month of the acquisition.</p></li>
+<li><p><strong>year</strong> – input the year of the acquisition.</p></li>
+<li><p><strong>solarZenith</strong> – input the solar zenith angle for the acquisition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>esun radiance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.visibility_to_aot">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.</span></span><span class="sig-name descname"><span class="pre">visibility_to_aot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rsgislib.imagecalibration.visibility_to_aot" title="Link to this definition"></a></dt>
+<dd><p>A function which converts an estimate of visibility to
+aerosol optical thickness (AOT)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vis</strong> – input visibility estimate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output AOT estimate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="solar-angles">
+<h2>Solar Angles<a class="headerlink" href="#solar-angles" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.solarangles.get_solar_irr_convention_solar_azimuth_from_usgs">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.solarangles.</span></span><span class="sig-name descname"><span class="pre">get_solar_irr_convention_solar_azimuth_from_usgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solarAz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.solarangles.get_solar_irr_convention_solar_azimuth_from_usgs" title="Link to this definition"></a></dt>
+<dd><p>IN: USGS Convertion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>         <span class="n">N</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+         <span class="o">|</span>
+<span class="n">W</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span><span class="o">-----</span><span class="n">E</span> <span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+         <span class="o">|</span>
+  <span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">)</span> <span class="n">S</span> <span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>OUT: Solar Irradiance Convertion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>         <span class="n">N</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+         <span class="o">|</span>
+<span class="n">W</span> <span class="p">(</span><span class="mi">270</span><span class="p">)</span><span class="o">-----</span><span class="n">E</span> <span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+         <span class="o">|</span>
+         <span class="n">S</span> <span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.solarangles.get_solar_irr_convention_solar_azimuth_from_trad">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.solarangles.</span></span><span class="sig-name descname"><span class="pre">get_solar_irr_convention_solar_azimuth_from_trad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solarAz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.solarangles.get_solar_irr_convention_solar_azimuth_from_trad" title="Link to this definition"></a></dt>
+<dd><p>IN: Traditional Convertion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">)</span> <span class="n">N</span> <span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+         <span class="o">|</span>
+<span class="n">W</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span><span class="o">-----</span><span class="n">E</span> <span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+         <span class="o">|</span>
+         <span class="n">S</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>OUT: Solar Irradiance Convertion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>         <span class="n">N</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+         <span class="o">|</span>
+<span class="n">W</span> <span class="p">(</span><span class="mi">270</span><span class="p">)</span><span class="o">-----</span><span class="n">E</span> <span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+         <span class="o">|</span>
+         <span class="n">S</span> <span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.solarangles.calc_solar_azimuth_zenith">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.solarangles.</span></span><span class="sig-name descname"><span class="pre">calc_solar_azimuth_zenith</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inImgDateTime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.solarangles.calc_solar_azimuth_zenith" title="Link to this definition"></a></dt>
+<dd><p>Function which calculate a solar azimuth (band 1) and zenith (band 2) image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputImg</strong> – input image file (can be any image with a spatial header)</p></li>
+<li><p><strong>inImgDateTime</strong> – a datatime object for the data/time of the acquasition</p></li>
+<li><p><strong>outputImg</strong> – output image file and path</p></li>
+<li><p><strong>gdalformat</strong> – output file format (e.g., KEA)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="landsat-collection-2-utilities">
+<h2>Landsat Collection 2  Utilities<a class="headerlink" href="#landsat-collection-2-utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.sensorlvl1data.create_stacked_toa_ls_oli_cl2_lv1_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.sensorlvl1data.</span></span><span class="sig-name descname"><span class="pre">create_stacked_toa_ls_oli_cl2_lv1_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_inter_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inc_full_qa_pxl_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.sensorlvl1data.create_stacked_toa_ls_oli_cl2_lv1_img" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts the USGS collection-2 level-1 data and creates a single
+multi-band TOA image file in the output directory. Note the output data type is
+32bit integer and the no data value is -9999. A cloud mask and valid area images
+are also provided and extracted from the pixel QA image provided in the collection
+2 package. Note this function just works for Landsat 8 and 9 data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – file name and path to the input TAR file.</p></li>
+<li><p><strong>out_dir</strong> – output directory where the output file will be written.</p></li>
+<li><p><strong>tmp_dir</strong> – a temporary directory where intermediate files will be written.</p></li>
+<li><p><strong>scale_factor</strong> – the scale factor applied to the output reflectance values.
+default is 10,000</p></li>
+<li><p><strong>gdalformat</strong> – the output file format.</p></li>
+<li><p><strong>delete_inter_data</strong> – delete any intermediate files created is True (Default)</p></li>
+<li><p><strong>inc_full_qa_pxl_img</strong> – Include the full pixel QA image split into individual
+bands in the output.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib.imagecalibration.sensorlvl2data</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_stacked_sref_ls_oli_cl2_lv2_img</span>
+<span class="n">create_stacked_sref_ls_oli_cl2_lv2_img</span><span class="p">(</span><span class="s2">&quot;LC08_L2SP_135046_20210319_20210328_02_T1.tar&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;GTIFF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.sensorlvl2data.create_stacked_sref_ls_oli_cl2_lv2_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.sensorlvl2data.</span></span><span class="sig-name descname"><span class="pre">create_stacked_sref_ls_oli_cl2_lv2_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_inter_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inc_full_qa_pxl_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.sensorlvl2data.create_stacked_sref_ls_oli_cl2_lv2_img" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts the USGS collection-2 level-2 data and creates a single
+multi-band image file in the output directory. Note the output data type is
+32bit integer and the no data value is -9999. A cloud mask and valid area images
+are also provided and extracted from the pixel QA image provided in the collection
+2 package.  Note this function just works for Landsat 8 and 9 data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – file name and path to the input TAR file.</p></li>
+<li><p><strong>out_dir</strong> – output directory where the output file will be written.</p></li>
+<li><p><strong>tmp_dir</strong> – a temporary directory where intermediate files will be written.</p></li>
+<li><p><strong>scale_factor</strong> – the scale factor applied to the output reflectance values.
+default is 10,000</p></li>
+<li><p><strong>gdalformat</strong> – the output file format.</p></li>
+<li><p><strong>delete_inter_data</strong> – delete any intermediate files created is True (Default)</p></li>
+<li><p><strong>inc_full_qa_pxl_img</strong> – Include the full pixel QA image split into individual
+bands in the output.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rsgislib.imagecalibration.sensorlvl2data</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_stacked_sref_ls_oli_cl2_lv2_img</span>
+<span class="n">create_stacked_sref_ls_oli_cl2_lv2_img</span><span class="p">(</span><span class="s2">&quot;LC08_L2SP_135046_20210319_20210328_02_T1.tar&quot;</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;GTIFF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.sensorlvl2data.create_stacked_sref_ls_4_5_7_lv2_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.sensorlvl2data.</span></span><span class="sig-name descname"><span class="pre">create_stacked_sref_ls_4_5_7_lv2_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_inter_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inc_full_qa_pxl_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.sensorlvl2data.create_stacked_sref_ls_4_5_7_lv2_img" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts the USGS collection-2 level-2 data and creates a single
+multi-band image file in the output directory. Note the output data type is
+32bit integer and the no data value is -9999. A cloud mask and valid area images
+are also provided and extracted from the pixel QA image provided in the collection
+2 package.  Note this function just works for Landsat 4, 5 and 7 data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> – file name and path to the input TAR file.</p></li>
+<li><p><strong>out_dir</strong> – output directory where the output file will be written.</p></li>
+<li><p><strong>tmp_dir</strong> – a temporary directory where intermediate files will be written.</p></li>
+<li><p><strong>scale_factor</strong> – the scale factor applied to the output reflectance values.
+default is 10,000</p></li>
+<li><p><strong>gdalformat</strong> – the output file format.</p></li>
+<li><p><strong>delete_inter_data</strong> – delete any intermediate files created is True (Default)</p></li>
+<li><p><strong>inc_full_qa_pxl_img</strong> – Include the full pixel QA image split into individual
+bands in the output.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.sensorlvl2data.parse_landsat_c2_qa_pixel_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.sensorlvl2data.</span></span><span class="sig-name descname"><span class="pre">parse_landsat_c2_qa_pixel_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.sensorlvl2data.parse_landsat_c2_qa_pixel_img" title="Link to this definition"></a></dt>
+<dd><p>A function which will parse the bit QA Pixel image from Landsat Collection 2
+and create a multi-band output - 1 band per variable. While this takes up more
+disk space than the bit encoded image it is much easier to use!</p>
+<dl class="simple">
+<dt>The output bands are:</dt><dd><ul class="simple">
+<li><p>Fill - No data regions (0-1)</p></li>
+<li><p>DilatedCloud - Cloud dilation regions (0-1)</p></li>
+<li><p>Cirrus - Cirrus clouds present (0-1)</p></li>
+<li><p>Cloud - Clouds present (0-1)</p></li>
+<li><p>CloudShadow - Cloud shadow present (0-1)</p></li>
+<li><p>Snow - Snow present (0-1)</p></li>
+<li><p>Clear - Clear sky pixel (0-1)</p></li>
+<li><p>Water - Water present (0-1)</p></li>
+<li><p>CloudConfidence - Confidence of cloud classification (1-4)</p></li>
+<li><p>CloudShadowConfidence - Confidence of cloud shadows classification (1-4)</p></li>
+<li><p>SnowIceConfidence - Confidence of snow and ice classification (1-4)</p></li>
+<li><p>CirrusConfidence - Confidence of cirrus classification (1-4)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_img</strong> – The input landsat pixel QA image.</p></li>
+<li><p><strong>output_img</strong> – The output image path - the output image will have 12 bands.</p></li>
+<li><p><strong>gdalformat</strong> – the output image format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sentinel-2-utilities">
+<h2>Sentinel-2  Utilities<a class="headerlink" href="#sentinel-2-utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.imagecalibration.sensorlvl2data.create_stacked_sen2_esa_l2a_img">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.imagecalibration.sensorlvl2data.</span></span><span class="sig-name descname"><span class="pre">create_stacked_sen2_esa_l2a_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_safe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_res_10m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharpen_10m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_inter_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample_10m_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resample_20m_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multi_core</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.imagecalibration.sensorlvl2data.create_stacked_sen2_esa_l2a_img" title="Link to this definition"></a></dt>
+<dd><p>A function which extracts the ESA Sentinel-2 Level 2A data from the SAFE download
+file structure to create a single multi-band image file in the output directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_safe</strong> – Input SAFE file format directory.</p></li>
+<li><p><strong>out_dir</strong> – output directory for the output files.</p></li>
+<li><p><strong>tmp_dir</strong> – tmp directory for intermediate files.</p></li>
+<li><p><strong>out_res_10m</strong> – boolean to specify that the output image should be at a
+pixel resolution of 10 m. Default: True</p></li>
+<li><p><strong>sharpen_10m</strong> – boolean specifying that the output image should sharpen
+the 20 m bands when creating a 10 m output image</p></li>
+<li><p><strong>scale_factor</strong> – the scale factor applied to the output reflectance values.
+default is 10,000</p></li>
+<li><p><strong>gdalformat</strong> – the output file format.</p></li>
+<li><p><strong>datatype</strong> – output data type - Default: rsgislib.TYPE_32INT</p></li>
+<li><p><strong>delete_inter_data</strong> – delete any intermediate files created is True (Default)</p></li>
+<li><p><strong>resample_10m_method</strong> – the method for resampling the 20 m bands to 10 m.
+Default: rsgislib.INTERP_CUBIC</p></li>
+<li><p><strong>resample_20m_method</strong> – the method for resampling the 10 m bands to 20 m.
+Default: rsgislib.INTERP_AVERAGE</p></li>
+<li><p><strong>use_multi_core</strong> – boolean specifying whether multiple cores should be used
+when resampling the image data. Default: False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_imagecalc.html" class="btn btn-neutral float-left" title="RSGISLib Image Calculations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_imagefilter.html" class="btn btn-neutral float-right" title="RSGISLib Image Filter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

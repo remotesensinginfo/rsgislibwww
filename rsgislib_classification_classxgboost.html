@@ -1,0 +1,905 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib XGBoost Classification &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib CatBoost Image Classification" href="rsgislib_classification_classcatboost.html" />
+    <link rel="prev" title="RSGISLib LightGBM Pixel Classification" href="rsgislib_classification_classlightgbm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classsklearn.html">RSGISLib Scikit-Learn Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classlightgbm.html">RSGISLib LightGBM Pixel Classification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib XGBoost Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#binary-classification-functions">Binary Classification Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.optimise_xgboost_binary_classifier"><code class="docutils literal notranslate"><span class="pre">optimise_xgboost_binary_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.train_xgboost_binary_classifier"><code class="docutils literal notranslate"><span class="pre">train_xgboost_binary_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.train_opt_xgboost_binary_classifier"><code class="docutils literal notranslate"><span class="pre">train_opt_xgboost_binary_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.apply_xgboost_binary_classifier"><code class="docutils literal notranslate"><span class="pre">apply_xgboost_binary_classifier()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-class-classification-functions">Multi-Class Classification Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.optimise_xgboost_multiclass_classifier"><code class="docutils literal notranslate"><span class="pre">optimise_xgboost_multiclass_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.train_xgboost_multiclass_classifier"><code class="docutils literal notranslate"><span class="pre">train_xgboost_multiclass_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.train_opt_xgboost_multiclass_classifier"><code class="docutils literal notranslate"><span class="pre">train_opt_xgboost_multiclass_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.apply_xgboost_multiclass_classifier"><code class="docutils literal notranslate"><span class="pre">apply_xgboost_multiclass_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classxgboost.apply_xgboost_multiclass_classifier_rat"><code class="docutils literal notranslate"><span class="pre">apply_xgboost_multiclass_classifier_rat()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classcatboost.html">RSGISLib CatBoost Image Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraspxl.html">RSGISLib Keras Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraschips.html">RSGISLib Keras Image Chips Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classratutils.html">RSGISLib Clumps Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_clustersklearn.html">RSGISLib Scikit-Learn Unsupervised Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classimblearn.html">RSGISLib Imbalanced Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#pixel-training-data">Pixel Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#chips-training-data">Chips Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#post-classification-refinement">Post Classification Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-samples">Accuracy Assessment Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-stats">Accuracy Assessment Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#classification-utility-classes">Classification Utility Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_classification.html">RSGISLib Classification</a></li>
+      <li class="breadcrumb-item active">RSGISLib XGBoost Classification</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-xgboost-classification">
+<h1>RSGISLib XGBoost Classification<a class="headerlink" href="#rsgislib-xgboost-classification" title="Link to this heading"></a></h1>
+<p>XGBoost (<a class="reference external" href="https://xgboost.readthedocs.io">https://xgboost.readthedocs.io</a>) is an optimized distributed gradient boosting library designed to be highly efficient, flexible and portable. It implements machine learning algorithms under the Gradient Boosting framework. XGBoost provides a parallel tree boosting (also known as GBDT, GBM) that solve many data science problems in a fast and accurate way.</p>
+<p>When considering ensemble learning, there are two primary methods: bagging and boosting. Bagging involves the training of many independent models and combines their predictions through some form of aggregation (averaging, voting etc.). An example of a bagging ensemble is a Random Forest.</p>
+<p>Boosting instead trains models sequentially, where each model learns from the errors of the previous model. Starting with a weak base model, models are trained iteratively, each adding to the prediction of the previous model to produce a strong overall prediction. In the case of gradient boosted decision trees, successive models are found by applying gradient descent in the direction of the average gradient, calculated with respect to the error residuals of the loss function, of the leaf nodes of previous models.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For an easy to follow and understandable background to XGBoost <a class="reference external" href="https://towardsdatascience.com/a-brief-introduction-to-xgboost-3eaee2e3e5d6">see this blog post</a></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For an an academic paper see: Chen, T. &amp; Guestrin, C., 2016. XGBoost: A Scalable Tree Boosting System. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. KDD &amp;#x27;16. New York, NY, USA: ACM, pp. 785–794. Available at: <a class="reference external" href="http://doi.acm.org/10.1145/2939672.2939785">http://doi.acm.org/10.1145/2939672.2939785</a>.</p>
+</div>
+<p>XGBoost is a binary classifier (i.e., separates two classes, e.g., mangroves and other) but it has a multi-class mode which applies a number of binary classification to produce a multi-class classification result.</p>
+<p><strong>Steps to applying a XGBoost Classification:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Extract training</p></li>
+<li><p>Split training: Training, Validation, Testing</p></li>
+<li><p>Train Classifier and Optimise Hyperparameters</p></li>
+<li><p>Apply Classifier</p></li>
+</ul>
+</div></blockquote>
+<p>However, fist we’ll create a couple of directories for our outputs and intermediary files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;baseline_cls_xgb&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+
+<span class="n">tmp_dir</span> <span class="o">=</span> <span class="s2">&quot;tmp_xgb&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will also define the input file path and the list ImageBandInfo objects, which specifies which images and bands are used for the analysis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imageutils</span>
+
+<span class="n">input_img</span> <span class="o">=</span> <span class="s2">&quot;./LS5TM_19970716_vmsk_mclds_topshad_rad_srefdem_stdsref_subset.tif&quot;</span>
+
+<span class="n">imgs_info</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">imgs_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">ImageBandInfo</span><span class="p">(</span>
+        <span class="n">file_name</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ls97&quot;</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>When applying a classifier a mask image needs to be provided where a pixel value within that mask specifying which pixels should be classified. While defining the input image we can also define that valid mask image using the rsgislib.imageutils.gen_valid_mask function, which simply creates a mask of pixels which are not ‘no data’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vld_msk_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_vmsk.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">gen_valid_mask</span><span class="p">(</span>
+    <span class="n">input_img</span><span class="p">,</span> <span class="n">output_img</span><span class="o">=</span><span class="n">vld_msk_img</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span> <span class="n">no_data_val</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To define training a raster with a unique value for each class, or multiple binary rasters one for each class. Commonly the training regions might be defined using a vector layer which would require rasterising:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.vectorutils.createrasters</span>
+
+<span class="n">mangrove_vec_file</span> <span class="o">=</span> <span class="s2">&quot;./training/mangroves.geojson&quot;</span>
+<span class="n">mangrove_vec_lyr</span> <span class="o">=</span> <span class="s2">&quot;mangroves&quot;</span>
+<span class="n">mangrove_smpls_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_smpls.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">createrasters</span><span class="o">.</span><span class="n">rasterise_vec_lyr</span><span class="p">(</span>
+    <span class="n">vec_file</span><span class="o">=</span><span class="n">mangrove_vec_file</span><span class="p">,</span>
+    <span class="n">vec_lyr</span><span class="o">=</span><span class="n">mangrove_vec_lyr</span><span class="p">,</span>
+    <span class="n">input_img</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span>
+    <span class="n">output_img</span><span class="o">=</span><span class="n">mangrove_smpls_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">burn_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">other_terrestrial_vec_file</span> <span class="o">=</span> <span class="s2">&quot;./training/other_terrestrial.geojson&quot;</span>
+<span class="n">other_terrestrial_vec_lyr</span> <span class="o">=</span> <span class="s2">&quot;other_terrestrial&quot;</span>
+<span class="n">other_terrestrial_smpls_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_smpls.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">createrasters</span><span class="o">.</span><span class="n">rasterise_vec_lyr</span><span class="p">(</span>
+    <span class="n">vec_file</span><span class="o">=</span><span class="n">other_terrestrial_vec_file</span><span class="p">,</span>
+    <span class="n">vec_lyr</span><span class="o">=</span><span class="n">other_terrestrial_vec_lyr</span><span class="p">,</span>
+    <span class="n">input_img</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span>
+    <span class="n">output_img</span><span class="o">=</span><span class="n">other_terrestrial_smpls_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">burn_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">water_vec_file</span> <span class="o">=</span> <span class="s2">&quot;./training/water.geojson&quot;</span>
+<span class="n">water_vec_lyr</span> <span class="o">=</span> <span class="s2">&quot;water&quot;</span>
+<span class="n">water_smpls_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;water_smpls.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">createrasters</span><span class="o">.</span><span class="n">rasterise_vec_lyr</span><span class="p">(</span>
+    <span class="n">vec_file</span><span class="o">=</span><span class="n">water_vec_file</span><span class="p">,</span>
+    <span class="n">vec_lyr</span><span class="o">=</span><span class="n">water_vec_lyr</span><span class="p">,</span>
+    <span class="n">input_img</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span>
+    <span class="n">output_img</span><span class="o">=</span><span class="n">water_smpls_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">burn_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To extract the image pixel values, which are stored within a HDF5 file (see <a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/HDF5">https://portal.hdfgroup.org/display/HDF5/HDF5</a> for more information) the following functions are used. To define the images and associated bands to be used for the classification and therefore values need to be extracted then a list of rsgislib.imageutils.ImageBandInfo classes needs to be provided:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.zonalstats</span>
+
+<span class="n">mangrove_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_all_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">mangrove_smpls_img</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">mangrove_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">other_terrestrial_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_all_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">other_terrestrial_smpls_img</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">water_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_all_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">water_smpls_img</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">water_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If training data is extracted from multiple input images then it will need to be merged using the following function. In this case we’ll merge the water and terrestrial samples and use the merged class to create a mangrove binary classifier:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">other_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_all_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">merge_extracted_hdf5_data</span><span class="p">(</span>
+    <span class="n">h5_files</span><span class="o">=</span><span class="p">[</span><span class="n">other_terrestrial_all_smpls_h5_file</span><span class="p">,</span> <span class="n">water_all_smpls_h5_file</span><span class="p">],</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">other_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To split the extracted samples into a training, validation and testing sets you can use the rsgislib.classification.split_sample_train_valid_test function. Note, this function is also used to standardise the number of samples used to train the classifier so the training data are balanced:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification</span>
+
+<span class="n">mangrove_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_train_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">mangrove_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_valid_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">mangrove_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_test_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">mangrove_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">mangrove_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">mangrove_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">mangrove_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">other_terrestrial_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_train_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">other_terrestrial_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_valid_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">other_terrestrial_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_test_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">water_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_train_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">water_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_valid_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">water_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_test_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">water_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">water_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">water_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">water_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">other_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_train_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">other_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_valid_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">other_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_test_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">other_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">other_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">other_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">other_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Training samples are used to train the classifier. Validation samples are used to test the accuracy of the classifier during the parameter optimisation process and are therefore part of the training process and not independent. Testing samples completely independent of the training process and are used as an independent sample to test the overall accuracy of the classifier.</p>
+</div>
+<p><strong>Apply a XGBoost Binary Classifier</strong></p>
+<p>To train a single binary classifier you need to use the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification.classxgboost</span>
+
+<span class="n">cls_bin_mdl_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;xgb_mng_bin_mdl.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classxgboost</span><span class="o">.</span><span class="n">train_opt_xgboost_binary_classifier</span><span class="p">(</span>
+    <span class="n">out_mdl_file</span><span class="o">=</span><span class="n">cls_bin_mdl_file</span><span class="p">,</span>
+    <span class="n">cls1_train_file</span><span class="o">=</span><span class="n">mangrove_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls1_valid_file</span><span class="o">=</span><span class="n">mangrove_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls1_test_file</span><span class="o">=</span><span class="n">mangrove_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls2_train_file</span><span class="o">=</span><span class="n">other_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls2_valid_file</span><span class="o">=</span><span class="n">other_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls2_test_file</span><span class="o">=</span><span class="n">other_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">op_mthd</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">OPT_MTHD_BAYESOPT</span><span class="p">,</span>
+    <span class="n">n_opt_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">n_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">mdl_cls_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">out_params_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To apply the binary classifier use the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cls_score_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_bin_cls_score_img.kea&quot;</span><span class="p">)</span>
+<span class="n">out_class_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_bin_cls_img.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classxgboost</span><span class="o">.</span><span class="n">apply_xgboost_binary_classifier</span><span class="p">(</span>
+    <span class="n">model_file</span><span class="o">=</span><span class="n">cls_bin_mdl_file</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">vld_msk_img</span><span class="p">,</span>
+    <span class="n">img_msk_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">img_file_info</span><span class="o">=</span><span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">out_score_img</span><span class="o">=</span><span class="n">cls_score_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">out_class_img</span><span class="o">=</span><span class="n">out_class_img</span><span class="p">,</span>
+    <span class="n">class_thres</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">n_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Class probability values are multipled by 10,000 so a threshold of 5000 is really 0.5.</p>
+</div>
+<p><strong>Apply a XGBoost Multi-Class Classifier</strong></p>
+<p>To train a multi-class classifier you first need to specify the reference samples as a dict of rsgislib.classification.ClassInfoObj objects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification</span>
+
+<span class="n">cls_info_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">cls_info_dict</span><span class="p">[</span><span class="s2">&quot;Mangrove&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">out_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">train_file_h5</span><span class="o">=</span><span class="n">mangrove_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_file_h5</span><span class="o">=</span><span class="n">mangrove_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_file_h5</span><span class="o">=</span><span class="n">mangrove_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">red</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">green</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+    <span class="n">blue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cls_info_dict</span><span class="p">[</span><span class="s2">&quot;Other Terrestrial&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">out_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">train_file_h5</span><span class="o">=</span><span class="n">other_terrestrial_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_file_h5</span><span class="o">=</span><span class="n">other_terrestrial_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_file_h5</span><span class="o">=</span><span class="n">other_terrestrial_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">red</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">green</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">blue</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cls_info_dict</span><span class="p">[</span><span class="s2">&quot;Water&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">out_id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">train_file_h5</span><span class="o">=</span><span class="n">water_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_file_h5</span><span class="o">=</span><span class="n">water_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_file_h5</span><span class="o">=</span><span class="n">water_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">red</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">green</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">blue</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can then train a multi-class xgboost classifier using the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification.classxgboost</span>
+
+<span class="n">cls_mcls_mdl_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;xgb_mng_mcls_mdl.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classxgboost</span><span class="o">.</span><span class="n">train_opt_xgboost_multiclass_classifier</span><span class="p">(</span>
+    <span class="n">out_mdl_file</span><span class="o">=</span><span class="n">cls_mcls_mdl_file</span><span class="p">,</span>
+    <span class="n">cls_info_dict</span><span class="o">=</span><span class="n">cls_info_dict</span><span class="p">,</span>
+    <span class="n">op_mthd</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">OPT_MTHD_BAYESOPT</span><span class="p">,</span>
+    <span class="n">n_opt_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">n_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">mdl_cls_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To apply the multi-class classifier use the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">out_class_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_mcls_img.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classxgboost</span><span class="o">.</span><span class="n">apply_xgboost_multiclass_classifier</span><span class="p">(</span>
+    <span class="n">model_file</span><span class="o">=</span><span class="n">cls_mcls_mdl_file</span><span class="p">,</span>
+    <span class="n">cls_info_dict</span><span class="o">=</span><span class="n">cls_info_dict</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">vld_msk_img</span><span class="p">,</span>
+    <span class="n">img_msk_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">img_file_info</span><span class="o">=</span><span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">out_class_img</span><span class="o">=</span><span class="n">out_class_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">class_clr_names</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Within the rsgislib.classification.ClassInfoObj class you need to provide an id and out_id value. The id must start from zero and be consecutive while the out_id will be used as the pixel value for the output classification image and can be any integer value.</p>
+</div>
+<section id="binary-classification-functions">
+<h2>Binary Classification Functions<a class="headerlink" href="#binary-classification-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.optimise_xgboost_binary_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">optimise_xgboost_binary_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_params_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_mthd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_opt_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.optimise_xgboost_binary_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a hyper-parameter optimisation for a binary
+xgboost classifier. Class 1 is the class which you are interested in
+and Class 2 is the ‘other class’.</p>
+<p>You have the option of using the bayes_opt (Default), optuna or skopt
+optimisation libraries. Before 5.1.0 skopt was the only option but this
+no longer appears to be maintained so the other options have been added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_params_file</strong> – The output JSON file with the identified parameters</p></li>
+<li><p><strong>cls1_train_file</strong> – File path to the HDF5 file with the training samples
+for class 1</p></li>
+<li><p><strong>cls1_valid_file</strong> – File path to the HDF5 file with the validation samples
+for class 1</p></li>
+<li><p><strong>cls2_train_file</strong> – File Path to the HDF5 file with the training samples
+for class 2</p></li>
+<li><p><strong>cls2_valid_file</strong> – File path to the HDF5 file with the validation samples
+for class 2</p></li>
+<li><p><strong>op_mthd</strong> – The method used to optimise the parameters.
+Default: rsgislib.OPT_MTHD_BAYESOPT</p></li>
+<li><p><strong>n_opt_iters</strong> – The number of iterations (Default 100) used for the
+optimisation. This parameter is ignored for skopt.
+For bayes_opt there is a minimum of 10 and these are
+added to that minimum so Default is therefore 110.
+For optuna this is the number of iterations used.</p></li>
+<li><p><strong>rnd_seed</strong> – A random seed for the optimisation. Default None. If None
+there a different seed will be used each time the function
+is run.</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+<li><p><strong>mdl_cls_obj</strong> – An optional (Default None) xgboost model which will be
+used as the basis model from which training will be
+continued (i.e., transfer learning).</p></li>
+<li><p><strong>use_gpu</strong> – A boolean to specify whether the GPU should be used for training.
+If you have a GPU available which supports CUDA and xgboost is
+installed with GPU support then this is significantly speed up
+the training of your model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.train_xgboost_binary_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">train_xgboost_binary_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_params_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_test_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_test_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.train_xgboost_binary_classifier" title="Link to this definition"></a></dt>
+<dd><dl>
+<dt>A function which trains a binary xgboost model using the parameters provided</dt><dd><p>within a JSON file. The JSON file must provide values for the following
+parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>eta</p></li>
+<li><p>gamma</p></li>
+<li><p>max_depth</p></li>
+<li><p>min_child_weight</p></li>
+<li><p>max_delta_step</p></li>
+<li><p>subsample</p></li>
+<li><p>bagging_fraction</p></li>
+<li><p>eval_metric</p></li>
+<li><p>objective</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">param out_mdl_file<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The file path for the output xgboost (<a href="#id1"><span class="problematic" id="id2">*</span></a>.json) model which
+can be loaded to perform a classification.</p>
+</dd>
+<dt class="field-even">param cls_params_file<span class="colon">:</span></dt>
+<dd class="field-even"><p>The file path to the JSON file with the classifier
+parameters.</p>
+</dd>
+<dt class="field-odd">param cls1_train_file<span class="colon">:</span></dt>
+<dd class="field-odd"><p>File path to the HDF5 file with the training samples
+for class 1</p>
+</dd>
+<dt class="field-even">param cls1_valid_file<span class="colon">:</span></dt>
+<dd class="field-even"><p>File path to the HDF5 file with the validation samples
+for class 1</p>
+</dd>
+<dt class="field-odd">param cls1_test_file<span class="colon">:</span></dt>
+<dd class="field-odd"><p>File path to the HDF5 file with the testing samples
+for class 1</p>
+</dd>
+<dt class="field-even">param cls2_train_file<span class="colon">:</span></dt>
+<dd class="field-even"><p>File path to the HDF5 file with the training samples
+for class 2</p>
+</dd>
+<dt class="field-odd">param cls2_valid_file<span class="colon">:</span></dt>
+<dd class="field-odd"><p>File path to the HDF5 file with the validation samples
+for class 2</p>
+</dd>
+<dt class="field-even">param cls2_test_file<span class="colon">:</span></dt>
+<dd class="field-even"><p>File path to the HDF5 file with the testing samples
+for class 2</p>
+</dd>
+<dt class="field-odd">param n_threads<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of threads used by xgboost</p>
+</dd>
+<dt class="field-even">param mdl_cls_obj<span class="colon">:</span></dt>
+<dd class="field-even"><p>An optional (Default None) xgboost model which will be
+used as the basis model from which training will be
+continued (i.e., transfer learning).</p>
+</dd>
+<dt class="field-odd">param use_gpu<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A boolean to specify whether the GPU should be used for training.
+If you have a GPU available which supports CUDA and xgboost is
+installed with GPU support then this is significantly speed up
+the training of your model.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.train_opt_xgboost_binary_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">train_opt_xgboost_binary_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_test_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_test_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_mthd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_opt_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_params_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.train_opt_xgboost_binary_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a hyper-parameter optimisation for a binary
+xgboost classifier and then trains a model saving the model for future
+use. Class 1 is the class which you are interested in and Class 2 is
+the ‘other class’.</p>
+<p>You have the option of using the bayes_opt (Default), optuna or skopt
+optimisation libraries. Before 5.1.0 skopt was the only option but this
+no longer appears to be maintained so the other options have been added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_mdl_file</strong> – The file path for the output xgboost (<a href="#id3"><span class="problematic" id="id4">*</span></a>.json) model which
+can be loaded to perform a classification.</p></li>
+<li><p><strong>cls1_train_file</strong> – File path to the HDF5 file with the training samples
+for class 1</p></li>
+<li><p><strong>cls1_valid_file</strong> – File path to the HDF5 file with the validation samples
+for class 1</p></li>
+<li><p><strong>cls1_test_file</strong> – File path to the HDF5 file with the testing samples
+for class 1</p></li>
+<li><p><strong>cls2_train_file</strong> – File path to the HDF5 file with the training samples
+for class 2</p></li>
+<li><p><strong>cls2_valid_file</strong> – File path to the HDF5 file with the validation samples
+for class 2</p></li>
+<li><p><strong>cls2_test_file</strong> – File path to the HDF5 file with the testing samples
+for class 2</p></li>
+<li><p><strong>op_mthd</strong> – The method used to optimise the parameters.
+Default: rsgislib.OPT_MTHD_BAYESOPT</p></li>
+<li><p><strong>n_opt_iters</strong> – The number of iterations (Default 100) used for the
+optimisation. This parameter is ignored for skopt.
+For bayes_opt there is a minimum of 10 and these are
+added to that minimum so Default is therefore 110.
+For optuna this is the number of iterations used.</p></li>
+<li><p><strong>rnd_seed</strong> – A random seed for the optimisation. Default None. If None
+there a different seed will be used each time the function
+is run.</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+<li><p><strong>mdl_cls_obj</strong> – An optional (Default None) xgboost model which will be
+used as the basis model from which training will be
+continued (i.e., transfer learning).</p></li>
+<li><p><strong>out_params_file</strong> – The output JSON file with the identified parameters.
+If None (default) then no file is outputted.</p></li>
+<li><p><strong>use_gpu</strong> – A boolean to specify whether the GPU should be used for training.
+If you have a GPU available which supports CUDA and xgboost is
+installed with GPU support then this is significantly speed up
+the training of your model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.apply_xgboost_binary_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">apply_xgboost_binary_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_score_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_class_img</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.apply_xgboost_binary_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function for applying a trained binary xgboost model to a image or stack of
+image files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_file</strong> – a trained xgboost binary model which can be loaded
+with the xgb.Booster function load_model(model_file).</p></li>
+<li><p><strong>in_msk_img</strong> – is an image file providing a mask to specify where
+should be classified. Simplest mask is all the valid
+data regions (rsgislib.imageutils.gen_valid_mask)</p></li>
+<li><p><strong>img_msk_val</strong> – the pixel value within the imgMask to limit the region
+to which the classification is applied.
+Can be used to create a hierarchical classification.</p></li>
+<li><p><strong>img_file_info</strong> – a list of rsgislib.imageutils.ImageBandInfo objects
+to identify which images and bands are to be used for
+the classification so it adheres to the training data.</p></li>
+<li><p><strong>out_score_img</strong> – output image file with the classification softmax score.
+Note. this image is scaled by multiplying by 10000
+therefore the range is between 0-10000.</p></li>
+<li><p><strong>gdalformat</strong> – The output image format (Default: KEA).</p></li>
+<li><p><strong>out_class_img</strong> – Optional output image which will contain the hard
+classification, defined with a threshold on the
+softmax score image.</p></li>
+<li><p><strong>class_thres</strong> – The threshold used to define the hard classification.
+Default is 5000 (i.e., softmax score of 0.5).</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="multi-class-classification-functions">
+<h2>Multi-Class Classification Functions<a class="headerlink" href="#multi-class-classification-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.optimise_xgboost_multiclass_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">optimise_xgboost_multiclass_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_params_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rsgislib_classification.html#rsgislib.classification.ClassInfoObj" title="rsgislib.classification.ClassInfoObj"><span class="pre">ClassInfoObj</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_train_smpls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_mthd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_opt_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.optimise_xgboost_multiclass_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a hyper-parameter optimisation for a multi-class
+xgboost classifier.</p>
+<p>You have the option of using the bayes_opt (Default), optuna or skopt
+optimisation libraries. Before 5.1.0 skopt was the only option but this
+no longer appears to be maintained so the other options have been added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_params_file</strong> – The output JSON file with the identified parameters</p></li>
+<li><p><strong>cls_info_dict</strong> – a dict where the key is string with class name
+of ClassInfoObj objects defining the training data.</p></li>
+<li><p><strong>sub_train_smpls</strong> – Subset the training, if None or 0 then no sub-setting
+will occur. If between 0-1 then a ratio subset
+(e.g., 0.25 = 25 % subset) will be taken. If &gt; 1 then
+that number of points will be taken per class.</p></li>
+<li><p><strong>op_mthd</strong> – The method used to optimise the parameters.
+Default: rsgislib.OPT_MTHD_BAYESOPT</p></li>
+<li><p><strong>n_opt_iters</strong> – The number of iterations (Default 100) used for the
+optimisation. This parameter is ignored for skopt.
+For bayes_opt there is a minimum of 10 and these are
+added to that minimum so Default is therefore 110.
+For optuna this is the number of iterations used.</p></li>
+<li><p><strong>rnd_seed</strong> – A random seed for the optimisation. Default None. If None
+there a different seed will be used each time the function
+is run.</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+<li><p><strong>mdl_cls_obj</strong> – An optional (Default None) xgboost model which will be
+used as the basis model from which training will be
+continued (i.e., transfer learning).</p></li>
+<li><p><strong>use_gpu</strong> – A boolean to specify whether the GPU should be used for training.
+If you have a GPU available which supports CUDA and xgboost is
+installed with GPU support then this is significantly speed up
+the training of your model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.train_xgboost_multiclass_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">train_xgboost_multiclass_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_params_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rsgislib_classification.html#rsgislib.classification.ClassInfoObj" title="rsgislib.classification.ClassInfoObj"><span class="pre">ClassInfoObj</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.train_xgboost_multiclass_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which trains a multiclass xgboost model using the parameters
+provided within a JSON file. The JSON file must provide values for the
+following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>eta</p></li>
+<li><p>gamma</p></li>
+<li><p>max_depth</p></li>
+<li><p>min_child_weight</p></li>
+<li><p>max_delta_step</p></li>
+<li><p>subsample</p></li>
+<li><p>bagging_fraction</p></li>
+<li><p>eval_metric</p></li>
+<li><p>objective</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params_file</strong> – The file path to the JSON file with the classifier
+parameters.</p></li>
+<li><p><strong>out_mdl_file</strong> – The file path for the output xgboost (<a href="#id5"><span class="problematic" id="id6">*</span></a>.json) model which
+can be loaded to perform a classification.</p></li>
+<li><p><strong>cls_info_dict</strong> – a dict where the key is string with class name
+of ClassInfoObj objects defining the training data.</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+<li><p><strong>mdl_cls_obj</strong> – An optional (Default None) xgboost model which will be
+used as the basis model from which training will be
+continued (i.e., transfer learning).</p></li>
+<li><p><strong>use_gpu</strong> – A boolean to specify whether the GPU should be used for training.
+If you have a GPU available which supports CUDA and xgboost is
+installed with GPU support then this is significantly speed up
+the training of your model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.train_opt_xgboost_multiclass_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">train_opt_xgboost_multiclass_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rsgislib_classification.html#rsgislib.classification.ClassInfoObj" title="rsgislib.classification.ClassInfoObj"><span class="pre">ClassInfoObj</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_mthd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_opt_iters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.train_opt_xgboost_multiclass_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a hyper-parameter optimisation for a multi-class
+xgboost classifier and then trains a model saving the model for future
+use.</p>
+<p>You have the option of using the bayes_opt (Default), optuna or skopt
+optimisation libraries. Before 5.1.0 skopt was the only option but this
+no longer appears to be maintained so the other options have been added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_mdl_file</strong> – The file path for the output xgboost (<a href="#id7"><span class="problematic" id="id8">*</span></a>.json) model which
+can be loaded to perform a classification.</p></li>
+<li><p><strong>cls_info_dict</strong> – a dict where the key is string with class name
+of ClassInfoObj objects defining the training data.</p></li>
+<li><p><strong>op_mthd</strong> – The method used to optimise the parameters.
+Default: rsgislib.OPT_MTHD_BAYESOPT</p></li>
+<li><p><strong>n_opt_iters</strong> – The number of iterations (Default 100) used for the
+optimisation. This parameter is ignored for skopt.
+For bayes_opt there is a minimum of 10 and these are
+added to that minimum so Default is therefore 110.
+For optuna this is the number of iterations used.</p></li>
+<li><p><strong>rnd_seed</strong> – A random seed for the optimisation. Default None. If None
+there a different seed will be used each time the function
+is run.</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+<li><p><strong>mdl_cls_obj</strong> – An optional (Default None) xgboost model which will be
+used as the basis model from which training will be
+continued (i.e., transfer learning).</p></li>
+<li><p><strong>use_gpu</strong> – A boolean to specify whether the GPU should be used for training.
+If you have a GPU available which supports CUDA and xgboost is
+installed with GPU support then this is significantly speed up
+the training of your model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.apply_xgboost_multiclass_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">apply_xgboost_multiclass_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rsgislib_classification.html#rsgislib.classification.ClassInfoObj" title="rsgislib.classification.ClassInfoObj"><span class="pre">ClassInfoObj</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_class_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_clr_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.apply_xgboost_multiclass_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function for applying a trained multiclass xgboost model to a image or
+stack of image files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_file</strong> – a trained xgboost multiclass model which can be loaded
+with the xgb.Booster function load_model(model_file).</p></li>
+<li><p><strong>cls_info_dict</strong> – a dict where the key is string with class name
+of ClassInfoObj objects defining the training data.
+This is used to define the class names and colours
+if class_clr_names is True.</p></li>
+<li><p><strong>in_msk_img</strong> – is an image file providing a mask to specify where
+should be classified. Simplest mask is all the valid
+data regions (rsgislib.imageutils.gen_valid_mask)</p></li>
+<li><p><strong>img_msk_val</strong> – the pixel value within the imgMask to limit the region
+to which the classification is applied.
+Can be used to create a hierarchical classification.</p></li>
+<li><p><strong>img_file_info</strong> – a list of rsgislib.imageutils.ImageBandInfo objects
+to identify which images and bands are to be used for
+the classification so it adheres to the training data.</p></li>
+<li><p><strong>out_class_img</strong> – The file path for the output classification image</p></li>
+<li><p><strong>gdalformat</strong> – The output image format (Default: KEA).</p></li>
+<li><p><strong>class_clr_names</strong> – default is True and therefore a colour table will the
+colours specified in ClassInfoObj and a class_names
+(from cls_info_dict) column will be added to the
+output file. Note the output format needs to support
+a raster attribute table (i.e., KEA).</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classxgboost.apply_xgboost_multiclass_classifier_rat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classxgboost.</span></span><span class="sig-name descname"><span class="pre">apply_xgboost_multiclass_classifier_rat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clumps_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_int</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'OutClass'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_col_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'OutClassName'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roi_col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roi_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_colours</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classxgboost.apply_xgboost_multiclass_classifier_rat" title="Link to this definition"></a></dt>
+<dd><p>A function for applying a trained multiclass xgboost model to a raster
+attribute table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clumps_img</strong> – the file path for the input image with associated
+raster attribute table (RAT) to which the classification
+will be applied.</p></li>
+<li><p><strong>variables</strong> – A list of column names within the RAT to be used for the
+classification.</p></li>
+<li><p><strong>model_file</strong> – a trained xgboost multiclass model which can be loaded
+with the xgb.Booster function load_model(model_file).</p></li>
+<li><p><strong>cls_info_dict</strong> – a dict where the key is string with class name
+of ClassInfoObj objects defining the training data.
+Note, this is just used for the class names, int ID
+and classification colours.</p></li>
+<li><p><strong>out_col_int</strong> – is the output column name for the int class
+representation (Default: ‘OutClass’)</p></li>
+<li><p><strong>out_col_str</strong> – is the output column name for the class names
+column (Default: ‘OutClassName’)</p></li>
+<li><p><strong>roi_col</strong> – is a column name for a column which specifies the region to
+be classified. If None ignored (Default: None)</p></li>
+<li><p><strong>roi_val</strong> – is a int value used within the roi_col to select a region
+to be classified (Default: 1)</p></li>
+<li><p><strong>class_colours</strong> – is a boolean specifying whether the RAT colour table should
+be updated using the classification colours (default: True)</p></li>
+<li><p><strong>n_threads</strong> – The number of threads used by xgboost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_classification_classlightgbm.html" class="btn btn-neutral float-left" title="RSGISLib LightGBM Pixel Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_classification_classcatboost.html" class="btn btn-neutral float-right" title="RSGISLib CatBoost Image Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

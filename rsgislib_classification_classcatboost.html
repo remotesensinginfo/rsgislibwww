@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib CatBoost Image Classification &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Keras Pixel Classification" href="rsgislib_classification_classkeraspxl.html" />
+    <link rel="prev" title="RSGISLib XGBoost Classification" href="rsgislib_classification_classxgboost.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classsklearn.html">RSGISLib Scikit-Learn Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classlightgbm.html">RSGISLib LightGBM Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classxgboost.html">RSGISLib XGBoost Classification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib CatBoost Image Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#binary-classification-functions">Binary Classification Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classcatboost.train_catboost_binary_classifier"><code class="docutils literal notranslate"><span class="pre">train_catboost_binary_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classcatboost.apply_catboost_binary_classifier"><code class="docutils literal notranslate"><span class="pre">apply_catboost_binary_classifier()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-class-classification-functions">Multi-Class Classification Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classcatboost.train_catboost_multiclass_classifier"><code class="docutils literal notranslate"><span class="pre">train_catboost_multiclass_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classcatboost.apply_catboost_multiclass_classifier"><code class="docutils literal notranslate"><span class="pre">apply_catboost_multiclass_classifier()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.classification.classcatboost.get_catboost_mdl"><code class="docutils literal notranslate"><span class="pre">get_catboost_mdl()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraspxl.html">RSGISLib Keras Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classkeraschips.html">RSGISLib Keras Image Chips Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classratutils.html">RSGISLib Clumps Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_clustersklearn.html">RSGISLib Scikit-Learn Unsupervised Pixel Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification_classimblearn.html">RSGISLib Imbalanced Classification Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#pixel-training-data">Pixel Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#chips-training-data">Chips Training Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#post-classification-refinement">Post Classification Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-samples">Accuracy Assessment Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#accuracy-assessment-stats">Accuracy Assessment Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_classification.html#classification-utility-classes">Classification Utility Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_classification.html">RSGISLib Classification</a></li>
+      <li class="breadcrumb-item active">RSGISLib CatBoost Image Classification</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-catboost-image-classification">
+<h1>RSGISLib CatBoost Image Classification<a class="headerlink" href="#rsgislib-catboost-image-classification" title="Link to this heading"></a></h1>
+<p>CatBoost (<a class="reference external" href="https://catboost.ai">https://catboost.ai</a>) is a high-performance open source library for gradient boosting on decision trees. Some of the key features of CatBoost are that it claims to produce good outputs without parameter tuning, specifically supports categorical features, minimises overfitting when constructing your models with a novel gradient-boosting scheme and provides fast predictions.</p>
+<p>When considering ensemble learning, there are two primary methods: bagging and boosting. Bagging involves the training of many independent models and combines their predictions through some form of aggregation (averaging, voting etc.). An example of a bagging ensemble is a Random Forest.</p>
+<p>Boosting instead trains models sequentially, where each model learns from the errors of the previous model. Starting with a weak base model, models are trained iteratively, each adding to the prediction of the previous model to produce a strong overall prediction. In the case of gradient boosted decision trees, successive models are found by applying gradient descent in the direction of the average gradient, calculated with respect to the error residuals of the loss function, of the leaf nodes of previous models.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For an easy to follow and understandable background to CatBoost <a class="reference external" href="https://medium.com/&#64;ambika199820/introduction-to-catboost-in-machine-learning-49c6519b8b85">see this blog post</a></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For an an academic paper see: Prokhorenkova, L., Gusev, G., Vorobev, A., Dorogush, A.V., Gulin, A., 2017. CatBoost: unbiased boosting with categorical features. arXiv. <a class="reference external" href="https://doi.org/10.48550/arxiv.1706.09516">https://doi.org/10.48550/arxiv.1706.09516</a>.</p>
+</div>
+<p>CatBoost is a binary classifier (i.e., separates two classes, e.g., mangroves and other) but it has a multi-class mode which applies a number of binary classification to produce a multi-class classification result.</p>
+<p><strong>Steps to applying a CatBoost Classification:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Extract training</p></li>
+<li><p>Split training: Training, Validation, Testing</p></li>
+<li><p>Train Classifier and Optimise Hyperparameters</p></li>
+<li><p>Apply Classifier</p></li>
+</ul>
+</div></blockquote>
+<p>However, fist we’ll create a couple of directories for our outputs and intermediary files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;baseline_cls_catb&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+
+<span class="n">tmp_dir</span> <span class="o">=</span> <span class="s2">&quot;tmp_catb&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will also define the input file path and the list ImageBandInfo objects, which specifies which images and bands are used for the analysis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.imageutils</span>
+
+<span class="n">input_img</span> <span class="o">=</span> <span class="s2">&quot;./LS5TM_19970716_vmsk_mclds_topshad_rad_srefdem_stdsref_subset.tif&quot;</span>
+
+<span class="n">imgs_info</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">imgs_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">ImageBandInfo</span><span class="p">(</span>
+        <span class="n">file_name</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ls97&quot;</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>When applying a classifier a mask image needs to be provided where a pixel value within that mask specifying which pixels should be classified. While defining the input image we can also define that valid mask image using the rsgislib.imageutils.gen_valid_mask function, which simply creates a mask of pixels which are not ‘no data’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vld_msk_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_vmsk.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">imageutils</span><span class="o">.</span><span class="n">gen_valid_mask</span><span class="p">(</span>
+    <span class="n">input_img</span><span class="p">,</span> <span class="n">output_img</span><span class="o">=</span><span class="n">vld_msk_img</span><span class="p">,</span> <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span> <span class="n">no_data_val</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To define training a raster with a unique value for each class, or multiple binary rasters one for each class. Commonly the training regions might be defined using a vector layer which would require rasterising:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.vectorutils.createrasters</span>
+
+<span class="n">mangrove_vec_file</span> <span class="o">=</span> <span class="s2">&quot;./training/mangroves.geojson&quot;</span>
+<span class="n">mangrove_vec_lyr</span> <span class="o">=</span> <span class="s2">&quot;mangroves&quot;</span>
+<span class="n">mangrove_smpls_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_smpls.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">createrasters</span><span class="o">.</span><span class="n">rasterise_vec_lyr</span><span class="p">(</span>
+    <span class="n">vec_file</span><span class="o">=</span><span class="n">mangrove_vec_file</span><span class="p">,</span>
+    <span class="n">vec_lyr</span><span class="o">=</span><span class="n">mangrove_vec_lyr</span><span class="p">,</span>
+    <span class="n">input_img</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span>
+    <span class="n">output_img</span><span class="o">=</span><span class="n">mangrove_smpls_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">burn_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">other_terrestrial_vec_file</span> <span class="o">=</span> <span class="s2">&quot;./training/other_terrestrial.geojson&quot;</span>
+<span class="n">other_terrestrial_vec_lyr</span> <span class="o">=</span> <span class="s2">&quot;other_terrestrial&quot;</span>
+<span class="n">other_terrestrial_smpls_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_smpls.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">createrasters</span><span class="o">.</span><span class="n">rasterise_vec_lyr</span><span class="p">(</span>
+    <span class="n">vec_file</span><span class="o">=</span><span class="n">other_terrestrial_vec_file</span><span class="p">,</span>
+    <span class="n">vec_lyr</span><span class="o">=</span><span class="n">other_terrestrial_vec_lyr</span><span class="p">,</span>
+    <span class="n">input_img</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span>
+    <span class="n">output_img</span><span class="o">=</span><span class="n">other_terrestrial_smpls_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">burn_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">water_vec_file</span> <span class="o">=</span> <span class="s2">&quot;./training/water.geojson&quot;</span>
+<span class="n">water_vec_lyr</span> <span class="o">=</span> <span class="s2">&quot;water&quot;</span>
+<span class="n">water_smpls_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="s2">&quot;water_smpls.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">createrasters</span><span class="o">.</span><span class="n">rasterise_vec_lyr</span><span class="p">(</span>
+    <span class="n">vec_file</span><span class="o">=</span><span class="n">water_vec_file</span><span class="p">,</span>
+    <span class="n">vec_lyr</span><span class="o">=</span><span class="n">water_vec_lyr</span><span class="p">,</span>
+    <span class="n">input_img</span><span class="o">=</span><span class="n">input_img</span><span class="p">,</span>
+    <span class="n">output_img</span><span class="o">=</span><span class="n">water_smpls_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">burn_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To extract the image pixel values, which are stored within a HDF5 file (see <a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/HDF5">https://portal.hdfgroup.org/display/HDF5/HDF5</a> for more information) the following functions are used. To define the images and associated bands to be used for the classification and therefore values need to be extracted then a list of rsgislib.imageutils.ImageBandInfo classes needs to be provided:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.zonalstats</span>
+
+<span class="n">mangrove_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_all_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">mangrove_smpls_img</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">mangrove_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">other_terrestrial_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_all_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">other_terrestrial_smpls_img</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">water_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_all_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">extract_zone_img_band_values_to_hdf</span><span class="p">(</span>
+    <span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">water_smpls_img</span><span class="p">,</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">water_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">mask_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If training data is extracted from multiple input images then it will need to be merged using the following function. In this case we’ll merge the water and terrestrial samples and use the merged class to create a mangrove binary classifier:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">other_all_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_all_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">zonalstats</span><span class="o">.</span><span class="n">merge_extracted_hdf5_data</span><span class="p">(</span>
+    <span class="n">h5_files</span><span class="o">=</span><span class="p">[</span><span class="n">other_terrestrial_all_smpls_h5_file</span><span class="p">,</span> <span class="n">water_all_smpls_h5_file</span><span class="p">],</span>
+    <span class="n">out_h5_file</span><span class="o">=</span><span class="n">other_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To split the extracted samples into a training, validation and testing sets you can use the rsgislib.classification.split_sample_train_valid_test function. Note, this function is also used to standardise the number of samples used to train the classifier so the training data are balanced:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification</span>
+
+<span class="n">mangrove_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_train_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">mangrove_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_valid_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">mangrove_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;mangrove_test_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">mangrove_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">mangrove_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">mangrove_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">mangrove_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">other_terrestrial_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_train_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">other_terrestrial_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_valid_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">other_terrestrial_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_terrestrial_test_smpls.h5&quot;</span>
+<span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">other_terrestrial_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">water_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_train_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">water_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_valid_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">water_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;water_test_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">water_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">water_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">water_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">water_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">other_train_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_train_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">other_valid_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_valid_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">other_test_smpls_h5_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;other_test_smpls.h5&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">split_sample_train_valid_test</span><span class="p">(</span>
+    <span class="n">in_h5_file</span><span class="o">=</span><span class="n">other_all_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">train_h5_file</span><span class="o">=</span><span class="n">other_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_h5_file</span><span class="o">=</span><span class="n">other_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_h5_file</span><span class="o">=</span><span class="n">other_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">valid_sample</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">train_sample</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span>
+    <span class="n">rnd_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">datatype</span><span class="o">=</span><span class="n">rsgislib</span><span class="o">.</span><span class="n">TYPE_16UINT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Training samples are used to train the classifier. Validation samples are used to test the accuracy of the classifier during the parameter optimisation process and are therefore part of the training process and not independent. Testing samples completely independent of the training process and are used as an independent sample to test the overall accuracy of the classifier.</p>
+</div>
+<p><strong>Apply a CatBoost Binary Classifier</strong></p>
+<p>To train a single binary classifier you need to use the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification.classcatboost</span>
+
+<span class="n">catb_bin_mdl_obj</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classcatboost</span><span class="o">.</span><span class="n">get_catboost_mdl</span><span class="p">()</span>
+
+<span class="n">cls_bin_mdl_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;catb_mng_bin_mdl.json&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classcatboost</span><span class="o">.</span><span class="n">train_catboost_binary_classifier</span><span class="p">(</span>
+    <span class="n">mdl_cls_obj</span> <span class="o">=</span> <span class="n">catb_bin_mdl_obj</span><span class="p">,</span>
+    <span class="n">cls1_train_file</span><span class="o">=</span><span class="n">mangrove_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls1_valid_file</span><span class="o">=</span><span class="n">mangrove_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls1_test_file</span><span class="o">=</span><span class="n">mangrove_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls2_train_file</span><span class="o">=</span><span class="n">other_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls2_valid_file</span><span class="o">=</span><span class="n">other_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cls2_test_file</span><span class="o">=</span><span class="n">other_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">cat_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">out_mdl_file</span><span class="o">=</span><span class="n">cls_bin_mdl_file</span><span class="p">,</span>
+    <span class="n">verbose_training</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To apply the binary classifier use the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cls_score_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_bin_cls_score_img.kea&quot;</span><span class="p">)</span>
+<span class="n">out_class_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_bin_cls_img.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classcatboost</span><span class="o">.</span><span class="n">apply_catboost_binary_classifier</span><span class="p">(</span>
+    <span class="n">mdl_cls_obj</span><span class="o">=</span><span class="n">catb_bin_mdl_obj</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">vld_msk_img</span><span class="p">,</span>
+    <span class="n">img_msk_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">img_file_info</span><span class="o">=</span><span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">out_class_img</span><span class="o">=</span><span class="n">out_class_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">out_score_img</span><span class="o">=</span><span class="n">cls_score_img</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Apply a CatBoost Multi-Class Classifier</strong></p>
+<p>To train a multi-class classifier you first need to specify the reference samples as a dict of rsgislib.classification.ClassInfoObj objects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification</span>
+
+<span class="n">cls_info_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">cls_info_dict</span><span class="p">[</span><span class="s2">&quot;Mangrove&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">out_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">train_file_h5</span><span class="o">=</span><span class="n">mangrove_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_file_h5</span><span class="o">=</span><span class="n">mangrove_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_file_h5</span><span class="o">=</span><span class="n">mangrove_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">red</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">green</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+    <span class="n">blue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cls_info_dict</span><span class="p">[</span><span class="s2">&quot;Other Terrestrial&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">out_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">train_file_h5</span><span class="o">=</span><span class="n">other_terrestrial_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_file_h5</span><span class="o">=</span><span class="n">other_terrestrial_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_file_h5</span><span class="o">=</span><span class="n">other_terrestrial_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">red</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">green</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">blue</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cls_info_dict</span><span class="p">[</span><span class="s2">&quot;Water&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">ClassInfoObj</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">out_id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">train_file_h5</span><span class="o">=</span><span class="n">water_train_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">test_file_h5</span><span class="o">=</span><span class="n">water_test_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">valid_file_h5</span><span class="o">=</span><span class="n">water_valid_smpls_h5_file</span><span class="p">,</span>
+    <span class="n">red</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">green</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">blue</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can then train a multi-class catboost classifier using the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rsgislib.classification.classcatboost</span>
+
+<span class="n">catb_mcls_mdl_obj</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classcatboost</span><span class="o">.</span><span class="n">get_catboost_mdl</span><span class="p">()</span>
+
+<span class="n">cls_mcls_mdl_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;catb_mng_mcls_mdl.json&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classcatboost</span><span class="o">.</span><span class="n">train_catboost_multiclass_classifier</span><span class="p">(</span>
+    <span class="n">mdl_cls_obj</span><span class="o">=</span><span class="n">catb_mcls_mdl_obj</span><span class="p">,</span>
+    <span class="n">cls_info_dict</span><span class="o">=</span><span class="n">cls_info_dict</span><span class="p">,</span>
+    <span class="n">cat_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">out_mdl_file</span><span class="o">=</span><span class="n">cls_mcls_mdl_file</span><span class="p">,</span>
+    <span class="n">verbose_training</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To apply the multi-class classifier use the following function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">out_class_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;LS5TM_19970716_mcls_img.kea&quot;</span><span class="p">)</span>
+<span class="n">rsgislib</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">classcatboost</span><span class="o">.</span><span class="n">apply_catboost_multiclass_classifier</span><span class="p">(</span>
+    <span class="n">mdl_cls_obj</span><span class="o">=</span><span class="n">catb_mcls_mdl_obj</span><span class="p">,</span>
+    <span class="n">cls_info_dict</span><span class="o">=</span><span class="n">cls_info_dict</span><span class="p">,</span>
+    <span class="n">in_msk_img</span><span class="o">=</span><span class="n">vld_msk_img</span><span class="p">,</span>
+    <span class="n">img_msk_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">img_file_info</span><span class="o">=</span><span class="n">imgs_info</span><span class="p">,</span>
+    <span class="n">out_class_img</span><span class="o">=</span><span class="n">out_class_img</span><span class="p">,</span>
+    <span class="n">gdalformat</span><span class="o">=</span><span class="s2">&quot;KEA&quot;</span><span class="p">,</span>
+    <span class="n">class_clr_names</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Within the rsgislib.classification.ClassInfoObj class you need to provide an id and out_id value. The id must start from zero and be consecutive while the out_id will be used as the pixel value for the output classification image and can be any integer value.</p>
+</div>
+<section id="binary-classification-functions">
+<h2>Binary Classification Functions<a class="headerlink" href="#binary-classification-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classcatboost.train_catboost_binary_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classcatboost.</span></span><span class="sig-name descname"><span class="pre">train_catboost_binary_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls1_test_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_train_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_valid_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls2_test_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_training</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classcatboost.train_catboost_binary_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which trains a catboost classifier with two classes (i.e., binary)
+Class 1 is the class which you are interested in and Class 2 is the ‘other class’.</p>
+<p>This function requires that catboost module to be installed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mdl_cls_obj</strong> – The catboost model object.</p></li>
+<li><p><strong>cls1_train_file</strong> – Training samples HDF5 file for the primary class
+(i.e., the one being classified)</p></li>
+<li><p><strong>cls1_valid_file</strong> – Validation samples HDF5 file for the primary class
+(i.e., the one being classified)</p></li>
+<li><p><strong>cls1_test_file</strong> – Testing samples HDF5 file for the primary class
+(i.e., the one being classified)</p></li>
+<li><p><strong>cls2_train_file</strong> – Training samples HDF5 file for the ‘other’ class</p></li>
+<li><p><strong>cls2_valid_file</strong> – Validation samples HDF5 file for the ‘other’ class</p></li>
+<li><p><strong>cls2_test_file</strong> – Testing samples HDF5 file for the ‘other’ class</p></li>
+<li><p><strong>cat_cols</strong> – list of indexes for variables which are categorical.</p></li>
+<li><p><strong>out_mdl_file</strong> – An optional path for a JSON file to save the catboost
+model to disk.</p></li>
+<li><p><strong>verbose_training</strong> – a boolean to specifying whether a verbose output
+should be provided during training (Default: False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classcatboost.apply_catboost_binary_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classcatboost.</span></span><span class="sig-name descname"><span class="pre">apply_catboost_binary_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_class_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_score_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classcatboost.apply_catboost_binary_classifier" title="Link to this definition"></a></dt>
+<dd><p>This function applies a trained binary (i.e., two classes) catboost model.
+The function train_catboost_binary_classifier can be used to train such as model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mdl_cls_obj</strong> – a trained catboost binary model. Can be loaded from disk using
+the get_catboost_mdl function.</p></li>
+<li><p><strong>in_msk_img</strong> – is an image file providing a mask to specify where should
+be classified. Simplest mask is all the valid data regions
+(rsgislib.imageutils.gen_valid_mask)</p></li>
+<li><p><strong>img_msk_val</strong> – the pixel value within the in_msk_img to limit the region
+to which the classification is applied. Can be used to
+create a hierarchical classification.</p></li>
+<li><p><strong>img_file_info</strong> – a list of rsgislib.imageutils.ImageBandInfo objects
+(also used within
+rsgislib.zonalstats.extract_zone_img_band_values_to_hdf)
+to identify which images and bands are to be used for the
+classification so it adheres to the training data.</p></li>
+<li><p><strong>out_class_img</strong> – output image file with the hard classification output.</p></li>
+<li><p><strong>gdalformat</strong> – is the output image format (default: KEA)</p></li>
+<li><p><strong>out_score_img</strong> – Optional output image which contains the probabilities
+for the two classes.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="multi-class-classification-functions">
+<h2>Multi-Class Classification Functions<a class="headerlink" href="#multi-class-classification-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classcatboost.train_catboost_multiclass_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classcatboost.</span></span><span class="sig-name descname"><span class="pre">train_catboost_multiclass_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rsgislib_classification.html#rsgislib.classification.ClassInfoObj" title="rsgislib.classification.ClassInfoObj"><span class="pre">ClassInfoObj</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_training</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classcatboost.train_catboost_multiclass_classifier" title="Link to this definition"></a></dt>
+<dd><p>A function which performs a bayesian optimisation of the hyper-parameters for a
+multiclass catboost classifier producing a full trained model at the end. A dict
+of class information, as ClassInfoObj objects, is defined with the training data.</p>
+<p>This function requires that xgboost modules to be installed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mdl_cls_obj</strong> – The catboost model object.</p></li>
+<li><p><strong>cls_info_dict</strong> – dict (key is string with class name) of ClassInfoObj
+objects defining the training data.</p></li>
+<li><p><strong>cat_cols</strong> – list of indexes for variables which are categorical.</p></li>
+<li><p><strong>out_mdl_file</strong> – An optional path for a JSON file to save the catboost
+model to disk.</p></li>
+<li><p><strong>verbose_training</strong> – a boolean to specifying whether a verbose output
+should be provided during training (Default: False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classcatboost.apply_catboost_multiclass_classifier">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classcatboost.</span></span><span class="sig-name descname"><span class="pre">apply_catboost_multiclass_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mdl_cls_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_info_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rsgislib_classification.html#rsgislib.classification.ClassInfoObj" title="rsgislib.classification.ClassInfoObj"><span class="pre">ClassInfoObj</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_msk_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_msk_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rsgislib_imageutils.html#rsgislib.imageutils.ImageBandInfo" title="rsgislib.imageutils.ImageBandInfo"><span class="pre">ImageBandInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_class_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdalformat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'KEA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_clr_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classcatboost.apply_catboost_multiclass_classifier" title="Link to this definition"></a></dt>
+<dd><p>This function applies a trained multiple classes catboost model. The function
+train_catboost_multiclass_classifier can be used to train such as model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls_info_dict</strong> – dict (where the key is the class name) of
+rsgislib.classification.ClassInfoObj objects which will
+be used to train the classifier (i.e.,
+train_catboost_multiclass_classifier()), provide pixel
+value id and RGB class values.</p></li>
+<li><p><strong>mdl_cls_obj</strong> – a trained catboost binary model. Can be loaded from disk using
+the get_catboost_mdl function.</p></li>
+<li><p><strong>in_msk_img</strong> – is an image file providing a mask to specify where should be
+classified. Simplest mask is all the valid data regions
+(rsgislib.imageutils.gen_valid_mask)</p></li>
+<li><p><strong>img_msk_val</strong> – the pixel value within the imgMask to limit the region to
+which the classification is applied. Can be used to create
+a hierarchical classification.</p></li>
+<li><p><strong>img_file_info</strong> – a list of rsgislib.imageutils.ImageBandInfo objects (also used
+within rsgislib.zonalstats.extract_zone_img_band_values_to_hdf)
+to identify which images and bands are to be used for the
+classification so it adheres to the training data.</p></li>
+<li><p><strong>out_class_img</strong> – Output image which will contain the hard classification
+defined as the maximum probability.</p></li>
+<li><p><strong>gdalformat</strong> – is the output image format - all GDAL supported formats are
+supported.</p></li>
+<li><p><strong>class_clr_names</strong> – default is True and therefore a colour table will the
+colours specified in ClassInfoObj and a class_names
+(from classTrainInfo) column will be added to the
+output file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.classification.classcatboost.get_catboost_mdl">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.classification.classcatboost.</span></span><span class="sig-name descname"><span class="pre">get_catboost_mdl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mdl_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdl_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.classification.classcatboost.get_catboost_mdl" title="Link to this definition"></a></dt>
+<dd><p>A function which creates a default catboost classifier and optionally
+loads an existing model is available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mdl_file</strong> – a path to a saved catboost model.</p></li>
+<li><p><strong>mdl_format</strong> – the format of the model file. cbm is catboost binary and json
+is JSON format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>catboost.CatBoostClassifier object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_classification_classxgboost.html" class="btn btn-neutral float-left" title="RSGISLib XGBoost Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_classification_classkeraspxl.html" class="btn btn-neutral float-right" title="RSGISLib Keras Pixel Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

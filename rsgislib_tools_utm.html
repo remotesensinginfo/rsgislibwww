@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSGISLib UTM Tools &mdash; RSGISLib</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2dde5210"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within RSGISLib"
+          href="_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RSGISLib Check Datasets Tools" href="rsgislib_tools_checkdatasets.html" />
+    <link rel="prev" title="RSGISLib MS Office Tools" href="rsgislib_tools_msofficetools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RSGISLib
+              <img src="_static/rsgislib-logo-white-sml.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation &amp; Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlineutilities.html">Command Line Utilities</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rsgislib.html">RSGISLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_changedetection.html">RSGISLib Image Change Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_classification.html">RSGISLib Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_dataaccess.html">RSGISLib Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_droneutils.html">RSGISLib Drone Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_elevation.html">RSGISLib Elevation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc.html">RSGISLib Image Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalibration.html">RSGISLib Image Calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagefilter.html">RSGISLib Image Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagemorphology.html">RSGISLib Image Morphology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageregistration.html">RSGISLib Image Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imagecalc_spectralunmixing.html">RSGISLib Spectral Unmixing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_imageutils.html">RSGISLib Image Utilities Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_modelling.html">RSGISLib Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_rastergis.html">RSGISLib Raster GIS Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_regression.html">RSGISLib Regression Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_segmentation.html">RSGISLib Image Segmentation Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_timeseries.html">RSGISLib Timeseries Analysis Module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="rsgislib_tools.html">RSGISLib Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_filetools.html">RSGISLib File Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_utils.html">RSGISLib Utility Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_mapping.html">RSGISLib Mapping Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_geometrytools.html">RSGISLib Geometry Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_projection.html">RSGISLib Projection Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_plotting.html">RSGISLib Plotting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_stats.html">RSGISLib Stats Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_maths.html">RSGISLib Maths Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_imagetools.html">RSGISLib Image Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sensors.html">RSGISLib Sensor Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_sysprofile.html">RSGISLib System Profiling Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_testimages.html">RSGISLib Test Images Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_tilecacheutils.html">RSGISLib Tile Cache Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_msofficetools.html">RSGISLib MS Office Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSGISLib UTM Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#epsg">EPSG</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.epsg_for_utm"><code class="docutils literal notranslate"><span class="pre">epsg_for_utm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.utm_from_epsg"><code class="docutils literal notranslate"><span class="pre">utm_from_epsg()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#validity">Validity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.check_valid_zone"><code class="docutils literal notranslate"><span class="pre">check_valid_zone()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lat-lon-to-utm">Lat / Lon to UTM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.from_latlon"><code class="docutils literal notranslate"><span class="pre">from_latlon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.to_latlon"><code class="docutils literal notranslate"><span class="pre">to_latlon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.latitude_to_zone_letter"><code class="docutils literal notranslate"><span class="pre">latitude_to_zone_letter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.latlon_to_zone_number"><code class="docutils literal notranslate"><span class="pre">latlon_to_zone_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.min_max_eastings_for_lat"><code class="docutils literal notranslate"><span class="pre">min_max_eastings_for_lat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.latlon_arr_to_utm_zone_number"><code class="docutils literal notranslate"><span class="pre">latlon_arr_to_utm_zone_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.latlon_to_mode_utm_zone_number"><code class="docutils literal notranslate"><span class="pre">latlon_to_mode_utm_zone_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.zone_number_to_central_longitude"><code class="docutils literal notranslate"><span class="pre">zone_number_to_central_longitude()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rsgislib.tools.utm.split_wgs84_bbox_utm_zones"><code class="docutils literal notranslate"><span class="pre">split_wgs84_bbox_utm_zones()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_checkdatasets.html">RSGISLib Check Datasets Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_visualisation.html">RSGISLib Visualisation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_googlecloud.html">RSGISLib Google Cloud Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_ftptools.html">RSGISLib FTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_httptools.html">RSGISLib HTTP Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_webtools.html">RSGISLib Web Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rsgislib_tools_wmts_tools.html">RSGISLib WMTS Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorattrs.html">RSGISLib Vector Attributes Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorgeoms.html">RSGISLib Vector Geometry Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorstats.html">RSGISLib Vector Stats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_vectorutils.html">RSGISLib Vector Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsgislib_zonalstats.html">RSGISLib Zonal Stats Module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RSGISLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="rsgislib_tools.html">RSGISLib Tools</a></li>
+      <li class="breadcrumb-item active">RSGISLib UTM Tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rsgislib-utm-tools">
+<h1>RSGISLib UTM Tools<a class="headerlink" href="#rsgislib-utm-tools" title="Link to this heading"></a></h1>
+<section id="epsg">
+<h2>EPSG<a class="headerlink" href="#epsg" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.epsg_for_utm">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">epsg_for_utm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hemisphere</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utm.epsg_for_utm" title="Link to this definition"></a></dt>
+<dd><p>Return EPSG code for given UTM zone and hemisphere using WGS84 datum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zone</strong> – UTM zone</p></li>
+<li><p><strong>hemisphere</strong> – hemisphere either ‘N’ or ‘S’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>corresponding EPSG code</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.utm_from_epsg">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">utm_from_epsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epsg_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'int'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.utm_from_epsg" title="Link to this definition"></a></dt>
+<dd><p>Return UTM zone and hemisphere from a EPSG code using WGS84 datum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>epsg_code</strong> – epsg code for the UTM projection.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>zone, hemisphere</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="validity">
+<h2>Validity<a class="headerlink" href="#validity" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.check_valid_zone">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">check_valid_zone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zone_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_letter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_exp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rsgislib.tools.utm.check_valid_zone" title="Link to this definition"></a></dt>
+<dd><p>Check that the UTM zone is valid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zone_number</strong> – int for the UTM zone</p></li>
+<li><p><strong>zone_letter</strong> – string for the zone letter.</p></li>
+<li><p><strong>use_exp</strong> – If True then an exception will be thrown if the zone is invalid
+if False (default) then a boolean value of False will be returned
+by the function if zone is not valid.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if zone is valid and Falsei if not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="lat-lon-to-utm">
+<h2>Lat / Lon to UTM<a class="headerlink" href="#lat-lon-to-utm" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.from_latlon">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">from_latlon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_zone_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_zone_letter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;built-in</span> <span class="pre">function</span> <span class="pre">array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">array&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">array&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.from_latlon" title="Link to this definition"></a></dt>
+<dd><p>This function convert Latitude and Longitude to UTM coordinate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> – float or array. Latitude between 80 deg S and 84 deg N, e.g. (-80.0 to 84.0)</p></li>
+<li><p><strong>longitude</strong> – float or array: Longitude between 180 deg W and 180 deg E, e.g. (-180.0 to 180.0).</p></li>
+<li><p><strong>number</strong> (<em>force_zone</em>) – int: Zone Number is represented with global map numbers of an UTM Zone
+Numbers Map. You may force conversion including one UTM Zone Number.
+More information see <a class="reference external" href="http://www.jaworski.ca/utmzones.htm">http://www.jaworski.ca/utmzones.htm</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>eastings, northings, zone_number, zone_letter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.to_latlon">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">to_latlon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">easting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone_letter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">northern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.to_latlon" title="Link to this definition"></a></dt>
+<dd><p>This function convert an UTM coordinate into Latitude and Longitude</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>easting</strong> – int or array: Easting value of UTM coordinate</p></li>
+<li><p><strong>northing</strong> – int or array: Northing value of UTM coordinate</p></li>
+<li><p><strong>number</strong> (<em>zone</em>) – int: Zone Number is represented with global map numbers of an UTM Zone
+Numbers Map. More information see <a class="reference external" href="http://www.jaworski.ca/utmzones.htm">http://www.jaworski.ca/utmzones.htm</a></p></li>
+<li><p><strong>zone_letter</strong> – str: Zone Letter can be represented as string values.
+Where UTM Zone Designators can be accessed in <a class="reference external" href="http://www.jaworski.ca/utmzones.htm">http://www.jaworski.ca/utmzones.htm</a></p></li>
+<li><p><strong>northern</strong> – bool: You can set True or False to set this parameter. Default is None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.latitude_to_zone_letter">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">latitude_to_zone_letter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.latitude_to_zone_letter" title="Link to this definition"></a></dt>
+<dd><p>Find the zone letter for the latitude. If the input is a numpy array, just use the first element
+user responsibility to make sure that all points are in one zone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>latitude</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string if found otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.latlon_to_zone_number">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">latlon_to_zone_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.latlon_to_zone_number" title="Link to this definition"></a></dt>
+<dd><p>Find the UTM zone number for a give latitude and longitude. If the input is a numpy array, just use the
+first element user responsibility to make sure that all points are in one zone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> – float</p></li>
+<li><p><strong>longitude</strong> – float</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.min_max_eastings_for_lat">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">min_max_eastings_for_lat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1)</span> <span class="pre">-&gt;</span> <span class="pre">(&lt;class</span> <span class="pre">'float'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.min_max_eastings_for_lat" title="Link to this definition"></a></dt>
+<dd><p>Find the minimum and maximum Eastings for a specified latitude within a specific zone.
+This should be the same for all zones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> – float</p></li>
+<li><p><strong>zone</strong> – int</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple [min, max]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.latlon_arr_to_utm_zone_number">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">latlon_arr_to_utm_zone_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">array</span></span></span><a class="headerlink" href="#rsgislib.tools.utm.latlon_arr_to_utm_zone_number" title="Link to this definition"></a></dt>
+<dd><p>Find the UTM zone number for a give latitude and longitude. UTM zone will be
+returned for all the lat/longs within the input arrays, which must be of the same
+length. Function will also work with a single value, at which point a single
+int will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> – numpy array of floats</p></li>
+<li><p><strong>longitude</strong> – numpy array of floats</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int or array of ints.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.latlon_to_mode_utm_zone_number">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">latlon_to_mode_utm_zone_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utm.latlon_to_mode_utm_zone_number" title="Link to this definition"></a></dt>
+<dd><p>Find the mode UTM zone for a list of lat/lon values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> – numpy array of floats</p></li>
+<li><p><strong>longitude</strong> – numpy array of floats</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int (mode UTM zone)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.zone_number_to_central_longitude">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">zone_number_to_central_longitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zone_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rsgislib.tools.utm.zone_number_to_central_longitude" title="Link to this definition"></a></dt>
+<dd><p>Find the central longitude for the given zone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>zone_number</strong> – int</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rsgislib.tools.utm.split_wgs84_bbox_utm_zones">
+<span class="sig-prename descclassname"><span class="pre">rsgislib.tools.utm.</span></span><span class="sig-name descname"><span class="pre">split_wgs84_bbox_utm_zones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wgs84_bbox</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rsgislib.tools.utm.split_wgs84_bbox_utm_zones" title="Link to this definition"></a></dt>
+<dd><p>Function which splits a bounding box (MinX, MaxX, MinY, MaxY) into
+a number of small bounding boxes (MinX, MaxX, MinY, MaxY) at UTM zone
+boundaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wgs84_bbox</strong> – bounding box in lat/long WGS84 (MinX, MaxX, MinY, MaxY)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list [utm zone, bbox]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rsgislib_tools_msofficetools.html" class="btn btn-neutral float-left" title="RSGISLib MS Office Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rsgislib_tools_checkdatasets.html" class="btn btn-neutral float-right" title="RSGISLib Check Datasets Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Pete Bunting, Daniel Clewley and Nathan Thomas.
+      <span class="lastupdated">Last updated on Oct 24, 2026.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
